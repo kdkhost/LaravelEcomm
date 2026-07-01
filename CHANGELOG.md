@@ -15,6 +15,8 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 - `.env` simplificado e robusto com `CACHE_STORE`, `LOG_LEVEL`, seções organizadas
 - `APP_TIMEZONE=America/Sao_Paulo`, `APP_CURRENCY=BRL`, `APP_CURRENCY_SYMBOL=R$` no `.env`
 - `.htaccess` na raiz do repositório (rewrite para `public/` + PHP 8.4 handler)
+- `.gitattributes` — normalização de arquivos UTF-8 sem BOM, LF, encoding explícito
+- `.editorconfig` expandido com regras para shell, env, JSON
 - Língua `pt` no `LanguageDatabaseSeeder` (Português como padrão)
 - `currency_symbol` e `default_currency` em `config/app.php` (BRL, R$)
 - Moeda BRL nos gateways: PayPal (`config/paypal.php`), Stripe (`config/stripe.php`)

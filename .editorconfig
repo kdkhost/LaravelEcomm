@@ -13,3 +13,10 @@ trim_trailing_whitespace = false
 
 [*.{yml,yaml}]
 indent_size = 2
+
+[*.{sh,bat,env*}]
+end_of_line = lf
+charset = utf-8
+
+[{package.json,composer.json}]
+indent_size = 2

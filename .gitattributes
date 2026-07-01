@@ -1,0 +1,50 @@
+# Configuração de atributos Git
+# ==============================
+# Padroniza o projeto para UTF-8 sem BOM, terminações LF,
+# e impede que arquivos binários sejam corrompidos.
+
+# Auto-detect text files e normalize para LF
+* text=auto
+
+# Source files: LF, UTF-8, diff
+*.php     text eol=lf working-tree-encoding=UTF-8
+*.blade.php text eol=lf working-tree-encoding=UTF-8
+*.js      text eol=lf working-tree-encoding=UTF-8
+*.css     text eol=lf working-tree-encoding=UTF-8
+*.html    text eol=lf working-tree-encoding=UTF-8
+*.json    text eol=lf working-tree-encoding=UTF-8
+*.xml     text eol=lf working-tree-encoding=UTF-8
+*.yml     text eol=lf working-tree-encoding=UTF-8
+*.yaml    text eol=lf working-tree-encoding=UTF-8
+*.md      text eol=lf working-tree-encoding=UTF-8
+*.sh      text eol=lf working-tree-encoding=UTF-8
+*.bat     text eol=lf working-tree-encoding=UTF-8
+*.env     text eol=lf working-tree-encoding=UTF-8
+*.env.example text eol=lf working-tree-encoding=UTF-8
+.env.prod.example text eol=lf working-tree-encoding=UTF-8
+.gitignore text eol=lf
+.editorconfig text eol=lf
+.htaccess  text eol=lf
+
+# Binary files - never normalize
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.svg     binary
+*.webp    binary
+*.woff    binary
+*.woff2   binary
+*.ttf     binary
+*.eot     binary
+*.zip     binary
+*.gz      binary
+*.tar     binary
+*.pdf     binary
+*.mo      binary
+*.phar    binary
+
+# Lock files
+composer.lock text eol=lf
+package-lock.json text eol=lf
