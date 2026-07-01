@@ -17,7 +17,7 @@ class UpdateCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -43,7 +43,7 @@ class UpdateCartActionTest extends ActionTestCase
 
         $this->assertEquals(5, $result->quantity);
         $this->assertEquals(500, $result->amount);
-        
+
         $this->assertDatabaseHas('carts', [
             'id' => $cart->id,
             'quantity' => 5,
@@ -55,7 +55,7 @@ class UpdateCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -87,7 +87,7 @@ class UpdateCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         // Create an order first
         $orderId = \DB::table('orders')->insertGetId([
             'order_number' => 'ORD-TEST-002',
@@ -101,7 +101,7 @@ class UpdateCartActionTest extends ActionTestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -136,7 +136,7 @@ class UpdateCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,

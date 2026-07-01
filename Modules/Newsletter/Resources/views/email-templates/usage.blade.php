@@ -72,7 +72,7 @@
                                                     <td>{{ $campaign->recipients_count ?? 0 }}</td>
                                                     <td>
                                                         @php
-                                                            $openRate = $campaign->recipients_count > 0 ? 
+                                                            $openRate = $campaign->recipients_count > 0 ?
                                                                 round(($campaign->opened_count ?? 0) / $campaign->recipients_count * 100, 1) : 0;
                                                         @endphp
                                                         <span class="badge badge-{{ $openRate > 20 ? 'success' : ($openRate > 10 ? 'warning' : 'danger') }}">
@@ -81,7 +81,7 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $clickRate = $campaign->recipients_count > 0 ? 
+                                                            $clickRate = $campaign->recipients_count > 0 ?
                                                                 round(($campaign->clicked_count ?? 0) / $campaign->recipients_count * 100, 1) : 0;
                                                         @endphp
                                                         <span class="badge badge-{{ $clickRate > 5 ? 'success' : ($clickRate > 2 ? 'warning' : 'danger') }}">
@@ -114,20 +114,20 @@
                         </div>
                         <div class="card-body">
                             <p><strong>Name:</strong> {{ $emailTemplate->name }}</p>
-                            <p><strong>Type:</strong> 
+                            <p><strong>Type:</strong>
                                 <span class="badge badge-info">
                                     {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$emailTemplate->template_type] ?? $emailTemplate->template_type }}
                                 </span>
                             </p>
                             <p><strong>Subject:</strong> {{ $emailTemplate->subject }}</p>
-                            <p><strong>Status:</strong> 
+                            <p><strong>Status:</strong>
                                 @if($emailTemplate->is_active)
                                     <span class="badge badge-success">Active</span>
                                 @else
                                     <span class="badge badge-secondary">Inactive</span>
                                 @endif
                             </p>
-                            <p><strong>Default:</strong> 
+                            <p><strong>Default:</strong>
                                 @if($emailTemplate->is_default)
                                     <span class="badge badge-warning">Yes</span>
                                 @else

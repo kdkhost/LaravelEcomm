@@ -130,7 +130,7 @@ class GeoIpMiddleware
     private function isBot(Request $request): bool
     {
         $userAgent = strtolower($request->userAgent() ?? '');
-        
+
         $bots = [
             'bot', 'crawl', 'spider', 'slurp', 'baidu', 'bing', 'google',
             'yahoo', 'yandex', 'facebook', 'twitter', 'linkedin',

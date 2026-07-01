@@ -22,10 +22,10 @@ return new class extends Migration
             $table->integer('sort_order')->default(0);
             $table->json('meta')->nullable();     // Extra config
             $table->timestamps();
-            
+
             $table->index(['is_active', 'sort_order']);
         });
-        
+
         // Seed default languages
         $this->seedDefaultLanguages();
     }
@@ -34,7 +34,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('languages');
     }
-    
+
     private function seedDefaultLanguages(): void
     {
         $languages = [
@@ -103,7 +103,7 @@ return new class extends Migration
                 'sort_order' => 7,
             ],
         ];
-        
+
         foreach ($languages as $lang) {
             \Modules\Language\Models\Language::create($lang);
         }

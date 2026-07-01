@@ -13,7 +13,7 @@
 
 	// Collection of derived classes
 	JQClass.classes = {};
- 
+
 	// Create a new JQClass that inherits from this class
 	JQClass.extend = function extender(prop) {
 		var base = this.prototype;
@@ -230,7 +230,7 @@
 } */
 		_postAttach: function(elem, inst) { // jshint unused:false
 		},
-		
+
 		/** Retrieve metadata configuration from the element.
 			Metadata is specified as an attribute:
 			<code>data-&lt;pluginName>="&lt;option name>: '&lt;value>', ..."</code>.

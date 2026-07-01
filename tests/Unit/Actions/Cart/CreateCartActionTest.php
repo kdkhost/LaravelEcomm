@@ -44,7 +44,7 @@ class CreateCartActionTest extends ActionTestCase
         $user = User::factory()->create();
         $product1 = Product::factory()->create(['price' => 100]);
         $product2 = Product::factory()->create(['price' => 50]);
-        
+
         // Create existing cart item for product1
         Cart::factory()->create([
             'user_id' => $user->id,
@@ -73,7 +73,7 @@ class CreateCartActionTest extends ActionTestCase
         $this->assertEquals($product2->id, $result->product_id);
         $this->assertEquals(2, $result->quantity);
         $this->assertEquals(100, $result->amount); // 2 * 50
-        
+
         // User should now have 2 cart items
         $this->assertEquals(2, Cart::where('user_id', $user->id)->count());
     }

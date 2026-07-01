@@ -229,7 +229,7 @@ Unsubscribe: [unsubscribe_link]';
         <div class="content">
             <h2>Hello {{name}}!</h2>
             <p>Here\'s what\'s new this month:</p>
-            
+
             <h3>Featured Products</h3>
             <div class="product-grid">
                 <div class="product-item">
@@ -243,10 +243,10 @@ Unsubscribe: [unsubscribe_link]';
                     <a href="#" class="button">View Product</a>
                 </div>
             </div>
-            
+
             <h3>Latest News</h3>
             <p>Stay updated with our latest news and updates...</p>
-            
+
             <a href="#" class="button">Visit Our Store</a>
         </div>
         <div class="footer">
@@ -307,16 +307,16 @@ Unsubscribe: [unsubscribe_link]';
         <div class="content">
             <h2>Hello {{name}}!</h2>
             <p>We noticed you left some items in your cart at {{company}}.</p>
-            
+
             <div class="cart-summary">
                 <h3>Your Cart Summary</h3>
                 <p>Items: {{cart_items}}</p>
                 <p>Total: {{cart_total}}</p>
             </div>
-            
+
             <p>Complete your purchase now before these items are no longer available!</p>
             <a href="#" class="button">Complete Purchase</a>
-            
+
             <p>If you have any questions, feel free to contact our support team.</p>
         </div>
         <div class="footer">
@@ -379,17 +379,17 @@ Unsubscribe: [unsubscribe_link]';
         <div class="content">
             <h2>Hello {{name}}!</h2>
             <p>Your order has been confirmed and is being processed.</p>
-            
+
             <div class="order-details">
                 <h3>Order Details</h3>
                 <p><strong>Order Number:</strong> {{order_number}}</p>
                 <p><strong>Total Amount:</strong> {{order_total}}</p>
                 <p><strong>Order Date:</strong> {{order_date}}</p>
             </div>
-            
+
             <p>You will receive a shipping confirmation email once your order is dispatched.</p>
             <a href="#" class="button">Track Your Order</a>
-            
+
             <p>If you have any questions about your order, please contact our support team.</p>
         </div>
         <div class="footer">
@@ -451,14 +451,14 @@ If you have any questions about your order, please contact our support team.
         <div class="content">
             <h2>Hello {{name}}!</h2>
             <p>We have an exclusive offer just for you!</p>
-            
+
             <div class="promo-code">
                 Use Code: {{promotion_code}}
             </div>
-            
+
             <p>This offer is valid for a limited time only. Don\'t miss out!</p>
             <a href="#" class="button">Shop Now</a>
-            
+
             <p>Terms and conditions apply. Offer expires in {{promotion_expiry}} days.</p>
         </div>
         <div class="footer">

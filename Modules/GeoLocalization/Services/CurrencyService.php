@@ -58,7 +58,7 @@ class CurrencyService
     private function fetchFromExchangeRateApi(): array
     {
         $apiKey = config('geolocalization.exchangerate_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -86,7 +86,7 @@ class CurrencyService
     private function fetchFromOpenExchangeRates(): array
     {
         $apiKey = config('geolocalization.openexchangerates_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -115,7 +115,7 @@ class CurrencyService
     private function fetchFromFixer(): array
     {
         $apiKey = config('geolocalization.fixer_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -183,7 +183,7 @@ class CurrencyService
     {
         $currency = $currency ?? $this->getCurrentCurrency();
         $symbol = $this->getCurrencySymbol($currency);
-        
+
         return $symbol . number_format($amount, 2);
     }
 

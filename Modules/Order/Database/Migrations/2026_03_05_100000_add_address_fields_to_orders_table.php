@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('last_name')->nullable()->after('first_name');
             $table->string('email')->nullable()->after('last_name');
             $table->string('phone')->nullable()->after('email');
-            
+
             // Address fields
             $table->string('country')->nullable()->after('phone');
             $table->string('city')->nullable()->after('country');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('address1')->nullable()->after('state');
             $table->string('address2')->nullable()->after('address1');
             $table->string('post_code', 20)->nullable()->after('address2');
-            
+
             // Add index for searching
             $table->index(['email', 'phone']);
             $table->index(['country', 'city']);

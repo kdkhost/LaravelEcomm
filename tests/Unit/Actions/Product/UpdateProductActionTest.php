@@ -73,7 +73,7 @@ class UpdateProductActionTest extends ActionTestCase
         );
 
         $action = app(UpdateProductAction::class);
-        
+
         // The action throws Error when product doesn't exist (call to fill() on null)
         $this->expectException(Error::class);
         $action->execute(99999, $dto);

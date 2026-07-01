@@ -34,7 +34,7 @@ class GeoLocalizationServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
         $router->aliasMiddleware('geolocalization', \Modules\GeoLocalization\Http\Middleware\GeoIpMiddleware::class);
-        
+
         // Add to web middleware group if enabled
         if (config('geolocalization.enabled', true)) {
             $router->pushMiddlewareToGroup('web', \Modules\GeoLocalization\Http\Middleware\GeoIpMiddleware::class);

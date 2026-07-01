@@ -20,7 +20,7 @@ class ProductTypeTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         $this->assertTrue($product->isDownloadable());
         $this->assertFalse($product->isVirtual());
         $this->assertFalse($product->requiresShipping());
@@ -32,7 +32,7 @@ class ProductTypeTest extends ProductTestCase
             'type' => Product::TYPE_SIMPLE,
             'is_downloadable' => true,
         ]);
-        
+
         $this->assertTrue($product->isDownloadable());
     }
 
@@ -41,7 +41,7 @@ class ProductTypeTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_VIRTUAL,
         ]);
-        
+
         $this->assertTrue($product->isVirtual());
         $this->assertFalse($product->isDownloadable());
         $this->assertFalse($product->requiresShipping());
@@ -53,7 +53,7 @@ class ProductTypeTest extends ProductTestCase
             'type' => Product::TYPE_SIMPLE,
             'is_virtual' => true,
         ]);
-        
+
         $this->assertTrue($product->isVirtual());
     }
 
@@ -62,7 +62,7 @@ class ProductTypeTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_SIMPLE,
         ]);
-        
+
         $this->assertTrue($product->requiresShipping());
         $this->assertFalse($product->isVirtual());
         $this->assertFalse($product->isDownloadable());
@@ -73,7 +73,7 @@ class ProductTypeTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_CONFIGURABLE,
         ]);
-        
+
         $this->assertTrue($product->requiresShipping());
     }
 
@@ -84,7 +84,7 @@ class ProductTypeTest extends ProductTestCase
             'type' => Product::TYPE_SIMPLE,
             'price' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -92,7 +92,7 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         $this->assertTrue(Helper::cartRequiresShipping($user->id));
     }
 
@@ -103,7 +103,7 @@ class ProductTypeTest extends ProductTestCase
             'type' => Product::TYPE_VIRTUAL,
             'price' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -111,7 +111,7 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         $this->assertFalse(Helper::cartRequiresShipping($user->id));
     }
 
@@ -122,7 +122,7 @@ class ProductTypeTest extends ProductTestCase
             'type' => Product::TYPE_DOWNLOADABLE,
             'price' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -130,24 +130,24 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         $this->assertFalse(Helper::cartRequiresShipping($user->id));
     }
 
     public function test_helper_cart_requires_shipping_with_mixed_products(): void
     {
         $user = User::factory()->create();
-        
+
         $physicalProduct = Product::factory()->create([
             'type' => Product::TYPE_SIMPLE,
             'price' => 100,
         ]);
-        
+
         $virtualProduct = Product::factory()->create([
             'type' => Product::TYPE_VIRTUAL,
             'price' => 50,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $physicalProduct->id,
@@ -155,7 +155,7 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $virtualProduct->id,
@@ -163,7 +163,7 @@ class ProductTypeTest extends ProductTestCase
             'price' => 50,
             'amount' => 50,
         ]);
-        
+
         // Should require shipping because of physical product
         $this->assertTrue(Helper::cartRequiresShipping($user->id));
     }
@@ -171,12 +171,12 @@ class ProductTypeTest extends ProductTestCase
     public function test_helper_cart_has_downloadable(): void
     {
         $user = User::factory()->create();
-        
+
         $downloadableProduct = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
             'price' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $downloadableProduct->id,
@@ -184,19 +184,19 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         $this->assertTrue(Helper::cartHasDownloadable($user->id));
     }
 
     public function test_helper_cart_has_no_downloadable(): void
     {
         $user = User::factory()->create();
-        
+
         $simpleProduct = Product::factory()->create([
             'type' => Product::TYPE_SIMPLE,
             'price' => 100,
         ]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $simpleProduct->id,
@@ -204,7 +204,7 @@ class ProductTypeTest extends ProductTestCase
             'price' => 100,
             'amount' => 100,
         ]);
-        
+
         $this->assertFalse(Helper::cartHasDownloadable($user->id));
     }
 
@@ -218,7 +218,7 @@ class ProductTypeTest extends ProductTestCase
             'download_expiry_days' => 7,
             'service_duration_minutes' => 60,
         ]);
-        
+
         $this->assertIsBool($product->is_virtual);
         $this->assertIsBool($product->is_downloadable);
         $this->assertIsInt($product->max_downloads);

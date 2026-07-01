@@ -39,12 +39,12 @@ class PageFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($locales): void {
             /** @var Page $page */
             $page = $model;
-            
+
             $localesToUse = $locales ?? $this->translationLocales;
-            
+
             foreach ($localesToUse as $locale) {
                 $localeSuffix = $locale === 'en' ? '' : ' (' . strtoupper($locale) . ')';
-                
+
                 $page->translations()->create([
                     'locale' => $locale,
                     'title' => $this->faker->words(3, true) . $localeSuffix,
@@ -68,7 +68,7 @@ class PageFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($translations): void {
             /** @var Page $page */
             $page = $model;
-            
+
             foreach ($translations as $locale => $fields) {
                 $page->translations()->create([
                     'locale' => $locale,

@@ -17,7 +17,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         $cart1 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -26,7 +26,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
             'amount' => 100,
             'order_id' => null,
         ]);
-        
+
         $cart2 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -50,7 +50,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
             'quantity' => 3,
             'amount' => 300, // 3 * 100
         ]);
-        
+
         $this->assertDatabaseHas('carts', [
             'id' => $cart2->id,
             'quantity' => 5,
@@ -62,7 +62,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -80,7 +80,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
         ]);
 
         $action = app(UpdateCartItemsAction::class);
-        
+
         // Repository throws exception for non-existent cart
         $this->expectException(\Illuminate\Database\Eloquent\ModelNotFoundException::class);
         $action->execute($request);
@@ -90,7 +90,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -119,7 +119,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -148,7 +148,7 @@ class UpdateCartItemsActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['price' => 50]);
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,

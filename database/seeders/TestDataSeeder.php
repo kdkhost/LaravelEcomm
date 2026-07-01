@@ -16,7 +16,7 @@ class TestDataSeeder extends Seeder
     {
         // Seed languages first (required for most operations)
         $this->call(LanguageDatabaseSeeder::class);
-        
+
         // Create roles
         $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         $clientRole = Role::firstOrCreate(['name' => 'client', 'guard_name' => 'web']);

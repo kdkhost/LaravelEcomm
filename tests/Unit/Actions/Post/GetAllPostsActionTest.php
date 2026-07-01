@@ -83,7 +83,7 @@ class GetAllPostsActionTest extends ActionTestCase
         $result = $action->execute();
 
         $this->assertCount(3, $result);
-        
+
         $statuses = $result->pluck('status')->toArray();
         $this->assertContains('active', $statuses);
         $this->assertContains('inactive', $statuses);
@@ -94,7 +94,7 @@ class GetAllPostsActionTest extends ActionTestCase
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
-        
+
         Post::factory()->create(['user_id' => $user1->id, 'title' => 'User1 Post']);
         Post::factory()->create(['user_id' => $user2->id, 'title' => 'User2 Post']);
 
@@ -102,7 +102,7 @@ class GetAllPostsActionTest extends ActionTestCase
         $result = $action->execute();
 
         $this->assertCount(2, $result);
-        
+
         $titles = $result->pluck('title')->toArray();
         $this->assertContains('User1 Post', $titles);
         $this->assertContains('User2 Post', $titles);

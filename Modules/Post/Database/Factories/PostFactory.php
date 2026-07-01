@@ -110,12 +110,12 @@ class PostFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($locales): void {
             /** @var Post $post */
             $post = $model;
-            
+
             $localesToUse = $locales ?? $this->translationLocales;
-            
+
             foreach ($localesToUse as $locale) {
                 $localeSuffix = $locale === 'en' ? '' : ' (' . strtoupper($locale) . ')';
-                
+
                 $post->translations()->create([
                     'locale' => $locale,
                     'title' => $this->faker->words(4, true) . $localeSuffix,
@@ -140,7 +140,7 @@ class PostFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($translations): void {
             /** @var Post $post */
             $post = $model;
-            
+
             foreach ($translations as $locale => $fields) {
                 $post->translations()->create([
                     'locale' => $locale,

@@ -47,12 +47,12 @@ class DatabaseSeeder extends Seeder
         $parentCategories = Category::factory()->count(5)->active()->create([
             'parent_id' => null,
         ]);
-        
+
         // Create subcategories for each parent
         foreach ($parentCategories as $parent) {
             Category::factory()->count(3)->active()->subcategory($parent)->create();
         }
-        
+
         // Create a few more top-level categories
         Category::factory()->count(3)->active()->create(['parent_id' => null]);
         Banner::factory()->count(5)->withMedia()->create();

@@ -105,7 +105,7 @@ class ReportController extends CoreController
     public function generate(Request $request, Report $report): JsonResponse
     {
         $parameters = $request->get('parameters', []);
-        
+
         $result = $this->generateAction->executeAndRecord(
             report: $report,
             triggeredBy: $request->user()->id,

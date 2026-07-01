@@ -92,7 +92,7 @@ class GetAllUsersActionTest extends ActionTestCase
         $names = $result->pluck('name')->toArray();
         $this->assertContains('John Doe', $names);
         $this->assertContains('Jane Smith', $names);
-        
+
         $emails = $result->pluck('email')->toArray();
         $this->assertContains('john@example.com', $emails);
         $this->assertContains('jane@example.com', $emails);

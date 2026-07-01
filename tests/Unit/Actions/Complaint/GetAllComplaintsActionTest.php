@@ -32,16 +32,16 @@ class GetAllComplaintsActionTest extends ActionTestCase
     {
         // Arrange
         $this->seedPermissions();
-        
+
         $user = User::factory()->create();
         $otherUser = User::factory()->create();
-        
+
         // Create complaints for both users
         Complaint::factory()->count(3)->create(['user_id' => $user->id]);
         Complaint::factory()->count(2)->create(['user_id' => $otherUser->id]);
 
         $this->actingAs($user);
-        
+
         $repository = new ComplaintRepository();
         $action = new GetAllComplaintsAction($repository);
 
@@ -60,17 +60,17 @@ class GetAllComplaintsActionTest extends ActionTestCase
     {
         // Arrange
         $this->seedPermissions();
-        
+
         $admin = User::factory()->create();
         $admin->assignRole('admin');
-        
+
         $user = User::factory()->create();
-        
+
         Complaint::factory()->count(3)->create(['user_id' => $user->id]);
         Complaint::factory()->count(2)->create(['user_id' => $admin->id]);
 
         $this->actingAs($admin);
-        
+
         $repository = new ComplaintRepository();
         $action = new GetAllComplaintsAction($repository);
 
@@ -86,14 +86,14 @@ class GetAllComplaintsActionTest extends ActionTestCase
     {
         // Arrange
         $this->seedPermissions();
-        
+
         $superAdmin = User::factory()->create();
         $superAdmin->assignRole('super-admin');
-        
+
         Complaint::factory()->count(4)->create();
 
         $this->actingAs($superAdmin);
-        
+
         $repository = new ComplaintRepository();
         $action = new GetAllComplaintsAction($repository);
 
@@ -109,15 +109,15 @@ class GetAllComplaintsActionTest extends ActionTestCase
     {
         // Arrange
         $this->seedPermissions();
-        
+
         $user = User::factory()->create();
-        
+
         $complaint1 = Complaint::factory()->create(['user_id' => $user->id]);
         $complaint2 = Complaint::factory()->create(['user_id' => $user->id]);
         $complaint3 = Complaint::factory()->create(['user_id' => $user->id]);
 
         $this->actingAs($user);
-        
+
         $repository = new ComplaintRepository();
         $action = new GetAllComplaintsAction($repository);
 
@@ -134,12 +134,12 @@ class GetAllComplaintsActionTest extends ActionTestCase
     {
         // Arrange
         $this->seedPermissions();
-        
+
         $user = User::factory()->create();
         Complaint::factory()->count(25)->create(['user_id' => $user->id]);
 
         $this->actingAs($user);
-        
+
         $repository = new ComplaintRepository();
         $action = new GetAllComplaintsAction($repository);
 

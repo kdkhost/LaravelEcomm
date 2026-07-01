@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Middleware to handle locale for API requests
- * 
+ *
  * Checks X-Locale header or falls back to default
  */
 class ApiLocaleMiddleware
@@ -54,7 +54,7 @@ class ApiLocaleMiddleware
         if ($request->hasHeader('Accept-Language')) {
             $acceptLanguage = $request->header('Accept-Language');
             $locale = substr($acceptLanguage, 0, 2);
-            
+
             if (Language::isValidCode($locale)) {
                 return $locale;
             }

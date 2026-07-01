@@ -99,13 +99,13 @@ class ProductGridsActionTest extends ActionTestCase
     {
         // Note: Brand filtering through query string requires specific setup
         // This test verifies the structure works when brand param is provided
-        
+
         // Arrange
         $brand = Brand::factory()->create([
             'slug' => 'nike',
             'status' => 'active',
         ]);
-        
+
         Product::factory()->create([
             'status' => 'active',
             'brand_id' => $brand->id,

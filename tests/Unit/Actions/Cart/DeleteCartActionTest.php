@@ -16,7 +16,7 @@ class DeleteCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -38,7 +38,7 @@ class DeleteCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart1 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -47,7 +47,7 @@ class DeleteCartActionTest extends ActionTestCase
             'amount' => 100,
             'order_id' => null,
         ]);
-        
+
         $cart2 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,

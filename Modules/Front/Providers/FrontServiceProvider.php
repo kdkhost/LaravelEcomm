@@ -147,13 +147,13 @@ class FrontServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
-        
+
         // Bind ThemeManager interface
         $this->app->singleton(
             \Modules\Front\Contracts\ThemeManagerInterface::class,
             \Modules\Front\Services\Theme\ThemeManager::class
         );
-        
+
         // Register Blaze Theme Service Provider for optimized Blade rendering
         // This provides View::share() and View::composer() support via KalimeroMK fork
         if (config('blaze.enabled', true)) {
@@ -198,7 +198,7 @@ class FrontServiceProvider extends ServiceProvider
         if ($configTheme && $configTheme !== 'default') {
             return $configTheme;
         }
-        
+
         try {
             $setting = app('settings');
             if ($setting instanceof \Modules\Settings\Models\Setting && ! empty($setting->active_template)) {
@@ -207,7 +207,7 @@ class FrontServiceProvider extends ServiceProvider
         } catch (Exception $e) {
             // Fall through to default
         }
-        
+
         return 'default';
     }
 

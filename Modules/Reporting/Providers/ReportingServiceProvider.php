@@ -36,7 +36,7 @@ class ReportingServiceProvider extends ServiceProvider
     {
         $this->app->booted(function (): void {
             $schedule = $this->app->make(Schedule::class);
-            
+
             // Run scheduled reports every hour
             $schedule->command('reports:run-scheduled')->hourly();
         });

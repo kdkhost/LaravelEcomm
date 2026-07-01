@@ -17,7 +17,7 @@
                 <h2>Welcome to Our E-commerce Store</h2>
                 <p class="lead">We are dedicated to providing you with the best products and excellent customer service.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                
+
                 <div class="row mt-40">
                     <div class="col-md-4 text-center">
                         <i class="fa fa-rocket fa-3x text-default"></i>

@@ -54,7 +54,7 @@
     <link rel="shortcut icon" href="{{asset('frontend/img/favicon.png')}}">
     @include('front::layouts.head')
     {!! $schema ?? '' !!}
-    
+
     <!-- RTL Support for Arabic -->
     @if(app()->getLocale() == 'ar')
         <style>

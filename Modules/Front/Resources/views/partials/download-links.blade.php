@@ -25,7 +25,7 @@ $hasDownloads = false;
                     if (!$product || !$product->isDownloadable()) {
                         continue;
                     }
-                    
+
                     // Get or create order downloads
                     $orderDownloads = [];
                     foreach ($product->activeDownloads as $download) {
@@ -36,7 +36,7 @@ $hasDownloads = false;
                                 'user_id' => $user->id,
                             ],
                             [
-                                'expires_at' => $product->download_expiry_days 
+                                'expires_at' => $product->download_expiry_days
                                     ? now()->addDays($product->download_expiry_days)
                                     : null,
                             ]
@@ -44,10 +44,10 @@ $hasDownloads = false;
                         $orderDownloads[] = ['download' => $download, 'orderDownload' => $orderDownload];
                     }
                 @endphp
-                
+
                 <div class="mb-3 pb-3 border-bottom">
                     <h6 class="font-weight-bold">{{ $product->title }}</h6>
-                    
+
                     @foreach($orderDownloads as $item)
                         @php
                             $download = $item['download'];
@@ -67,7 +67,7 @@ $hasDownloads = false;
                                 @elseif($orderDownload->isLimitReached())
                                     <span class="badge badge-danger">@lang('partials.download_limit_reached')</span>
                                 @else
-                                    <a href="{{ $download->getDownloadUrl($order->id, $user->id) }}" 
+                                    <a href="{{ $download->getDownloadUrl($order->id, $user->id) }}"
                                        class="btn btn-sm btn-primary">
                                         <i class="ti-download"></i> @lang('partials.download')
                                     </a>
@@ -75,7 +75,7 @@ $hasDownloads = false;
                             </div>
                         </div>
                         <div class="small text-muted">
-                            @lang('partials.downloads'): {{ $orderDownload->downloads_count }} 
+                            @lang('partials.downloads'): {{ $orderDownload->downloads_count }}
                             @if($product->max_downloads)
                                 / {{ $product->max_downloads }}
                             @endif
@@ -86,10 +86,10 @@ $hasDownloads = false;
                     @endforeach
                 </div>
             @endforeach
-            
+
             <div class="alert alert-info mt-3 mb-0">
                 <small>
-                    <i class="ti-info-alt"></i> 
+                    <i class="ti-info-alt"></i>
                     @lang('partials.downloads_available_after_payment')
                     @if($product->max_downloads)
                         @lang('partials.max_downloads_info', ['count' => $product->max_downloads])

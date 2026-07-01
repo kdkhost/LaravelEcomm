@@ -11,7 +11,7 @@ class AnalyticsTracker {
         this.pageStartTime = Date.now();
         this.events = [];
         this.isTracking = true;
-        
+
         this.init();
     }
 
@@ -98,7 +98,7 @@ class AnalyticsTracker {
      */
     trackScroll() {
         const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-        
+
         const eventData = {
             event_type: 'scroll',
             page_url: window.location.href,
@@ -120,7 +120,7 @@ class AnalyticsTracker {
      */
     trackTimeOnPage() {
         const timeOnPage = Math.round((Date.now() - this.pageStartTime) / 1000);
-        
+
         const eventData = {
             event_type: 'time_on_page',
             page_url: window.location.href,
@@ -286,7 +286,7 @@ class AnalyticsTracker {
             const element = event.target;
             const productId = element.getAttribute('data-product-id');
             const action = element.getAttribute('data-action');
-            
+
             if (productId && action) {
                 this.trackProductInteraction(productId, action);
             }
@@ -364,12 +364,12 @@ class AnalyticsTracker {
     saveEventsLocally() {
         const storedEvents = JSON.parse(localStorage.getItem('analytics_events') || '[]');
         storedEvents.push(...this.events);
-        
+
         // Keep only last 100 events
         if (storedEvents.length > 100) {
             storedEvents.splice(0, storedEvents.length - 100);
         }
-        
+
         localStorage.setItem('analytics_events', JSON.stringify(storedEvents));
         this.events = [];
     }
@@ -379,7 +379,7 @@ class AnalyticsTracker {
      */
     async sendPendingEvents() {
         const storedEvents = JSON.parse(localStorage.getItem('analytics_events') || '[]');
-        
+
         for (const event of storedEvents) {
             try {
                 await fetch('/api/admin/analytics/track', {
@@ -395,7 +395,7 @@ class AnalyticsTracker {
                 break; // Stop trying if we can't send
             }
         }
-        
+
         // Clear sent events
         localStorage.removeItem('analytics_events');
     }
@@ -419,7 +419,7 @@ class AnalyticsTracker {
 // Initialize analytics tracking
 if (typeof window !== 'undefined') {
     window.AnalyticsTracker = new AnalyticsTracker();
-    
+
     // Make it globally available
     window.trackEvent = (eventName, data) => window.AnalyticsTracker.trackCustomEvent(eventName, data);
     window.trackProduct = (productId, action, data) => window.AnalyticsTracker.trackProductInteraction(productId, action, data);

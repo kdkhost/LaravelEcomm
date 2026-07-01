@@ -57,7 +57,7 @@
         @endif
         <p>You will no longer receive promotional emails from us.</p>
         <p>If you change your mind, you can always subscribe again from our website.</p>
-        
+
         <div class="footer">
             <p>Thank you for being part of our community!</p>
             <p>{{ config('app.name') }}</p>

@@ -41,18 +41,18 @@ readonly class ExportReportAction
 
         $response = new StreamedResponse(function () use ($data, $headers): void {
             $handle = fopen('php://output', 'w');
-            
+
             // Add BOM for UTF-8
             fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
-            
+
             // Headers
             fputcsv($handle, $headers);
-            
+
             // Data
             foreach ($data as $row) {
                 fputcsv($handle, $this->flattenRow($row, $headers));
             }
-            
+
             fclose($handle);
         });
 
@@ -68,7 +68,7 @@ readonly class ExportReportAction
     private function exportToExcel(Report $report, Collection $data): StreamedResponse
     {
         $filename = $this->generateFilename($report, 'xlsx');
-        
+
         // For now, we'll use CSV with Excel MIME type
         // In production, you'd use a library like PhpSpreadsheet or Laravel Excel
         $headers = $this->getCsvHeaders($data);
@@ -146,7 +146,7 @@ readonly class ExportReportAction
     {
         $timestamp = now()->format('Y-m-d_H-i-s');
         $slug = \Illuminate\Support\Str::slug($report->name);
-        
+
         return "{$slug}_{$timestamp}.{$extension}";
     }
 }

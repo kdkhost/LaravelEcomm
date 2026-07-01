@@ -22,7 +22,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         Google2faSetting::getSettings(); // Ensure settings exist
-        
+
         $data = [
             'enforce_for_admins' => true,
             'enforce_for_users' => false,
@@ -47,7 +47,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         Google2faSetting::getSettings();
-        
+
         $data = [
             'enforce_for_admins' => true,
             'recovery_codes_count' => 8,
@@ -67,7 +67,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         Google2faSetting::getSettings();
-        
+
         $data = [
             'enforce_for_admins' => true,
         ];
@@ -88,7 +88,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         $initialSettings = Google2faSetting::getSettings();
-        
+
         $data = [
             'enforce_for_admins' => true,
         ];
@@ -105,7 +105,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         Google2faSetting::getSettings();
-        
+
         $data = [
             'enforce_for_admins' => true,
             'enforced_roles' => [],
@@ -123,7 +123,7 @@ class Update2FASettingsActionTest extends ActionTestCase
     {
         // Arrange
         Google2faSetting::getSettings();
-        
+
         $data = [
             'enforce_for_admins' => null,
             'enforce_for_users' => null,

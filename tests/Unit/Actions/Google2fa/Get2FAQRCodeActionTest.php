@@ -68,7 +68,7 @@ class Get2FAQRCodeActionTest extends ActionTestCase
 
         // Assert
         $this->assertStringStartsWith('data:image/svg+xml;base64,', $result['qr_code']);
-        
+
         // Verify it's valid base64
         $base64Data = substr($result['qr_code'], strlen('data:image/svg+xml;base64,'));
         $decoded = base64_decode($base64Data, true);

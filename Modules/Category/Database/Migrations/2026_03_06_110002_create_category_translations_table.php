@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('locale', 10);
-            
+
             // Translatable fields
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
-            
+
             $table->timestamps();
-            
+
             $table->unique(['category_id', 'locale'], 'unique_category_translation');
             $table->index(['locale', 'slug']);
         });

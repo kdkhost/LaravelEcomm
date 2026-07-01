@@ -23,7 +23,7 @@ readonly class ReportDataService
     public function generate(Report $report, array $parameters = []): array
     {
         $filters = array_merge($report->filters ?? [], $parameters);
-        
+
         return match ($report->type) {
             Report::TYPE_SALES => $this->generateSalesReport($filters),
             Report::TYPE_PRODUCTS => $this->generateProductsReport($filters),

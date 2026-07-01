@@ -47,13 +47,13 @@ class BlazeThemeServiceProvider extends ServiceProvider
     {
         $themeManager = app(ThemeManager::class);
         $activeTheme = $themeManager->getActiveTheme();
-        
+
         // Configure shared components first
         $this->configureSharedComponents();
-        
+
         // Configure active theme
         $this->configureTheme($activeTheme);
-        
+
         // Configure other themes (for cache warming)
         if (config('blaze.cache_warming.enabled')) {
             foreach (config('blaze.cache_warming.themes', []) as $theme) {
@@ -70,13 +70,13 @@ class BlazeThemeServiceProvider extends ServiceProvider
     private function configureSharedComponents(): void
     {
         $sharedConfig = config('blaze.shared_components');
-        
+
         if (! ($sharedConfig['enabled'] ?? false)) {
             return;
         }
 
         $sharedPath = $sharedConfig['path'] ?? base_path('Modules/Front/Resources/views/components');
-        
+
         if (! is_dir($sharedPath)) {
             return;
         }
@@ -84,7 +84,7 @@ class BlazeThemeServiceProvider extends ServiceProvider
         $strategy = $sharedConfig['strategy'] ?? ['compile' => true, 'memo' => false, 'fold' => false];
 
         Blaze::optimize()
-            ->in($sharedPath, 
+            ->in($sharedPath,
                 compile: $strategy['compile'] ?? true,
                 memo: $strategy['memo'] ?? false,
                 fold: $strategy['fold'] ?? false
@@ -97,13 +97,13 @@ class BlazeThemeServiceProvider extends ServiceProvider
     private function configureTheme(string $theme): void
     {
         $themeConfig = config("blaze.themes.{$theme}");
-        
+
         if (! ($themeConfig['enabled'] ?? true)) {
             return;
         }
 
         $themePath = base_path("Modules/Front/Resources/views/themes/{$theme}");
-        
+
         if (! is_dir($themePath)) {
             return;
         }
@@ -219,13 +219,13 @@ class BlazeThemeServiceProvider extends ServiceProvider
         // Wildcard pattern (e.g., 'icon*')
         if (str_contains($pattern, '*')) {
             $prefix = str_replace('*', '', $pattern);
-            
+
             $items = scandir($basePath);
             foreach ($items as $item) {
                 if ($item === '.' || $item === '..') {
                     continue;
                 }
-                
+
                 if (str_starts_with($item, $prefix) && is_dir($basePath . '/' . $item)) {
                     return $basePath . '/' . $item;
                 }

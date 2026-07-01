@@ -96,28 +96,28 @@ class ReportSchedule extends Core
     {
         $now = now($this->timezone);
         $time = explode(':', $this->time);
-        
+
         $nextRun = match ($this->frequency) {
             self::FREQUENCY_DAILY => $now->copy()->addDay()->setTime((int) $time[0], (int) $time[1]),
-            
+
             self::FREQUENCY_WEEKLY => $now->copy()
                 ->next($this->day_of_week ?? 'monday')
                 ->setTime((int) $time[0], (int) $time[1]),
-            
+
             self::FREQUENCY_BIWEEKLY => $now->copy()
                 ->addWeeks(2)
                 ->setTime((int) $time[0], (int) $time[1]),
-            
+
             self::FREQUENCY_MONTHLY => $now->copy()
                 ->addMonth()
                 ->setDay($this->day_of_month ?? 1)
                 ->setTime((int) $time[0], (int) $time[1]),
-            
+
             self::FREQUENCY_QUARTERLY => $now->copy()
                 ->addMonths(3)
                 ->setDay($this->day_of_month ?? 1)
                 ->setTime((int) $time[0], (int) $time[1]),
-            
+
             default => null,
         };
 
@@ -127,7 +127,7 @@ class ReportSchedule extends Core
     public function getDateRange(): array
     {
         $now = now();
-        
+
         return match ($this->date_range_type) {
             self::DATE_RANGE_LAST_7_DAYS => [
                 'from' => $now->copy()->subDays(7)->startOfDay(),

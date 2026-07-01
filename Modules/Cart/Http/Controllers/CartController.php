@@ -115,7 +115,7 @@ class CartController extends CoreController
     public function checkout(): View|Factory|RedirectResponse|Application
     {
         $cart = Helper::getAllProductFromCart();
-        
+
         if ($cart->isEmpty()) {
             session()->flash('error', __('messages.cart_is_empty'));
             return redirect()->route('cart-list');

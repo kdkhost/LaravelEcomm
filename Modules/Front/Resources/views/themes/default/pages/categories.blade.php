@@ -9,7 +9,7 @@
                 <hr>
             </div>
         </div>
-        
+
         <div class="row">
             @foreach($categories as $category)
             <div class="col-lg-4 col-md-6 col-12">

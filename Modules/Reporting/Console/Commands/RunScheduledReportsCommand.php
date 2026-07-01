@@ -36,7 +36,7 @@ class RunScheduledReportsCommand extends Command
 
         foreach ($schedules as $schedule) {
             $this->info("Queueing report: {$schedule->report->name}");
-            
+
             dispatch(new ProcessScheduledReportJob($schedule));
         }
 

@@ -19,16 +19,16 @@ test.describe('Client Profile & Orders Access', () => {
   test('Client can access my-orders page', async ({ page }) => {
     await page.goto(`${BASE_URL}/my-orders`);
     await page.waitForTimeout(2000);
-    
+
     // Should not be 403
     const url = page.url();
     expect(url).not.toContain('403');
     expect(url).not.toContain('login');
-    
+
     // Should see orders page (check body content)
     const bodyText = await page.locator('body').textContent();
     expect(bodyText.includes('My Orders') || bodyText.includes('No orders found') || bodyText.includes('orders')).toBeTruthy();
-    
+
     // Take screenshot
     await page.screenshot({ path: 'test-results/09-client-my-orders.png', fullPage: true });
   });
@@ -37,7 +37,7 @@ test.describe('Client Profile & Orders Access', () => {
     // Try to access order that doesn't belong to user
     await page.goto(`${BASE_URL}/my-orders/99999`);
     await page.waitForTimeout(2000);
-    
+
     // Should redirect or show error, not 403
     const url = page.url();
     expect(url.includes('my-orders') || url.includes('error')).toBeTruthy();

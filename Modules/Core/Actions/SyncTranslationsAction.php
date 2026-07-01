@@ -10,7 +10,7 @@ use Modules\Language\Models\Language;
 
 /**
  * Action to sync/replace all translations for a model
- * 
+ *
  * Used by both Web and API controllers
  */
 readonly class SyncTranslationsAction
@@ -40,7 +40,7 @@ readonly class SyncTranslationsAction
 
             // Filter out empty/null values
             $validFields = array_filter($fields, fn ($value) => ! blank($value));
-            
+
             if (! empty($validFields)) {
                 $validTranslations[$locale] = $validFields;
             }
@@ -92,7 +92,7 @@ readonly class SyncTranslationsAction
         $this->ensureTranslatable($model);
 
         $sourceTranslation = $model->translation($sourceLocale);
-        
+
         if (! $sourceTranslation) {
             return $model;
         }

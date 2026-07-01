@@ -108,11 +108,11 @@ class UserController extends CoreController
     public function profile(): Factory|View
     {
         $user = auth()->user();
-        
+
         if ($user === null) {
             abort(401, 'Unauthorized');
         }
-        
+
         $userDto = $this->findUserAction->execute($user->id);
 
         return view('user::profile', ['profile' => $userDto]);

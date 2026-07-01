@@ -37,7 +37,7 @@ class LanguageController extends CoreController
     public function store(LanguageRequest $request): RedirectResponse
     {
         $dto = LanguageDTO::fromRequest($request->validated());
-        
+
         $this->createAction->execute($dto);
 
         return redirect()->route('admin.languages.index')
@@ -52,7 +52,7 @@ class LanguageController extends CoreController
     public function update(LanguageRequest $request, Language $language): RedirectResponse
     {
         $dto = LanguageDTO::fromRequest($request->validated());
-        
+
         try {
             $this->updateAction->execute($language, $dto);
         } catch (\InvalidArgumentException $e) {
@@ -103,13 +103,13 @@ class LanguageController extends CoreController
     {
         $parsedUrl = parse_url($url);
         $path = $parsedUrl['path'] ?? '/';
-        
+
         // Get active language codes
         $activeLocales = Language::getActiveCodes();
-        
+
         // Build pattern to match any active locale at the start of path
         $localePattern = '/^\/(' . implode('|', array_map('preg_quote', $activeLocales)) . ')(\/|$)/i';
-        
+
         // Replace existing locale or prepend new locale
         if (preg_match($localePattern, $path, $matches)) {
             $newPath = preg_replace($localePattern, '/' . $newLocale . '$2', $path, 1);
@@ -117,24 +117,24 @@ class LanguageController extends CoreController
             // No locale in path, prepend it
             $newPath = $path === '/' ? '/' . $newLocale : '/' . $newLocale . $path;
         }
-        
+
         // Rebuild URL
         $newUrl = ($parsedUrl['scheme'] ?? 'http') . '://' . $parsedUrl['host'];
-        
+
         if (isset($parsedUrl['port'])) {
             $newUrl .= ':' . $parsedUrl['port'];
         }
-        
+
         $newUrl .= $newPath;
-        
+
         if (isset($parsedUrl['query'])) {
             $newUrl .= '?' . $parsedUrl['query'];
         }
-        
+
         if (isset($parsedUrl['fragment'])) {
             $newUrl .= '#' . $parsedUrl['fragment'];
         }
-        
+
         return $newUrl;
     }
 }

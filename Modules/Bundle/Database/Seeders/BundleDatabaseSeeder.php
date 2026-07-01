@@ -16,7 +16,7 @@ class BundleDatabaseSeeder extends Seeder
     public function run(): void
     {
         $products = Product::where('status', 'active')->take(10)->get();
-        
+
         if ($products->count() < 3) {
             return;
         }

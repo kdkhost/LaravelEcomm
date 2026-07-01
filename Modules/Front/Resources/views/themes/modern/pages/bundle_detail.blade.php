@@ -63,7 +63,7 @@
                                 <div class="product-description">
                                     <p>{!! ($bundle->description) !!}</p>
                                 </div>
-                                
+
                                 @if($bundle->products && $bundle->products->count() > 0)
                                     <div class="bundle-products mt-4">
                                         <h4>Products in this Bundle ({{$bundle->products->count()}})</h4>
@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                
+
                                 <div class="add-to-cart mt-4">
                                     <a href="#" class="btn btn-primary">Add Bundle to Cart</a>
                                 </div>

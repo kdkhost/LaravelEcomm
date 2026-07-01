@@ -33,23 +33,23 @@
 
                             <div class="form-group">
                                 <label for="free_shipping_threshold">Free Shipping Threshold (Amount)</label>
-                                <input type="number" step="0.01" class="form-control" id="free_shipping_threshold" 
-                                       name="free_shipping_threshold" 
+                                <input type="number" step="0.01" class="form-control" id="free_shipping_threshold"
+                                       name="free_shipping_threshold"
                                        value="{{ $shippingSettings['free_shipping_threshold'] ?? '' }}">
                                 <small class="form-text text-muted">Orders above this amount will qualify for free shipping</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="flat_rate_shipping">Flat Rate Shipping Price</label>
-                                <input type="number" step="0.01" class="form-control" id="flat_rate_shipping" 
-                                       name="flat_rate_shipping" 
+                                <input type="number" step="0.01" class="form-control" id="flat_rate_shipping"
+                                       name="flat_rate_shipping"
                                        value="{{ $shippingSettings['flat_rate_shipping'] ?? '' }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="estimated_delivery_days">Estimated Delivery Days</label>
-                                <input type="number" class="form-control" id="estimated_delivery_days" 
-                                       name="estimated_delivery_days" 
+                                <input type="number" class="form-control" id="estimated_delivery_days"
+                                       name="estimated_delivery_days"
                                        value="{{ $shippingSettings['estimated_delivery_days'] ?? '' }}">
                                 <small class="form-text text-muted">Average number of days for delivery</small>
                             </div>

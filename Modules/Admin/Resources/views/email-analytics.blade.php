@@ -426,7 +426,7 @@ function exportEmailAnalytics() {
 function showNotification(message, type = 'info') {
     const container = document.getElementById('notificationContainer');
     const alertClass = type === 'error' ? 'alert-danger' : type === 'success' ? 'alert-success' : 'alert-info';
-    
+
     const notification = document.createElement('div');
     notification.className = `alert ${alertClass} alert-dismissible fade show`;
     notification.innerHTML = `
@@ -435,9 +435,9 @@ function showNotification(message, type = 'info') {
             <span>&times;</span>
         </button>
     `;
-    
+
     container.appendChild(notification);
-    
+
     setTimeout(() => {
         if (notification.parentNode) {
             notification.parentNode.removeChild(notification);

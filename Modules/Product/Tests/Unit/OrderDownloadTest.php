@@ -22,7 +22,7 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
@@ -30,7 +30,7 @@ class OrderDownloadTest extends ProductTestCase
             'downloads_count' => 0,
             'expires_at' => now()->addDays(7),
         ]);
-        
+
         $this->assertDatabaseHas('order_downloads', [
             'id' => $orderDownload->id,
             'order_id' => $order->id,
@@ -47,7 +47,7 @@ class OrderDownloadTest extends ProductTestCase
             'max_downloads' => 5,
         ]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
@@ -55,7 +55,7 @@ class OrderDownloadTest extends ProductTestCase
             'downloads_count' => 2,
             'expires_at' => now()->addDays(7),
         ]);
-        
+
         $this->assertTrue($orderDownload->canDownload());
         $this->assertFalse($orderDownload->isExpired());
         $this->assertFalse($orderDownload->isLimitReached());
@@ -67,14 +67,14 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
             'expires_at' => now()->subDay(), // Yesterday
         ]);
-        
+
         $this->assertTrue($orderDownload->isExpired());
         $this->assertFalse($orderDownload->canDownload());
     }
@@ -85,14 +85,14 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
             'expires_at' => null, // Never expires
         ]);
-        
+
         $this->assertFalse($orderDownload->isExpired());
     }
 
@@ -105,14 +105,14 @@ class OrderDownloadTest extends ProductTestCase
             'max_downloads' => 3,
         ]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
             'downloads_count' => 3, // Max reached
         ]);
-        
+
         $this->assertTrue($orderDownload->isLimitReached());
         $this->assertFalse($orderDownload->canDownload());
     }
@@ -126,14 +126,14 @@ class OrderDownloadTest extends ProductTestCase
             'max_downloads' => null, // Unlimited
         ]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
             'downloads_count' => 100, // Many downloads
         ]);
-        
+
         $this->assertFalse($orderDownload->isLimitReached());
     }
 
@@ -143,16 +143,16 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
             'downloads_count' => 0,
         ]);
-        
+
         $orderDownload->recordDownload();
-        
+
         $this->assertEquals(1, $orderDownload->fresh()->downloads_count);
         $this->assertNotNull($orderDownload->fresh()->last_downloaded_at);
     }
@@ -161,25 +161,25 @@ class OrderDownloadTest extends ProductTestCase
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
-        
+
         $order1 = Order::factory()->create(['user_id' => $user1->id]);
         $order2 = Order::factory()->create(['user_id' => $user2->id]);
-        
+
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         OrderDownload::create([
             'order_id' => $order1->id,
             'product_download_id' => $download->id,
             'user_id' => $user1->id,
         ]);
-        
+
         OrderDownload::create([
             'order_id' => $order2->id,
             'product_download_id' => $download->id,
             'user_id' => $user2->id,
         ]);
-        
+
         $this->assertEquals(1, OrderDownload::forUser($user1->id)->count());
         $this->assertEquals(1, OrderDownload::forUser($user2->id)->count());
     }
@@ -190,7 +190,7 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         // Valid - not expired
         OrderDownload::create([
             'order_id' => $order->id,
@@ -198,7 +198,7 @@ class OrderDownloadTest extends ProductTestCase
             'user_id' => $user->id,
             'expires_at' => now()->addDay(),
         ]);
-        
+
         // Valid - never expires
         OrderDownload::create([
             'order_id' => $order->id,
@@ -206,7 +206,7 @@ class OrderDownloadTest extends ProductTestCase
             'user_id' => $user->id,
             'expires_at' => null,
         ]);
-        
+
         // Invalid - expired
         OrderDownload::create([
             'order_id' => $order->id,
@@ -214,7 +214,7 @@ class OrderDownloadTest extends ProductTestCase
             'user_id' => $user->id,
             'expires_at' => now()->subDay(),
         ]);
-        
+
         $this->assertEquals(2, OrderDownload::valid()->count());
     }
 
@@ -224,13 +224,13 @@ class OrderDownloadTest extends ProductTestCase
         $order = Order::factory()->create(['user_id' => $user->id]);
         $product = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $download = ProductDownload::factory()->create(['product_id' => $product->id]);
-        
+
         $orderDownload = OrderDownload::create([
             'order_id' => $order->id,
             'product_download_id' => $download->id,
             'user_id' => $user->id,
         ]);
-        
+
         $this->assertInstanceOf(Order::class, $orderDownload->order);
         $this->assertInstanceOf(ProductDownload::class, $orderDownload->productDownload);
         $this->assertInstanceOf(User::class, $orderDownload->user);

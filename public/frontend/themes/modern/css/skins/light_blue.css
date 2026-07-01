@@ -561,7 +561,7 @@ ul.pagination li.active a,
   border-color: #f7f7f7;
 }
 
-/* Mega Menu 
+/* Mega Menu
 ------------------------------ */
 header:not(.dark) .mega-menu .menu > li > a:hover i,
 header:not(.dark) .dropdown-menu > li > a:hover i,
@@ -579,7 +579,7 @@ header:not(.dark) .dropdown-menu > li.active > a i {
   text-decoration: none;
 }
 
-/* Arrow for parent menu item 
+/* Arrow for parent menu item
 ------------------------------ */
 .header:not(.dark) .active.dropdown > a:before,
 .header:not(.dark).centered .active.dropdown > a:before {
@@ -828,7 +828,7 @@ header:not(.dark) .dropdown-menu > li.active > a i {
   background: #09afdf;
 }
 
-/* Media 
+/* Media
 ---------------------------------- */
 .media:hover .icon {
   background-color: transparent;

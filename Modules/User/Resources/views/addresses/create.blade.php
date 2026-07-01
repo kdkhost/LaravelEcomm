@@ -11,7 +11,7 @@
     <div class="card-body">
         <form action="{{ route('user.addresses.store') }}" method="POST">
             @csrf
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

@@ -28,8 +28,8 @@ class SeoViewComposer
     {
         // Get SEO settings from cached singleton
         $settings = app('settings');
-        $seoSettings = ($settings instanceof \Modules\Settings\Models\Setting) 
-            ? ($settings->seo_settings ?? []) 
+        $seoSettings = ($settings instanceof \Modules\Settings\Models\Setting)
+            ? ($settings->seo_settings ?? [])
             : [];
 
         $seoData = [

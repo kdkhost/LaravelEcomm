@@ -16,7 +16,7 @@ class UpdateOrderActionTest extends ActionTestCase
     public function testExecuteUpdatesOrderSuccessfully(): void
     {
         $user = User::factory()->create();
-        
+
         // Create order in database
         \DB::table('orders')->insert([
             'id' => 1,
@@ -55,7 +55,7 @@ class UpdateOrderActionTest extends ActionTestCase
         $this->assertEquals('paid', $result->payment_status);
         $this->assertEquals('processing', $result->status);
         $this->assertEquals('TXN-12345', $result->transaction_reference);
-        
+
         $this->assertDatabaseHas('orders', [
             'id' => 1,
             'payment_method' => 'paypal',
@@ -68,7 +68,7 @@ class UpdateOrderActionTest extends ActionTestCase
     public function testExecuteUpdatesOrderStatusOnly(): void
     {
         $user = User::factory()->create();
-        
+
         // Create order in database
         \DB::table('orders')->insert([
             'id' => 1,
@@ -112,7 +112,7 @@ class UpdateOrderActionTest extends ActionTestCase
     public function testExecuteUpdatesOrderNumber(): void
     {
         $user = User::factory()->create();
-        
+
         // Create order in database
         \DB::table('orders')->insert([
             'id' => 1,
@@ -153,7 +153,7 @@ class UpdateOrderActionTest extends ActionTestCase
     public function testExecuteUpdatesTotalAmountAndQuantity(): void
     {
         $user = User::factory()->create();
-        
+
         // Create order in database
         \DB::table('orders')->insert([
             'id' => 1,
@@ -197,7 +197,7 @@ class UpdateOrderActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $payer = User::factory()->create();
-        
+
         // Create order in database
         \DB::table('orders')->insert([
             'id' => 1,

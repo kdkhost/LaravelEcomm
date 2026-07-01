@@ -95,7 +95,7 @@ class LanguageController extends CoreController
     public function store(LanguageRequest $request): JsonResponse
     {
         $dto = LanguageDTO::fromRequest($request->validated());
-        
+
         $language = $this->createAction->execute($dto);
 
         return response()->json([
@@ -108,7 +108,7 @@ class LanguageController extends CoreController
     public function update(LanguageRequest $request, Language $language): JsonResponse
     {
         $dto = LanguageDTO::fromRequest($request->validated());
-        
+
         try {
             $language = $this->updateAction->execute($language, $dto);
         } catch (\InvalidArgumentException $e) {

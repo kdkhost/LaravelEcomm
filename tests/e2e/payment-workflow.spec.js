@@ -21,12 +21,12 @@ async function login(page, email, password) {
 async function addProductToCart(page) {
   await page.goto(`${BASE_URL}/product-grids`);
   await page.waitForSelector('.product-item, .listing-item, .single-product, .product-list-item', { timeout: 10000 });
-  
+
   // Click on first product link (get the product slug from the link)
   const productLink = await page.locator('.product-item-title a, .product-item a, .listing-item a').first();
   const href = await productLink.getAttribute('href');
   const slug = href.split('/').pop();
-  
+
   // Direct add to cart via URL (most reliable)
   await page.goto(`${BASE_URL}/add-to-cart/${slug}`);
   await page.waitForTimeout(2000);
@@ -36,14 +36,14 @@ async function addProductToCart(page) {
 async function updateCartQuantity(page) {
   await page.goto(`${BASE_URL}/cart-list`);
   await page.waitForLoadState('networkidle');
-  
+
   // Check if cart has items
   const cartItems = await page.locator('input[name^="quantity"], .qty input').count();
   if (cartItems > 0) {
     // Update first item quantity to 2
     const qtyInput = await page.locator('input[name^="quantity"]').first();
     await qtyInput.fill('2');
-    
+
     // Click update button
     const updateBtn = await page.locator('button:has-text("Update"), .btn-update').first();
     if (await updateBtn.isVisible()) {
@@ -57,7 +57,7 @@ async function updateCartQuantity(page) {
 async function removeFromCart(page) {
   await page.goto(`${BASE_URL}/cart-list`);
   await page.waitForLoadState('networkidle');
-  
+
   const removeLinks = await page.locator('a[href*="cart-delete"], .remove-icon, .btn-danger').count();
   if (removeLinks > 0) {
     // Remove first item
@@ -71,7 +71,7 @@ async function removeFromCart(page) {
 async function checkoutWithCOD(page) {
   await page.goto(`${BASE_URL}/checkout`);
   await page.waitForLoadState('networkidle');
-  
+
   // Fill checkout form
   await page.fill('input[name="first_name"]', 'Test');
   await page.fill('input[name="last_name"]', 'User');
@@ -80,24 +80,24 @@ async function checkoutWithCOD(page) {
   await page.fill('input[name="address1"]', 'Test Address 123');
   await page.fill('input[name="city"]', 'Skopje');
   await page.fill('input[name="post_code"]', '1000');
-  
+
   // Select country if exists
   const countrySelect = await page.locator('select[name="country"]').first();
   if (await countrySelect.isVisible()) {
     await countrySelect.selectOption('MK');
   }
-  
+
   // Select COD payment
   const codRadio = await page.locator('input[value="cod"]').first();
   if (await codRadio.isVisible()) {
     await codRadio.check();
   }
-  
+
   // Submit order
   const submitBtn = await page.locator('button[type="submit"], .btn-order').first();
   await submitBtn.click();
   await page.waitForTimeout(3000);
-  
+
   // Check for success message
   const successMsg = await page.locator('text=success, text=Order placed, text=Thank you').count();
   return successMsg > 0;
@@ -107,7 +107,7 @@ async function checkoutWithCOD(page) {
 async function checkoutWithStripe(page) {
   await page.goto(`${BASE_URL}/checkout`);
   await page.waitForLoadState('networkidle');
-  
+
   // Fill checkout form
   await page.fill('input[name="first_name"]', 'Test');
   await page.fill('input[name="last_name"]', 'User');
@@ -116,18 +116,18 @@ async function checkoutWithStripe(page) {
   await page.fill('input[name="address1"]', 'Test Address 123');
   await page.fill('input[name="city"]', 'Skopje');
   await page.fill('input[name="post_code"]', '1000');
-  
+
   // Select Stripe payment
   const stripeRadio = await page.locator('input[value="stripe"]').first();
   if (await stripeRadio.isVisible()) {
     await stripeRadio.check();
   }
-  
+
   // Submit to go to Stripe
   const submitBtn = await page.locator('button[type="submit"], .btn-order').first();
   await submitBtn.click();
   await page.waitForTimeout(3000);
-  
+
   // Check if redirected to Stripe page
   if (page.url().includes('stripe')) {
     // Fill Stripe test card details
@@ -135,7 +135,7 @@ async function checkoutWithStripe(page) {
     await page.fill('.card-cvc', '123');
     await page.fill('.card-expiry-month', '12');
     await page.fill('.card-expiry-year', '2025');
-    
+
     // Submit payment
     await page.click('button[type="submit"]');
     await page.waitForTimeout(3000);
@@ -146,7 +146,7 @@ async function checkoutWithStripe(page) {
 async function checkoutWithPayPal(page) {
   await page.goto(`${BASE_URL}/checkout`);
   await page.waitForLoadState('networkidle');
-  
+
   // Fill checkout form
   await page.fill('input[name="first_name"]', 'Test');
   await page.fill('input[name="last_name"]', 'User');
@@ -155,18 +155,18 @@ async function checkoutWithPayPal(page) {
   await page.fill('input[name="address1"]', 'Test Address 123');
   await page.fill('input[name="city"]', 'Skopje');
   await page.fill('input[name="post_code"]', '1000');
-  
+
   // Select PayPal payment
   const paypalRadio = await page.locator('input[value="paypal"]').first();
   if (await paypalRadio.isVisible()) {
     await paypalRadio.check();
   }
-  
+
   // Submit to go to PayPal
   const submitBtn = await page.locator('button[type="submit"], .btn-order').first();
   await submitBtn.click();
   await page.waitForTimeout(5000);
-  
+
   // Check if redirected to PayPal
   if (page.url().includes('paypal.com')) {
     console.log('Redirected to PayPal sandbox');
@@ -229,7 +229,7 @@ test.describe('Default Theme - Cart & Payment', () => {
   test.beforeEach(async ({ page }) => {
     // Login first
     await login(page, TEST_USER.email, TEST_USER.password);
-    
+
     // Switch to default theme if possible (via URL param or settings)
     // This depends on how theme switching works in the app
   });

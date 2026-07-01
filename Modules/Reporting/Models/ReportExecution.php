@@ -100,7 +100,7 @@ class ReportExecution extends Core
     {
         $startedAt = $this->started_at ?? now();
         $completedAt = now();
-        
+
         $this->update([
             'status' => self::STATUS_COMPLETED,
             'completed_at' => $completedAt,

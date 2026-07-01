@@ -9,7 +9,7 @@ use Modules\Core\Traits\HasTranslations;
 
 /**
  * Action to set translations for a model
- * 
+ *
  * Used by both Web and API controllers
  */
 readonly class SetTranslationAction

@@ -25,14 +25,14 @@ $themePath = 'front::themes.' . $activeTheme;
             <div class="main col-md-12">
                 <h1 class="page-title">My Orders</h1>
                 <div class="separator-2"></div>
-                
+
                 @if(session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
                 @if(session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                
+
                 @if($orders->count() > 0)
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
@@ -82,7 +82,7 @@ $themePath = 'front::themes.' . $activeTheme;
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="text-center">
                         {{ $orders->links() }}
                     </div>

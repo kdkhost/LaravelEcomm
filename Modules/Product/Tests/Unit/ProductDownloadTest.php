@@ -18,14 +18,14 @@ class ProductDownloadTest extends ProductTestCase
     public function test_can_create_product_download(): void
     {
         Storage::fake('local');
-        
+
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
             'is_downloadable' => true,
         ]);
-        
+
         $file = UploadedFile::fake()->create('test-ebook.pdf', 1024);
-        
+
         $download = ProductDownload::create([
             'product_id' => $product->id,
             'file_name' => 'test-ebook.pdf',
@@ -36,13 +36,13 @@ class ProductDownloadTest extends ProductTestCase
             'sort_order' => 1,
             'is_active' => true,
         ]);
-        
+
         $this->assertDatabaseHas('product_downloads', [
             'id' => $download->id,
             'product_id' => $product->id,
             'file_name' => 'test-ebook.pdf',
         ]);
-        
+
         $this->assertEquals($product->id, $download->product_id);
         $this->assertTrue($download->is_active);
     }
@@ -52,11 +52,11 @@ class ProductDownloadTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         ProductDownload::factory()->count(3)->create([
             'product_id' => $product->id,
         ]);
-        
+
         $this->assertEquals(3, $product->downloads()->count());
         $this->assertEquals(3, $product->downloads->count());
     }
@@ -66,17 +66,17 @@ class ProductDownloadTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         ProductDownload::factory()->create([
             'product_id' => $product->id,
             'is_active' => true,
         ]);
-        
+
         ProductDownload::factory()->create([
             'product_id' => $product->id,
             'is_active' => false,
         ]);
-        
+
         $this->assertEquals(1, $product->activeDownloads()->count());
     }
 
@@ -85,12 +85,12 @@ class ProductDownloadTest extends ProductTestCase
         $download = new ProductDownload([
             'file_size' => 1024, // 1KB
         ]);
-        
+
         $this->assertEquals('1 KB', $download->formatted_file_size);
-        
+
         $download->file_size = 1024 * 1024; // 1MB
         $this->assertEquals('1 MB', $download->formatted_file_size);
-        
+
         $download->file_size = null;
         $this->assertEquals('Unknown', $download->formatted_file_size);
     }
@@ -100,13 +100,13 @@ class ProductDownloadTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         $download = ProductDownload::factory()->create([
             'product_id' => $product->id,
         ]);
-        
+
         $url = $download->getDownloadUrl(123, 456);
-        
+
         $this->assertStringContainsString('download=' . $download->id, $url);
         $this->assertStringContainsString('order=123', $url);
         $this->assertStringContainsString('signature=', $url);
@@ -117,23 +117,23 @@ class ProductDownloadTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         $download = ProductDownload::factory()->create([
             'product_id' => $product->id,
         ]);
-        
+
         $orderId = 123;
         $userId = 456;
-        
+
         $url = $download->getDownloadUrl($orderId, $userId);
-        
+
         // Extract signature from URL
         parse_str(parse_url($url, PHP_URL_QUERY), $params);
         $signature = $params['signature'];
-        
+
         // Verify signature matches expected
         $expectedSignature = hash('sha256', $download->id . ':' . $orderId . ':' . $userId . ':' . config('app.key'));
-        
+
         $this->assertEquals($expectedSignature, $signature);
     }
 
@@ -141,10 +141,10 @@ class ProductDownloadTest extends ProductTestCase
     {
         $product1 = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
         $product2 = Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]);
-        
+
         ProductDownload::factory()->count(2)->create(['product_id' => $product1->id]);
         ProductDownload::factory()->create(['product_id' => $product2->id]);
-        
+
         $this->assertEquals(2, ProductDownload::forProduct($product1->id)->count());
         $this->assertEquals(1, ProductDownload::forProduct($product2->id)->count());
     }
@@ -154,11 +154,11 @@ class ProductDownloadTest extends ProductTestCase
         $product = Product::factory()->create([
             'type' => Product::TYPE_DOWNLOADABLE,
         ]);
-        
+
         $download = ProductDownload::factory()->create([
             'product_id' => $product->id,
         ]);
-        
+
         $this->assertInstanceOf(Product::class, $download->product);
         $this->assertEquals($product->id, $download->product->id);
     }

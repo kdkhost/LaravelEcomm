@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- SEO Meta Tags -->
     <title>{{ $seo['title'] ?? config('app.name') }}</title>
     <meta name="description" content="{{ $seo['description'] ?? 'Online shopping store with quality products and fast delivery.' }}">
@@ -81,12 +81,12 @@
             src="https://www.facebook.com/tr?id={{ $seo['analytics']['facebook_pixel_id'] }}&ev=PageView&noscript=1"
         /></noscript>
     @endif
-    
+
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#ffffff">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon/apple-icon-60x60.png">
@@ -103,15 +103,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" href="{{asset('frontend/img/favicon.png')}}">
-    
+
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="//www.google-analytics.com">
-    
+
     <!-- Include head content -->
     @include($themePath . '.layouts.head')
-    
+
     <!-- JSON-LD Structured Data -->
     @if(isset($seo['schema']))
         @if(is_array($seo['schema']) && isset($seo['schema'][0]))
@@ -126,7 +126,7 @@
             </script>
         @endif
     @endif
-    
+
     <!-- Custom SEO content -->
     @yield('seo')
 </head>
@@ -141,17 +141,17 @@
         </div>
     </div>
     <!-- End Preloader -->
-    
+
     @include($themePath . '.layouts.notification')
-    
+
     <!-- Header -->
     @include($themePath . '.layouts.header')
     <!--/ End Header -->
-    
+
     @yield('content')
-    
+
     @include($themePath . '.layouts.footer')
-    
+
     <!-- Performance optimization scripts -->
     <script>
         // Lazy loading for images
@@ -166,18 +166,18 @@
                     }
                 });
             });
-            
+
             document.querySelectorAll('img[data-src]').forEach(img => {
                 imageObserver.observe(img);
             });
         }
-        
+
         // Preload critical resources
         const preloadLinks = [
             '/assets/css/critical.css',
             '/assets/js/critical.js'
         ];
-        
+
         preloadLinks.forEach(href => {
             const link = document.createElement('link');
             link.rel = 'preload';
@@ -186,7 +186,7 @@
             document.head.appendChild(link);
         });
     </script>
-    
+
     @stack('scripts')
 </body>
 </html>

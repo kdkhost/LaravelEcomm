@@ -121,19 +121,19 @@ class UserAddress extends Core
     public function getFullAddressAttribute(): string
     {
         $address = $this->address1;
-        
+
         if ($this->address2) {
             $address .= ", {$this->address2}";
         }
-        
+
         $address .= ", {$this->city}";
-        
+
         if ($this->state) {
             $address .= ", {$this->state}";
         }
-        
+
         $address .= " {$this->post_code}, {$this->country}";
-        
+
         return $address;
     }
 
@@ -147,7 +147,7 @@ class UserAddress extends Core
             ->where('type', $this->type)
             ->where('id', '!=', $this->id)
             ->update(['is_default' => false]);
-        
+
         $this->update(['is_default' => true]);
     }
 }

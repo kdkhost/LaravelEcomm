@@ -77,7 +77,7 @@ class BlazeOptimizeCommand extends Command
 
         $this->newLine();
         $this->info('Available Themes:');
-        
+
         $themeRows = [];
         foreach ($themes as $theme) {
             $isActive = $theme['name'] === $status['active_theme'];
@@ -114,11 +114,11 @@ class BlazeOptimizeCommand extends Command
             };
 
             $this->line("  <fg={$typeColor}>[{$rec['type']}]</> {$rec['message']}");
-            
+
             if (isset($rec['config_path'])) {
                 $this->line("  → Config: <fg=cyan>{$rec['config_path']}</>");
             }
-            
+
             $this->newLine();
         }
 
@@ -132,7 +132,7 @@ class BlazeOptimizeCommand extends Command
         if ($this->option('all')) {
             $this->info('Clearing Blaze cache for all themes...');
             $results = $this->themeManager->warmAllThemes();
-            
+
             foreach ($results as $themeName => $result) {
                 $icon = $result['success'] ? '<fg=green>✓</>' : '<fg=red>✗</>';
                 $this->line("{$icon} {$themeName}: {$result['message']}");
@@ -140,9 +140,9 @@ class BlazeOptimizeCommand extends Command
         } else {
             $theme = $theme ?? $this->themeManager->getActiveTheme();
             $this->info("Clearing Blaze cache for theme: {$theme}...");
-            
+
             $result = $this->themeManager->clearBlazeCache($theme);
-            
+
             if ($result['success']) {
                 $this->info("<fg=green>✓</> {$result['message']}");
             } else {
@@ -165,7 +165,7 @@ class BlazeOptimizeCommand extends Command
 
         foreach ($results as $themeName => $result) {
             $icon = $result['success'] ? '<fg=green>✓</>' : '<fg=red>✗</>';
-            
+
             if ($result['success']) {
                 $this->line("{$icon} {$themeName}: <fg=green>{$result['compiled']}</> compiled, <fg=red>{$result['failed']}</> failed");
                 $totalCompiled += $result['compiled'];
@@ -217,10 +217,10 @@ class BlazeOptimizeCommand extends Command
         $this->newLine(2);
 
         $this->info("<fg=green>✓</> Compiled: {$result['compiled']}");
-        
+
         if ($result['failed'] > 0) {
             $this->warn("<fg=red>✗</> Failed: {$result['failed']}");
-            
+
             if (! empty($result['errors'])) {
                 $this->newLine();
                 $this->warn('Errors:');
@@ -236,7 +236,7 @@ class BlazeOptimizeCommand extends Command
     private function formatStrategy(array $strategy): string
     {
         $parts = [];
-        
+
         if ($strategy['compile'] ?? false) {
             $parts[] = 'compile';
         }

@@ -43,11 +43,11 @@ class StripeController extends CoreController
     public function stripePost(Request $request, StoreOrderAction $storeOrderAction): RedirectResponse
     {
         $pendingOrder = session('pending_order');
-        
+
         if (!$pendingOrder) {
             return redirect()->route('front.checkout')->with('error', 'No pending order found. Please try again.');
         }
-        
+
         try {
             // Process Stripe payment
             $dto = new StripeDTO(
@@ -57,28 +57,28 @@ class StripeController extends CoreController
                 description: 'Order from ' . ($pendingOrder['email'] ?? 'Guest')
             );
             $paymentResult = $this->createAction->execute($dto);
-            
+
             // Get cart items before clearing
             $userId = $pendingOrder['user_id'] ?? '';
             $cartItems = Helper::getAllProductFromCart($userId);
-            
+
             if ($cartItems->isEmpty()) {
                 return redirect()->route('front.cart')->with('error', 'Your cart is empty.');
             }
-            
+
             // Update order data with Stripe payment info
             $pendingOrder['payment_status'] = 'paid';
             $pendingOrder['transaction_reference'] = $request->stripeToken;
-            
+
             // Create the order
             $orderDto = OrderDTO::fromArray($pendingOrder);
             $order = $storeOrderAction->execute($orderDto);
-            
+
             // Associate cart items with the order
             foreach ($cartItems as $cartItem) {
                 $cartItem->update(['order_id' => $order->id]);
             }
-            
+
             // Save address to user's address book if logged in
             if (!empty($pendingOrder['user_id']) && !empty($pendingOrder['save_address'])) {
                 $user = \Modules\User\Models\User::find($pendingOrder['user_id']);
@@ -98,12 +98,12 @@ class StripeController extends CoreController
                     ]);
                 }
             }
-            
+
             // Clear session data
             session()->forget('cart');
             session()->forget('coupon');
             session()->forget('pending_order');
-            
+
             Session::flash('success', 'Payment successful! Order number: ' . $order->order_number);
             return redirect()->route('orders.index');
         } catch (\Exception $e) {

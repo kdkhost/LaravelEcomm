@@ -16,7 +16,7 @@ class FindCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -41,7 +41,7 @@ class FindCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['price' => 150]);
-        
+
         $cart = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -64,7 +64,7 @@ class FindCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         $cart1 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -73,7 +73,7 @@ class FindCartActionTest extends ActionTestCase
             'amount' => 100,
             'order_id' => null,
         ]);
-        
+
         $cart2 = Cart::factory()->create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -84,7 +84,7 @@ class FindCartActionTest extends ActionTestCase
         ]);
 
         $action = app(FindCartAction::class);
-        
+
         $result1 = $action->execute($cart1->id);
         $result2 = $action->execute($cart2->id);
 

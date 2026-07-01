@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class="mb-4">Recently Viewed Products</h2>
-                    
+
                     @if(count($products) > 0)
                         <div class="row">
                             @foreach($products as $product)

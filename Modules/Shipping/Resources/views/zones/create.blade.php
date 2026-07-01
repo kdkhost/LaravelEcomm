@@ -26,7 +26,7 @@
 
                             <div class="form-group">
                                 <label for="countries">Countries (ISO codes, comma-separated)</label>
-                                <input type="text" class="form-control" id="countries" name="countries" 
+                                <input type="text" class="form-control" id="countries" name="countries"
                                        placeholder="US, CA, MX (leave empty for all countries)">
                                 <small class="form-text text-muted">Enter 2-letter country codes separated by commas</small>
                             </div>

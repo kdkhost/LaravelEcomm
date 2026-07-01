@@ -23,7 +23,7 @@ class DownloadController extends CoreController
     {
         // Verify signature
         $expectedSignature = hash('sha256', $download->id . ':' . $order->id . ':' . auth()->id() . ':' . config('app.key'));
-        
+
         if ($request->get('signature') !== $expectedSignature) {
             return redirect()->route('front.my-orders')
                 ->with('error', 'Invalid download link.');
@@ -49,7 +49,7 @@ class DownloadController extends CoreController
                 'user_id' => auth()->id(),
             ],
             [
-                'expires_at' => $download->product->download_expiry_days 
+                'expires_at' => $download->product->download_expiry_days
                     ? now()->addDays($download->product->download_expiry_days)
                     : null,
             ]
@@ -105,10 +105,10 @@ class DownloadController extends CoreController
         }
 
         $downloads = [];
-        
+
         foreach ($order->carts as $cart) {
             $product = $cart->product;
-            
+
             if (!$product || !$product->isDownloadable()) {
                 continue;
             }
@@ -121,7 +121,7 @@ class DownloadController extends CoreController
                         'user_id' => auth()->id(),
                     ],
                     [
-                        'expires_at' => $product->download_expiry_days 
+                        'expires_at' => $product->download_expiry_days
                             ? now()->addDays($product->download_expiry_days)
                             : null,
                     ]

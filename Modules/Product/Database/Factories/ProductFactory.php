@@ -158,12 +158,12 @@ class ProductFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($locales): void {
             /** @var Product $product */
             $product = $model;
-            
+
             $localesToUse = $locales ?? $this->translationLocales;
-            
+
             foreach ($localesToUse as $locale) {
                 $localeSuffix = $locale === 'en' ? '' : ' (' . strtoupper($locale) . ')';
-                
+
                 $product->translations()->create([
                     'locale' => $locale,
                     'name' => $this->faker->words(3, true) . $localeSuffix,
@@ -187,7 +187,7 @@ class ProductFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($translations): void {
             /** @var Product $product */
             $product = $model;
-            
+
             foreach ($translations as $locale => $fields) {
                 $product->translations()->create([
                     'locale' => $locale,

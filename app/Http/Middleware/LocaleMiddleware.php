@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Middleware to handle locale from URL prefix
- * 
+ *
  * URLs: /en/products, /mk/products, /de/products
  * Falls back to default language if locale is invalid
  */
@@ -36,17 +36,17 @@ class LocaleMiddleware
         } else {
             // Redirect to default locale
             $defaultLocale = Language::getDefaultCode();
-            
+
             // Only redirect GET requests to avoid breaking form submissions
             if ($request->isMethod('GET')) {
                 $newUrl = '/' . $defaultLocale . $request->getPathInfo();
                 if ($request->getQueryString()) {
                     $newUrl .= '?' . $request->getQueryString();
                 }
-                
+
                 return redirect($newUrl, 301);
             }
-            
+
             // For non-GET requests, just set default locale
             app()->setLocale($defaultLocale);
         }
@@ -62,7 +62,7 @@ class LocaleMiddleware
         // First check URL prefix: /en/, /mk/, etc.
         $path = $request->path();
         $segments = explode('/', $path);
-        
+
         if (count($segments) > 0 && strlen($segments[0]) === 2) {
             return $segments[0];
         }

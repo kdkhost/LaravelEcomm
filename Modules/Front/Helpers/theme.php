@@ -79,7 +79,7 @@ if (! function_exists('theme_asset')) {
     {
         $theme = $theme ?? active_theme();
         $assetPath = "frontend/themes/{$theme}/{$path}";
-        
+
         // Check if asset exists, fallback to default theme if configured
         if (config('front.assets.fallback_to_default', true) && $theme !== 'default') {
             $fullPath = public_path($assetPath);
@@ -90,7 +90,7 @@ if (! function_exists('theme_asset')) {
                 }
             }
         }
-        
+
         return asset($assetPath);
     }
 }
@@ -102,7 +102,7 @@ if (! function_exists('theme_view')) {
     function theme_view(string $view): string
     {
         $activeTheme = active_theme();
-        
+
         // Try different view path formats (pages subdirectory first)
         $viewFormats = [
             "front::themes.{$activeTheme}.pages.{$view}",

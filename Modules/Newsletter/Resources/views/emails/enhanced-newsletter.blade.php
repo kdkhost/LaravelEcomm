@@ -182,10 +182,10 @@
                 <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => 'https://twitter.com']) }}">Twitter</a>
                 <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => 'https://instagram.com']) }}">Instagram</a>
             </div>
-            
+
             <p>Thank you for subscribing to our newsletter!</p>
             <p>{{ config('app.name') }} - Your trusted e-commerce partner</p>
-            
+
             <div class="unsubscribe">
                 <a href="{{ route('email.unsubscribe', ['email' => $recipientEmail ?? '', 'id' => $analyticsId ?? '']) }}">
                     Unsubscribe from this newsletter

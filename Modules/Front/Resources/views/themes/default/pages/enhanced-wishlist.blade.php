@@ -17,19 +17,19 @@
             <h3 class="text-lg font-semibold text-gray-900">{{ $statistics['total_items'] }}</h3>
             <p class="text-gray-600 text-sm">Total Items</p>
         </div>
-        
+
         <div class="bg-white rounded-lg shadow-md p-6 text-center">
             <i class="fas fa-dollar-sign text-green-500 text-3xl mb-3"></i>
             <h3 class="text-lg font-semibold text-gray-900">${{ number_format($statistics['total_value'], 2) }}</h3>
             <p class="text-gray-600 text-sm">Total Value</p>
         </div>
-        
+
         <div class="bg-white rounded-lg shadow-md p-6 text-center">
             <i class="fas fa-tags text-blue-500 text-3xl mb-3"></i>
             <h3 class="text-lg font-semibold text-gray-900">{{ $statistics['categories'] }}</h3>
             <p class="text-gray-600 text-sm">Categories</p>
         </div>
-        
+
         <div class="bg-white rounded-lg shadow-md p-6 text-center">
             <i class="fas fa-crown text-purple-500 text-3xl mb-3"></i>
             <h3 class="text-lg font-semibold text-gray-900">{{ $statistics['brands'] }}</h3>
@@ -44,15 +44,15 @@
                 <h2 class="text-xl font-semibold text-gray-900 mb-2">Price Alerts</h2>
                 <p class="text-gray-600">Track price changes and get notified about the best deals</p>
             </div>
-            
+
             <div class="flex items-center space-x-4">
-                <a href="{{ route('front.enhanced-wishlist', ['with_price_alerts' => true]) }}" 
+                <a href="{{ route('front.enhanced-wishlist', ['with_price_alerts' => true]) }}"
                    class="px-4 py-2 rounded-lg {{ $withPriceAlerts ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }} transition-colors">
                     <i class="fas fa-bell mr-2"></i>
                     With Price Alerts
                 </a>
-                
-                <a href="{{ route('front.enhanced-wishlist') }}" 
+
+                <a href="{{ route('front.enhanced-wishlist') }}"
                    class="px-4 py-2 rounded-lg {{ !$withPriceAlerts ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }} transition-colors">
                     <i class="fas fa-list mr-2"></i>
                     Standard View
@@ -66,15 +66,15 @@
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-semibold text-gray-900">Wishlist Items</h2>
-                
+
                 <div class="flex space-x-2">
-                    <button onclick="bulkAddToCart()" 
+                    <button onclick="bulkAddToCart()"
                             class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                         <i class="fas fa-shopping-cart mr-2"></i>
                         Add All to Cart
                     </button>
-                    
-                    <button onclick="bulkRemove()" 
+
+                    <button onclick="bulkRemove()"
                             class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
                         <i class="fas fa-trash mr-2"></i>
                         Remove All
@@ -88,7 +88,7 @@
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div class="relative">
                             @if($item->product->getFirstMediaUrl('images'))
-                                <img src="{{ $item->product->getFirstMediaUrl('images') }}" 
+                                <img src="{{ $item->product->getFirstMediaUrl('images') }}"
                                      alt="{{ $item->product->title }}"
                                      class="w-full h-48 object-cover">
                             @else
@@ -96,7 +96,7 @@
                                     <i class="fas fa-image text-gray-400 text-4xl"></i>
                                 </div>
                             @endif
-                            
+
                             <!-- Price Alert Badge -->
                             @if($withPriceAlerts && $item->price_drop)
                                 <div class="absolute top-2 left-2">
@@ -106,7 +106,7 @@
                                     </span>
                                 </div>
                             @endif
-                            
+
                             <!-- Quantity Badge -->
                             @if($item->quantity > 1)
                                 <div class="absolute top-2 right-2">
@@ -116,15 +116,15 @@
                                 </div>
                             @endif
                         </div>
-                        
+
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                <a href="{{ route('front.product-detail', $item->product->slug) }}" 
+                                <a href="{{ route('front.product-detail', $item->product->slug) }}"
                                    class="hover:text-blue-600 transition-colors">
                                     {{ $item->product->title }}
                                 </a>
                             </h3>
-                            
+
                             <!-- Price Information -->
                             <div class="mb-3">
                                 @if($withPriceAlerts && $item->price_drop)
@@ -149,29 +149,29 @@
                                         @endif
                                     </div>
                                 @endif
-                                
+
                                 <div class="text-sm text-gray-600">
                                     Stock: {{ $item->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
                                 </div>
                             </div>
-                            
+
                             <!-- Action Buttons -->
                             <div class="flex items-center justify-between">
                                 <div class="flex space-x-2">
-                                    <button onclick="moveToCart({{ $item->product->id }})" 
+                                    <button onclick="moveToCart({{ $item->product->id }})"
                                             class="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm">
                                         <i class="fas fa-shopping-cart mr-1"></i>
                                         Move to Cart
                                     </button>
-                                    
-                                    <button onclick="updateQuantity({{ $item->product->id }})" 
+
+                                    <button onclick="updateQuantity({{ $item->product->id }})"
                                             class="bg-gray-100 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-200 transition-colors text-sm">
                                         <i class="fas fa-edit mr-1"></i>
                                         Edit
                                     </button>
                                 </div>
-                                
-                                <button onclick="removeFromWishlist({{ $item->product->id }})" 
+
+                                <button onclick="removeFromWishlist({{ $item->product->id }})"
                                         class="text-red-500 hover:text-red-700 transition-colors">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -187,14 +187,14 @@
             <i class="far fa-heart text-gray-400 text-6xl mb-4"></i>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">Your wishlist is empty</h3>
             <p class="text-gray-600 mb-6">Start adding products you love to your wishlist to track them and get notified about price drops.</p>
-            
+
             <div class="flex justify-center space-x-4">
-                <a href="{{ route('front.product-grids') }}" 
+                <a href="{{ route('front.product-grids') }}"
                    class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
                     Browse Products
                 </a>
-                
-                <a href="{{ route('front.recommendations') }}" 
+
+                <a href="{{ route('front.recommendations') }}"
                    class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
                     Get Recommendations
                 </a>
@@ -206,13 +206,13 @@
     @if($recommendations->count() > 0)
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <h2 class="text-xl font-semibold text-gray-900 mb-6">You Might Also Like</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($recommendations as $product)
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div class="aspect-w-1 aspect-h-1 bg-gray-200">
                             @if($product->getFirstMediaUrl('images'))
-                                <img src="{{ $product->getFirstMediaUrl('images') }}" 
+                                <img src="{{ $product->getFirstMediaUrl('images') }}"
                                      alt="{{ $product->title }}"
                                      class="w-full h-48 object-cover">
                             @else
@@ -221,15 +221,15 @@
                                 </div>
                             @endif
                         </div>
-                        
+
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                <a href="{{ route('front.product-detail', $product->slug) }}" 
+                                <a href="{{ route('front.product-detail', $product->slug) }}"
                                    class="hover:text-blue-600 transition-colors">
                                     {{ $product->title }}
                                 </a>
                             </h3>
-                            
+
                             <div class="flex items-center mb-2">
                                 @if($product->special_price)
                                     <span class="text-lg font-bold text-red-600">${{ number_format($product->special_price, 2) }}</span>
@@ -238,13 +238,13 @@
                                     <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="flex items-center justify-between">
                                 <span class="text-sm text-gray-600">
                                     Stock: {{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
                                 </span>
-                                
-                                <button onclick="addToWishlist({{ $product->id }})" 
+
+                                <button onclick="addToWishlist({{ $product->id }})"
                                         class="text-gray-400 hover:text-red-500 transition-colors">
                                     <i class="far fa-heart"></i>
                                 </button>
@@ -259,36 +259,36 @@
     <!-- Wishlist Actions -->
     <div class="bg-white rounded-lg shadow-md p-6">
         <h2 class="text-xl font-semibold text-gray-900 mb-4">Wishlist Actions</h2>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Share Wishlist -->
             <div class="text-center">
                 <i class="fas fa-share-alt text-blue-600 text-3xl mb-3"></i>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Share Wishlist</h3>
                 <p class="text-gray-600 mb-4">Share your wishlist with friends and family</p>
-                <button onclick="shareWishlist()" 
+                <button onclick="shareWishlist()"
                         class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                     Share Now
                 </button>
             </div>
-            
+
             <!-- Export Wishlist -->
             <div class="text-center">
                 <i class="fas fa-download text-green-600 text-3xl mb-3"></i>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Export Wishlist</h3>
                 <p class="text-gray-600 mb-4">Download your wishlist as a PDF or CSV</p>
-                <button onclick="exportWishlist()" 
+                <button onclick="exportWishlist()"
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                     Export
                 </button>
             </div>
-            
+
             <!-- Price Alerts -->
             <div class="text-center">
                 <i class="fas fa-bell text-purple-600 text-3xl mb-3"></i>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Price Alerts</h3>
                 <p class="text-gray-600 mb-4">Get notified when prices drop on your wishlist items</p>
-                <button onclick="managePriceAlerts()" 
+                <button onclick="managePriceAlerts()"
                         class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
                     Manage Alerts
                 </button>
@@ -304,7 +304,7 @@ function bulkAddToCart() {
     if (confirm('Add all wishlist items to cart?')) {
         const productIds = Array.from(document.querySelectorAll('[onclick*="moveToCart"]'))
             .map(btn => btn.getAttribute('onclick').match(/\d+/)[0]);
-        
+
         // Implementation for bulk add to cart
         showNotification('Bulk add to cart feature coming soon!', 'info');
     }
@@ -314,7 +314,7 @@ function bulkRemove() {
     if (confirm('Remove all items from wishlist? This action cannot be undone.')) {
         const productIds = Array.from(document.querySelectorAll('[onclick*="removeFromWishlist"]'))
             .map(btn => btn.getAttribute('onclick').match(/\d+/)[0]);
-        
+
         // Implementation for bulk remove
         showNotification('Bulk remove feature coming soon!', 'info');
     }
@@ -331,7 +331,7 @@ async function moveToCart(productId) {
                 'Accept': 'application/json'
             }
         });
-        
+
         if (response.ok) {
             showNotification('Product moved to cart successfully!', 'success');
             // Reload page to update wishlist
@@ -356,7 +356,7 @@ async function removeFromWishlist(productId) {
                     'Accept': 'application/json'
                 }
             });
-            
+
             if (response.ok) {
                 showNotification('Product removed from wishlist!', 'success');
                 // Reload page to update wishlist
@@ -410,7 +410,7 @@ async function addToWishlist(productId) {
                 quantity: 1
             })
         });
-        
+
         if (response.ok) {
             showNotification('Product added to wishlist!', 'success');
         } else {
@@ -426,14 +426,14 @@ async function addToWishlist(productId) {
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
-        type === 'success' ? 'bg-green-500 text-white' : 
-        type === 'error' ? 'bg-red-500 text-white' : 
+        type === 'success' ? 'bg-green-500 text-white' :
+        type === 'error' ? 'bg-red-500 text-white' :
         'bg-blue-500 text-white'
     }`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.remove();
     }, 3000);

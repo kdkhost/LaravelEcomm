@@ -12,7 +12,7 @@
         <form action="{{ route('user.addresses.update', $address) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

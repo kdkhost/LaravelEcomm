@@ -34,8 +34,8 @@ if (! function_exists('current_country')) {
      */
     function current_country(): ?string
     {
-        return request()->attributes->get('country_code') 
-            ?? session('country_code') 
+        return request()->attributes->get('country_code')
+            ?? session('country_code')
             ?? config('geolocalization.default_country', 'US');
     }
 }
@@ -101,8 +101,8 @@ if (! function_exists('detected_timezone')) {
      */
     function detected_timezone(): string
     {
-        return request()->attributes->get('timezone') 
-            ?? session('timezone') 
+        return request()->attributes->get('timezone')
+            ?? session('timezone')
             ?? config('app.timezone');
     }
 }

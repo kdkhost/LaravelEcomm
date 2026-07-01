@@ -8,12 +8,12 @@ use Modules\Core\Helpers\Helper;
         .pagination { justify-content: center; display: flex; list-style: none; padding: 0; margin: 20px 0; }
         .pagination .page-item { display: inline-block; margin: 0 3px; }
         .pagination .page-item.active .page-link { background-color: #f7941d; border-color: #f7941d; color: #fff; }
-        .pagination .page-link { 
-            color: #333; 
-            display: block; 
-            padding: 8px 16px; 
-            border: 1px solid #ddd; 
-            text-decoration: none; 
+        .pagination .page-link {
+            color: #333;
+            display: block;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            text-decoration: none;
             border-radius: 4px;
             min-width: 40px;
             text-align: center;

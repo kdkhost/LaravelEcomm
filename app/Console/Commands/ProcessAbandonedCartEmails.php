@@ -15,7 +15,7 @@ class ProcessAbandonedCartEmails extends Command
      *
      * @var string
      */
-    protected $signature = 'cart:process-abandoned-emails 
+    protected $signature = 'cart:process-abandoned-emails
                             {--stats : Show abandoned cart statistics}
                             {--cleanup : Clean up old abandoned carts}';
 

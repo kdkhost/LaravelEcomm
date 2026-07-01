@@ -23,7 +23,7 @@ use Modules\Core\Helpers\Helper;
             <div class="main col-md-12">
                 <h1 class="page-title">{{ $category->title }}</h1>
                 <div class="separator-2"></div>
-                
+
                 @if($category->summary)
                     <p class="lead">{{ $category->summary }}</p>
                 @endif
@@ -51,7 +51,7 @@ use Modules\Core\Helpers\Helper;
                                         <a href="{{ route('front.product-cat', $childCat->slug) }}">{{ $childCat->title }}</a>
                                     </h4>
                                     <p class="small mb-10 text-muted">
-                                        <i class="fa fa-folder-o pr-1"></i> 
+                                        <i class="fa fa-folder-o pr-1"></i>
                                         {{ $childCat->children_count ?? 0 }} subcategories
                                         <span class="pl-1 pr-1">|</span>
                                         {{ $childCat->products_count ?? 0 }} products

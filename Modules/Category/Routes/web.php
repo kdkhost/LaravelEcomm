@@ -16,7 +16,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Modules\Category\Http\Controllers\CategoryController;
 
-Route::resource('categories', CategoryController::class)->except('shows');
+Route::resource('categories', CategoryController::class)->except('show');
 Route::post(
     '/categories/order/update',
     [CategoryController::class, 'updateCategoryOrder']

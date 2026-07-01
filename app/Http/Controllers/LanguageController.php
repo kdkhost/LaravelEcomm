@@ -33,7 +33,7 @@ class LanguageController extends Controller
 
         // Get the previous URL (where user came from)
         $previousUrl = url()->previous();
-        
+
         // Generate new URL with updated locale
         $newUrl = $this->replaceLocaleInUrl($previousUrl, $lang);
 
@@ -42,7 +42,7 @@ class LanguageController extends Controller
 
     /**
      * Replace locale in URL with new locale
-     * 
+     *
      * Examples:
      * - /en/products -> /de/products
      * - /mk/blog/post-1 -> /en/blog/post-1
@@ -52,13 +52,13 @@ class LanguageController extends Controller
     {
         $parsedUrl = parse_url($url);
         $path = $parsedUrl['path'] ?? '/';
-        
+
         // Get active language codes
         $activeLocales = Language::getActiveCodes();
-        
+
         // Build pattern to match any active locale at the start of path
         $localePattern = '/^\/(' . implode('|', array_map('preg_quote', $activeLocales)) . ')(\/|$)/i';
-        
+
         // Replace existing locale or prepend new locale
         if (preg_match($localePattern, $path, $matches)) {
             // Replace existing locale
@@ -72,24 +72,24 @@ class LanguageController extends Controller
                 $newPath = '/' . $newLocale . $path;
             }
         }
-        
+
         // Rebuild URL
         $newUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
-        
+
         if (isset($parsedUrl['port'])) {
             $newUrl .= ':' . $parsedUrl['port'];
         }
-        
+
         $newUrl .= $newPath;
-        
+
         if (isset($parsedUrl['query'])) {
             $newUrl .= '?' . $parsedUrl['query'];
         }
-        
+
         if (isset($parsedUrl['fragment'])) {
             $newUrl .= '#' . $parsedUrl['fragment'];
         }
-        
+
         return $newUrl;
     }
 }

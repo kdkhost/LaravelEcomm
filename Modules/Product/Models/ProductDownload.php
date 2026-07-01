@@ -96,7 +96,7 @@ class ProductDownload extends Model
     public function getFormattedFileSizeAttribute(): string
     {
         $bytes = $this->file_size;
-        
+
         if ($bytes === null) {
             return 'Unknown';
         }

@@ -26,7 +26,7 @@ $themePath = 'front::themes.' . $activeTheme;
             <div class="main col-md-12">
                 <h1 class="page-title">Order Tracking</h1>
                 <div class="separator-2"></div>
-                
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -43,7 +43,7 @@ $themePath = 'front::themes.' . $activeTheme;
                             <div class="col-md-12">
                                 <h4>Tracking Information</h4>
                                 <div class="space-bottom"></div>
-                                
+
                                 @if($order->shipping)
                                     <p><strong>Shipping Method:</strong> {{ $order->shipping->type }}</p>
                                     @if($order->shipping->tracking_number)
@@ -52,9 +52,9 @@ $themePath = 'front::themes.' . $activeTheme;
                                 @else
                                     <p>No shipping information available yet.</p>
                                 @endif
-                                
+
                                 <div class="space-bottom"></div>
-                                
+
                                 <h5>Order Status History</h5>
                                 <div class="timeline">
                                     <div class="timeline-item {{ $order->status == 'pending' || $order->status == 'processing' || $order->status == 'shipped' || $order->status == 'delivered' ? 'active' : '' }}">
@@ -88,7 +88,7 @@ $themePath = 'front::themes.' . $activeTheme;
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="space-bottom"></div>
                         <div class="row">
                             <div class="col-md-6">

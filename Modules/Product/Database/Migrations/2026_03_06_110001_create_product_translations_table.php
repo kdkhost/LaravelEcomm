@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('locale', 10); // 'en', 'mk', 'de'
-            
+
             // Translatable fields
             $table->string('name')->nullable();
             $table->text('summary')->nullable();
@@ -22,12 +22,12 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
-            
+
             $table->timestamps();
-            
+
             // Unique constraint: one translation per product/locale
             $table->unique(['product_id', 'locale'], 'unique_product_translation');
-            
+
             // Indexes
             $table->index(['locale', 'slug']);
         });

@@ -4,7 +4,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary float-left">@lang('partials.list')</h6>
-            <a href="{{route('attribute-groups.create')}}" class="btn btn-primary btn-sm float-right"
+            <a href="{{route('attribute_groups.create')}}" class="btn btn-primary btn-sm float-right"
                data-toggle="tooltip"
                data-placement="bottom" title="Add Group"><i class="fas fa-plus"></i>@lang('partials.create')</a>
         </div>
@@ -32,11 +32,11 @@
                                 <td>{{$group->id}}</td>
                                 <td>{{$group->name}}</td>
                                 <td>
-                                    <a href="{{route('attribute-groups.edit',$group->id)}}"
+                                    <a href="{{route('attribute_groups.edit',$group->id)}}"
                                        class="btn btn-primary btn-sm float-left mr-1"
                                        style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
                                        title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                                    <form method="POST" action="{{route('attribute-groups.destroy',$group->id)}}"
+                                    <form method="POST" action="{{route('attribute_groups.destroy',$group->id)}}"
                                           style="display:inline;">
                                         @csrf
                                         @method('delete')

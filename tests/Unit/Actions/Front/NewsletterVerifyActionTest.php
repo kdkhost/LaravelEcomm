@@ -18,10 +18,10 @@ class NewsletterVerifyActionTest extends ActionTestCase
             'is_validated' => false,
         ]);
         $newsletter->save();
-        
+
         // Get the auto-generated token
         $token = $newsletter->token;
-        
+
         $action = new NewsletterVerifyAction();
 
         // Act
@@ -52,7 +52,7 @@ class NewsletterVerifyActionTest extends ActionTestCase
             'email' => 'existing@example.com',
         ]);
         $newsletter->save();
-        
+
         $action = new NewsletterVerifyAction();
 
         // Act
@@ -71,7 +71,7 @@ class NewsletterVerifyActionTest extends ActionTestCase
         ]);
         $newsletter1->save();
         $token1 = $newsletter1->token;
-        
+
         $newsletter2 = new Newsletter([
             'email' => 'second@example.com',
             'is_validated' => false,
@@ -99,7 +99,7 @@ class NewsletterVerifyActionTest extends ActionTestCase
         ]);
         $newsletter->save();
         $token = $newsletter->token;
-        
+
         $action = new NewsletterVerifyAction();
 
         // Act

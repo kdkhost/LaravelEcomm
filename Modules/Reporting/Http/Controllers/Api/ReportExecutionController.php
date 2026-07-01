@@ -75,7 +75,7 @@ class ReportExecutionController extends CoreController
         $result = $service->generate($report, $execution->parameters ?? []);
 
         $exportAction = app(\Modules\Reporting\Actions\ExportReportAction::class);
-        
+
         return $exportAction->execute($report, $report->format, $execution->parameters ?? []);
     }
 }

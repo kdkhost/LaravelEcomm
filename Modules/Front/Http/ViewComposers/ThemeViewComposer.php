@@ -31,9 +31,9 @@ class ThemeViewComposer
     {
         try {
             $setting = app('settings');
-            
-            return ($setting instanceof Setting) 
-                ? ($setting->active_template ?? 'default') 
+
+            return ($setting instanceof Setting)
+                ? ($setting->active_template ?? 'default')
                 : 'default';
         } catch (Exception $e) {
             return 'default';

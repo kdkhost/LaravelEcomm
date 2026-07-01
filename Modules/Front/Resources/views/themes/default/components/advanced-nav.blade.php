@@ -11,20 +11,20 @@
 
             <!-- Advanced Features Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="{{ route('front.advanced-search') }}" 
+                <a href="{{ route('front.advanced-search') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center">
                     <i class="fas fa-search mr-2"></i>
                     Advanced Search
                 </a>
-                
-                <a href="{{ route('front.recommendations') }}" 
+
+                <a href="{{ route('front.recommendations') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center">
                     <i class="fas fa-star mr-2"></i>
                     Recommendations
                 </a>
-                
+
                 @auth
-                    <a href="{{ route('front.enhanced-wishlist') }}" 
+                    <a href="{{ route('front.enhanced-wishlist') }}"
                        class="text-gray-700 hover:text-blue-600 transition-colors flex items-center">
                         <i class="fas fa-heart mr-2"></i>
                         Wishlist
@@ -33,8 +33,8 @@
                         </span>
                     </a>
                 @endauth
-                
-                <a href="{{ route('front.product-grids') }}" 
+
+                <a href="{{ route('front.product-grids') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center">
                     <i class="fas fa-th mr-2"></i>
                     All Products
@@ -43,7 +43,7 @@
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
-                <button onclick="toggleMobileMenu()" 
+                <button onclick="toggleMobileMenu()"
                         class="text-gray-700 hover:text-blue-600 transition-colors">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -53,20 +53,20 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden hidden pb-4">
             <nav class="flex flex-col space-y-4">
-                <a href="{{ route('front.advanced-search') }}" 
+                <a href="{{ route('front.advanced-search') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-2">
                     <i class="fas fa-search mr-3 w-5"></i>
                     Advanced Search
                 </a>
-                
-                <a href="{{ route('front.recommendations') }}" 
+
+                <a href="{{ route('front.recommendations') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-2">
                     <i class="fas fa-star mr-3 w-5"></i>
                     Recommendations
                 </a>
-                
+
                 @auth
-                    <a href="{{ route('front.enhanced-wishlist') }}" 
+                    <a href="{{ route('front.enhanced-wishlist') }}"
                        class="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-2">
                         <i class="fas fa-heart mr-3 w-5"></i>
                         Wishlist
@@ -75,8 +75,8 @@
                         </span>
                     </a>
                 @endauth
-                
-                <a href="{{ route('front.product-grids') }}" 
+
+                <a href="{{ route('front.product-grids') }}"
                    class="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-2">
                     <i class="fas fa-th mr-3 w-5"></i>
                     All Products
@@ -120,13 +120,13 @@ function updateWishlistCountFromAction(action) {
     const countElement = document.getElementById('wishlistCount');
     if (countElement) {
         let currentCount = parseInt(countElement.textContent) || 0;
-        
+
         if (action === 'add') {
             currentCount++;
         } else if (action === 'remove') {
             currentCount = Math.max(0, currentCount - 1);
         }
-        
+
         countElement.textContent = currentCount;
     }
 }

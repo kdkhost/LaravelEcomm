@@ -39,11 +39,11 @@ class UpdateEmailSettingsActionTest extends ActionTestCase
         $this->assertArrayHasKey('mail_port', $result->email_settings);
         $this->assertArrayHasKey('mail_username', $result->email_settings);
         $this->assertArrayHasKey('mail_password', $result->email_settings);
-        
+
         // Original values should be preserved
         $this->assertEquals('smtp', $result->email_settings['mail_driver']);
         $this->assertEquals('587', $result->email_settings['mail_port']);
-        
+
         // New values should be merged
         $this->assertEquals('new.host.com', $result->email_settings['mail_host']);
         $this->assertEquals('test@example.com', $result->email_settings['mail_username']);
@@ -98,11 +98,11 @@ class UpdateEmailSettingsActionTest extends ActionTestCase
 
         // Assert
         $this->assertInstanceOf(Setting::class, $result);
-        
+
         // Unchanged values should persist
         $this->assertEquals('smtp', $result->email_settings['mail_driver']);
         $this->assertEquals('tls', $result->email_settings['mail_encryption']);
-        
+
         // Updated values should be changed
         $this->assertEquals('smtp.gmail.com', $result->email_settings['mail_host']);
         $this->assertEquals('587', $result->email_settings['mail_port']);

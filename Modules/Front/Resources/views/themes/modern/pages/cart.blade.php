@@ -20,7 +20,7 @@
             <div class="main col-md-12">
                 <h1 class="page-title">Shopping Cart</h1>
                 <div class="separator-2"></div>
-                
+
                 @if(Helper::getAllProductFromCart()->isEmpty())
                     <div class="alert alert-warning">
                         Your cart is empty. <a href="{{ route('front.product-grids') }}">Continue shopping</a>
@@ -74,7 +74,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <a href="{{route('front.product-grids')}}" class="btn btn-default">
@@ -113,7 +113,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="coupon">

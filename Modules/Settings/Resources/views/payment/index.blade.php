@@ -24,8 +24,8 @@
                             <h4>Stripe Settings</h4>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="stripe_enabled" 
-                                           name="stripe_enabled" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="stripe_enabled"
+                                           name="stripe_enabled" value="1"
                                            {{ ($paymentSettings['stripe_enabled'] ?? false) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="stripe_enabled">
                                         Enable Stripe
@@ -34,22 +34,22 @@
                             </div>
                             <div class="form-group">
                                 <label for="stripe_public_key">Stripe Public Key</label>
-                                <input type="text" class="form-control" id="stripe_public_key" 
-                                       name="stripe_public_key" 
+                                <input type="text" class="form-control" id="stripe_public_key"
+                                       name="stripe_public_key"
                                        value="{{ $paymentSettings['stripe_public_key'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="stripe_secret_key">Stripe Secret Key</label>
-                                <input type="password" class="form-control" id="stripe_secret_key" 
-                                       name="stripe_secret_key" 
+                                <input type="password" class="form-control" id="stripe_secret_key"
+                                       name="stripe_secret_key"
                                        value="{{ $paymentSettings['stripe_secret_key'] ?? '' }}">
                             </div>
 
                             <h4 class="mt-4">PayPal Settings</h4>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="paypal_enabled" 
-                                           name="paypal_enabled" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="paypal_enabled"
+                                           name="paypal_enabled" value="1"
                                            {{ ($paymentSettings['paypal_enabled'] ?? false) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="paypal_enabled">
                                         Enable PayPal
@@ -58,14 +58,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="paypal_client_id">PayPal Client ID</label>
-                                <input type="text" class="form-control" id="paypal_client_id" 
-                                       name="paypal_client_id" 
+                                <input type="text" class="form-control" id="paypal_client_id"
+                                       name="paypal_client_id"
                                        value="{{ $paymentSettings['paypal_client_id'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="paypal_client_secret">PayPal Client Secret</label>
-                                <input type="password" class="form-control" id="paypal_client_secret" 
-                                       name="paypal_client_secret" 
+                                <input type="password" class="form-control" id="paypal_client_secret"
+                                       name="paypal_client_secret"
                                        value="{{ $paymentSettings['paypal_client_secret'] ?? '' }}">
                             </div>
                             <div class="form-group">
@@ -79,8 +79,8 @@
                             <h4 class="mt-4">MercadoPago Settings</h4>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="mercadopago_enabled" 
-                                           name="mercadopago_enabled" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="mercadopago_enabled"
+                                           name="mercadopago_enabled" value="1"
                                            {{ ($paymentSettings['mercadopago_enabled'] ?? false) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="mercadopago_enabled">
                                         Habilitar MercadoPago
@@ -89,8 +89,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="mercadopago_access_token">MercadoPago Access Token</label>
-                                <input type="password" class="form-control" id="mercadopago_access_token" 
-                                       name="mercadopago_access_token" 
+                                <input type="password" class="form-control" id="mercadopago_access_token"
+                                       name="mercadopago_access_token"
                                        value="{{ $paymentSettings['mercadopago_access_token'] ?? '' }}">
                             </div>
                             <div class="form-group">
@@ -104,8 +104,8 @@
                             <h4 class="mt-4">Other Payment Methods</h4>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="cod_enabled" 
-                                           name="cod_enabled" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="cod_enabled"
+                                           name="cod_enabled" value="1"
                                            {{ ($paymentSettings['cod_enabled'] ?? true) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="cod_enabled">
                                         Enable Cash on Delivery
@@ -114,8 +114,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="bank_transfer_enabled" 
-                                           name="bank_transfer_enabled" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="bank_transfer_enabled"
+                                           name="bank_transfer_enabled" value="1"
                                            {{ ($paymentSettings['bank_transfer_enabled'] ?? false) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="bank_transfer_enabled">
                                         Enable Bank Transfer
@@ -124,7 +124,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="bank_account_details">Bank Account Details</label>
-                                <textarea class="form-control" id="bank_account_details" 
+                                <textarea class="form-control" id="bank_account_details"
                                           name="bank_account_details" rows="3">{{ $paymentSettings['bank_account_details'] ?? '' }}</textarea>
                             </div>
 

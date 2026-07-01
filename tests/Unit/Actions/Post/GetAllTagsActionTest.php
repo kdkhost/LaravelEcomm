@@ -82,7 +82,7 @@ class GetAllTagsActionTest extends ActionTestCase
         $result = $action->execute();
 
         $this->assertCount(2, $result);
-        
+
         $titles = $result->pluck('title')->toArray();
         $this->assertContains('Laravel', $titles);
         $this->assertContains('PHP', $titles);

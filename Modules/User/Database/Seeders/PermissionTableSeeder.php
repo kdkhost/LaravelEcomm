@@ -68,7 +68,7 @@ class PermissionTableSeeder extends Seeder
 
         // Create roles and assign ALL permissions to each
         $roles = ['manager', 'client', 'admin'];
-        
+
         foreach ($roles as $roleName) {
             $role = Role::firstOrCreate(['name' => $roleName]);
             // Give ALL permissions to this role

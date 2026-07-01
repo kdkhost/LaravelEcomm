@@ -27,7 +27,7 @@
                         @if($attribute->is_configurable || $attribute->options->count() > 0)
                             <div class="col-md-4 mb-2">
                                 <label class="d-block p-2 border rounded">
-                                    <input type="checkbox" name="configurable_attributes[]" 
+                                    <input type="checkbox" name="configurable_attributes[]"
                                            value="{{ $attribute->code }}"
                                            {{ in_array($attribute->code, $product['configurable_attributes'] ?? []) ? 'checked' : '' }}>
                                     {{ $attribute->name }}
@@ -72,11 +72,11 @@
                                         <td>{{ $variant->variant_name }}</td>
                                         <td>{{ $variant->sku }}</td>
                                         <td>
-                                            <input type="number" name="variant_prices[{{ $variant->id }}]" 
+                                            <input type="number" name="variant_prices[{{ $variant->id }}]"
                                                    value="{{ $variant->price }}" class="form-control form-control-sm" step="0.01">
                                         </td>
                                         <td>
-                                            <input type="number" name="variant_stocks[{{ $variant->id }}]" 
+                                            <input type="number" name="variant_stocks[{{ $variant->id }}]"
                                                    value="{{ $variant->stock }}" class="form-control form-control-sm">
                                         </td>
                                         <td>
@@ -99,7 +99,7 @@
         const type = document.getElementById('product_type').value;
         const section = document.getElementById('configurable-section');
         const attrsSection = document.getElementById('configurable-attributes-section');
-        
+
         if (type === 'configurable') {
             section.style.display = 'block';
             attrsSection.style.display = 'block';

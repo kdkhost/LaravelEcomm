@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'name' => 'Language',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Default Locale
@@ -16,7 +16,7 @@ return [
     |
     */
     'locale' => env('APP_LOCALE', 'en'),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Fallback Locale
@@ -28,7 +28,7 @@ return [
     |
     */
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
@@ -40,7 +40,7 @@ return [
     |
     */
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Available Locales

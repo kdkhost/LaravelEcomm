@@ -35,11 +35,11 @@
                             <div class="col-md-6">
                                 <h5>Current Status</h5>
                                 <div class="status-display">
-                                    <span class="badge badge-lg badge-{{ 
-                                        $order->status == 'pending' ? 'warning' : 
-                                        ($order->status == 'processing' ? 'info' : 
-                                        ($order->status == 'shipped' ? 'primary' : 
-                                        ($order->status == 'delivered' ? 'success' : 'danger'))) 
+                                    <span class="badge badge-lg badge-{{
+                                        $order->status == 'pending' ? 'warning' :
+                                        ($order->status == 'processing' ? 'info' :
+                                        ($order->status == 'shipped' ? 'primary' :
+                                        ($order->status == 'delivered' ? 'success' : 'danger')))
                                     }}" style="font-size: 1.2em; padding: 10px 20px;">
                                         {{ ucfirst($order->status) }}
                                     </span>

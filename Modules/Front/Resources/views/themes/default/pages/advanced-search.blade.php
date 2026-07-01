@@ -18,9 +18,9 @@
                 <div class="md:col-span-2">
                     <label for="query" class="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
                     <div class="relative">
-                        <input type="text" 
-                               id="query" 
-                               name="query" 
+                        <input type="text"
+                               id="query"
+                               name="query"
                                value="{{ $query }}"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                placeholder="Search for products, brands, or categories..."
@@ -50,14 +50,14 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
                         <div class="flex space-x-2">
-                            <input type="number" 
-                                   name="price_min" 
+                            <input type="number"
+                                   name="price_min"
                                    value="{{ $filters['price_min'] ?? '' }}"
                                    placeholder="Min"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <span class="text-gray-500 self-center">-</span>
-                            <input type="number" 
-                                   name="price_max" 
+                            <input type="number"
+                                   name="price_max"
                                    value="{{ $filters['price_max'] ?? '' }}"
                                    placeholder="Max"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -69,7 +69,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Categories</label>
                         <select name="categories[]" multiple class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             @foreach($availableFilters['categories'] as $category)
-                                <option value="{{ $category->id }}" 
+                                <option value="{{ $category->id }}"
                                         {{ in_array($category->id, $filters['categories'] ?? []) ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
@@ -104,13 +104,13 @@
 
             <!-- Search Buttons -->
             <div class="flex justify-between items-center mt-6">
-                <button type="submit" 
+                <button type="submit"
                         class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                     <i class="fas fa-search mr-2"></i>
                     Search Products
                 </button>
-                
-                <button type="button" 
+
+                <button type="button"
                         onclick="clearFilters()"
                         class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors">
                     Clear Filters
@@ -136,7 +136,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                             <div class="aspect-w-1 aspect-h-1 bg-gray-200">
                                 @if($product->getFirstMediaUrl('images'))
-                                    <img src="{{ $product->getFirstMediaUrl('images') }}" 
+                                    <img src="{{ $product->getFirstMediaUrl('images') }}"
                                          alt="{{ $product->title }}"
                                          class="w-full h-48 object-cover">
                                 @else
@@ -145,15 +145,15 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                    <a href="{{ route('front.product-detail', $product->slug) }}" 
+                                    <a href="{{ route('front.product-detail', $product->slug) }}"
                                        class="hover:text-blue-600 transition-colors">
                                         {{ $product->title }}
                                     </a>
                                 </h3>
-                                
+
                                 <div class="flex items-center mb-2">
                                     @if($product->special_price)
                                         <span class="text-lg font-bold text-red-600">${{ number_format($product->special_price, 2) }}</span>
@@ -162,13 +162,13 @@
                                         <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
                                     @endif
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm text-gray-600">
                                         Stock: {{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
                                     </span>
-                                    
-                                    <button onclick="addToWishlist({{ $product->id }})" 
+
+                                    <button onclick="addToWishlist({{ $product->id }})"
                                             class="text-gray-400 hover:text-red-500 transition-colors">
                                         <i class="far fa-heart"></i>
                                     </button>
@@ -183,20 +183,20 @@
                     <i class="fas fa-search text-gray-400 text-6xl mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
                     <p class="text-gray-600 mb-6">Try adjusting your search terms or filters to find what you're looking for.</p>
-                    
+
                     <!-- Suggested Searches -->
                     <div class="max-w-md mx-auto">
                         <h4 class="text-sm font-medium text-gray-700 mb-3">Try these suggestions:</h4>
                         <div class="flex flex-wrap gap-2 justify-center">
-                            <button onclick="suggestedSearch('laptop')" 
+                            <button onclick="suggestedSearch('laptop')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Laptop
                             </button>
-                            <button onclick="suggestedSearch('smartphone')" 
+                            <button onclick="suggestedSearch('smartphone')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Smartphone
                             </button>
-                            <button onclick="suggestedSearch('headphones')" 
+                            <button onclick="suggestedSearch('headphones')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Headphones
                             </button>
@@ -237,12 +237,12 @@ const suggestionsDiv = document.getElementById('searchSuggestions');
 queryInput.addEventListener('input', function() {
     clearTimeout(searchTimeout);
     const query = this.value.trim();
-    
+
     if (query.length < 2) {
         suggestionsDiv.classList.add('hidden');
         return;
     }
-    
+
     searchTimeout = setTimeout(() => {
         fetchSuggestions(query);
     }, 300);
@@ -252,7 +252,7 @@ async function fetchSuggestions(query) {
     try {
         const response = await fetch(`{{ route('front.search-suggestions') }}?query=${encodeURIComponent(query)}`);
         const data = await response.json();
-        
+
         if (data.suggestions && Object.keys(data.suggestions).some(key => data.suggestions[key].length > 0)) {
             displaySuggestions(data.suggestions);
         } else {
@@ -265,7 +265,7 @@ async function fetchSuggestions(query) {
 
 function displaySuggestions(suggestions) {
     let html = '<div class="p-3">';
-    
+
     if (suggestions.popular_terms && suggestions.popular_terms.length > 0) {
         html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Popular Products</h4>';
         suggestions.popular_terms.forEach(term => {
@@ -273,7 +273,7 @@ function displaySuggestions(suggestions) {
         });
         html += '</div>';
     }
-    
+
     if (suggestions.categories && suggestions.categories.length > 0) {
         html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Categories</h4>';
         suggestions.categories.forEach(category => {
@@ -281,7 +281,7 @@ function displaySuggestions(suggestions) {
         });
         html += '</div>';
     }
-    
+
     if (suggestions.brands && suggestions.brands.length > 0) {
         html += '<div><h4 class="text-sm font-medium text-gray-700 mb-2">Brands</h4>';
         suggestions.brands.forEach(brand => {
@@ -289,7 +289,7 @@ function displaySuggestions(suggestions) {
         });
         html += '</div>';
     }
-    
+
     html += '</div>';
     suggestionsDiv.innerHTML = html;
     suggestionsDiv.classList.remove('hidden');
@@ -340,7 +340,7 @@ async function addToWishlist(productId) {
                 quantity: 1
             })
         });
-        
+
         if (response.ok) {
             // Show success message
             showNotification('Product added to wishlist!', 'success');
@@ -360,9 +360,9 @@ function showNotification(message, type) {
         type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
     }`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.remove();
     }, 3000);

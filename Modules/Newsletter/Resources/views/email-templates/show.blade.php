@@ -28,20 +28,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <strong>Name:</strong> {{ $emailTemplate->name }}<br>
-                                    <strong>Type:</strong> 
+                                    <strong>Type:</strong>
                                     <span class="badge badge-info">
                                         {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$emailTemplate->template_type] ?? $emailTemplate->template_type }}
                                     </span><br>
                                     <strong>Subject:</strong> {{ $emailTemplate->subject }}<br>
                                 </div>
                                 <div class="col-md-6">
-                                    <strong>Status:</strong> 
+                                    <strong>Status:</strong>
                                     @if($emailTemplate->is_active)
                                         <span class="badge badge-success">Active</span>
                                     @else
                                         <span class="badge badge-secondary">Inactive</span>
                                     @endif<br>
-                                    <strong>Default:</strong> 
+                                    <strong>Default:</strong>
                                     @if($emailTemplate->is_default)
                                         <span class="badge badge-warning">Yes</span>
                                     @else
@@ -179,7 +179,7 @@
                                     </button>
                                 </form>
                                 @if(!$emailTemplate->is_default)
-                                    <form action="{{ route('admin.email-templates.destroy', $emailTemplate->id) }}" method="POST" style="display: inline;" 
+                                    <form action="{{ route('admin.email-templates.destroy', $emailTemplate->id) }}" method="POST" style="display: inline;"
                                           onsubmit="return confirm('Are you sure you want to delete this template?')">
                                         @csrf
                                         @method('DELETE')

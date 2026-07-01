@@ -16,7 +16,7 @@ class GetUserCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         // Create cart items using raw insert
         for ($i = 0; $i < 3; $i++) {
             \DB::table('carts')->insert([
@@ -34,7 +34,7 @@ class GetUserCartActionTest extends ActionTestCase
         }
 
         Auth::login($user);
-        
+
         $action = app(GetUserCartAction::class);
         $result = $action->execute();
 
@@ -46,7 +46,7 @@ class GetUserCartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create();
-        
+
         // First create a real order to satisfy FK
         $orderId = \DB::table('orders')->insertGetId([
             'order_number' => 'ORD-TEST-001',
@@ -60,7 +60,7 @@ class GetUserCartActionTest extends ActionTestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+
         // Cart item with the real order_id
         \DB::table('carts')->insert([
             'user_id' => $user->id,
@@ -74,7 +74,7 @@ class GetUserCartActionTest extends ActionTestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        
+
         // Cart item without order
         \DB::table('carts')->insert([
             'user_id' => $user->id,
@@ -90,7 +90,7 @@ class GetUserCartActionTest extends ActionTestCase
         ]);
 
         Auth::login($user);
-        
+
         $action = app(GetUserCartAction::class);
         $result = $action->execute();
 

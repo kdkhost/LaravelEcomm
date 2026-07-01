@@ -30,13 +30,13 @@ $sizeClasses = match($size) {
 $classes = implode(' ', [$baseClasses, $variantClasses, $sizeClasses]);
 @endphp
 
-<button 
+<button
     type="{{ $type }}"
     {{ $attributes->merge(['class' => $classes, 'disabled' => $disabled]) }}
 >
     @if($loading)
         <x-front::spinner class="w-4 h-4 mr-2" />
     @endif
-    
+
     {{ $slot }}
 </button>

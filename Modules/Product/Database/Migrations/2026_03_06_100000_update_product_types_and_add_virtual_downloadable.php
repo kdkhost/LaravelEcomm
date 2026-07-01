@@ -17,19 +17,19 @@ return new class extends Migration
             $table->enum('type', ['simple', 'configurable', 'variant', 'downloadable', 'virtual'])
                 ->default('simple')
                 ->change();
-            
+
             // Virtual product fields
             $table->boolean('is_virtual')->default(false)->after('type')
                 ->comment('No shipping required');
             $table->boolean('is_downloadable')->default(false)->after('is_virtual')
                 ->comment('Has downloadable files');
-            
+
             // Service fields for virtual products
             $table->timestamp('service_starts_at')->nullable()->after('special_price_end');
             $table->timestamp('service_ends_at')->nullable()->after('service_starts_at');
             $table->integer('service_duration_minutes')->nullable()->after('service_ends_at')
                 ->comment('Service duration in minutes');
-            
+
             // Download limit settings
             $table->integer('max_downloads')->nullable()->after('service_duration_minutes')
                 ->comment('Max number of downloads per purchase');
@@ -49,7 +49,7 @@ return new class extends Migration
             $table->integer('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->index(['product_id', 'is_active']);
         });
 
@@ -63,7 +63,7 @@ return new class extends Migration
             $table->timestamp('last_downloaded_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
-            
+
             $table->index(['order_id', 'user_id']);
             $table->unique(['order_id', 'product_download_id']);
         });
@@ -79,7 +79,7 @@ return new class extends Migration
             $table->enum('type', ['simple', 'configurable', 'variant'])
                 ->default('simple')
                 ->change();
-            
+
             $table->dropColumn([
                 'is_virtual',
                 'is_downloadable',

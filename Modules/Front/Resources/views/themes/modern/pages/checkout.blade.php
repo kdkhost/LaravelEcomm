@@ -1,4 +1,4 @@
-@php 
+@php
 use Modules\Core\Helpers\Helper;
 $user = Auth::user();
 $defaultAddress = $user?->defaultShippingAddress();
@@ -26,7 +26,7 @@ $subtotal = Helper::totalCartPrice();
             <div class="main col-md-12">
                 <h1 class="page-title">Finalizar Compra</h1>
                 <div class="separator-2"></div>
-                
+
                 @if($cartItems->isEmpty())
                     <div class="alert alert-warning">
                         Seu carrinho está vazio. <a href="{{ route('front.product-grids') }}">Continuar comprando</a>
@@ -34,7 +34,7 @@ $subtotal = Helper::totalCartPrice();
                 @else
                 <form method="POST" action="{{ route('front.cart.order') }}">
                     @csrf
-                    
+
                     <!-- Cart Summary -->
                     <table class="table cart">
                         <thead>
@@ -77,9 +77,9 @@ $subtotal = Helper::totalCartPrice();
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     <div class="space-bottom"></div>
-                    
+
                     <!-- Billing Information -->
                     <fieldset>
                         <legend>Informações de Cobrança</legend>
@@ -214,7 +214,7 @@ $subtotal = Helper::totalCartPrice();
                             </div>
                         </div>
                     </fieldset>
-                    
+
                     <!-- Payment Method -->
                     <fieldset>
                         <legend>Forma de Pagamento</legend>
@@ -247,7 +247,7 @@ $subtotal = Helper::totalCartPrice();
                             </div>
                         </div>
                     </fieldset>
-                    
+
                     <div class="text-right">
                         <a href="{{ route('cart-list') }}" class="btn btn-group btn-default">
                             <i class="icon-left-open-big"></i> Voltar ao Carrinho

@@ -1,5 +1,5 @@
 <form class="form-horizontal" method="POST"
-      action="{{ route($group->exists ? 'attribute-groups.update' : 'attribute-groups.store', $group->exists ? $group->id : null) }}"
+      action="{{ route($group->exists ? 'attribute_groups.update' : 'attribute_groups.store', $group->exists ? $group->id : null) }}"
       enctype="multipart/form-data">
     @csrf
     @if($group->exists)

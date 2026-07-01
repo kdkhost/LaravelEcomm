@@ -208,7 +208,7 @@
                                 </thead>
                                 <tbody>
                     `;
-                    
+
                     if (cart.cart_data && Array.isArray(cart.cart_data)) {
                         cart.cart_data.forEach(item => {
                             html += `
@@ -221,13 +221,13 @@
                             `;
                         });
                     }
-                    
+
                     html += `
                                 </tbody>
                             </table>
                         </div>
                     `;
-                    
+
                     document.getElementById('cartDetailsContent').innerHTML = html;
                     $('#cartDetailsModal').modal('show');
                 }

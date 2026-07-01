@@ -15,7 +15,7 @@
         <div id="product-grid" class="row">
             @include('front::partials.product_grid_items', ['products' => $products])
         </div>
-        
+
         {{-- Pagination --}}
         <div id="pagination-container">
             {{ $products->links() }}
@@ -43,13 +43,13 @@
         productGrid: document.getElementById('product-grid'),
         paginationContainer: document.getElementById('pagination-container'),
         activeFiltersContainer: document.getElementById('active-filters'),
-        
+
         currentFilters: {},
         categoryId: null,
 
         init() {
             if (!this.container) return;
-            
+
             this.categoryId = this.container.dataset.category;
             this.bindEvents();
             this.parseUrlParams();
@@ -120,7 +120,7 @@
             } else {
                 this.currentFilters[attributeCode] = this.currentFilters[attributeCode]
                     .filter(v => v !== value);
-                
+
                 if (this.currentFilters[attributeCode].length === 0) {
                     delete this.currentFilters[attributeCode];
                 }
@@ -165,7 +165,7 @@
             this.showLoading();
 
             const params = new URLSearchParams();
-            
+
             Object.entries(this.currentFilters).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
                     params.set(key, value.join(','));
@@ -190,7 +190,7 @@
                 this.updatePagination(data.pagination);
                 this.updateActiveFilters();
                 this.updateFilterCounts(data.filter_counts);
-                
+
                 if (updateUrl) {
                     this.updateBrowserUrl(params);
                 }
@@ -221,10 +221,10 @@
 
         updateActiveFilters() {
             const activeFilters = [];
-            
+
             Object.entries(this.currentFilters).forEach(([key, value]) => {
                 if (key === 'page' || key === 'sort') return;
-                
+
                 if (Array.isArray(value)) {
                     value.forEach(v => {
                         activeFilters.push({ code: key, value: v });
@@ -300,7 +300,7 @@
 
         clearAllFilters() {
             this.currentFilters = {};
-            
+
             // Uncheck all checkboxes
             document.querySelectorAll('.filter-option input[type="checkbox"]')
                 .forEach(cb => cb.checked = false);
@@ -316,7 +316,7 @@
 
         parseUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            
+
             urlParams.forEach((value, key) => {
                 if (value.includes(',')) {
                     this.currentFilters[key] = value.split(',');

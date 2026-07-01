@@ -33,6 +33,7 @@ return [
     'notifications' => 'Notificações',
     'blocked_ip' => 'IP Bloqueado',
     'activity_log' => 'Registro de Atividades',
+    'languages' => 'Idiomas',
     'translation' => 'Tradução',
     'users' => 'Usuários',
     'roles' => 'Funções',

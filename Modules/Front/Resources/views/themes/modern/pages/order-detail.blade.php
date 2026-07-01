@@ -30,7 +30,7 @@ $themePath = 'front::themes.' . $activeTheme;
                 @if(session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -82,9 +82,9 @@ $themePath = 'front::themes.' . $activeTheme;
                                 </address>
                             </div>
                         </div>
-                        
+
                         <hr>
-                        
+
                         <h4>Order Items</h4>
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -132,7 +132,7 @@ $themePath = 'front::themes.' . $activeTheme;
                                 </tfoot>
                             </table>
                         </div>
-                        
+
                         <div class="space-bottom"></div>
                         <div class="row">
                             <div class="col-md-6">

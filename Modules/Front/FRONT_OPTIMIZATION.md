@@ -254,7 +254,7 @@ For questions or issues related to front-end performance optimization:
 
 ---
 
-**Last Updated**: January 2025  
-**Version**: 1.0.0  
-**Module**: Front  
+**Last Updated**: January 2025
+**Version**: 1.0.0
+**Module**: Front
 **Maintained By**: Development Team

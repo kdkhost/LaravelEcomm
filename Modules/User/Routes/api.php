@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function (): void {
 
     // User management routes
     Route::apiResource('users', UserController::class)->names('api.users');
-    
+
     // User Address routes
     Route::apiResource('user/addresses', UserAddressController::class)->names('api.user.addresses');
     Route::prefix('user/addresses')->group(function (): void {

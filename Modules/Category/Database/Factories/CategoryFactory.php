@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         $title = $this->faker->unique()->words(2, true);
-        
+
         return [
             'title' => ucwords($title),
             'slug' => Str::slug($title) . '-' . Str::random(5),
@@ -79,12 +79,12 @@ class CategoryFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($locales): void {
             /** @var Category $category */
             $category = $model;
-            
+
             $localesToUse = $locales ?? $this->translationLocales;
-            
+
             foreach ($localesToUse as $locale) {
                 $localeSuffix = $locale === 'en' ? '' : ' (' . strtoupper($locale) . ')';
-                
+
                 $category->translations()->create([
                     'locale' => $locale,
                     'title' => $this->faker->words(2, true) . $localeSuffix,
@@ -108,7 +108,7 @@ class CategoryFactory extends Factory
         return $this->afterCreating(function (Model $model) use ($translations): void {
             /** @var Category $category */
             $category = $model;
-            
+
             foreach ($translations as $locale => $fields) {
                 $category->translations()->create([
                     'locale' => $locale,

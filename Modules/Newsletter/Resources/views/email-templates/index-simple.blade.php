@@ -29,7 +29,7 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    <strong>Type:</strong> 
+                                    <strong>Type:</strong>
                                     <span class="badge bg-info">
                                         {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$template->template_type] ?? $template->template_type }}
                                     </span>
@@ -39,8 +39,8 @@
                                 </p>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        Sent: {{ $template->emailAnalytics()->count() }} | 
-                                        Open: {{ $template->emailAnalytics()->whereNotNull('opened_at')->count() }} | 
+                                        Sent: {{ $template->emailAnalytics()->count() }} |
+                                        Open: {{ $template->emailAnalytics()->whereNotNull('opened_at')->count() }} |
                                         Click: {{ $template->emailAnalytics()->whereNotNull('clicked_at')->count() }}
                                     </small>
                                 </p>
@@ -69,7 +69,7 @@
                                     @endif
                                     <form action="{{ route('admin.email-templates.toggle-active', $template->id) }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-outline-{{ $template->is_active ? 'danger' : 'success' }} btn-sm" 
+                                        <button type="submit" class="btn btn-outline-{{ $template->is_active ? 'danger' : 'success' }} btn-sm"
                                                 title="{{ $template->is_active ? 'Deactivate' : 'Activate' }}"
                                                 onclick="return confirm('{{ $template->is_active ? 'Deactivate' : 'Activate' }} this template?')">
                                             <i class="fas fa-{{ $template->is_active ? 'pause' : 'play' }}"></i>
@@ -81,7 +81,7 @@
                     </div>
                 @endforeach
             </div>
-            
+
             <!-- Pagination -->
             <div class="d-flex justify-content-center">
                 {{ $templates->links('pagination::admin-bootstrap-5') }}

@@ -19,7 +19,7 @@ class GenerateSeoSitemap extends Command
      *
      * @var string
      */
-    protected $signature = 'seo:generate-sitemap 
+    protected $signature = 'seo:generate-sitemap
                             {--type=all : Type of sitemap to generate (all, products, posts, categories, brands)}
                             {--limit=50000 : Maximum number of URLs per sitemap}
                             {--compress : Compress sitemap with gzip}';

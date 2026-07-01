@@ -19,7 +19,7 @@
             <div class="main col-md-12">
                 <h1 class="page-title">{{ __('All Categories') }}</h1>
                 <div class="separator-2"></div>
-                
+
                 @if(isset($categories) && $categories->isNotEmpty())
                     <div class="row">
                         @foreach($categories as $category)
@@ -40,7 +40,7 @@
                                         <a href="{{ route('front.product-cat', $category->slug) }}">{{ $category->title }}</a>
                                     </h4>
                                     <p class="small mb-10 text-muted">
-                                        <i class="fa fa-folder-o pr-1"></i> 
+                                        <i class="fa fa-folder-o pr-1"></i>
                                         {{ $category->children_count ?? 0 }} subcategories
                                     </p>
                                     <a href="{{ route('front.product-cat', $category->slug) }}" class="btn btn-default btn-sm margin-clear">

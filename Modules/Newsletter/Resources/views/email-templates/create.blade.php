@@ -6,12 +6,12 @@
         <div class="card-body">
             <form action="{{route('admin.email-templates.store')}}" method="POST" id="email-template-form">
                 @csrf
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Template Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" id="name" class="form-control" 
+                            <input type="text" name="name" id="name" class="form-control"
                                    value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
@@ -38,7 +38,7 @@
 
                 <div class="form-group">
                     <label for="subject">Email Subject <span class="text-danger">*</span></label>
-                    <input type="text" name="subject" id="subject" class="form-control" 
+                    <input type="text" name="subject" id="subject" class="form-control"
                            value="{{ old('subject') }}" required>
                     @error('subject')
                         <div class="text-danger">{{ $message }}</div>
@@ -87,7 +87,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input type="checkbox" name="is_active" id="is_active" class="form-check-input" 
+                                <input type="checkbox" name="is_active" id="is_active" class="form-check-input"
                                        value="1" {{ old('is_active', true) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_active">
                                     Active Template
@@ -98,7 +98,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div class="form-check">
-                                <input type="checkbox" name="is_default" id="is_default" class="form-check-input" 
+                                <input type="checkbox" name="is_default" id="is_default" class="form-check-input"
                                        value="1" {{ old('is_default') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_default">
                                     Set as Default
@@ -110,7 +110,7 @@
 
                 <div class="form-group">
                     <label for="preview_data">Preview Data (JSON)</label>
-                    <textarea name="preview_data" id="preview_data" class="form-control" rows="4" 
+                    <textarea name="preview_data" id="preview_data" class="form-control" rows="4"
                               placeholder='{"name": "John Doe", "email": "john@example.com", "company": "Example Corp"}'>{{ old('preview_data', $template->preview_data ? json_encode($template->preview_data, JSON_PRETTY_PRINT) : '') }}</textarea>
                     @error('preview_data')
                         <div class="text-danger">{{ $message }}</div>
@@ -215,7 +215,7 @@
         function previewTemplate() {
             const form = document.getElementById('email-template-form');
             const formData = new FormData(form);
-            
+
             // Create preview endpoint
             fetch('{{ route("admin.email-templates.preview") }}', {
                 method: 'POST',

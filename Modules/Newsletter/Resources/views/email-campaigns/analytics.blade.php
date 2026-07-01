@@ -263,38 +263,38 @@
         height: 10rem;
         width: 100%;
     }
-    
+
     .chart-pie {
         position: relative;
         height: 15rem;
         width: 100%;
     }
-    
+
     .card {
         box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
     }
-    
+
     .card .card-header {
         font-weight: 500;
     }
-    
+
     .card-header:first-child {
         border-radius: calc(0.35rem - 1px) calc(0.35rem - 1px) 0 0;
     }
-    
+
     .btn-group .btn {
         margin-right: 0.25rem;
     }
-    
+
     .btn-group .btn:last-child {
         margin-right: 0;
     }
-    
+
     .table-responsive {
         max-height: 400px;
         overflow-y: auto;
     }
-    
+
     .badge {
         font-size: 0.8em;
     }
@@ -319,7 +319,7 @@
         try {
             const response = await fetch('/admin/email-campaigns/analytics/api');
             const data = await response.json();
-            
+
             if (data.success && data.data) {
                 updateOverviewCards(data.data);
                 updateCharts(data.data);
@@ -337,7 +337,7 @@
     // Update overview cards
     function updateOverviewCards(data) {
         if (!data) return;
-        
+
         document.getElementById('totalSent').textContent = formatNumber(data.total_sent || 0);
         document.getElementById('openRate').textContent = (data.open_rate || 0) + '%';
         document.getElementById('clickRate').textContent = (data.click_rate || 0) + '%';
@@ -459,7 +459,7 @@
             try {
                 const response = await fetch('/admin/email-campaigns/analytics/real-time');
                 const data = await response.json();
-                
+
                 if (data.success) {
                     document.getElementById('onlineUsers').textContent = data.data.online_users || 0;
                     document.getElementById('emailsSentToday').textContent = data.data.emails_sent_today || 0;
@@ -495,7 +495,7 @@
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const campaign = document.getElementById('campaignFilter').value;
-        
+
         // Reload analytics with new filters
         loadAnalytics();
         showNotification('Filters applied', 'success');

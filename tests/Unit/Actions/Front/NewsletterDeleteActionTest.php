@@ -18,7 +18,7 @@ class NewsletterDeleteActionTest extends ActionTestCase
         ]);
         $newsletter->save();
         $token = $newsletter->token;
-        
+
         $action = new NewsletterDeleteAction();
 
         // Act
@@ -50,7 +50,7 @@ class NewsletterDeleteActionTest extends ActionTestCase
             'email' => 'existing@example.com',
         ]);
         $newsletter->save();
-        
+
         $action = new NewsletterDeleteAction();
 
         // Act
@@ -68,7 +68,7 @@ class NewsletterDeleteActionTest extends ActionTestCase
         ]);
         $newsletter1->save();
         $token1 = $newsletter1->token;
-        
+
         $newsletter2 = new Newsletter([
             'email' => 'second@example.com',
         ]);

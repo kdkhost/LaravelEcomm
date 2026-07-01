@@ -20,7 +20,7 @@
                 @else
                 <p>Write us a message <span class="text-danger">(You need to login first)</span></p>
                 @endauth
-                
+
                 <form method="POST" action="{{ route('front.store-message') }}" class="form">
                     @csrf
                     <div class="row">

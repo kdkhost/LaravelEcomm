@@ -43,7 +43,7 @@
                                             $org = $product->price;
                                         @endphp
                                         <p class="price">
-                                            ${{number_format($org,2)}}  
+                                            ${{number_format($org,2)}}
                                         </p>
 
                                     </div>

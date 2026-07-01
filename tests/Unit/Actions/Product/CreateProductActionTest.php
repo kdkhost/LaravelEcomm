@@ -17,7 +17,7 @@ class CreateProductActionTest extends ActionTestCase
     {
         $brand = Brand::factory()->create();
         $category = Category::factory()->create();
-        
+
         $dto = new ProductDTO(
             id: null,
             title: 'Test Product',
@@ -51,7 +51,7 @@ class CreateProductActionTest extends ActionTestCase
     public function testExecuteGeneratesSlugWhenNotProvided(): void
     {
         $brand = Brand::factory()->create();
-        
+
         $dto = new ProductDTO(
             id: null,
             title: 'Another Test Product',
@@ -84,7 +84,7 @@ class CreateProductActionTest extends ActionTestCase
     {
         $brand = Brand::factory()->create();
         $categories = Category::factory()->count(2)->create();
-        
+
         $dto = new ProductDTO(
             id: null,
             title: 'Categorized Product',

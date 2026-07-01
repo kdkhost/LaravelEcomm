@@ -27,14 +27,14 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class="mb-4">My Orders</h2>
-                    
+
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
                     @if(session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-                    
+
                     @if($orders->count() > 0)
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -84,7 +84,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         {{ $orders->links() }}
                     @else
                         <div class="text-center py-5">

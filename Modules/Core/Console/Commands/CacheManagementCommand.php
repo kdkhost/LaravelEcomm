@@ -12,7 +12,7 @@ class CacheManagementCommand extends Command
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'cache:manage 
+    protected $signature = 'cache:manage
                             {action : Action to perform (stats|clear|invalidate)}
                             {--model= : Model to invalidate cache for}
                             {--pattern= : Pattern to match for invalidation}';

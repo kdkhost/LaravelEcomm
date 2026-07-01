@@ -110,7 +110,7 @@ class OrderDownload extends Model
     public function isLimitReached(): bool
     {
         $maxDownloads = $this->productDownload->product->max_downloads;
-        
+
         if ($maxDownloads === null) {
             return false;
         }

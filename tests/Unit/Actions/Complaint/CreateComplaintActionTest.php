@@ -19,7 +19,7 @@ class CreateComplaintActionTest extends ActionTestCase
         // Arrange
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        
+
         $repository = new ComplaintRepository();
         $action = new CreateComplaintAction($repository);
 
@@ -53,7 +53,7 @@ class CreateComplaintActionTest extends ActionTestCase
         // Arrange
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        
+
         $repository = new ComplaintRepository();
         $action = new CreateComplaintAction($repository);
 
@@ -82,7 +82,7 @@ class CreateComplaintActionTest extends ActionTestCase
         // Arrange
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        
+
         $repository = new ComplaintRepository();
         $action = new CreateComplaintAction($repository);
 
@@ -108,7 +108,7 @@ class CreateComplaintActionTest extends ActionTestCase
         // Arrange
         $user = User::factory()->create();
         $order = Order::factory()->create();
-        
+
         $repository = new ComplaintRepository();
         $action = new CreateComplaintAction($repository);
 

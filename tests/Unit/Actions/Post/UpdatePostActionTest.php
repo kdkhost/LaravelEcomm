@@ -49,7 +49,7 @@ class UpdatePostActionTest extends ActionTestCase
     public function testExecuteThrowsExceptionForNonExistentPost(): void
     {
         $user = User::factory()->create();
-        
+
         $dto = new PostDTO(
             id: 99999,
             title: 'Test Title',
@@ -63,7 +63,7 @@ class UpdatePostActionTest extends ActionTestCase
         );
 
         $action = app(UpdatePostAction::class);
-        
+
         // The action throws ModelNotFoundException when post doesn't exist
         $this->expectException(ModelNotFoundException::class);
         $action->execute($dto);
@@ -151,7 +151,7 @@ class UpdatePostActionTest extends ActionTestCase
         $post = Post::factory()
             ->hasAttached($oldCategories)
             ->create(['user_id' => $user->id]);
-        
+
         $newCategories = Category::factory()->count(3)->create();
 
         $this->assertCount(2, $post->fresh()->categories);

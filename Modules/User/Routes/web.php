@@ -25,7 +25,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function (): void {
 Route::prefix('user')->middleware(['auth'])->group(function (): void {
     Route::get('user-profile', [UserController::class, 'profile'])->name('user-profile');
     Route::post('/profile/{id}', [UserController::class, 'profileUpdate'])->name('profile-update');
-    
+
     // Address Book Routes
     Route::get('addresses', [UserAddressController::class, 'index'])->name('user.addresses.index');
     Route::get('addresses/create', [UserAddressController::class, 'create'])->name('user.addresses.create');

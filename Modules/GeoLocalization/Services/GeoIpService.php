@@ -21,7 +21,7 @@ readonly class GeoIpService
         $dbPath = storage_path('app/geoip/GeoLite2-City.mmdb');
         $this->useApi = ! file_exists($dbPath);
         $this->apiProvider = config('geolocalization.provider', 'ipapi');
-        
+
         try {
             $this->reader = $this->useApi ? null : new Reader($dbPath);
         } catch (\Exception $e) {
@@ -155,7 +155,7 @@ readonly class GeoIpService
     private function lookupViaIpGeolocation(string $ip): ?LocationDTO
     {
         $apiKey = config('geolocalization.ipgeolocation_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultLocation();
         }
@@ -294,7 +294,7 @@ readonly class GeoIpService
     public function getClientIp(): string
     {
         $request = request();
-        
+
         $headers = [
             'HTTP_CLIENT_IP',
             'HTTP_X_FORWARDED_FOR',

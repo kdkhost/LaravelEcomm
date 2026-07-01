@@ -28,19 +28,19 @@
                                         <td>{{ $order->created_at->format('M d, Y') }}</td>
                                         <td>${{ number_format($order->total_amount, 2) }}</td>
                                         <td>
-                                            <span class="badge badge-{{ 
-                                                $order->status == 'pending' ? 'warning' : 
-                                                ($order->status == 'processing' ? 'info' : 
-                                                ($order->status == 'shipped' ? 'primary' : 
-                                                ($order->status == 'delivered' ? 'success' : 'danger'))) 
+                                            <span class="badge badge-{{
+                                                $order->status == 'pending' ? 'warning' :
+                                                ($order->status == 'processing' ? 'info' :
+                                                ($order->status == 'shipped' ? 'primary' :
+                                                ($order->status == 'delivered' ? 'success' : 'danger')))
                                             }}">
                                                 {{ ucfirst($order->status) }}
                                             </span>
                                         </td>
                                         <td>
-                                            <span class="badge badge-{{ 
-                                                $order->payment_status == 'paid' ? 'success' : 
-                                                ($order->payment_status == 'pending' ? 'warning' : 'danger') 
+                                            <span class="badge badge-{{
+                                                $order->payment_status == 'paid' ? 'success' :
+                                                ($order->payment_status == 'pending' ? 'warning' : 'danger')
                                             }}">
                                                 {{ ucfirst($order->payment_status) }}
                                             </span>

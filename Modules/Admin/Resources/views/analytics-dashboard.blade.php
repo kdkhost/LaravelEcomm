@@ -393,7 +393,7 @@
         loadAnalytics();
         initializeCharts();
         startRealTimeUpdates();
-        
+
         // Add event listener for analytics type dropdown
         document.getElementById('analyticsType').addEventListener('change', function() {
             updateDateRange();
@@ -410,7 +410,7 @@
                 }
             });
             const data = await response.json();
-            
+
             if (data.success && data.data) {
                 if (data.data.overview) {
                     updateOverviewCards(data.data.overview);
@@ -430,12 +430,12 @@
     // Update overview cards
     function updateOverviewCards(overview) {
         if (!overview) return;
-        
+
         const totalRevenue = document.getElementById('totalRevenue');
         const totalOrders = document.getElementById('totalOrders');
         const totalCustomers = document.getElementById('totalCustomers');
         const totalProducts = document.getElementById('totalProducts');
-        
+
         if (totalRevenue && overview.total_revenue) {
             totalRevenue.textContent = '$' + formatNumber(overview.total_revenue.current || 0);
         }
@@ -448,7 +448,7 @@
         if (totalProducts && overview.total_products) {
             totalProducts.textContent = formatNumber(overview.total_products.current || 0);
         }
-        
+
         // Update change indicators
         if (overview.total_revenue) {
             updateChangeIndicator('revenueChange', overview.total_revenue.this_month, overview.total_revenue.last_month);
@@ -467,7 +467,7 @@
         const change = previous > 0 ? ((current - previous) / previous * 100) : 0;
         const sign = change >= 0 ? '+' : '';
         const color = change >= 0 ? 'text-success' : 'text-danger';
-        
+
         element.innerHTML = `<span class="${color}">${sign}${change.toFixed(1)}% from last month</span>`;
     }
 
@@ -823,7 +823,7 @@
                     }
                 });
                 const data = await response.json();
-                
+
                 if (data.success) {
                     document.getElementById('onlineUsers').textContent = data.data.online_users;
                     document.getElementById('currentOrders').textContent = data.data.current_orders.pending + data.data.current_orders.processing;
@@ -849,9 +849,9 @@
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const type = document.getElementById('analyticsType').value;
-        
+
         console.log('Export parameters:', { type, format: 'xlsx', startDate, endDate });
-        
+
         try {
             const response = await fetch('/admin/analytics/export?_t=' + Date.now(), {
                 method: 'POST',
@@ -867,9 +867,9 @@
                     end_date: endDate
                 })
             });
-            
+
             console.log('Response status:', response.status);
-            
+
             if (response.ok) {
                 const blob = await response.blob();
                 const url = window.URL.createObjectURL(blob);
@@ -897,7 +897,7 @@
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const type = document.getElementById('analyticsType').value;
-        
+
         // Load analytics for specific date range
         loadDateRangeAnalytics(type, startDate, endDate);
     }
@@ -912,14 +912,14 @@
                 }
             });
             const data = await response.json();
-            
+
             if (data.success) {
                 // Update charts and tables with filtered data
                 // Create a proper data structure for updateCharts
                 const chartData = {};
                 chartData[type] = data.data;
                 updateCharts(chartData);
-                
+
                 // Show success message
                 showNotification('Analytics updated successfully!', 'success');
             }
@@ -958,9 +958,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Auto remove after 3 seconds
         setTimeout(() => {
             if (notification.parentNode) {

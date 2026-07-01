@@ -15,7 +15,7 @@ abstract class ProductTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Load product module service provider
         $this->app->register(ProductServiceProvider::class);
     }

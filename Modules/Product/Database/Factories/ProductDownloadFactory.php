@@ -16,7 +16,7 @@ class ProductDownloadFactory extends Factory
     public function definition(): array
     {
         $fileName = $this->faker->word() . '.pdf';
-        
+
         return [
             'product_id' => Product::factory()->create(['type' => Product::TYPE_DOWNLOADABLE]),
             'file_name' => $fileName,

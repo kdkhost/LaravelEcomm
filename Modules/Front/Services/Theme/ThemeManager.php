@@ -39,7 +39,7 @@ class ThemeManager implements ThemeManagerInterface
         }
 
         $this->activeTheme = $theme;
-        
+
         if (config('blaze.enabled')) {
             $this->reconfigureBlaze();
         }
@@ -52,14 +52,14 @@ class ThemeManager implements ThemeManagerInterface
         }
 
         $themesPath = base_path('Modules/Front/Resources/views/themes');
-        
+
         if (! is_dir($themesPath)) {
             return [];
         }
 
         $themes = [];
         $items = scandir($themesPath);
-        
+
         foreach ($items as $item) {
             if ($item === '.' || $item === '..' || ! is_dir($themesPath . '/' . $item)) {
                 continue;
@@ -130,7 +130,7 @@ class ThemeManager implements ThemeManagerInterface
     public function prewarmBlazeCache(?string $theme = null): array
     {
         $theme = $theme ?? $this->activeTheme;
-        
+
         if (! $this->isBlazeEnabledForTheme($theme)) {
             return [
                 'success' => false,
@@ -141,7 +141,7 @@ class ThemeManager implements ThemeManagerInterface
         }
 
         $themePath = base_path("Modules/Front/Resources/views/themes/{$theme}");
-        
+
         if (! is_dir($themePath)) {
             return [
                 'success' => false,
@@ -231,11 +231,11 @@ class ThemeManager implements ThemeManagerInterface
         try {
             $setting = app('settings');
             $theme = $setting->active_template ?? 'default';
-            
+
             if (! $this->themeExists($theme)) {
                 return 'default';
             }
-            
+
             return $theme;
         } catch (\Exception $e) {
             return 'default';

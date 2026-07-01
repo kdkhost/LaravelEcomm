@@ -45,7 +45,7 @@ class FindPostActionTest extends ActionTestCase
     public function testExecuteThrowsExceptionForNonExistentPost(): void
     {
         $action = app(FindPostAction::class);
-        
+
         $this->expectException(ModelNotFoundException::class);
         $action->execute(99999);
     }
@@ -63,7 +63,7 @@ class FindPostActionTest extends ActionTestCase
         ]);
 
         $action = app(FindPostAction::class);
-        
+
         $result1 = $action->execute($post1->id);
         $result2 = $action->execute($post2->id);
 

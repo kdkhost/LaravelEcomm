@@ -6,7 +6,7 @@
         <div class="card-body">
             <form action="{{route('admin.email-campaigns.store')}}" method="POST" id="campaign-form">
                 @csrf
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -14,11 +14,11 @@
                             <select name="template_id" id="template_id" class="form-control" required>
                                 <option value="">Select Template</option>
                                 @foreach($templates as $template)
-                                    <option value="{{ $template->id }}" 
+                                    <option value="{{ $template->id }}"
                                             data-subject="{{ $template->subject }}"
                                             data-type="{{ $template->template_type }}"
                                             {{ $template->is_default ? 'selected' : '' }}>
-                                        {{ $template->name }} 
+                                        {{ $template->name }}
                                         @if($template->is_default)
                                             <span class="badge badge-warning">Default</span>
                                         @endif
@@ -37,7 +37,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="subject">Email Subject <span class="text-danger">*</span></label>
-                            <input type="text" name="subject" id="subject" class="form-control" 
+                            <input type="text" name="subject" id="subject" class="form-control"
                                    value="{{ old('subject') }}" required>
                             @error('subject')
                                 <div class="text-danger">{{ $message }}</div>
@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input type="checkbox" name="include_posts" id="include_posts" class="form-check-input" 
+                                <input type="checkbox" name="include_posts" id="include_posts" class="form-check-input"
                                        value="1" {{ old('include_posts', true) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="include_posts">
                                     Include Blog Posts
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input type="checkbox" name="include_products" id="include_products" class="form-check-input" 
+                                <input type="checkbox" name="include_products" id="include_products" class="form-check-input"
                                        value="1" {{ old('include_products', true) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="include_products">
                                     Include Featured Products
@@ -89,14 +89,14 @@
                 <div class="form-group">
                     <label>Send To <span class="text-danger">*</span></label>
                     <div class="form-check">
-                        <input type="radio" name="send_to" id="send_to_all" class="form-check-input" 
+                        <input type="radio" name="send_to" id="send_to_all" class="form-check-input"
                                value="all" {{ old('send_to', 'all') == 'all' ? 'checked' : '' }}>
                         <label class="form-check-label" for="send_to_all">
                             All Subscribers
                         </label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" name="send_to" id="send_to_segment" class="form-check-input" 
+                        <input type="radio" name="send_to" id="send_to_segment" class="form-check-input"
                                value="segment" {{ old('send_to') == 'segment' ? 'checked' : '' }}>
                         <label class="form-check-label" for="send_to_segment">
                             Specific Segment
@@ -108,21 +108,21 @@
                     <div class="form-group">
                         <label>Segment Criteria</label>
                         <div class="form-check">
-                            <input type="checkbox" name="segment_criteria[new_subscribers]" id="new_subscribers" class="form-check-input" 
+                            <input type="checkbox" name="segment_criteria[new_subscribers]" id="new_subscribers" class="form-check-input"
                                    value="1" {{ old('segment_criteria.new_subscribers') ? 'checked' : '' }}>
                             <label class="form-check-label" for="new_subscribers">
                                 New Subscribers (Last 30 days)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" name="segment_criteria[active_users]" id="active_users" class="form-check-input" 
+                            <input type="checkbox" name="segment_criteria[active_users]" id="active_users" class="form-check-input"
                                    value="1" {{ old('segment_criteria.active_users') ? 'checked' : '' }}>
                             <label class="form-check-label" for="active_users">
                                 Active Users (Made purchases)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input type="checkbox" name="segment_criteria[inactive_users]" id="inactive_users" class="form-check-input" 
+                            <input type="checkbox" name="segment_criteria[inactive_users]" id="inactive_users" class="form-check-input"
                                    value="1" {{ old('segment_criteria.inactive_users') ? 'checked' : '' }}>
                             <label class="form-check-label" for="inactive_users">
                                 Inactive Users (No purchases)
@@ -205,7 +205,7 @@
         function previewCampaign() {
             const form = document.getElementById('campaign-form');
             const formData = new FormData(form);
-            
+
             fetch('{{ route("admin.email-campaigns.preview") }}', {
                 method: 'POST',
                 body: formData,
@@ -234,13 +234,13 @@
         document.getElementById('campaign-form').addEventListener('submit', function(e) {
             const templateId = document.getElementById('template_id').value;
             const subject = document.getElementById('subject').value;
-            
+
             if (!templateId || !subject) {
                 e.preventDefault();
                 alert('Please select a template and enter a subject.');
                 return false;
             }
-            
+
             if (confirm('Are you sure you want to send this campaign?')) {
                 return true;
             } else {

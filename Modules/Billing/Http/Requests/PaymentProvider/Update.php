@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Billing\Http\Requests\PaymentProvider;
 
-use Modules\Core\Http\Requests\CoreRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class Update extends CoreRequest
+class Update extends FormRequest
 {
-    public function rules(): array
-    {
-        return [
-            'name' => 'required|string|max:50',
-            'public_key' => 'nullable',
-            'secret_key' => 'nullable',
-            'status' => 'boolean',
-        ];
-    }
-
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'public_key' => 'nullable|string|max:255',
+            'secret_key' => 'nullable|string|max:255',
+            'status' => 'required|in:0,1',
+        ];
     }
 }

@@ -118,7 +118,7 @@ class Helper
     public static function cartRequiresShipping(string $user_id = ''): bool
     {
         $cartItems = self::getAllProductFromCart($user_id);
-        
+
         if ($cartItems->isEmpty()) {
             return true; // Default to requiring shipping if cart is empty
         }
@@ -138,7 +138,7 @@ class Helper
     public static function cartHasDownloadable(string $user_id = ''): bool
     {
         $cartItems = self::getAllProductFromCart($user_id);
-        
+
         foreach ($cartItems as $item) {
             if ($item->product && $item->product->isDownloadable()) {
                 return true;

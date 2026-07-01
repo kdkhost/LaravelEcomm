@@ -48,7 +48,7 @@
             disconnect: function() {}
         };
     }
-    
+
     // Prevent jQuery deferred exceptions
     window.addEventListener('unhandledrejection', function(event) {
         if (event.reason && event.reason.message && event.reason.message.includes('Echo')) {

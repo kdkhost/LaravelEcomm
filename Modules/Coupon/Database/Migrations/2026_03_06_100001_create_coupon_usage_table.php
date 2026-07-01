@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('discount_amount', 20, 2)->default(0);
             $table->timestamp('used_at');
             $table->timestamps();
-            
+
             // Indexes for quick lookups
             $table->index(['coupon_id', 'user_id']);
             $table->index(['coupon_id', 'session_id']);

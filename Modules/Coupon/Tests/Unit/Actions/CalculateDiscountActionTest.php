@@ -137,11 +137,11 @@ class CalculateDiscountActionTest extends CouponTestCase
         $result = $this->action->executeForCartItems($coupon, $cartItems);
 
         $this->assertEquals(20.00, $result['total']);
-        
+
         // Check proportional distribution
         $item1Discount = collect($result['items'])->firstWhere('product_id', 1)['discount'];
         $item2Discount = collect($result['items'])->firstWhere('product_id', 2)['discount'];
-        
+
         $this->assertEquals(5.00, $item1Discount); // 25% of discount
         $this->assertEquals(15.00, $item2Discount); // 75% of discount
     }

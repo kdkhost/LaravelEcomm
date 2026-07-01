@@ -200,7 +200,7 @@ class RecommendationService
         - Viewed brands: {$brands}
         - Price range: \${$priceRange['min']} - \${$priceRange['max']} (avg: \${$priceRange['avg']})
         - Interaction patterns: {$userBehavior['interaction_patterns']['clicks']} clicks, {$userBehavior['interaction_patterns']['cart_adds']} cart additions
-        
+
         Suggest 5 product categories and 3 price ranges that would interest this user. Format as JSON with 'categories' and 'price_ranges' arrays.";
     }
 

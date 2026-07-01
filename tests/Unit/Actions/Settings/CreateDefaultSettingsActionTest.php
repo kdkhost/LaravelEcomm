@@ -48,7 +48,7 @@ class CreateDefaultSettingsActionTest extends ActionTestCase
         $this->assertDatabaseHas('settings', [
             'email' => 'info@example.com',
         ]);
-        
+
         // Check that payment settings defaults are set in the JSON fields
         $setting = Setting::first();
         $this->assertNotNull($setting);

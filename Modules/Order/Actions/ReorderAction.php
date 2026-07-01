@@ -16,7 +16,7 @@ class ReorderAction
     public function execute(int $orderId, int $userId): array
     {
         $order = Order::with('carts.product')->findOrFail($orderId);
-        
+
         // Verify the order belongs to the user
         if ($order->user_id !== $userId) {
             return [
@@ -24,31 +24,31 @@ class ReorderAction
                 'message' => 'You do not have permission to reorder this order.',
             ];
         }
-        
+
         $addedItems = 0;
         $skippedItems = 0;
-        
+
         foreach ($order->carts as $cartItem) {
             $product = $cartItem->product;
-            
+
             // Check if product is still active
             if (!$product || $product->status !== 'active') {
                 $skippedItems++;
                 continue;
             }
-            
+
             // Check if product is in stock
             if ($product->stock !== null && $product->stock < $cartItem->quantity) {
                 $skippedItems++;
                 continue;
             }
-            
+
             // Check if product already exists in cart
             $existingCart = Cart::where('user_id', $userId)
                 ->where('product_id', $product->id)
                 ->whereNull('order_id')
                 ->first();
-            
+
             if ($existingCart) {
                 // Update quantity
                 $newQuantity = $existingCart->quantity + $cartItem->quantity;
@@ -67,16 +67,16 @@ class ReorderAction
                     'status' => 'new',
                 ]);
             }
-            
+
             $addedItems++;
         }
-        
+
         return [
             'success' => true,
             'added_items' => $addedItems,
             'skipped_items' => $skippedItems,
-            'message' => $addedItems > 0 
-                ? "Added {$addedItems} item(s) to your cart." 
+            'message' => $addedItems > 0
+                ? "Added {$addedItems} item(s) to your cart."
                 : 'No items could be added to your cart.',
         ];
     }

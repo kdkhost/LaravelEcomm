@@ -27,7 +27,7 @@
 
                             <div class="form-group">
                                 <label for="countries">Countries (ISO codes, comma-separated)</label>
-                                <input type="text" class="form-control" id="countries" name="countries" 
+                                <input type="text" class="form-control" id="countries" name="countries"
                                        value="{{ $zone->countries ? implode(', ', $zone->countries) : '' }}"
                                        placeholder="US, CA, MX (leave empty for all countries)">
                             </div>
@@ -39,7 +39,7 @@
 
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="is_active" name="is_active" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="is_active" name="is_active" value="1"
                                            {{ $zone->is_active ? 'checked' : '' }}>
                                     <label class="form-check-label" for="is_active">Active</label>
                                 </div>
@@ -55,7 +55,7 @@
                                             <select name="methods[{{ $index }}][shipping_id]" class="form-control" required>
                                                 <option value="">Select Method</option>
                                                 @foreach($shippingMethods as $shippingMethod)
-                                                    <option value="{{ $shippingMethod->id }}" 
+                                                    <option value="{{ $shippingMethod->id }}"
                                                             {{ $method->shipping_id == $shippingMethod->id ? 'selected' : '' }}>
                                                         {{ $shippingMethod->type }}
                                                     </option>
@@ -64,26 +64,26 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Price *</label>
-                                            <input type="number" step="0.01" name="methods[{{ $index }}][price]" 
+                                            <input type="number" step="0.01" name="methods[{{ $index }}][price]"
                                                    class="form-control" value="{{ $method->price }}" required min="0">
                                         </div>
                                         <div class="form-group">
                                             <label>Free Shipping Threshold</label>
-                                            <input type="number" step="0.01" name="methods[{{ $index }}][free_shipping_threshold]" 
+                                            <input type="number" step="0.01" name="methods[{{ $index }}][free_shipping_threshold]"
                                                    class="form-control" value="{{ $method->free_shipping_threshold }}" min="0">
                                         </div>
                                         <div class="form-group">
                                             <label>Estimated Days</label>
-                                            <input type="number" name="methods[{{ $index }}][estimated_days]" 
+                                            <input type="number" name="methods[{{ $index }}][estimated_days]"
                                                    class="form-control" value="{{ $method->estimated_days }}" min="1">
                                         </div>
                                         <div class="form-group">
                                             <label>Priority</label>
-                                            <input type="number" name="methods[{{ $index }}][priority]" 
+                                            <input type="number" name="methods[{{ $index }}][priority]"
                                                    class="form-control" value="{{ $method->priority }}" min="0">
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="methods[{{ $index }}][is_active]" 
+                                            <input type="checkbox" class="form-check-input" name="methods[{{ $index }}][is_active]"
                                                    value="1" {{ $method->is_active ? 'checked' : '' }}>
                                             <label class="form-check-label">Active</label>
                                         </div>

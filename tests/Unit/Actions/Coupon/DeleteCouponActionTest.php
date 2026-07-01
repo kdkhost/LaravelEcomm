@@ -60,7 +60,7 @@ class DeleteCouponActionTest extends ActionTestCase
         $coupon = Coupon::factory()->fixed(10.00)->create([
             'code' => 'COUPONWITHUSAGE',
         ]);
-        
+
         // Create usage records using the model directly
         CouponUsage::create([
             'coupon_id' => $coupon->id,

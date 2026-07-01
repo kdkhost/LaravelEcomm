@@ -50,13 +50,13 @@
                             <div class="alert alert-success">
                                 2FA is currently <strong>enabled</strong> on your account.
                             </div>
-                            
+
                             <div class="mb-3">
                                 <a href="{{ route('admin.2fa.recovery-codes') }}" class="btn btn-info">
                                     View Recovery Codes
                                 </a>
                             </div>
-                            
+
                             <p>If you are looking to disable Two Factor Authentication. Please confirm your password and
                                 Click Disable 2FA Button.</p>
                             <form method="POST" action="{{ route('admin.google-disable2fa') }}">

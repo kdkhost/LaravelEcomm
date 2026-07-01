@@ -45,10 +45,10 @@ class DeletePostActionTest extends ActionTestCase
     public function testExecuteDoesNotThrowForNonExistentPost(): void
     {
         $action = app(DeletePostAction::class);
-        
+
         // Should not throw an exception
         $action->execute(99999);
-        
+
         $this->assertTrue(true); // Test passes if we reach this point
     }
 

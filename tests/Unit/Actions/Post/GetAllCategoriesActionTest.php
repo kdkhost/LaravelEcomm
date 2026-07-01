@@ -61,7 +61,7 @@ class GetAllCategoriesActionTest extends ActionTestCase
         $result = $action->execute();
 
         $this->assertCount(3, $result);
-        
+
         $titles = $result->pluck('title')->toArray();
         $this->assertContains('Category One', $titles);
         $this->assertContains('Category Two', $titles);

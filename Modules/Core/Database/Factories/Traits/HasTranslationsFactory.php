@@ -79,8 +79,8 @@ trait HasTranslationsFactory
                     $translationData[$field] = $value($locale);
                 } else {
                     // For non-callable values, add locale suffix to make them unique
-                    $translationData[$field] = $locale === 'en' 
-                        ? $value 
+                    $translationData[$field] = $locale === 'en'
+                        ? $value
                         : $value . ' (' . strtoupper($locale) . ')';
                 }
             }

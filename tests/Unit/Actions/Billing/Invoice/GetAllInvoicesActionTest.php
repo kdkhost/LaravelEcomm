@@ -40,7 +40,7 @@ class GetAllInvoicesActionTest extends ActionTestCase
 
         $this->assertInstanceOf(Collection::class, $result);
         $this->assertCount(3, $result);
-        
+
         foreach ($result as $invoice) {
             $this->assertEquals($user1->id, $invoice->user_id);
         }

@@ -33,7 +33,7 @@
                     @if(session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-                    
+
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Order #{{ $order->order_number ?? $order->id }}</h4>
@@ -83,9 +83,9 @@
                                     </address>
                                 </div>
                             </div>
-                            
+
                             <hr>
-                            
+
                             <h6>Order Items</h6>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
@@ -133,7 +133,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            
+
                             <div class="mt-4 d-flex justify-content-between">
                                 <a href="{{ route('front.my-orders') }}" class="btn btn-secondary">
                                     <i class="ti-arrow-left"></i> Back to Orders

@@ -53,7 +53,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    
+
                     <div class="d-flex justify-content-center">
                         {{ $complaints->appends($_GET)->links('pagination::admin-bootstrap-5') }}
                     </div>

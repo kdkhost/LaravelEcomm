@@ -33,6 +33,7 @@ return [
     'notifications' => 'Известувања',
     'blocked_ip' => 'Блокирани IP адреси',
     'activity_log' => 'Лог на Активности',
+        'languages' => 'Languages',
     'translation' => 'Превод',
     'users' => 'Корисници',
     'roles' => 'Улоги',

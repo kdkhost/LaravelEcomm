@@ -38,10 +38,10 @@ class UpdatePaymentSettingsActionTest extends ActionTestCase
         $this->assertArrayHasKey('stripe_public_key', $result->payment_settings);
         $this->assertArrayHasKey('stripe_secret_key', $result->payment_settings);
         $this->assertArrayHasKey('paypal_enabled', $result->payment_settings);
-        
+
         // Original unchanged value should be preserved
         $this->assertFalse($result->payment_settings['paypal_enabled']);
-        
+
         // New values should be merged
         $this->assertTrue($result->payment_settings['stripe_enabled']);
         $this->assertEquals('pk_new', $result->payment_settings['stripe_public_key']);

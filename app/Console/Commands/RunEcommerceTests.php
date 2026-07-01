@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class RunEcommerceTests extends Command
 {
-    protected $signature = 'ecommerce:test 
+    protected $signature = 'ecommerce:test
                             {--module=all : Specific module to test (cart, order, payment, product, workflow, business)}
                             {--coverage : Generate coverage report}
                             {--parallel : Run tests in parallel}

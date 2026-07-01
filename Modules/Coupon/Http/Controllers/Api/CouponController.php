@@ -109,7 +109,7 @@ class CouponController extends CoreController
     public function validateCoupon(\Illuminate\Http\Request $request): JsonResponse
     {
         $request->validate(['code' => 'required|string']);
-        
+
         $user = Auth::user();
         $isValid = $this->validateCouponAction->isValid(
             $request->code,

@@ -80,7 +80,7 @@ class ProductDealActionTest extends ActionTestCase
     {
         // Arrange - Create specific number of active brands
         Brand::factory()->count(5)->create(['status' => 'active']);
-        
+
         Product::factory()->create([
             'status' => 'active',
             'd_deal' => true,

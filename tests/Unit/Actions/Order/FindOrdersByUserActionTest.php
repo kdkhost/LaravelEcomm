@@ -13,7 +13,7 @@ class FindOrdersByUserActionTest extends ActionTestCase
     public function testExecuteReturnsUserOrders(): void
     {
         $user = User::factory()->create();
-        
+
         // Create orders using raw insert to bypass FK constraints
         \DB::table('orders')->insert([
             [

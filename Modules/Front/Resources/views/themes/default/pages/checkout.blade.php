@@ -1,4 +1,4 @@
-@php 
+@php
 use Modules\Core\Helpers\Helper;
 $user = Auth::user();
 $defaultAddress = $user?->defaultShippingAddress();
@@ -437,12 +437,12 @@ $defaultAddress = $user?->defaultShippingAddress();
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 @if($user)
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
-                                            <input type="checkbox" name="save_address" value="1" style="width: auto;"> 
+                                            <input type="checkbox" name="save_address" value="1" style="width: auto;">
                                             Salvar este endereço na minha conta
                                         </label>
                                     </div>
@@ -450,7 +450,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
-                                            <input type="checkbox" name="make_default_address" value="1" style="width: auto;"> 
+                                            <input type="checkbox" name="make_default_address" value="1" style="width: auto;">
                                             Definir como endereço padrão
                                         </label>
                                     </div>

@@ -19,7 +19,7 @@ class UserAddressController extends CoreController
     {
         $user = auth()->user();
         $addresses = $user->addresses()->orderBy('is_default', 'desc')->orderBy('created_at', 'desc')->get();
-        
+
         return view('user::addresses.index', compact('addresses'));
     }
 
@@ -54,7 +54,7 @@ class UserAddressController extends CoreController
         ]);
 
         $user = auth()->user();
-        
+
         $address = $user->addresses()->create([
             ...$validated,
             'is_default' => $request->boolean('is_default'),
@@ -74,7 +74,7 @@ class UserAddressController extends CoreController
     public function edit(UserAddress $address): View
     {
         $this->authorize('update', $address);
-        
+
         return view('user::addresses.edit', compact('address'));
     }
 
@@ -84,7 +84,7 @@ class UserAddressController extends CoreController
     public function update(Request $request, UserAddress $address): RedirectResponse
     {
         $this->authorize('update', $address);
-        
+
         $validated = $request->validate([
             'type' => 'required|in:shipping,billing,both',
             'first_name' => 'required|string|max:255',
@@ -121,7 +121,7 @@ class UserAddressController extends CoreController
     public function destroy(UserAddress $address): RedirectResponse
     {
         $this->authorize('delete', $address);
-        
+
         $address->delete();
 
         return redirect()->route('user.addresses.index')
@@ -134,7 +134,7 @@ class UserAddressController extends CoreController
     public function setDefault(UserAddress $address): RedirectResponse
     {
         $this->authorize('update', $address);
-        
+
         $address->setAsDefault();
 
         return redirect()->route('user.addresses.index')

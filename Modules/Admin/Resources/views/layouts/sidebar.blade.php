@@ -309,7 +309,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    
+
     @hasrole('super-admin')
     <!-- Heading -->
     <div class="sidebar-heading">
@@ -378,6 +378,7 @@
                 <a class="collapse-item"
                    href="javascript:void(0);">@lang('sidebar.blocked_ip')</a>
                 <a class="collapse-item" href="{{route('activity')}}">@lang('sidebar.activity_log')</a>
+                <a class="collapse-item" href="{{ route('admin.languages.index') }}">@lang('sidebar.languages')</a>
                 <a class="collapse-item" href="{{ url('translations/') }}">@lang('sidebar.translation')</a>
             </div>
         </div>

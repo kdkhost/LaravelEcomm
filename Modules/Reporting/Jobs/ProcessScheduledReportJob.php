@@ -34,7 +34,7 @@ class ProcessScheduledReportJob implements ShouldQueue
 
         $report = $this->schedule->report;
         $dateRange = $this->schedule->getDateRange();
-        
+
         $parameters = array_merge(
             $report->filters ?? [],
             [

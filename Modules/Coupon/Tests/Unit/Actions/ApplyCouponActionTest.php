@@ -31,7 +31,7 @@ class ApplyCouponActionTest extends CouponTestCase
         $coupon = $this->createPercentCoupon(10);
         $user = $this->createUser();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         // Add item to cart
         Cart::create([
             'user_id' => $user->id,
@@ -64,7 +64,7 @@ class ApplyCouponActionTest extends CouponTestCase
         $coupon = $this->createPercentCoupon(10);
         $user = $this->createUser();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -92,7 +92,7 @@ class ApplyCouponActionTest extends CouponTestCase
     public function test_removes_coupon_from_session(): void
     {
         $user = $this->createUser();
-        
+
         // Set a coupon in session
         session()->put('coupon', ['code' => 'TEST']);
 
@@ -149,7 +149,7 @@ class ApplyCouponActionTest extends CouponTestCase
         $coupon = $this->createFreeShippingCoupon();
         $user = $this->createUser();
         $product = Product::factory()->create(['price' => 100]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -171,7 +171,7 @@ class ApplyCouponActionTest extends CouponTestCase
         ]);
         $user = $this->createUser();
         $product = Product::factory()->create(['price' => 50]);
-        
+
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $product->id,

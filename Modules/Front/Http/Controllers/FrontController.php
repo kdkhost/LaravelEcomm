@@ -518,13 +518,13 @@ class FrontController extends Controller
     public function orderDetail(Order $order): View|RedirectResponse
     {
         $user = Auth::user();
-        
+
         if (!$user || $order->user_id !== $user->id) {
             return redirect()->route('front.my-orders')->with('error', 'Order not found.');
         }
-        
+
         $order->load('carts.product');
-        
+
         return view(theme_view('pages.order-detail'), compact('order'));
     }
 
@@ -534,17 +534,17 @@ class FrontController extends Controller
     public function reorder(Order $order, ReorderAction $reorderAction): RedirectResponse
     {
         $user = Auth::user();
-        
+
         if (!$user || $order->user_id !== $user->id) {
             return redirect()->route('front.my-orders')->with('error', 'Order not found.');
         }
-        
+
         $result = $reorderAction->execute($order->id, $user->id);
-        
+
         if ($result['success']) {
             return redirect()->route('cart-list')->with('success', $result['message']);
         }
-        
+
         return redirect()->back()->with('error', $result['message']);
     }
 
@@ -554,7 +554,7 @@ class FrontController extends Controller
     public function recentlyViewed(RecentlyViewedService $recentlyViewedService): View
     {
         $products = $recentlyViewedService->getForCurrentUser(12);
-        
+
         return view('front::pages.recently-viewed', compact('products'));
     }
 }

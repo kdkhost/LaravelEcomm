@@ -12,10 +12,10 @@
                 $attribute = $attributeValues->first()->attribute;
                 $display = $attribute->display;
             @endphp
-            
+
             <div class="attribute-group mb-3">
                 <h6 class="attribute-name">{{ $attributeName }}</h6>
-                
+
                 @switch($display)
                     @case('color')
                         {{-- Color Swatches --}}
@@ -26,13 +26,13 @@
                                     $colorHex = $av->attribute->options->firstWhere('value', $colorValue)?->color_hex ?? $colorValue;
                                 @endphp
                                 <label class="color-swatch-label">
-                                    <input type="radio" 
-                                           name="attribute_{{ $attribute->code }}" 
+                                    <input type="radio"
+                                           name="attribute_{{ $attribute->code }}"
                                            value="{{ $colorValue }}"
                                            class="d-none"
                                            @if($loop->first) checked @endif
                                            onchange="updateVariantSelection('{{ $attribute->code }}', '{{ $colorValue }}')">
-                                    <span class="color-swatch" 
+                                    <span class="color-swatch"
                                           style="background-color: {{ $colorHex }};"
                                           title="{{ $colorValue }}">
                                     </span>
@@ -50,8 +50,8 @@
                                     $label = $av->attribute->options->firstWhere('value', $value)?->label ?? $value;
                                 @endphp
                                 <label class="btn-swatch-label">
-                                    <input type="radio" 
-                                           name="attribute_{{ $attribute->code }}" 
+                                    <input type="radio"
+                                           name="attribute_{{ $attribute->code }}"
                                            value="{{ $value }}"
                                            class="d-none"
                                            @if($loop->first) checked @endif
@@ -74,8 +74,8 @@
                                     $label = $av->attribute->options->firstWhere('value', $value)?->label ?? $value;
                                 @endphp
                                 <label class="image-swatch-label">
-                                    <input type="radio" 
-                                           name="attribute_{{ $attribute->code }}" 
+                                    <input type="radio"
+                                           name="attribute_{{ $attribute->code }}"
                                            value="{{ $value }}"
                                            class="d-none"
                                            @if($loop->first) checked @endif
@@ -94,7 +94,7 @@
 
                     @default
                         {{-- Default Dropdown --}}
-                        <select name="attribute_{{ $attribute->code }}" 
+                        <select name="attribute_{{ $attribute->code }}"
                                 class="form-control"
                                 onchange="updateVariantSelection('{{ $attribute->code }}', this.value)">
                             @foreach($attributeValues as $av)
@@ -191,7 +191,7 @@
 
     function updateVariantSelection(attributeCode, value) {
         selectedAttributes[attributeCode] = value;
-        
+
         // If this is a configurable product, try to find matching variant
         @if(isset($product) && $product->isConfigurable())
             checkVariantAvailability();
@@ -203,7 +203,7 @@
         // Check if all configurable attributes are selected
         const configurableAttributes = @json($product->configurable_attributes ?? []);
         const allSelected = configurableAttributes.every(attr => selectedAttributes[attr]);
-        
+
         if (allSelected) {
             // Make AJAX request to find variant
             fetch('{{ route("admin.products.variant.by-attributes", $product) }}', {
@@ -231,13 +231,13 @@
         if (priceElement) {
             priceElement.textContent = '$' + parseFloat(variant.price).toFixed(2);
         }
-        
+
         // Update SKU
         const skuElement = document.querySelector('.product-sku');
         if (skuElement) {
             skuElement.textContent = 'SKU: ' + variant.sku;
         }
-        
+
         // Update stock status
         const stockElement = document.querySelector('.stock-status');
         if (stockElement) {
@@ -251,7 +251,7 @@
                 document.querySelector('.add-to-cart-btn')?.setAttribute('disabled', 'disabled');
             }
         }
-        
+
         // Update variant ID for add to cart
         const variantInput = document.querySelector('input[name="variant_id"]');
         if (variantInput) {

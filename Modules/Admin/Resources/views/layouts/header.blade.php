@@ -104,24 +104,21 @@
         </li>
 
     </ul>
+    @php $locales = config('app.locales', []); $currentLocale = app()->getLocale(); @endphp
     <div class="dropdown">
         <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-            @switch(Session::get('locale', 'en'))
-                @case('mk')
-                    <img src="{{ asset('images/north-macedonia.png') }}" alt="Macedonian Language" height="32">
-                    @break
-                @case('de')
-                    <img src="{{ asset('images/germany.png') }}" alt="German Language" height="32">
-                    @break
-                @default
-                    <img src="{{ asset('images/united-kingdom.png') }}" alt="English Language" height="32">
-            @endswitch
+            <span class="mr-1">{{ $locales[$currentLocale]['flag'] ?? '🌐' }}</span>
+            <span>{{ $locales[$currentLocale]['native'] ?? $currentLocale }}</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ route('language.switch', 'en') }}">English</a>
-            <a class="dropdown-item" href="{{ route('language.switch', 'mk') }}">Macedonian</a>
-            <a class="dropdown-item" href="{{ route('language.switch', 'de') }}">German</a>
+            @foreach($locales as $code => $config)
+                @if($code !== $currentLocale)
+                    <a class="dropdown-item" href="{{ route('language.switch', $code) }}">
+                        <span class="mr-1">{{ $config['flag'] }}</span> {{ $config['native'] }}
+                    </a>
+                @endif
+            @endforeach
         </div>
     </div>
 </nav>

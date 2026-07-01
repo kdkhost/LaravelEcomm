@@ -25,10 +25,10 @@ class DeleteProductActionTest extends ActionTestCase
     public function testExecuteDoesNotThrowForNonExistentProduct(): void
     {
         $action = app(DeleteProductAction::class);
-        
+
         // Should not throw an exception
         $action->execute(99999);
-        
+
         $this->assertTrue(true); // Test passes if we reach this point
     }
 }

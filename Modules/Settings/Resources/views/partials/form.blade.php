@@ -2,7 +2,7 @@
     Settings Form - Single Record Approach
     Settings always exist and can only be updated, never deleted.
 --}}
-<form class="form-horizontal" method="POST" 
+<form class="form-horizontal" method="POST"
       action="{{ route('settings.update', $settings['id']) }}"
       enctype="multipart/form-data">
     @method('put')
@@ -32,7 +32,7 @@
                value="{{ $settings['address'] ?? '' }}"
                class="form-control">
     </div>
-    
+
     <!-- Template Selection -->
     <div class="form-group">
         <label for="active_template" class="col-form-label">Active Template <span class="text-danger">*</span></label>
@@ -49,13 +49,13 @@
         </select>
         <small class="form-text text-muted">Choose the active theme for your website.</small>
     </div>
-    
+
     <div class="form-group">
        <textarea class="form-control" id="description" name="description">
            {{ $settings['description'] ?? '' }}
        </textarea>
     </div>
-    
+
     <div class="form-group">
         <label for="inputImage">@lang('partials.logo')</label>
         <input type="file" class="form-control" id="inputImage" name="images[]" multiple>
@@ -84,7 +84,7 @@
 
 @push('scripts')
     <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
-    
+
     <script>
         $(document).ready(function () {
             $('#description').summernote({
@@ -94,14 +94,14 @@
             });
         });
     </script>
-    
+
     @if(!empty($settings['google_map_api_key']))
     <script src="https://maps.googleapis.com/maps/api/js?key={{ $settings['google_map_api_key'] }}"></script>
     <script>
         $(document).ready(function () {
             let map;
             let marker;
-           
+
             const dbLat = {{ $settings['latitude'] ?? '50.8503' }};
             const dbLng = {{ $settings['longitude'] ?? '4.3517' }};
             const initialLocation = {lat: dbLat, lng: dbLng};

@@ -36,26 +36,26 @@
                             <h4 class="mt-4">SMTP Settings</h4>
                             <div class="form-group">
                                 <label for="mail_host">SMTP Host</label>
-                                <input type="text" class="form-control" id="mail_host" 
-                                       name="mail_host" 
+                                <input type="text" class="form-control" id="mail_host"
+                                       name="mail_host"
                                        value="{{ $emailSettings['mail_host'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="mail_port">SMTP Port</label>
-                                <input type="number" class="form-control" id="mail_port" 
-                                       name="mail_port" 
+                                <input type="number" class="form-control" id="mail_port"
+                                       name="mail_port"
                                        value="{{ $emailSettings['mail_port'] ?? '587' }}">
                             </div>
                             <div class="form-group">
                                 <label for="mail_username">SMTP Username</label>
-                                <input type="text" class="form-control" id="mail_username" 
-                                       name="mail_username" 
+                                <input type="text" class="form-control" id="mail_username"
+                                       name="mail_username"
                                        value="{{ $emailSettings['mail_username'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="mail_password">SMTP Password</label>
-                                <input type="password" class="form-control" id="mail_password" 
-                                       name="mail_password" 
+                                <input type="password" class="form-control" id="mail_password"
+                                       name="mail_password"
                                        value="{{ $emailSettings['mail_password'] ?? '' }}">
                             </div>
                             <div class="form-group">
@@ -69,20 +69,20 @@
                             <h4 class="mt-4">Email From Settings</h4>
                             <div class="form-group">
                                 <label for="mail_from_address">From Address</label>
-                                <input type="email" class="form-control" id="mail_from_address" 
-                                       name="mail_from_address" 
+                                <input type="email" class="form-control" id="mail_from_address"
+                                       name="mail_from_address"
                                        value="{{ $emailSettings['mail_from_address'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="mail_from_name">From Name</label>
-                                <input type="text" class="form-control" id="mail_from_name" 
-                                       name="mail_from_name" 
+                                <input type="text" class="form-control" id="mail_from_name"
+                                       name="mail_from_name"
                                        value="{{ $emailSettings['mail_from_name'] ?? '' }}">
                             </div>
                             <div class="form-group">
                                 <label for="mail_reply_to">Reply To Address</label>
-                                <input type="email" class="form-control" id="mail_reply_to" 
-                                       name="mail_reply_to" 
+                                <input type="email" class="form-control" id="mail_reply_to"
+                                       name="mail_reply_to"
                                        value="{{ $emailSettings['mail_reply_to'] ?? '' }}">
                             </div>
 

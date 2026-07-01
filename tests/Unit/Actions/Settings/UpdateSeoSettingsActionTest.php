@@ -36,11 +36,11 @@ class UpdateSeoSettingsActionTest extends ActionTestCase
         $this->assertArrayHasKey('meta_title', $result->seo_settings);
         $this->assertArrayHasKey('meta_description', $result->seo_settings);
         $this->assertArrayHasKey('meta_keywords', $result->seo_settings);
-        
+
         // Updated values
         $this->assertEquals('New Title', $result->seo_settings['meta_title']);
         $this->assertEquals('New description', $result->seo_settings['meta_description']);
-        
+
         // Unchanged value should persist
         $this->assertEquals('old, keywords', $result->seo_settings['meta_keywords']);
     }
@@ -202,7 +202,7 @@ class UpdateSeoSettingsActionTest extends ActionTestCase
             'twitter_description' => 'Original Twitter Description',
             'twitter_image' => 'original_twitter.jpg',
         ];
-        
+
         $setting = Setting::factory()->create([
             'seo_settings' => $originalSettings,
         ]);

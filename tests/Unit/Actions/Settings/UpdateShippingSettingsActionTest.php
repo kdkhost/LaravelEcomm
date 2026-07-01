@@ -36,10 +36,10 @@ class UpdateShippingSettingsActionTest extends ActionTestCase
         $this->assertArrayHasKey('default_shipping_method', $result->shipping_settings);
         $this->assertArrayHasKey('free_shipping_threshold', $result->shipping_settings);
         $this->assertArrayHasKey('flat_rate_shipping', $result->shipping_settings);
-        
+
         // Unchanged value should persist
         $this->assertEquals('standard', $result->shipping_settings['default_shipping_method']);
-        
+
         // New values should be merged
         $this->assertEquals(100, $result->shipping_settings['free_shipping_threshold']);
         $this->assertEquals(15, $result->shipping_settings['flat_rate_shipping']);
@@ -180,7 +180,7 @@ class UpdateShippingSettingsActionTest extends ActionTestCase
             'free_shipping_enabled' => true,
             'international_shipping_enabled' => false,
         ];
-        
+
         $setting = Setting::factory()->create([
             'shipping_settings' => $originalSettings,
         ]);

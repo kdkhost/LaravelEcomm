@@ -18,7 +18,7 @@
                             <div class="col-md-6">
                                 <h5>{{ __('Invoice Information') }}</h5>
                                 <p><strong>{{ __('Invoice Number') }}:</strong> {{ $invoice->invoice_number }}</p>
-                                <p><strong>{{ __('Status') }}:</strong> 
+                                <p><strong>{{ __('Status') }}:</strong>
                                     <span class="badge badge-{{ $invoice->status === 'paid' ? 'success' : ($invoice->isOverdue() ? 'danger' : 'warning') }}">
                                         {{ ucfirst($invoice->status) }}
                                     </span>

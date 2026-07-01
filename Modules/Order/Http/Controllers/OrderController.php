@@ -122,11 +122,11 @@ class OrderController extends CoreController
     public function reorder(Order $order): RedirectResponse
     {
         $result = $this->reorderAction->execute($order->id, auth()->id());
-        
+
         if ($result['success']) {
             return redirect()->route('cart-list')->with('success', $result['message']);
         }
-        
+
         return redirect()->back()->with('error', $result['message']);
     }
 }

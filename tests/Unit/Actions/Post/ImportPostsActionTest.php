@@ -32,7 +32,7 @@ class ImportPostsActionTest extends ActionTestCase
         $csvFile = UploadedFile::fake()->create('posts.csv');
 
         $action = app(ImportPostsAction::class);
-        
+
         $action->execute($xlsxFile);
         Excel::assertImported('posts.xlsx');
 
@@ -47,10 +47,10 @@ class ImportPostsActionTest extends ActionTestCase
         $file = UploadedFile::fake()->create('empty.xlsx');
 
         $action = app(ImportPostsAction::class);
-        
+
         // Should not throw an exception
         $action->execute($file);
-        
+
         $this->assertTrue(true); // Test passes if we reach this point
         Excel::assertImported('empty.xlsx');
     }

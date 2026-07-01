@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="product-details">
                     <h2>{{ $product_detail->title }}</h2>
-                    
+
                     {{-- Rating --}}
                     @php
                         $rate = ceil($product_detail->getReview->avg('rate'));
@@ -108,7 +108,7 @@
                     <form action="{{ route('single-add-to-cart') }}" method="POST" class="mb-30">
                         @csrf
                         <input type="hidden" name="slug" value="{{ $product_detail->slug }}">
-                        
+
                         <div class="form-group" style="display: flex; align-items: center;">
                             <label style="margin-right: 15px; margin-bottom: 0;">Quantity:</label>
                             <div class="input-group" style="width: 140px;">
@@ -165,7 +165,7 @@
                             <form method="POST" action="{{ route('product.review.store', $product_detail->slug) }}" class="mb-40">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product_detail->id }}">
-                                
+
                                 <div class="form-group">
                                     <label>Rating</label>
                                     <div class="rating-input">
@@ -195,9 +195,9 @@
                             <div class="review-item mb-30 p-20 border-radius-3" style="background:#f9f9f9;">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
-                                        <img src="{{ $review->user?->getFirstMediaUrl('photo') ?: asset('backend/img/avatar.png') }}" 
-                                             alt="{{ $review->user['name'] }}" 
-                                             class="img-circle" 
+                                        <img src="{{ $review->user?->getFirstMediaUrl('photo') ?: asset('backend/img/avatar.png') }}"
+                                             alt="{{ $review->user['name'] }}"
+                                             class="img-circle"
                                              style="width:80px;height:80px;">
                                         <p class="mt-10"><strong>{{ $review->user['name'] }}</strong></p>
                                     </div>
@@ -271,7 +271,7 @@
 .rating-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; }
 .rating-input input { display: none; }
 .rating-input label { cursor: pointer; font-size: 24px; color: #ddd; margin-right: 5px; }
-.rating-input label:hover, .rating-input label:hover ~ label, 
+.rating-input label:hover, .rating-input label:hover ~ label,
 .rating-input input:checked ~ label { color: #FFD700; }
 .product-item { transition: all 0.3s; }
 .product-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -291,7 +291,7 @@ $(document).ready(function() {
         const type = $(this).attr('data-type');
         const input = $(this).closest('.input-group').find('.input-number');
         let currentVal = parseInt(input.val()) || 1;
-        
+
         if(type == 'minus') {
             if(currentVal > 1) input.val(currentVal - 1);
         } else {

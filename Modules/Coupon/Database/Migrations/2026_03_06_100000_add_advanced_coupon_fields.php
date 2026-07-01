@@ -19,7 +19,7 @@ return new class extends Migration
                 ->comment('Minimum cart amount required to use coupon');
             $table->decimal('maximum_discount', 20, 2)->nullable()->after('minimum_amount')
                 ->comment('Maximum discount amount for percentage coupons');
-            
+
             // Usage limits
             $table->unsignedInteger('usage_limit')->nullable()->after('maximum_discount')
                 ->comment('Global usage limit');
@@ -27,17 +27,17 @@ return new class extends Migration
                 ->comment('Usage limit per customer');
             $table->unsignedInteger('times_used')->default(0)->after('usage_limit_per_user')
                 ->comment('How many times coupon has been used');
-            
+
             // Date range
             $table->timestamp('starts_at')->nullable()->after('times_used');
             // expires_at already exists from previous migration
-            
+
             // Status flags
             $table->boolean('is_public')->default(true)->after('status')
                 ->comment('Show on cart page');
             $table->boolean('is_stackable')->default(false)->after('is_public')
                 ->comment('Can be combined with other coupons');
-            
+
             // Product restrictions (stored as JSON arrays)
             $table->json('applicable_products')->nullable()->after('is_stackable')
                 ->comment('Product IDs where coupon applies (null = all)');
@@ -45,20 +45,20 @@ return new class extends Migration
                 ->comment('Category IDs where coupon applies (null = all)');
             $table->json('applicable_brands')->nullable()->after('applicable_categories')
                 ->comment('Brand IDs where coupon applies (null = all)');
-            
+
             $table->json('excluded_products')->nullable()->after('applicable_brands')
                 ->comment('Product IDs excluded from coupon');
             $table->json('excluded_categories')->nullable()->after('excluded_products')
                 ->comment('Category IDs excluded from coupon');
             $table->json('excluded_brands')->nullable()->after('excluded_categories')
                 ->comment('Brand IDs excluded from coupon');
-            
+
             // Customer restrictions
             $table->json('customer_groups')->nullable()->after('excluded_brands')
                 ->comment('Customer group IDs (null = all)');
             $table->json('customer_ids')->nullable()->after('customer_groups')
                 ->comment('Specific customer IDs (null = all)');
-            
+
             // Free shipping
             $table->boolean('free_shipping')->default(false)->after('customer_ids')
                 ->comment('Coupon provides free shipping');

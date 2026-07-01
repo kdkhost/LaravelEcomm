@@ -17,7 +17,7 @@ class GenerateOrderPdfActionTest extends ActionTestCase
     public function testExecuteGeneratesPdfForExistingOrder(): void
     {
         $user = User::factory()->create();
-        
+
         // Create order using direct DB insert to avoid FK constraints
         \DB::table('orders')->insert([
             'id' => 1,

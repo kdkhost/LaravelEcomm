@@ -17,7 +17,7 @@ class CreatePostActionTest extends ActionTestCase
     public function testExecuteCreatesPostWithValidData(): void
     {
         $user = User::factory()->create();
-        
+
         $dto = new PostDTO(
             id: null,
             title: 'Test Post Title',
@@ -47,7 +47,7 @@ class CreatePostActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $categories = Category::factory()->count(3)->create();
-        
+
         $dto = new PostDTO(
             id: null,
             title: 'Post With Categories',
@@ -71,7 +71,7 @@ class CreatePostActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $tags = Tag::factory()->count(2)->create();
-        
+
         $dto = new PostDTO(
             id: null,
             title: 'Post With Tags',
@@ -96,7 +96,7 @@ class CreatePostActionTest extends ActionTestCase
         $user = User::factory()->create();
         $categories = Category::factory()->count(2)->create();
         $tags = Tag::factory()->count(3)->create();
-        
+
         $dto = new PostDTO(
             id: null,
             title: 'Complete Post',
@@ -121,7 +121,7 @@ class CreatePostActionTest extends ActionTestCase
     public function testExecuteCreatesPostWithNullDescription(): void
     {
         $user = User::factory()->create();
-        
+
         $dto = new PostDTO(
             id: null,
             title: 'Post Without Description',

@@ -10,7 +10,7 @@ use Modules\Language\Models\Language;
 
 /**
  * Action to get translations for a model
- * 
+ *
  * Used by both Web and API controllers
  */
 readonly class GetTranslationAction

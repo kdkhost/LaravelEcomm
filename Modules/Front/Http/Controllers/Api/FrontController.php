@@ -177,7 +177,7 @@ class FrontController extends CoreController
     public function couponRemove(ApplyCouponAction $applyCouponAction): JsonResponse
     {
         $result = $applyCouponAction->remove();
-        
+
         return $this
             ->setMessage($result['message'])
             ->respond($result);

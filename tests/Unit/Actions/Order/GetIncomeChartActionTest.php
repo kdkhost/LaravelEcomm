@@ -18,7 +18,7 @@ class GetIncomeChartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['status' => 'active', 'price' => 50.00]);
-        
+
         // Create order for current year with delivered status
         \DB::table('orders')->insert([
             'id' => 1,
@@ -54,7 +54,7 @@ class GetIncomeChartActionTest extends ActionTestCase
         $this->assertCount(12, $result);
         $this->assertArrayHasKey('January', $result);
         $this->assertArrayHasKey('December', $result);
-        
+
         // March should have income
         $this->assertGreaterThanOrEqual(0, $result['March']);
     }
@@ -63,7 +63,7 @@ class GetIncomeChartActionTest extends ActionTestCase
     {
         $user = User::factory()->create();
         $product = Product::factory()->create(['status' => 'active', 'price' => 75.00]);
-        
+
         // Create order for a specific year (2023)
         \DB::table('orders')->insert([
             'id' => 1,
@@ -107,7 +107,7 @@ class GetIncomeChartActionTest extends ActionTestCase
 
         $this->assertIsArray($result);
         $this->assertCount(12, $result);
-        
+
         // All months should have 0.0 for a year with no orders
         foreach ($result as $month => $value) {
             $this->assertSame(0.0, $value);
@@ -117,7 +117,7 @@ class GetIncomeChartActionTest extends ActionTestCase
     public function testExecuteIgnoresNonDeliveredOrders(): void
     {
         $user = User::factory()->create();
-        
+
         // Create pending order (should not count)
         \DB::table('orders')->insert([
             'id' => 1,

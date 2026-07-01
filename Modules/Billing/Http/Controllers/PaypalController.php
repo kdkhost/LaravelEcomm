@@ -59,33 +59,33 @@ class PaypalController extends CoreController
     {
         $paymentId = $request->input('paymentId');
         $pendingOrder = session('pending_order');
-        
+
         if (!$pendingOrder) {
             return redirect()->route('front.index')->with('error', 'No pending order found.');
         }
-        
+
         try {
             // Get cart items before clearing
             $userId = $pendingOrder['user_id'] ?? '';
             $cartItems = Helper::getAllProductFromCart($userId);
-            
+
             if ($cartItems->isEmpty()) {
                 return redirect()->route('front.cart')->with('error', 'Your cart is empty.');
             }
-            
+
             // Update order data with PayPal payment info
             $pendingOrder['payment_status'] = 'paid';
             $pendingOrder['transaction_reference'] = $paymentId;
-            
+
             // Create the order
             $dto = OrderDTO::fromArray($pendingOrder);
             $order = $storeOrderAction->execute($dto);
-            
+
             // Associate cart items with the order
             foreach ($cartItems as $cartItem) {
                 $cartItem->update(['order_id' => $order->id]);
             }
-            
+
             // Save address to user's address book if logged in
             if (!empty($pendingOrder['user_id']) && !empty($pendingOrder['save_address'])) {
                 $user = \Modules\User\Models\User::find($pendingOrder['user_id']);
@@ -105,12 +105,12 @@ class PaypalController extends CoreController
                     ]);
                 }
             }
-            
+
             // Clear session data
             session()->forget('cart');
             session()->forget('coupon');
             session()->forget('pending_order');
-            
+
             return redirect()->route('front.index')->with('success', 'Payment successful! Order number: ' . $order->order_number);
         } catch (Exception $e) {
             return redirect()->route('front.index')->with('error', 'Payment succeeded but order creation failed. Please contact support. Error: ' . $e->getMessage());

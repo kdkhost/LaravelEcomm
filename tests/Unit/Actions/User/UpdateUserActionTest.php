@@ -71,7 +71,7 @@ class UpdateUserActionTest extends ActionTestCase
         );
 
         $action = app(UpdateUserAction::class);
-        
+
         $this->expectException(ModelNotFoundException::class);
         $action->execute(99999, $dto);
     }
@@ -91,7 +91,7 @@ class UpdateUserActionTest extends ActionTestCase
         );
 
         $action = app(UpdateUserAction::class);
-        
+
         // Database will throw unique constraint violation
         $this->expectException(\Illuminate\Database\UniqueConstraintViolationException::class);
         $action->execute($user2->id, $dto);

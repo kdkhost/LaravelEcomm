@@ -35,7 +35,7 @@ class DownloadController extends CoreController
                     'max_downloads' => $orderDownload->productDownload->product->max_downloads,
                     'can_download' => $orderDownload->canDownload(),
                     'expires_at' => $orderDownload->expires_at,
-                    'download_url' => $orderDownload->canDownload() 
+                    'download_url' => $orderDownload->canDownload()
                         ? $orderDownload->productDownload->getDownloadUrl($orderDownload->order_id, auth()->id())
                         : null,
                 ];

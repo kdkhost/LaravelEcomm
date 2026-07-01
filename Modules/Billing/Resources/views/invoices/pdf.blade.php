@@ -19,7 +19,7 @@
     <div class="header">
         <h1>Invoice #{{ $invoice->invoice_number }}</h1>
     </div>
-    
+
     <div class="invoice-info">
         <table>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
         </table>
     </div>
-    
+
     <div class="invoice-items">
         <table>
             <thead>
@@ -59,7 +59,7 @@
             </tbody>
         </table>
     </div>
-    
+
     @if($invoice->notes)
         <div style="margin-top: 30px;">
             <strong>Notes:</strong><br>

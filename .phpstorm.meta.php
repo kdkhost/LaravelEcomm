@@ -3440,10 +3440,10 @@ namespace PHPSTORM_META {
     override(\tap(0), type(0));
     override(\optional(0), type(0));
 
-            registerArgumentsSet('auth', 
+            registerArgumentsSet('auth',
 'viewAny','view','create','update','delete',
 'denyWithStatus','denyAsNotFound','restore','forceDelete',);
-        registerArgumentsSet('configs', 
+        registerArgumentsSet('configs',
 'app.name','app.env','app.debug','app.url','app.frontend_url',
 'app.asset_url','app.timezone','app.locale','app.fallback_locale','app.faker_locale',
 'app.cipher','app.key','app.previous_keys','app.maintenance.driver','app.maintenance.store',
@@ -3594,11 +3594,11 @@ namespace PHPSTORM_META {
 'ide-helper.type_overrides.integer','ide-helper.type_overrides.boolean','ide-helper.include_class_docblocks','ide-helper.force_fqn','ide-helper.use_generics_annotations',
 'ide-helper.additional_relation_types','ide-helper.additional_relation_return_types','ide-helper.enforce_nullable_relationships','ide-helper.post_migrate','ide-helper.macroable_traits',
 'tinker.commands','tinker.alias','tinker.dont_alias',);
-        registerArgumentsSet('middleware', 
+        registerArgumentsSet('middleware',
 'web','api','auth','auth.basic','auth.session',
 'cache.headers','can','guest','password.confirm','precognitive',
 'signed','throttle','verified',);
-        registerArgumentsSet('routes', 
+        registerArgumentsSet('routes',
 'laravelblocker::blocker.index','laravelblocker::blocker.create','laravelblocker::blocker.store','laravelblocker::blocker.show','laravelblocker::blocker.edit',
 'laravelblocker::blocker.update','laravelblocker::blocker.destroy','laravelblocker::blocker-deleted','laravelblocker::blocker-item-show-deleted','laravelblocker::blocker-item-restore',
 'laravelblocker::blocker-deleted-restore-all','laravelblocker::blocker-item-destroy','laravelblocker::destroy-all-blocked','laravelblocker::search-blocked','laravelblocker::search-blocked-deleted',
@@ -3678,7 +3678,7 @@ namespace PHPSTORM_META {
 'tags.create','tags.store','tags.edit','tags.update','tags.destroy','api.login','users.index','users.create',
 'users.store','users.show','users.edit','users.update','users.destroy',
 'users.impersonate','users.leave-impersonate','user-profile','profile-update','storage.local',);
-        registerArgumentsSet('views', 
+        registerArgumentsSet('views',
 'admin::index','admin::layouts.changePassword','admin::layouts.footer','admin::layouts.head','admin::layouts.header',
 'admin::layouts.master','admin::layouts.sidebar','attribute::create','attribute::edit','attribute::groups.create',
 'attribute::groups.edit','attribute::groups.index','attribute::groups.partials.form','attribute::index','attribute::partials.form',
@@ -3754,7 +3754,7 @@ namespace PHPSTORM_META {
 'translation-manager::bootstrap4.blocks._supportedLocales','translation-manager::bootstrap4.index','translation-manager::bootstrap5._notifications','translation-manager::bootstrap5.blocks._addEditGroupKeys','translation-manager::bootstrap5.blocks._edit',
 'translation-manager::bootstrap5.blocks._mainBlock','translation-manager::bootstrap5.blocks._publishAll','translation-manager::bootstrap5.blocks._supportedLocales','translation-manager::bootstrap5.index','translation-manager::jsScript',
 'translation-manager::layout',);
-        registerArgumentsSet('translations', 
+        registerArgumentsSet('translations',
 'auth.failed','auth.password','auth.throttle','pagination.previous','pagination.next',
 'passwords.reset','passwords.sent','passwords.throttled','passwords.token','passwords.user',
 'passwords.password','validation.accepted','validation.accepted_if','validation.active_url','validation.after',
@@ -3863,7 +3863,7 @@ namespace PHPSTORM_META {
 'LaravelLogger::laravel-logger.pagination.countText','LaravelLogger::laravel-logger.listenerTypes.auth','LaravelLogger::laravel-logger.listenerTypes.attempt','LaravelLogger::laravel-logger.listenerTypes.failed','LaravelLogger::laravel-logger.listenerTypes.lockout',
 'LaravelLogger::laravel-logger.listenerTypes.reset','LaravelLogger::laravel-logger.listenerTypes.login','LaravelLogger::laravel-logger.listenerTypes.logout','LaravelLogger::laravel-logger.drilldown.labels.userNiveau','cookie-consent::texts.message',
 'cookie-consent::texts.agree',);
-        registerArgumentsSet('env', 
+        registerArgumentsSet('env',
 'APP_NAME','APP_ENV','APP_KEY','APP_DEBUG','APP_URL',
 'LOG_CHANNEL','DB_CONNECTION','DB_HOST','DB_PORT','DB_USERNAME',
 'DB_PASSWORD','DB_DATABASE','OWNER_DB_CONNECTION','OWNER_DB_HOST','OWNER_DB_PORT',
@@ -3890,7 +3890,7 @@ namespace PHPSTORM_META {
 'LARAVEL_BLOCKER_DEFAULT_ACTION','LARAVEL_BLOCKER_DEFAULT_ACTION_ABORT_TYPE','LARAVEL_BLOCKER_DEFAULT_ACTION_VIEW','LARAVEL_BLOCKER_DEFAULT_ACTION_REDIRECT','PAYPAL_MODE',
 'PPAYPAL_SANDBOX_CLIENT_ID','PAYPAL_SANDBOX_CLIENT_SECRET','STRIPE_SANDBOX_PUBLISH_KEY','STRIPE_SANDBOX_SECRET','MULTI_TENANT_ENABLED',
 'ACTIVE_THEME',);
-        
+
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::denies(), 0, argumentsSet('auth'));
@@ -3954,5 +3954,5 @@ namespace PHPSTORM_META {
                 expectedArguments(\Illuminate\Contracts\Translation\Translator::get(), 0, argumentsSet('translations'));
                 expectedArguments(\env(), 0, argumentsSet('env'));
                 expectedArguments(\Illuminate\Support\Env::get(), 0, argumentsSet('env'));
-            
+
 }

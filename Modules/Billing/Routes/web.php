@@ -20,6 +20,7 @@ use Modules\Billing\Http\Controllers\PaymentController;
 use Modules\Billing\Http\Controllers\PaypalController;
 use Modules\Billing\Http\Controllers\StripeController;
 use Modules\Billing\Http\Controllers\MercadoPagoController;
+use Modules\Billing\Http\Controllers\PaymentProviderController;
 use Modules\Billing\Http\Controllers\WishlistController;
 
 // theme_view() is loaded via composer autoload files
@@ -54,6 +55,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('invoices', InvoiceController::class);
     Route::get('invoices/{invoice}/download', [InvoiceController::class, 'download'])->name('invoices.download');
+});
+
+// Payment Providers (Admin CRUD)
+Route::middleware(['auth'])->group(function () {
+    Route::resource('payment_provider', PaymentProviderController::class)->except('show');
 });
 
 // Payment Analytics (Admin only)
