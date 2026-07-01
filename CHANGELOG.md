@@ -15,10 +15,14 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 - `.env` simplificado e robusto com `CACHE_STORE`, `LOG_LEVEL`, seções organizadas
 - `APP_TIMEZONE=America/Sao_Paulo` no `.env`
 - `DEBUGBAR_ENABLED=false` no `.env`
+- `.htaccess` na raiz do repositório (rewrite para `public/` + PHP 8.4 handler)
 
 ### Alterado
 - Workflow definido: atualizações sempre nos 3 locais (local → GitHub → servidor)
 - CHANGELOG sempre atualizado a cada sessão
+
+### Corrigido
+- Site `loja.km.site.nom.br` retornando 404 — `.htaccess` foi perdido durante `git reset --hard origin/main` no servidor (estava em commit local não enviado). Recriado e adicionado ao repositório para não se perder novamente.
 
 ### Planejado
 - Testar fluxo completo de checkout MercadoPago (sandbox e produção)
