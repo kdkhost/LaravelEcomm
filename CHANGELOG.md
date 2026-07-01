@@ -2,6 +2,19 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.6] - 2026-07-01
+
+### Corrigido
+- Menu lateral do admin deixou de apontar para a rota inexistente `avaliacoes.index` e passou a usar a rota real `reviews.index`.
+- Fluxo administrativo de avaliacoes foi alinhado ao resource `reviews`, corrigindo listagem, edicao, exclusao e redirects do modulo.
+- Views de avaliacoes com nomes corrompidos por encoding antigo foram reescritas em ASCII limpo para evitar novas falhas de rota e renderizacao.
+
+### Validacoes
+- `php -l Modules/Product/Http/Controllers/ProductReviewController.php`
+- `git diff --check`
+- Validacao remota de `/admin` apos limpeza de cache do Laravel.
+- Validacao remota de `https://loja.km.site.nom.br/en/provador-virtual/status` apos configuracao do `REPLICATE_API_TOKEN`.
+
 ## [1.1.5] - 2026-07-01
 
 ### Corrigido

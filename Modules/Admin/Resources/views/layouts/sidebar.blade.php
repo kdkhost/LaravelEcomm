@@ -210,7 +210,7 @@
     </li>
     <!-- Reviews -->
     <li class="nav-item">
-        <a class="nav-link" href="{{route('avaliacoes.index')}}">
+        <a class="nav-link" href="{{ route('reviews.index') }}">
             <i class="fas fa-comments"></i>
             <span>@lang('sidebar.avaliacoes')</span></a>
     </li>

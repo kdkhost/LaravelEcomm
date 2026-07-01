@@ -1,21 +1,19 @@
 @extends('admin::layouts.master')
 
 @section('content')
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
-
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary float-left">@lang('partials.list')</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                @if(isset($avaliações))
+                @if(isset($reviews) && $reviews->count() > 0)
                     <table class="table table-bordered" id="data-table">
                         <thead>
                         <tr>
                             <th>@lang('partials.s_n')</th>
-                            <th>@lang('partials.review_by')y</th>
-                            <th>@lang('partials.product_title')/th>
+                            <th>@lang('partials.review_by')</th>
+                            <th>@lang('partials.product_title')</th>
                             <th>@lang('partials.review')</th>
                             <th>@lang('partials.rate')</th>
                             <th>@lang('partials.date')</th>
@@ -26,8 +24,8 @@
                         <tfoot>
                         <tr>
                             <th>@lang('partials.s_n')</th>
-                            <th>@lang('partials.review_by')y</th>
-                            <th>@lang('partials.product_title')/th>
+                            <th>@lang('partials.review_by')</th>
+                            <th>@lang('partials.product_title')</th>
                             <th>@lang('partials.review')</th>
                             <th>@lang('partials.rate')</th>
                             <th>@lang('partials.date')</th>
@@ -36,44 +34,49 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($avaliações as $review)
-
+                        @foreach($reviews as $review)
                             <tr>
-                                <td>{{$review->id}}</td>
-                                <td>{{$review->user->name ?? ''}}</td>
-                                <td>{{$review->product->title ?? ''}}</td>
-                                <td>{{$review->review}}</td>
+                                <td>{{ $review->id }}</td>
+                                <td>{{ $review->user->name ?? '' }}</td>
+                                <td>{{ $review->product->title ?? '' }}</td>
+                                <td>{{ $review->review }}</td>
                                 <td>
-                                    <ul style="list-style:none">
-                                        @for($i=1; $i<=5;$i++)
-                                            @if($review->rate >=$i)
-                                                <li style="float:left;color:#F7941D;"><i class="fa fa-star"></i></li>
-                                            @else
-                                                <li style="float:left;color:#F7941D;"><i class="far fa-star"></i></li>
-                                            @endif
+                                    <ul class="list-unstyled d-flex mb-0">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <li class="mr-1 text-warning">
+                                                <i class="fa{{ $review->rate >= $i ? ' fa-star' : 'r fa-star' }}"></i>
+                                            </li>
                                         @endfor
                                     </ul>
                                 </td>
-                                <td>{{$review->created_at->format('M d D, Y g: i a')}}</td>
+                                <td>{{ $review->created_at?->format('d/m/Y H:i') }}</td>
                                 <td>
-                                    @if($review->status=='active')
-                                        <span class="badge badge-success">{{$review->status}}</span>
+                                    @if($review->status === 'active')
+                                        <span class="badge badge-success">{{ $review->status }}</span>
                                     @else
-                                        <span class="badge badge-warning">{{$review->status}}</span>
+                                        <span class="badge badge-warning">{{ $review->status }}</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href="{{route('avaliações.edit',$review->id)}}"
-                                       class="btn btn-primary btn-sm float-left mr-1"
-                                       style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
-                                       title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                                    <form method="POST" action="{{route('avaliações.destroy',$review->id)}}">
+                                <td class="d-flex">
+                                    <a href="{{ route('reviews.edit', $review->id) }}"
+                                       class="btn btn-primary btn-sm mr-1"
+                                       style="height:30px; width:30px; border-radius:50%"
+                                       data-toggle="tooltip"
+                                       title="Editar"
+                                       data-placement="bottom">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" action="{{ route('reviews.destroy', $review->id) }}">
                                         @csrf
-                                        @method('delete')
+                                        @method('DELETE')
                                         <button class="btn btn-danger btn-sm dltBtn"
-                                                data-id="{{$review->id}}" style="height:30px; width:30px;border-radius:50%
-                                        " data-toggle="tooltip" data-placement="bottom" title="Delete"><i
-                                                    class="fas fa-trash-alt"></i></button>
+                                                data-id="{{ $review->id }}"
+                                                style="height:30px; width:30px; border-radius:50%"
+                                                data-toggle="tooltip"
+                                                data-placement="bottom"
+                                                title="Excluir">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -87,4 +90,3 @@
         </div>
     </div>
 @endsection
-

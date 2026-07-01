@@ -75,7 +75,7 @@ class ProductReviewController extends CoreController
      *
      * @return Application|Factory|View
      */
-    public function edit(ProductReview $review)
+    public function edit(ProductReview $review): View|Factory
     {
         $this->authorize('update', $review);
 
@@ -92,7 +92,7 @@ class ProductReviewController extends CoreController
         $dto = ProductReviewDTO::fromRequest($request, $review->id);
         $this->updateProductReviewAction->execute($review->id, $dto);
 
-        return redirect()->route('product::review.index');
+        return redirect()->route('reviews.index');
     }
 
     /**
@@ -103,6 +103,6 @@ class ProductReviewController extends CoreController
         $this->authorize('delete', $review);
         $this->deleteProductReviewAction->execute($review->id);
 
-        return redirect()->route('review.index');
+        return redirect()->route('reviews.index');
     }
 }
