@@ -2,6 +2,27 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.2] - 2026-07-01
+
+### Adicionado
+- Imagens dos produtos da loja antiga Wix Rataplam importadas para a Media Library da nova loja.
+- Publicacao das imagens em `public/storage` no servidor cPanel para evitar bloqueio de symlink em hospedagem compartilhada.
+
+### Alterado
+- `.env` remoto ajustado para usar `FILESYSTEM_DISK=public`, `FILESYSTEM_PUBLIC_ROOT=/home/lojavirtual/public_html/public/storage` e `FILESYSTEM_PUBLIC_URL=https://loja.km.site.nom.br/storage`.
+
+### Validacoes
+- 84 de 84 produtos da nova loja foram mapeados com produtos da loja antiga.
+- 152 imagens foram importadas e publicadas com retorno HTTP `200` em `/storage/...`.
+- Home, pagina da Calca Nono e pagina da Calca Juno validadas em producao com retorno HTTP `200`.
+- Scripts temporarios de importacao e correcao de storage removidos do servidor.
+- `graphify update .`
+- `graphify update`
+
+### Observacoes
+- 4 imagens antigas do Wix nao foram importadas porque todas as URLs publicas expostas pela propria loja antiga retornaram HTTP `403`: 2 da Calca Nono e 2 da Calca Juno.
+- Mesmo com essas URLs bloqueadas na origem antiga, todos os 84 produtos publicados possuem pelo menos uma imagem ativa na nova loja.
+
 ## [1.1.1] - 2026-07-01
 
 ### Corrigido
