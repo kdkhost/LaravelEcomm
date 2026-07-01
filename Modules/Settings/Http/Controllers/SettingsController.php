@@ -40,8 +40,8 @@ final class SettingsController extends Controller
         // Get or create settings (ensures settings always exist)
         $settings = $this->getSettingsAction->execute();
 
-        if (empty($settings)) {
-            $setting = $this->createDefaultSettingsAction->execute();
+        if (empty($settings['id'])) {
+            $this->createDefaultSettingsAction->execute();
             $settings = $this->getSettingsAction->execute();
         }
 

@@ -40,6 +40,7 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 ### Corrigido
 - Site `loja.km.site.nom.br` retornando 404 — `.htaccess` foi perdido durante `git reset --hard origin/main` no servidor (estava em commit local não enviado). Recriado e adicionado ao repositório para não se perder novamente.
 - Redirect automático `/` → `/en` removido. Agora a raiz `/` abre o site diretamente em português (`routes/web.php`). O seletor de idioma no navbar permite trocar para inglês ou outros idiomas.
+- Erro `Missing required parameter for [Route: settings.update]` ao acessar `/admin/settings` — controller usava `empty($settings)` que nunca era verdadeiro pois o array retornado pela `GetSettingsAction` sempre tem chaves mesmo sem registro no banco. Corrigido para `empty($settings['id'])`.
 
 ### MercadoPago
 - Já implementado nas sessões anteriores: Service, Controller (6 endpoints), DTO, Action, rotas, views admin, CSRF exclusion, `config/mercadopago.php`
