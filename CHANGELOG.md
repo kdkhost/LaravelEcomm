@@ -2,6 +2,18 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.7] - 2026-07-01
+
+### Corrigido
+- Painel administrativo deixou de exibir chaves literais como `sidebar.dashboard`, `partials.edit`, `partials.name` e similares.
+- Arquivos globais de traducao `resources/lang/pt/sidebar.php` e `resources/lang/pt/partials.php` foram adicionados para o locale padrao `pt`.
+
+### Validacoes
+- `php -l resources/lang/pt/sidebar.php`
+- `php -l resources/lang/pt/partials.php`
+- `git diff --check`
+- Validacao remota por boot do Laravel e leitura de `trans('sidebar.dashboard')` e `trans('partials.edit')` apos limpeza de cache.
+
 ## [1.1.6] - 2026-07-01
 
 ### Corrigido
