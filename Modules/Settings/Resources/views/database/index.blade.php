@@ -33,16 +33,16 @@
                                     <div class="card-body">
                                         <form action="{{ route('settings.database.migrate') }}" method="POST" class="mb-3">
                                             @csrf
-                                            <button type="submit" class="btn btn-primary btn-block"
-                                                    onclick="return confirm('Run pending migrations?')">
+                                            <button type="submit" class="btn btn-primary btn-block btn-confirm"
+                                                    data-confirm-text="Run pending migrations?">
                                                 Run Migrations
                                             </button>
                                         </form>
 
                                         <form action="{{ route('settings.database.migrate-fresh') }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-warning btn-block"
-                                                    onclick="return confirm('⚠️ WARNING: This will drop all tables and re-run migrations. Are you absolutely sure?')">
+                                            <button type="submit" class="btn btn-warning btn-block btn-confirm"
+                                                    data-confirm-text="⚠️ WARNING: This will drop all tables and re-run migrations. Are you absolutely sure?">
                                                 Fresh Migrations (Drop All Tables)
                                             </button>
                                         </form>
@@ -58,16 +58,16 @@
                                     <div class="card-body">
                                         <form action="{{ route('settings.database.seed') }}" method="POST" class="mb-3">
                                             @csrf
-                                            <button type="submit" class="btn btn-primary btn-block"
-                                                    onclick="return confirm('Run database seeders?')">
+                                            <button type="submit" class="btn btn-primary btn-block btn-confirm"
+                                                    data-confirm-text="Run database seeders?">
                                                 Run Seeders
                                             </button>
                                         </form>
 
                                         <form action="{{ route('settings.database.migrate-fresh-seed') }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-danger btn-block"
-                                                    onclick="return confirm('⚠️ WARNING: This will drop all tables, re-run migrations, and seed the database. Are you absolutely sure?')">
+                                            <button type="submit" class="btn btn-danger btn-block btn-confirm"
+                                                    data-confirm-text="⚠️ WARNING: This will drop all tables, re-run migrations, and seed the database. Are you absolutely sure?">
                                                 Fresh Migrations + Seeders
                                             </button>
                                         </form>

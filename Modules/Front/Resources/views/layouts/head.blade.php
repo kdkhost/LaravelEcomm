@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="{{asset('frontend/css/font-awesome.css')}}">
 <!-- Themify Icons -->
 <link rel="stylesheet" href="{{asset('frontend/css/themify-icons.css')}}">
+<link rel="stylesheet" href="{{asset('backend/css/sweetalert2.min.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/css/toastr.min.css')}}">
 
 <script type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons'

@@ -232,7 +232,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error generating preview');
+                toastr.error('Error generating preview');
             });
         }
 

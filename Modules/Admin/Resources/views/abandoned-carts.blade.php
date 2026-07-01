@@ -234,7 +234,7 @@
             })
             .catch(error => {
                 console.error('Error loading cart details:', error);
-                alert('Error loading cart details');
+                toastr.error('Error loading cart details');
             });
     }
 </script>

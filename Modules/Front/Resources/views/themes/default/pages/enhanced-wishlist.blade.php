@@ -301,23 +301,19 @@
 <script>
 // Bulk operations
 function bulkAddToCart() {
-    if (confirm('Add all wishlist items to cart?')) {
+    showConfirm('Add to Cart?', 'Add all wishlist items to cart?', function() {
         const productIds = Array.from(document.querySelectorAll('[onclick*="moveToCart"]'))
             .map(btn => btn.getAttribute('onclick').match(/\d+/)[0]);
-
-        // Implementation for bulk add to cart
         showNotification('Bulk add to cart feature coming soon!', 'info');
-    }
+    });
 }
 
 function bulkRemove() {
-    if (confirm('Remove all items from wishlist? This action cannot be undone.')) {
+    showConfirm('Remove All?', 'Remove all items from wishlist? This action cannot be undone.', function() {
         const productIds = Array.from(document.querySelectorAll('[onclick*="removeFromWishlist"]'))
             .map(btn => btn.getAttribute('onclick').match(/\d+/)[0]);
-
-        // Implementation for bulk remove
         showNotification('Bulk remove feature coming soon!', 'info');
-    }
+    });
 }
 
 // Individual item operations
@@ -346,7 +342,7 @@ async function moveToCart(productId) {
 }
 
 async function removeFromWishlist(productId) {
-    if (confirm('Remove this item from your wishlist?')) {
+    showConfirm('Remove Item?', 'Remove this item from your wishlist?', async function() {
         try {
             const response = await fetch(`{{ route('api.wishlist.destroy', ['id' => ':id']) }}`.replace(':id', productId), {
                 method: 'DELETE',

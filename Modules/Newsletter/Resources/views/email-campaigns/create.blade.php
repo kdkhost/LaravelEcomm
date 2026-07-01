@@ -221,13 +221,13 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error generating preview');
+                toastr.error('Error generating preview');
             });
         }
 
         function saveDraft() {
             // Implement draft saving functionality
-            alert('Draft saved successfully!');
+            toastr.success('Draft saved successfully!');
         }
 
         // Form validation
@@ -237,14 +237,25 @@
 
             if (!templateId || !subject) {
                 e.preventDefault();
-                alert('Please select a template and enter a subject.');
+                toastr.warning('Please select a template and enter a subject.');
                 return false;
             }
 
-            if (confirm('Are you sure you want to send this campaign?')) {
-                return true;
-            } else {
-                e.preventDefault();
+            e.preventDefault();
+            Swal.fire({
+                title: "Send Campaign?",
+                text: "Are you sure you want to send this campaign?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#e74a3b",
+                confirmButtonText: "Yes, send it!",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('campaign-form').submit();
+                }
+            });
+            return false;
                 return false;
             }
         });

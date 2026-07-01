@@ -66,7 +66,7 @@
                                     </td>
                                     <td class="amount">${{number_format($cart['amount'],2)}}</td>
                                     <td>
-                                        <a href="{{route('cart-delete',$cart->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to remove this item?')">
+                                        <a href="{{route('cart-delete',$cart->id)}}" class="btn btn-danger btn-sm" onclick="event.preventDefault();showConfirm('Remove Item?','Are you sure you want to remove this item?',function(){window.location.href='{{route('cart-delete',$cart->id)}}'});">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>

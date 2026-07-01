@@ -98,10 +98,37 @@
 
 @stack('scripts')
 <script>
-    setTimeout(function () {
-        $('.alert').slideUp();
-    }, 5000);
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        timeOut: 5000,
+        extendedTimeOut: 2000,
+    };
+
     $(function () {
+        var flash = $('#flash-messages');
+        if (flash.length) {
+            var success = flash.data('success');
+            var error = flash.data('error');
+            var info = flash.data('info');
+            var warning = flash.data('warning');
+            var errors = flash.data('errors');
+
+            if (success) toastr.success(success);
+            if (error) toastr.error(error);
+            if (info) toastr.info(info);
+            if (warning) toastr.warning(warning);
+            if (errors) {
+                try {
+                    var errs = typeof errors === 'string' ? JSON.parse(errors) : errors;
+                    if (Array.isArray(errs)) {
+                        errs.forEach(function(e) { toastr.error(e); });
+                    }
+                } catch (e) {}
+            }
+        }
+
         // ------------------------------------------------------- //
         // Multi Level dropdowns
         // ------------------------------------------------------ //
@@ -121,4 +148,46 @@
 
         });
     });
+
+    window.showConfirm = function (title, text, callback) {
+        Swal.fire({
+            title: title || "Are you sure?",
+            text: text || "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74a3b",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed && callback) callback();
+        });
+    };
+
+    $(document).on('click', '.btn-confirm', function (e) {
+        e.preventDefault();
+        var text = $(this).data('confirm-text') || 'Are you sure?';
+        var form = $(this).closest('form');
+        Swal.fire({
+            title: 'Confirm',
+            text: text,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74a3b',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then(function (result) {
+            if (result.isConfirmed) form.submit();
+        });
+    });
+
+    window.showAlert = function (title, text, icon) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon || 'info',
+            confirmButtonText: 'OK'
+        });
+    };
 </script>

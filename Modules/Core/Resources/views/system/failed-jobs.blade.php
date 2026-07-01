@@ -12,7 +12,7 @@
                         <div class="float-right">
                             <form action="{{ route('system.queue.retry-all') }}" method="POST" class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-primary" onclick="return confirm('Retry all failed jobs?')">
+                                <button type="submit" class="btn btn-primary btn-confirm" data-confirm-text="Retry all failed jobs?">
                                     Retry All
                                 </button>
                             </form>
@@ -51,7 +51,7 @@
                                             <form action="{{ route('system.queue.delete', $job->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this failed job?')">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-danger btn-confirm" data-confirm-text="Delete this failed job?">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

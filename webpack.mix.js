@@ -18,7 +18,8 @@ mix.combine([
         'public/backend/js/sb-admin-2.min.js',
         'public/backend/vendor/datatables/jquery.dataTables.min.js',
         'public/backend/vendor/datatables/dataTables.bootstrap4.min.js',
-        'public/backend/js/sweetalert.min.js',
+        'public/backend/js/sweetalert2.min.js',
+        'public/backend/js/toastr.min.js',
         'public/backend/js/dataTables.searchBuilder.min.js'
 
     ],
@@ -29,7 +30,9 @@ mix.minify('public/js/all.js');
 mix.babel([
         'public/backend/css/sb-admin-2.min.css',
         'public/backend/css/custom.css',
-        'public/backend/vendor/datatables/dataTables.bootstrap4.min.css'
+        'public/backend/vendor/datatables/dataTables.bootstrap4.min.css',
+        'public/backend/css/sweetalert2.min.css',
+        'public/backend/css/toastr.min.css'
 
     ],
     'public/css/all.css');
@@ -53,7 +56,9 @@ mix.combine([
         'public/frontend/js/onepage-nav.min.js',
         'public/frontend/js/isotope/isotope.pkgd.min.js',
         'public/frontend/js/easing.js',
-        'public/frontend/js/active.js'
+        'public/frontend/js/active.js',
+        'public/backend/js/sweetalert2.min.js',
+        'public/frontend/js/toastr.min.js'
 
     ],
     'public/js/all_front.js');
@@ -75,7 +80,8 @@ mix.babel([
         'public/frontend/css/reset.css',
         'public/frontend/css/reset.css',
         'public/frontend/css/style.css',
-        'public/frontend/css/responsive.css'
+        'public/frontend/css/responsive.css',
+        'public/frontend/css/toastr.min.css'
 
     ],
     'public/css/all_front.css');

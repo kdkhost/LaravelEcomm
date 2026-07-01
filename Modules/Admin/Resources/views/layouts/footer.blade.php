@@ -36,6 +36,8 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('backend/js/all.min.js')}}"></script>
+<script src="{{asset('backend/js/sweetalert2.min.js')}}"></script>
+<script src="{{asset('backend/js/toastr.min.js')}}"></script>
 
 <!-- Fix for missing Echo variable globally -->
 <script>
@@ -72,38 +74,104 @@
     });
 </script>
 <script>
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: 'toast-top-right',
+        timeOut: 5000,
+        extendedTimeOut: 2000,
+    };
+
     $(document).ready(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        var flash = $('#flash-messages');
+        if (flash.length) {
+            var success = flash.data('success');
+            var error = flash.data('error');
+            var successMsg = flash.data('success-msg');
+            var info = flash.data('info');
+            var warning = flash.data('warning');
+            var errors = flash.data('errors');
+
+            if (success) toastr.success(success);
+            if (error) toastr.error(error);
+            if (successMsg) toastr.success(successMsg);
+            if (info) toastr.info(info);
+            if (warning) toastr.warning(warning);
+            if (errors) {
+                try {
+                    var errs = typeof errors === 'string' ? JSON.parse(errors) : errors;
+                    if (Array.isArray(errs)) {
+                        errs.forEach(function(e) { toastr.error(e); });
+                    }
+                } catch (e) {}
+            }
+        }
+
         $('.dltBtn').click(function (e) {
             const form = $(this).closest('form');
-            const dataID = $(this).data('id');
-            // alert(dataID);
             e.preventDefault();
-            swal({
+            Swal.fire({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this data!",
                 icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-        })
-    })
-</script>
+                showCancelButton: true,
+                confirmButtonColor: "#e74a3b",
+                cancelButtonColor: "#858796",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
 
-<script>
-    setTimeout(function () {
-        $('.alert').slideUp();
-    }, 4000);
+        $('.btn-confirm').click(function (e) {
+            e.preventDefault();
+            var text = $(this).data('confirm-text') || 'Are you sure?';
+            var form = $(this).closest('form');
+            Swal.fire({
+                title: 'Confirm',
+                text: text,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e74a3b',
+                cancelButtonColor: '#858796',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel'
+            }).then(function (result) {
+                if (result.isConfirmed) form.submit();
+            });
+        });
+    });
+
+    window.showConfirm = function (title, text, callback) {
+        Swal.fire({
+            title: title || "Are you sure?",
+            text: text || "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74a3b",
+            cancelButtonColor: "#858796",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed && callback) callback();
+        });
+    };
+
+    window.showAlert = function (title, text, icon) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon || 'info',
+            confirmButtonText: 'OK'
+        });
+    };
 </script>
 @stack('scripts')

@@ -101,7 +101,7 @@
                                         @if(!$template->is_default)
                                             <form action="{{route('admin.email-templates.destroy', $template->id)}}"
                                                   method="POST" style="display: inline;"
-                                                  onsubmit="return confirm('Are you sure you want to delete this template?')">
+                                                  onsubmit="event.preventDefault();showConfirm('Delete Template?','Are you sure you want to delete this template?',function(){this.submit()}.bind(this))">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"

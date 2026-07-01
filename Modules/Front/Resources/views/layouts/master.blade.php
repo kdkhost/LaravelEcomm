@@ -53,6 +53,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/img/favicon.ico">
     @include('front::layouts.head')
+    <script src="{{asset('backend/js/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('frontend/js/toastr.min.js')}}"></script>
     {!! $schema ?? '' !!}
 
     @php

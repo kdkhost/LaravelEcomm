@@ -229,7 +229,7 @@
                       method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete
+                    <button type="submit" class="btn btn-danger dltBtn">Delete
                     </button>
                 </form>
             </div>
@@ -256,7 +256,7 @@
                 $('#generateDescription').on('click', function () {
                     const productTitle = $('#inputTitle').val();
                     if (!productTitle) {
-                        alert('Please enter a title first.');
+                        toastr.warning('Please enter a title first.');
                         return;
                     }
 
@@ -271,7 +271,7 @@
                             $('#description').summernote('code', response.description);
                         },
                         error: function () {
-                            alert('Error generating description. Please try again.');
+                            toastr.error('Error generating description. Please try again.');
                         }
                     });
                 });

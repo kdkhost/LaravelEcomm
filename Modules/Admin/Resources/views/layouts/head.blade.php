@@ -16,6 +16,8 @@
     <link href="{{asset('backend/css/all.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/css/custom.css')}}" rel="stylesheet">
     <link href="{{asset('backend/css/pagination.css')}}" rel="stylesheet">
+    <link href="{{asset('backend/css/sweetalert2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('backend/css/toastr.min.css')}}" rel="stylesheet">
     @stack('styles')
 
     @php

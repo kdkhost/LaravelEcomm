@@ -59,7 +59,7 @@
                                     <a href="{{ route('user.addresses.edit', $address) }}" class="btn btn-sm btn-info">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
-                                    <form action="{{ route('user.addresses.destroy', $address) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                    <form action="{{ route('user.addresses.destroy', $address) }}" method="POST" class="d-inline" onsubmit="event.preventDefault();showConfirm('Delete Address?','Are you sure?',function(){this.submit()}.bind(this))">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">

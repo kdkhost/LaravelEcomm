@@ -11,7 +11,7 @@
                         <h3 class="card-title">Log Files</h3>
                         <form action="{{ route('system.logs.clear') }}" method="POST" class="float-right">
                             @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all log files?')">
+                            <button type="submit" class="btn btn-danger btn-confirm" data-confirm-text="Are you sure you want to clear all log files?">
                                 Clear All Logs
                             </button>
                         </form>

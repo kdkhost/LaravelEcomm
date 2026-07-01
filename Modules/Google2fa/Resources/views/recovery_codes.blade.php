@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <form action="{{ route('admin.2fa.recovery-codes.regenerate') }}" method="POST" onsubmit="return confirm('Are you sure you want to regenerate recovery codes? Your old codes will no longer work.');">
+                            <form action="{{ route('admin.2fa.recovery-codes.regenerate') }}" method="POST" onsubmit="event.preventDefault();showConfirm('Regenerate Recovery Codes?','Are you sure you want to regenerate recovery codes? Your old codes will no longer work.',function(){this.submit()}.bind(this));">
                                 @csrf
                                 <button type="submit" class="btn btn-warning">Regenerate Recovery Codes</button>
                             </form>

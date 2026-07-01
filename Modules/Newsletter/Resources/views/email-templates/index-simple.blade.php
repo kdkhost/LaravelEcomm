@@ -62,7 +62,7 @@
                                     @if(!$template->is_default)
                                         <form action="{{ route('admin.email-templates.set-default', $template->id) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-outline-warning btn-sm" title="Set as Default" onclick="return confirm('Set this template as default?')">
+                                            <button type="submit" class="btn btn-outline-warning btn-sm btn-confirm" title="Set as Default" data-confirm-text="Set this template as default?">
                                                 <i class="fas fa-star"></i>
                                             </button>
                                         </form>
@@ -71,7 +71,7 @@
                                         @csrf
                                         <button type="submit" class="btn btn-outline-{{ $template->is_active ? 'danger' : 'success' }} btn-sm"
                                                 title="{{ $template->is_active ? 'Deactivate' : 'Activate' }}"
-                                                onclick="return confirm('{{ $template->is_active ? 'Deactivate' : 'Activate' }} this template?')">
+                                                class="btn-confirm" data-confirm-text="{{ $template->is_active ? 'Deactivate' : 'Activate' }} this template?">
                                             <i class="fas fa-{{ $template->is_active ? 'pause' : 'play' }}"></i>
                                         </button>
                                     </form>

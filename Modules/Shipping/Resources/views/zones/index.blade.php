@@ -54,7 +54,7 @@
                                             <form action="{{ route('shipping.zones.destroy', $zone) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-danger dltBtn">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

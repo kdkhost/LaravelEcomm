@@ -325,17 +325,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function generateSitemap() {
-    if (confirm('Generate XML Sitemap?')) {
-        fetch('/api/v1/admin/seo/generate-sitemap', { method:'POST',
-            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), 'Content-Type':'application/json' }
-        }).then(r=>r.json()).then(d=>alert('Sitemap generated!')).catch(e=>alert('Error: '+e.message));
-    }
+    Swal.fire({
+        title: "Generate XML Sitemap?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, generate!",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/api/v1/admin/seo/generate-sitemap', { method:'POST',
+                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), 'Content-Type':'application/json' }
+            }).then(r=>r.json()).then(d=>toastr.success('Sitemap generated!')).catch(e=>toastr.error('Error: '+e.message));
+        }
+    });
 }
 function clearCache() {
-    if (confirm('Clear all application cache?')) {
-        fetch('/api/v1/admin/clear-cache', { method:'POST',
-            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), 'Content-Type':'application/json' }
-        }).then(r=>r.json()).then(d=>alert('Cache cleared!')).catch(e=>alert('Error: '+e.message));
-    }
+    Swal.fire({
+        title: "Clear all application cache?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, clear!",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/api/v1/admin/clear-cache', { method:'POST',
+                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), 'Content-Type':'application/json' }
+            }).then(r=>r.json()).then(d=>toastr.success('Cache cleared!')).catch(e=>toastr.error('Error: '+e.message));
+        }
+    });
 }
 </script>

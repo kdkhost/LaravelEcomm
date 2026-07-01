@@ -884,11 +884,11 @@
             } else {
                 const errorText = await response.text();
                 console.error('Export failed:', response.status, errorText);
-                alert('Export failed. Please try again.');
+                toastr.error('Export failed. Please try again.');
             }
         } catch (error) {
             console.error('Export error:', error);
-            alert('Export failed. Please try again.');
+            toastr.error('Export failed. Please try again.');
         }
     }
 
