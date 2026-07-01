@@ -10,15 +10,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint \): void {
-            \->string('document', 20)->nullable()->after('post_code');
+        Schema::table('orders', function (Blueprint $table): void {
+            $table->string('document', 20)->nullable()->after('post_code');
         });
     }
 
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint \): void {
-            \->dropColumn('document');
+        Schema::table('orders', function (Blueprint $table): void {
+            $table->dropColumn('document');
         });
     }
 };

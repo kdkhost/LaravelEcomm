@@ -8,20 +8,20 @@ use Illuminate\Contracts\Validation\Rule;
 
 class DocumentRule implements Rule
 {
-    private string \ = 'cpf/cnpj';
+    private string $type = 'cpf/cnpj';
 
-    public function passes(\, \): bool
+    public function passes($attribute, $value): bool
     {
-        \ = preg_replace('/\D/', '', \);
+        $value = preg_replace('/\D/', '', $value);
 
-        if (strlen(\) === 11) {
-            \->type = 'CPF';
-            return \->validateCpf(\);
+        if (strlen($value) === 11) {
+            $this->type = 'CPF';
+            return $this->validateCpf($value);
         }
 
-        if (strlen(\) === 14) {
-            \->type = 'CNPJ';
-            return \->validateCnpj(\);
+        if (strlen($value) === 14) {
+            $this->type = 'CNPJ';
+            return $this->validateCnpj($value);
         }
 
         return false;
@@ -29,62 +29,62 @@ class DocumentRule implements Rule
 
     public function message(): string
     {
-        return "O :attribute informado não é um {\->type} válido.";
+        return "O :attribute informado não é um {$this->type} válido.";
     }
 
-    private function validateCpf(string \): bool
+    private function validateCpf(string $cpf): bool
     {
-        if (preg_match('/^(\d)\1{10}$/', \)) {
+        if (preg_match('/^(\d)\1{10}$/', $cpf)) {
             return false;
         }
 
-        \ = 0;
-        for (\ = 0; \ < 9; \++) {
-            \ += (int) \[\] * (10 - \);
+        $sum = 0;
+        for ($i = 0; $i < 9; $i++) {
+            $sum += (int) $cpf[$i] * (10 - $i);
         }
-        \ = \ % 11;
-        \ = \ < 2 ? 0 : 11 - \;
+        $remainder = $sum % 11;
+        $digit1 = $remainder < 2 ? 0 : 11 - $remainder;
 
-        if ((int) \[9] !== \) {
+        if ((int) $cpf[9] !== $digit1) {
             return false;
         }
 
-        \ = 0;
-        for (\ = 0; \ < 10; \++) {
-            \ += (int) \[\] * (11 - \);
+        $sum = 0;
+        for ($i = 0; $i < 10; $i++) {
+            $sum += (int) $cpf[$i] * (11 - $i);
         }
-        \ = \ % 11;
-        \ = \ < 2 ? 0 : 11 - \;
+        $remainder = $sum % 11;
+        $digit2 = $remainder < 2 ? 0 : 11 - $remainder;
 
-        return (int) \[10] === \;
+        return (int) $cpf[10] === $digit2;
     }
 
-    private function validateCnpj(string \): bool
+    private function validateCnpj(string $cnpj): bool
     {
-        if (preg_match('/^(\d)\1{13}$/', \)) {
+        if (preg_match('/^(\d)\1{13}$/', $cnpj)) {
             return false;
         }
 
-        \ = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-        \ = 0;
-        for (\ = 0; \ < 12; \++) {
-            \ += (int) \[\] * \[\];
+        $weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $sum = 0;
+        for ($i = 0; $i < 12; $i++) {
+            $sum += (int) $cnpj[$i] * $weights1[$i];
         }
-        \ = \ % 11;
-        \ = \ < 2 ? 0 : 11 - \;
+        $remainder = $sum % 11;
+        $digit1 = $remainder < 2 ? 0 : 11 - $remainder;
 
-        if ((int) \[12] !== \) {
+        if ((int) $cnpj[12] !== $digit1) {
             return false;
         }
 
-        \ = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-        \ = 0;
-        for (\ = 0; \ < 13; \++) {
-            \ += (int) \[\] * \[\];
+        $weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $sum = 0;
+        for ($i = 0; $i < 13; $i++) {
+            $sum += (int) $cnpj[$i] * $weights2[$i];
         }
-        \ = \ % 11;
-        \ = \ < 2 ? 0 : 11 - \;
+        $remainder = $sum % 11;
+        $digit2 = $remainder < 2 ? 0 : 11 - $remainder;
 
-        return (int) \[13] === \;
+        return (int) $cnpj[13] === $digit2;
     }
 }
