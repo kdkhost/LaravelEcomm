@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->loadGlobalHelpers();
     }
 
     /**
@@ -29,5 +29,20 @@ class AppServiceProvider extends ServiceProvider
         // Set default pagination view for admin panel
         // This ensures all pagination in admin panel uses the custom view
         LengthAwarePaginator::defaultView('pagination::admin-bootstrap-5');
+    }
+
+    private function loadGlobalHelpers(): void
+    {
+        $helpers = [
+            base_path('Modules/Front/Helpers/theme.php'),
+            base_path('app/Helpers/LocaleHelper.php'),
+            base_path('Modules/GeoLocalization/Helpers/GeoLocalizationHelper.php'),
+        ];
+
+        foreach ($helpers as $helper) {
+            if (is_file($helper)) {
+                require_once $helper;
+            }
+        }
     }
 }

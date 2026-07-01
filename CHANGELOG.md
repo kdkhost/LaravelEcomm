@@ -2,6 +2,18 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.1] - 2026-07-01
+
+### Corrigido
+- Corrigido erro 500 em producao causado por `Call to undefined function format_currency()` no tema modern.
+- Carregamento dos helpers globais de tema, locale e moeda tambem pelo `AppServiceProvider`, evitando dependencia exclusiva do autoload `files` do Composer em hospedagem cPanel.
+
+### Validacoes
+- `php -l app/Providers/AppServiceProvider.php`
+- `git diff --check`
+- `graphify update .`
+- `graphify update`
+
 ## [1.1.0] - 2026-07-01
 
 ### Adicionado
