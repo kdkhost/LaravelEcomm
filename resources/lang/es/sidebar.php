@@ -21,7 +21,7 @@ return [
     'add_shipping' => 'Add Shipping',
     'newsletters' => 'Newsletters',
     'add_newsletter' => 'Add Newsletter',
-        'cron' => 'Cron',
+    'cron' => 'Cron',
     'orders' => 'Orders',
     'reviews' => 'Reviews',
     'posts' => 'Posts',
@@ -34,7 +34,8 @@ return [
     'notifications' => 'Notifications',
     'blocked_ip' => 'Blocked IP',
     'activity_log' => 'Activity Log',
-        'languages' => 'Languages',
+    'appearance' => 'Apariencia',
+    'languages' => 'Languages',
     'translation' => 'Translation',
     'users' => 'Users',
     'roles' => 'Roles',
@@ -57,5 +58,4 @@ return [
     'page' => 'Page',
     'complaints' => 'Complaints',
     'attribute_groups' => 'Attribute groups',
-
 ];

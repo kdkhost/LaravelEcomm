@@ -55,6 +55,31 @@
     @include('front::layouts.head')
     {!! $schema ?? '' !!}
 
+    @php
+        $themeColors = [];
+        try {
+            $themeColors = app('settings')->theme_settings ?? [];
+        } catch (\Exception $e) {}
+        $primary = $themeColors['primary_color'] ?? '#4e73df';
+        $accent = $themeColors['accent_color'] ?? '#F7941D';
+        $footerBg = $themeColors['footer_bg'] ?? '#2d2d2d';
+        $bodyFont = $themeColors['body_font'] ?? 'Poppins, sans-serif';
+    @endphp
+    <style>
+        :root {
+            --primary-color: {{ $primary }};
+            --accent-color: {{ $accent }};
+            --footer-bg: {{ $footerBg }};
+            --body-font: {{ $bodyFont }};
+        }
+        body { font-family: var(--body-font); }
+        a:hover { color: var(--accent-color); }
+        .btn-primary { background-color: var(--accent-color) !important; border-color: var(--accent-color) !important; }
+        .btn-primary:hover { opacity: 0.9; }
+        .footer { background: var(--footer-bg) !important; }
+        .shop.shop .shop-content .product-item:hover .cart-btn { background: var(--accent-color); }
+    </style>
+
     <!-- RTL Support for Arabic -->
     @if(app()->getLocale() == 'ar')
         <style>

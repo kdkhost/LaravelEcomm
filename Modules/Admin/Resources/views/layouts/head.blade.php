@@ -18,4 +18,31 @@
     <link href="{{asset('backend/css/pagination.css')}}" rel="stylesheet">
     @stack('styles')
 
+    @php
+        $themeColors = [];
+        try {
+            $themeColors = app('settings')->theme_settings ?? [];
+        } catch (\Exception $e) {}
+        $primary = $themeColors['primary_color'] ?? '#4e73df';
+        $sidebarBg = $themeColors['sidebar_bg'] ?? '#4e73df';
+        $sidebarText = $themeColors['sidebar_text'] ?? '#ffffff';
+        $accent = $themeColors['accent_color'] ?? '#F7941D';
+        $headerBg = $themeColors['header_bg'] ?? '#ffffff';
+    @endphp
+    <style>
+        :root {
+            --primary-color: {{ $primary }};
+            --sidebar-bg: {{ $sidebarBg }};
+            --sidebar-text: {{ $sidebarText }};
+            --accent-color: {{ $accent }};
+            --header-bg: {{ $headerBg }};
+        }
+        .bg-gradient-primary { background: linear-gradient(180deg, var(--sidebar-bg) 0%, {{ $sidebarBg }}cc 100%) !important; }
+        .sidebar-dark .nav-item .nav-link { color: var(--sidebar-text) !important; }
+        .sidebar-dark .nav-item .nav-link i { color: var(--sidebar-text) !important; }
+        .btn-primary { background-color: var(--primary-color) !important; border-color: var(--primary-color) !important; }
+        a { color: var(--primary-color); }
+        .topbar { background: var(--header-bg) !important; }
+    </style>
+
 </head>

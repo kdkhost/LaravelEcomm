@@ -37,6 +37,11 @@ class LanguageController extends Controller
         // Generate new URL with updated locale
         $newUrl = $this->replaceLocaleInUrl($previousUrl, $lang);
 
+        // Flash success message in the new locale
+        $localeNames = config('app.locales', []);
+        $langName = $localeNames[$lang]['native'] ?? $lang;
+        Session::flash('success', "Idioma alterado para {$langName}.");
+
         return Redirect::to($newUrl);
     }
 

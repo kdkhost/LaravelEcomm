@@ -44,6 +44,10 @@ Route::middleware(EnsureSettingsExist::class)->group(function () {
     Route::get('settings/seo', [SeoSettingsController::class, 'index'])->name('settings.seo.index');
     Route::put('settings/seo/{setting}', [SeoSettingsController::class, 'update'])->name('settings.seo.update');
 
+    // Appearance / Theme Settings
+    Route::get('settings/appearance', [\Modules\Settings\Http\Controllers\ThemeSettingsController::class, 'index'])->name('settings.appearance.index');
+    Route::put('settings/appearance', [\Modules\Settings\Http\Controllers\ThemeSettingsController::class, 'update'])->name('settings.appearance.update');
+
     // Database Management (no migrations/seeds)
     Route::prefix('settings/database')->name('settings.database.')->group(function () {
         Route::get('/', [Modules\Settings\Http\Controllers\DatabaseManagementController::class, 'index'])->name('index');
