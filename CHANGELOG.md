@@ -20,6 +20,20 @@ Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portug
 - A foto da crianca nao e persistida no storage da loja; o processamento usa dados temporarios em memoria e envio ao provedor somente apos consentimento.
 - Quando a imagem da peca esta disponivel localmente pela Media Library, o servidor usa o arquivo local em vez de baixar uma URL publica.
 
+### Validacoes
+- `php -l Modules/Front/Services/VirtualTryOnAiService.php`
+- `php -l Modules/Front/Http/Controllers/VirtualTryOnController.php`
+- `php -l config/services.php`
+- `node --check public/frontend/js/rataplam-virtual-try-on.js`
+- `git diff --check`
+- Verificacao sem UTF-8 BOM nos arquivos alterados.
+- `graphify update .`
+- `graphify update`
+- Deploy remoto no cPanel com `optimize:clear`, `config:clear`, `route:clear` e `view:cache` executados com sucesso.
+- Rota `https://loja.km.site.nom.br/en/provador-virtual/status` validada com HTTP `200`, provedor Replicate, modelo `black-forest-labs/flux-kontext-pro`, GD disponivel e `configurado=false` ate configurar `REPLICATE_API_TOKEN`.
+- Pagina `https://loja.km.site.nom.br/en/provador-virtual/bermuda-andes` validada com HTTP `200`, bloco "Resultado IA real" e endpoint `/provador-virtual/processar`.
+- Assets `frontend/js/rataplam-virtual-try-on.js?v=20260701ia` e `frontend/css/rataplam-virtual-try-on.css?v=20260701ia` validados em producao com HTTP `200`.
+
 ### Observacoes
 - A geracao de imagem real depende de `REPLICATE_API_TOKEN` configurado no `.env` do servidor. Sem essa chave, a tela mostra o status pendente e nao dispara custo de IA.
 
