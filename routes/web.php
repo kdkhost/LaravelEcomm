@@ -78,9 +78,11 @@ if (!function_exists('getSafeDefaultLocale')) {
     }
 }
 
-// Redirect root to default locale
+// Serve homepage directly in default locale (pt-BR) without redirect
 Route::get('/', function () {
-    return redirect('/' . getSafeDefaultLocale());
+    app()->setLocale(getSafeDefaultLocale());
+    $controller = app(\Modules\Front\Http\Controllers\FrontController::class);
+    return $controller->index(app(\Modules\Front\Actions\IndexAction::class));
 });
 
 // Set default locale for URL generation
