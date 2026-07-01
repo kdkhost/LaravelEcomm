@@ -10,14 +10,22 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 ## [Não publicado]
 
 ### Adicionado
-- README e CHANGELOG em português brasileiro (pt-BR)
+- `.env.example` super completo em português com todas as variáveis documentadas
+- `.env.prod.example` completo em português para ambiente de produção cPanel
+- `.env` simplificado e robusto com `CACHE_STORE`, `LOG_LEVEL`, seções organizadas
+- `APP_TIMEZONE=America/Sao_Paulo` no `.env`
+- `DEBUGBAR_ENABLED=false` no `.env`
+
+### Alterado
+- Workflow definido: atualizações sempre nos 3 locais (local → GitHub → servidor)
+- CHANGELOG sempre atualizado a cada sessão
 
 ### Planejado
 - Testar fluxo completo de checkout MercadoPago (sandbox e produção)
-- Configurar servidor de produção e executar `deploy.sh`
 - Adicionar views faltantes se houver rotas quebradas
 - Implementar notificações de e-mail transacionais em português
 - Configurar cron jobs para processamento de carrinhos abandonados
+- Configurar fila (`QUEUE_CONNECTION=database`) no servidor
 
 ## [1.0.0] - 2026-06-30
 
