@@ -66,6 +66,7 @@ class BillingServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
         $this->app->singleton(\Modules\Billing\Services\WishlistService::class);
+        $this->app->singleton(\Modules\Billing\Services\MercadoPagoService::class);
     }
 
     /**

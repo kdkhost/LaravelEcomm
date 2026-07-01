@@ -454,7 +454,9 @@ $defaultAddress = $user?->defaultShippingAddress();
                                             <input name="payment_method" type="radio" value="paypal"> <label>
                                                 PayPal</label><br>
                                             <input name="payment_method" type="radio" value="stripe"> <label>
-                                                Stripe</label>
+                                                Stripe</label><br>
+                                            <input name="payment_method" type="radio" value="mercadopago"> <label>
+                                                MercadoPago</label>
                                         </form-group>
 
                                     </div>

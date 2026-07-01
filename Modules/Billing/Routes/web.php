@@ -19,6 +19,7 @@ use Modules\Billing\Http\Controllers\InvoiceController;
 use Modules\Billing\Http\Controllers\PaymentController;
 use Modules\Billing\Http\Controllers\PaypalController;
 use Modules\Billing\Http\Controllers\StripeController;
+use Modules\Billing\Http\Controllers\MercadoPagoController;
 use Modules\Billing\Http\Controllers\WishlistController;
 
 // theme_view() is loaded via composer autoload files
@@ -35,6 +36,13 @@ Route::get('payment/success', [PaypalController::class, 'success'])->name('payme
 // Stripe
 Route::get('stripe/{id}', [StripeController::class, 'stripe'])->name('stripe');
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+// MercadoPago
+Route::get('mercadopago/checkout', [MercadoPagoController::class, 'checkout'])->name('mercadopago.checkout');
+Route::get('mercadopago/success', [MercadoPagoController::class, 'success'])->name('mercadopago.success');
+Route::get('mercadopago/failure', [MercadoPagoController::class, 'failure'])->name('mercadopago.failure');
+Route::get('mercadopago/pending', [MercadoPagoController::class, 'pending'])->name('mercadopago.pending');
+Route::post('mercadopago/webhook', [MercadoPagoController::class, 'webhook'])->name('mercadopago.webhook');
+Route::post('mercadopago/refund/{orderId}', [MercadoPagoController::class, 'refund'])->name('mercadopago.refund');
 
 // Billing History (User)
 Route::middleware(['auth'])->group(function () {

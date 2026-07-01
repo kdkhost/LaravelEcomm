@@ -90,6 +90,12 @@ class ProcessCheckoutAction
             return redirect()->route('stripe', Auth::id());
         }
 
+        if ($paymentMethod === 'mercadopago') {
+            session()->put('pending_order', $orderData);
+
+            return redirect()->route('mercadopago.checkout');
+        }
+
         // COD — create order immediately
         $order = $this->storeOrderAction->execute(OrderDTO::fromArray($orderData));
 

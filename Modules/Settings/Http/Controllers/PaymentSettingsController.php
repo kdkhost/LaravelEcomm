@@ -51,6 +51,9 @@ class PaymentSettingsController extends Controller
             'cod_enabled' => 'boolean',
             'bank_transfer_enabled' => 'boolean',
             'bank_account_details' => 'nullable|string',
+            'mercadopago_enabled' => 'boolean',
+            'mercadopago_access_token' => 'nullable|string|max:255',
+            'mercadopago_mode' => 'nullable|in:sandbox,live',
         ]);
 
         $this->updatePaymentSettingsAction->execute($setting, $validated);

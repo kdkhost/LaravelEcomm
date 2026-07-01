@@ -152,6 +152,12 @@ return [
             'flag' => '🇸🇦',
             'rtl' => true,
         ],
+        'pt' => [
+            'name' => 'Portuguese',
+            'native' => 'Português',
+            'flag' => '🇧🇷',
+            'rtl' => false,
+        ],
     ],
 
     /*

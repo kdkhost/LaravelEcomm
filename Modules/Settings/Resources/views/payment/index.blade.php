@@ -76,6 +76,31 @@
                                 </select>
                             </div>
 
+                            <h4 class="mt-4">MercadoPago Settings</h4>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="mercadopago_enabled" 
+                                           name="mercadopago_enabled" value="1" 
+                                           {{ ($paymentSettings['mercadopago_enabled'] ?? false) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="mercadopago_enabled">
+                                        Habilitar MercadoPago
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mercadopago_access_token">MercadoPago Access Token</label>
+                                <input type="password" class="form-control" id="mercadopago_access_token" 
+                                       name="mercadopago_access_token" 
+                                       value="{{ $paymentSettings['mercadopago_access_token'] ?? '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="mercadopago_mode">Modo</label>
+                                <select class="form-control" id="mercadopago_mode" name="mercadopago_mode">
+                                    <option value="sandbox" {{ ($paymentSettings['mercadopago_mode'] ?? 'sandbox') == 'sandbox' ? 'selected' : '' }}>Sandbox</option>
+                                    <option value="live" {{ ($paymentSettings['mercadopago_mode'] ?? '') == 'live' ? 'selected' : '' }}>Produção</option>
+                                </select>
+                            </div>
+
                             <h4 class="mt-4">Other Payment Methods</h4>
                             <div class="form-group">
                                 <div class="form-check">

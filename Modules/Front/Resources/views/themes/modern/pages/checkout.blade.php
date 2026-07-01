@@ -179,6 +179,12 @@ $subtotal = Helper::totalCartPrice();
                                         <i class="fa fa-paypal pr-10"></i> PayPal
                                     </label>
                                 </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="payment_method" value="mercadopago">
+                                        <i class="fa fa-credit-card pr-10"></i> MercadoPago
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </fieldset>

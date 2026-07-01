@@ -17,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         App\Providers\ActivityLoggerServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+            'mercadopago/webhook',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
