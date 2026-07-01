@@ -1,72 +1,108 @@
 #!/bin/bash
 # =============================================================================
-# DEPLOY SCRIPT FOR PRODUCTION
+# Script de Deploy para cPanel / WHM
 # =============================================================================
-# Употреба: ./deploy.sh
-#
-# Напомена: Cloudflare тунелот е централизиран во /root/cloudflare-tunnel/
-# и не е дел од овој compose.
+# Uso: bash deploy.sh
+# Execute na raiz do projeto após fazer upload dos arquivos via Git ou FTP.
 # =============================================================================
 
 set -e
 
-echo "🚀 Starting deployment to production..."
-echo ""
+echo "========================================"
+echo "  Iniciando deploy da Loja Rataplam..."
+echo "========================================"
 
-# Провери дали сме на продукција
-if [ -f ".env.prod" ]; then
-    echo "✓ Production environment detected (.env.prod found)"
-    ENV_FILE=".env.prod"
-else
-    echo "⚠️  Warning: .env.prod not found, using .env"
-    ENV_FILE=".env"
+# 1. Verificar PHP
+if ! command -v php &> /dev/null; then
+    echo "[ERRO] PHP não encontrado. Verifique se o PHP está instalado."
+    exit 1
 fi
 
-# Копирај го prod env во .env за Docker
-cp $ENV_FILE .env
-echo "✓ Environment file copied"
+echo "[OK] PHP $(php -r 'echo PHP_VERSION;')"
 
+# 2. Verificar composer
+if ! command -v composer &> /dev/null; then
+    echo "[AVISO] Composer não encontrado. Instale via cPanel ou manualmente."
+    echo "  curl -sS https://getcomposer.org/installer | php"
+    echo "  mv composer.phar ~/bin/composer"
+fi
+
+# 3. Instalar dependências (sem dev)
+if command -v composer &> /dev/null; then
+    echo "[INFO] Instalando dependências (production)..."
+    composer install --no-dev --optimize-autoloader --no-interaction
+fi
+
+# 4. Verificar/criar .env
+if [ ! -f .env ]; then
+    echo "[INFO] .env não encontrado. Copiando .env.example..."
+    cp .env.example .env
+    echo "[ATENÇÃO] Edite o .env com as configurações do seu banco MySQL!"
+    echo "  DB_CONNECTION=mysql"
+    echo "  DB_DATABASE=..."
+    echo "  DB_USERNAME=..."
+    echo "  DB_PASSWORD=..."
+    echo "  APP_URL=https://seudominio.com.br"
+    echo "  APP_ENV=production"
+    echo "  APP_DEBUG=false"
+    exit 1
+fi
+
+# 5. Gerar APP_KEY se vazio
+APP_KEY=$(grep ^APP_KEY= .env | cut -d= -f2)
+if [ -z "$APP_KEY" ]; then
+    echo "[INFO] Gerando APP_KEY..."
+    php artisan key:generate --force
+fi
+
+# 6. Permissões (storage + bootstrap/cache)
+echo "[INFO] Ajustando permissões..."
+chmod -R 775 storage bootstrap/cache
+chmod -R 775 public/assets public/frontend 2>/dev/null || true
+
+# 7. Cache
+echo "[INFO] Limpando caches..."
+php artisan optimize:clear 2>/dev/null || true
+
+# 8. Migrations
+echo "[INFO] Rodando migrations..."
+php artisan migrate --force
+
+# 9. Seeders (apenas se tabelas vazias)
+USERS=$(php -r "echo \\Modules\\User\\Models\\User::count();" 2>/dev/null || echo "0")
+if [ "$USERS" = "0" ]; then
+    echo "[INFO] Banco vazio — rodando seeders..."
+    php artisan db:seed --force
+fi
+
+# 10. Cache de produção
+echo "[INFO] Compilando assets de produção..."
+php artisan config:cache
+php artisan event:cache
+php artisan route:cache
+php artisan view:cache
+
+# 11. Link simbólico storage (se não existir)
+if [ ! -L public/storage ]; then
+    echo "[INFO] Criando link simbólico storage..."
+    php artisan storage:link 2>/dev/null || true
+fi
+
+# 12. MercadoPago config check
+MP_TOKEN=$(grep ^MERCADO_PAGO_ACCESS_TOKEN= .env | cut -d= -f2)
+if [ -z "$MP_TOKEN" ]; then
+    echo "[AVISO] MERCADO_PAGO_ACCESS_TOKEN está vazio."
+    echo "  Configure no .env ou pelo admin em Configurações > Pagamentos > MercadoPago."
+fi
+
+echo "========================================"
+echo "  Deploy concluído!"
+echo "========================================"
 echo ""
-echo "📦 Pulling latest changes from git..."
-git pull origin main 2>/dev/null || echo "⚠️  No git remote or already up to date"
-
-echo ""
-echo "🐳 Building and starting containers..."
-docker compose -f docker-compose.prod.yml down --remove-orphans
-docker compose -f docker-compose.prod.yml pull
-docker compose -f docker-compose.prod.yml up -d --build
-
-echo ""
-echo "⏳ Waiting for services to start..."
-sleep 10
-
-echo ""
-echo "🔧 Running Laravel optimizations..."
-
-# Миграции
-docker compose -f docker-compose.prod.yml exec -T app php artisan migrate --force 2>/dev/null || echo "⚠️  Migration skipped (may already be up to date)"
-
-# Кеширање на конфигурација, рути и views
-docker compose -f docker-compose.prod.yml exec -T app php artisan config:cache
-docker compose -f docker-compose.prod.yml exec -T app php artisan route:cache
-docker compose -f docker-compose.prod.yml exec -T app php artisan view:cache
-docker compose -f docker-compose.prod.yml exec -T app php artisan event:cache
-
-# Чистење на стари кешови
-docker compose -f docker-compose.prod.yml exec -T app php artisan cache:clear 2>/dev/null || true
-docker compose -f docker-compose.prod.yml exec -T app php artisan optimize:clear 2>/dev/null || true
-
-echo ""
-echo "🔒 Setting permissions..."
-docker compose -f docker-compose.prod.yml exec -T app chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
-docker compose -f docker-compose.prod.yml exec -T app chmod -R 775 storage bootstrap/cache 2>/dev/null || true
-
-echo ""
-echo "✅ Deployment complete!"
-echo ""
-echo "📊 Service status:"
-docker compose -f docker-compose.prod.yml ps
-
-echo ""
-echo "🌐 Website: https://e-comm.mk"
-echo "📋 Logs: docker compose -f docker-compose.prod.yml logs -f"
+echo "Próximos passos:"
+echo "  1. Acesse https://seudominio.com.br/admin para configurar a loja"
+echo "  2. Configure o webhook do MercadoPago:"
+echo "     URL: https://seudominio.com.br/mercadopago/webhook"
+echo "     Eventos: payment"
+echo "  3. Edite .env se necessário:"
+echo "     APP_URL, MAIL_*, MERCADO_PAGO_*, etc."
