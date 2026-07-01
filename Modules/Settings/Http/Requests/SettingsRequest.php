@@ -475,7 +475,7 @@ class SettingsRequest extends BaseRequest
             // Validate currency
             if ($this->filled('currency')) {
                 $currency = $this->currency;
-                $validCurrencies = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD'];
+                $validCurrencies = ['BRL', 'USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD'];
 
                 if (! in_array($currency, $validCurrencies)) {
                     $validator->errors()->add(

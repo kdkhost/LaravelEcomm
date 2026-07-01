@@ -5,7 +5,7 @@ $defaultAddress = $user?->defaultShippingAddress();
 @endphp
 @extends('front::layouts.master')
 
-@section('title','Checkout page')
+@section('title','Finalizar Compra')
 
 @section('content')
 
@@ -16,8 +16,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0)">Checkout</a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0)">Finalizar Compra</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,13 +34,13 @@ $defaultAddress = $user?->defaultShippingAddress();
                 <div class="row">
                     <div class="col-lg-8 col-12">
                         <div class="checkout-form">
-                            <h2>Make Your Checkout Here</h2>
-                            <p>Please register in order to checkout more quickly</p>
+                            <h2>Finalize seu Pedido</h2>
+                            <p>Preencha seus dados para finalizar a compra</p>
                             <!-- Form -->
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>First Name<span>*</span></label>
+                                        <label>Nome<span>*</span></label>
                                         <input type="text" name="first_name" placeholder=""
                                                value="{{old('first_name', $defaultAddress?->first_name)}}">
                                         @error('first_name')
@@ -50,7 +50,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Last Name<span>*</span></label>
+                                        <label>Sobrenome<span>*</span></label>
                                         <input type="text" name="last_name" placeholder="" value="{{old('last_name', $defaultAddress?->last_name)}}">
                                         @error('last_name')
                                         <span class='text-danger'>{{$message}}</span>
@@ -59,7 +59,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Email Address<span>*</span></label>
+                                        <label>E-mail<span>*</span></label>
                                         <input type="email" name="email" placeholder="" value="{{old('email', $defaultAddress?->email ?? $user?->email)}}">
                                         @error('email')
                                         <span class='text-danger'>{{$message}}</span>
@@ -68,8 +68,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Phone Number <span>*</span></label>
-                                        <input type="number" name="phone" placeholder="" required
+                                        <label>Telefone <span>*</span></label>
+                                        <input type="text" name="phone" placeholder="(00) 00000-0000" required
                                                value="{{old('phone', $defaultAddress?->phone)}}">
                                         @error('phone')
                                         <span class='text-danger'>{{$message}}</span>
@@ -78,10 +78,10 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Country<span>*</span></label>
+                                        <label>País<span>*</span></label>
                                         <select name="country" id="country">
                                             @php
-                                                $selectedCountry = old('country', $defaultAddress?->country ?? 'MK');
+                                                $selectedCountry = old('country', $defaultAddress?->country ?? 'BR');
                                             @endphp
                                             <option value="AF" {{ $selectedCountry == 'AF' ? 'selected' : '' }}>Afghanistan</option>
                                             <option value="AX">Åland Islands</option>
@@ -113,7 +113,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                             <option value="BA">Bosnia and Herzegovina</option>
                                             <option value="BW">Botswana</option>
                                             <option value="BV">Bouvet Island</option>
-                                            <option value="BR">Brazil</option>
+                                            <option value="BR" {{ $selectedCountry == 'BR' ? 'selected' : '' }}>Brazil</option>
                                             <option value="IO">British Indian Ocean Territory</option>
                                             <option value="VG">British Virgin Islands</option>
                                             <option value="BN">Brunei</option>
@@ -334,7 +334,16 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Address Line 1<span>*</span></label>
+                                        <label>Cidade<span>*</span></label>
+                                        <input type="text" name="city" placeholder="" value="{{old('city', $defaultAddress?->city)}}">
+                                        @error('city')
+                                        <span class='text-danger'>{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Endereço<span>*</span></label>
                                         <input type="text" name="address1" placeholder="" value="{{old('address1', $defaultAddress?->address1)}}">
                                         @error('address1')
                                         <span class='text-danger'>{{$message}}</span>
@@ -343,7 +352,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Address Line 2</label>
+                                        <label>Complemento</label>
                                         <input type="text" name="address2" placeholder="" value="{{old('address2', $defaultAddress?->address2)}}">
                                         @error('address2')
                                         <span class='text-danger'>{{$message}}</span>
@@ -352,9 +361,78 @@ $defaultAddress = $user?->defaultShippingAddress();
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
-                                        <label>Postal Code</label>
+                                        <label>CEP</label>
                                         <input type="text" name="post_code" placeholder="" value="{{old('post_code', $defaultAddress?->post_code)}}">
                                         @error('post_code')
+                                        <span class='text-danger'>{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- CPF/CNPJ -->
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>CPF / CNPJ <span>*</span></label>
+                                        <input type="text" name="document" placeholder="000.000.000-00" value="{{old('document')}}">
+                                        @error('document')
+                                        <span class='text-danger'>{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- Estado / UF -->
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Estado (UF) <span>*</span></label>
+                                        <select name="state">
+                                            <option value="">Selecione...</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                        </select>
+                                        @error('state')
+                                        <span class='text-danger'>{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- Bairro -->
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Bairro <span>*</span></label>
+                                        <input type="text" name="neighborhood" placeholder="Bairro" value="{{old('neighborhood')}}">
+                                        @error('neighborhood')
+                                        <span class='text-danger'>{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- Número -->
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Número <span>*</span></label>
+                                        <input type="text" name="number" placeholder="Nº" value="{{old('number')}}">
+                                        @error('number')
                                         <span class='text-danger'>{{$message}}</span>
                                         @enderror
                                     </div>
@@ -365,7 +443,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
                                             <input type="checkbox" name="save_address" value="1" style="width: auto;"> 
-                                            Save this address to my address book
+                                            Salvar este endereço na minha conta
                                         </label>
                                     </div>
                                 </div>
@@ -373,7 +451,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
                                             <input type="checkbox" name="make_default_address" value="1" style="width: auto;"> 
-                                            Make this my default shipping address
+                                            Definir como endereço padrão
                                         </label>
                                     </div>
                                 </div>
@@ -387,32 +465,31 @@ $defaultAddress = $user?->defaultShippingAddress();
                         <div class="order-details">
                             <!-- Order Widget -->
                             <div class="single-widget">
-                                <h2>CART TOTALS</h2>
+                                <h2>RESUMO DO PEDIDO</h2>
                                 <div class="content">
                                     <ul>
                                         <li class="order_subtotal"
-                                            data-price="{{Helper::totalCartPrice()}}">Cart
-                                            Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span>
+                                            data-price="{{Helper::totalCartPrice()}}">Subtotal<span>R$ {{number_format(Helper::totalCartPrice(),2)}}</span>
                                         </li>
                                         <li class="shipping">
-                                            Shipping Cost
+                                            Frete
                                             @if(count(Helper::shipping())>0 && Helper::cartCount()>0)
                                                 <select name="shipping" class="nice-select">
-                                                    <option value="">Select your address</option>
+                                                    <option value="">Selecione o frete</option>
                                                     @foreach(Helper::shipping() as $shipping)
                                                         <option value="{{$shipping->id}}" class="shippingOption"
                                                                 data-price="{{$shipping->price}}">{{$shipping->type}}
-                                                            : ${{$shipping->price}}</option>
+                                                            : R$ {{$shipping->price}}</option>
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <span>Free</span>
+                                                <span>Grátis</span>
                                             @endif
                                         </li>
 
                                         @if(session('coupon'))
-                                            <li class="coupon_price" data-price="{{session('coupon')['value']}}">You
-                                                Save<span>${{number_format(session('coupon')['value'],2)}}</span></li>
+                                            <li class="coupon_price" data-price="{{session('coupon')['value']}}">Você
+                                                Economiza<span>R$ {{number_format(session('coupon')['value'],2)}}</span></li>
                                         @endif
                                         @php
                                             $total_amount=Helper::totalCartPrice();
@@ -422,10 +499,10 @@ $defaultAddress = $user?->defaultShippingAddress();
                                         @endphp
                                         @if(session('coupon'))
                                             <li class="last" id="order_total_price">
-                                                Total<span>${{number_format($total_amount,2)}}</span></li>
+                                                Total<span>R$ {{number_format($total_amount,2)}}</span></li>
                                         @else
                                             <li class="last" id="order_total_price">
-                                                Total<span>${{number_format($total_amount,2)}}</span></li>
+                                                Total<span>R$ {{number_format($total_amount,2)}}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -433,13 +510,13 @@ $defaultAddress = $user?->defaultShippingAddress();
                             <!--/ End Order Widget -->
                             <!-- Order Widget -->
                             <div class="single-widget">
-                                <h2>Payments</h2>
+                                <h2>Pagamento</h2>
                                 <div class="content">
                                     <div class="checkbox">
                                         {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                         <form-group>
-                                            <input name="payment_method" type="radio" value="cod"> <label> Cash On
-                                                Delivery</label><br>
+                                            <input name="payment_method" type="radio" value="cod"> <label> Pagar na
+                                                Entrega</label><br>
                                             <input name="payment_method" type="radio" value="paypal"> <label>
                                                 PayPal</label><br>
                                             <input name="payment_method" type="radio" value="stripe"> <label>
@@ -463,7 +540,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                             <div class="single-widget get-button">
                                 <div class="content">
                                     <div class="button">
-                                        <button type="submit" class="btn">proceed to checkout</button>
+                                        <button type="submit" class="btn">Finalizar Pedido</button>
                                     </div>
                                 </div>
                             </div>
@@ -484,8 +561,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>Frete Grátis</h4>
+                        <p>Pedidos acima de R$ 100</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -493,8 +570,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>Troca Grátis</h4>
+                        <p>Em até 30 dias</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -502,8 +579,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Pagamento Seguro</h4>
+                        <p>100% seguro</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -511,8 +588,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>Melhor Preço</h4>
+                        <p>Preço garantido</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -530,10 +607,10 @@ $defaultAddress = $user?->defaultShippingAddress();
                         <!-- Start Newsletter Inner -->
                         <div class="inner">
                             <h4>Newsletter</h4>
-                            <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                            <p> Assine nossa newsletter e ganhe <span>10%</span> na sua primeira compra</p>
                             <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-                                <input name="EMAIL" placeholder="Your email address" required="" type="email">
-                                <button class="btn">Subscribe</button>
+                                <input name="EMAIL" placeholder="Seu e-mail" required="" type="email">
+                                <button class="btn">Inscrever</button>
                             </form>
                         </div>
                         <!-- End Newsletter Inner -->
@@ -624,11 +701,28 @@ $defaultAddress = $user?->defaultShippingAddress();
                 let subtotal = parseFloat($('.order_subtotal').data('price'));
                 let coupon = parseFloat($('.coupon_price').data('price')) || 0;
                 // alert(coupon);
-                $('#order_total_price span').text('$' + (subtotal + cost - coupon).toFixed(2));
+                $('#order_total_price span').text('R$ ' + (subtotal + cost - coupon).toFixed(2));
             });
 
         });
 
+    </script>
+
+    <script src="{{asset('frontend/js/jquery.mask.min.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+        var maskBehavior = function(val) {
+            return val.replace(/\D/g, '').length <= 11 ? '000.000.000-009' : '00.000.000/0000-00';
+        },
+        spOptions = {
+            onKeyPress: function(val, e, field, options) {
+                field.mask(maskBehavior.apply({}, arguments), options);
+            }
+        };
+        $('input[name="document"]').mask(maskBehavior, spOptions);
+        $('input[name="phone"]').mask('(00) 00000-0000');
+        $('input[name="post_code"]').mask('00000-000');
+    });
     </script>
 
 @endpush

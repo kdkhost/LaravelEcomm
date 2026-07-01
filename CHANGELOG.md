@@ -13,23 +13,44 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 - `.env.example` super completo em português com todas as variáveis documentadas
 - `.env.prod.example` completo em português para ambiente de produção cPanel
 - `.env` simplificado e robusto com `CACHE_STORE`, `LOG_LEVEL`, seções organizadas
-- `APP_TIMEZONE=America/Sao_Paulo` no `.env`
-- `DEBUGBAR_ENABLED=false` no `.env`
+- `APP_TIMEZONE=America/Sao_Paulo`, `APP_CURRENCY=BRL`, `APP_CURRENCY_SYMBOL=R$` no `.env`
 - `.htaccess` na raiz do repositório (rewrite para `public/` + PHP 8.4 handler)
+- Língua `pt` no `LanguageDatabaseSeeder` (Português como padrão)
+- `currency_symbol` e `default_currency` em `config/app.php` (BRL, R$)
+- Moeda BRL nos gateways: PayPal (`config/paypal.php`), Stripe (`config/stripe.php`)
+- BRL no `CurrencyService` (símbolo R$, taxas, moeda base, moedas disponíveis)
+- BRL no `GeoIpService` (moeda padrão para localização geográfica)
+- BRL nas moedas válidas do `SettingsRequest`
+- `resources/lang/pt/messages.php` — cupom com R$ em vez de $
+- `public/frontend/js/jquery.mask.min.js` — plugin de máscaras jQuery Mask v1.14.16
 
 ### Alterado
 - Workflow definido: atualizações sempre nos 3 locais (local → GitHub → servidor)
 - CHANGELOG sempre atualizado a cada sessão
+- **Checkout (3 temas)** totalmente em português brasileiro:
+  - Labels traduzidas (Nome, Sobrenome, E-mail, Telefone, CPF/CNPJ, CEP, Endereço, etc.)
+  - Moeda alterada de `$` para `R$` em todos os preços e totais
+  - Campos brasileiros adicionados: CPF/CNPJ (com máscara automática), Estado/UF (dropdown completo), Bairro, Número
+  - País padrão alterado de MK (Macedônia) para BR (Brasil)
+  - Telefone alterado de `type="number"` para `type="text"` (com máscara)
+  - Máscaras JavaScript para CPF/CNPJ, telefone `(00) 00000-0000` e CEP `00000-000`
+  - jQuery Mask Plugin incluído nos scripts do checkout
+- `config/app.php`: `'timezone'` agora lê de `env('APP_TIMEZONE', 'America/Sao_Paulo')`
 
 ### Corrigido
 - Site `loja.km.site.nom.br` retornando 404 — `.htaccess` foi perdido durante `git reset --hard origin/main` no servidor (estava em commit local não enviado). Recriado e adicionado ao repositório para não se perder novamente.
 
+### MercadoPago
+- Já implementado nas sessões anteriores: Service, Controller (6 endpoints), DTO, Action, rotas, views admin, CSRF exclusion, `config/mercadopago.php`
+- Moeda já configurada como BRL no Service e DTO
+- Rotas funcionais: checkout, success, failure, pending, webhook, refund
+- Opção de pagamento MercadoPago presente nos 3 temas de checkout
+
 ### Planejado
 - Testar fluxo completo de checkout MercadoPago (sandbox e produção)
-- Adicionar views faltantes se houver rotas quebradas
 - Implementar notificações de e-mail transacionais em português
-- Configurar cron jobs para processamento de carrinhos abandonados
-- Configurar fila (`QUEUE_CONNECTION=database`) no servidor
+- Configurar cron jobs para processamento de carrinhos abandonados e fila
+- Adicionar validação server-side de CPF/CNPJ no backend
 
 ## [1.0.0] - 2026-06-30
 

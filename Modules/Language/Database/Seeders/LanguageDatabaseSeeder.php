@@ -17,7 +17,7 @@ class LanguageDatabaseSeeder extends Seeder
                 'name' => 'English',
                 'native_name' => 'English',
                 'flag' => '🇬🇧',
-                'is_default' => true,
+                'is_default' => false,
                 'is_active' => true,
                 'direction' => 'ltr',
                 'sort_order' => 1,
@@ -51,6 +51,16 @@ class LanguageDatabaseSeeder extends Seeder
                 'is_active' => true,
                 'direction' => 'ltr',
                 'sort_order' => 4,
+            ],
+            [
+                'code' => 'pt',
+                'name' => 'Portuguese',
+                'native_name' => 'Português',
+                'flag' => '🇧🇷',
+                'is_default' => true,
+                'is_active' => true,
+                'direction' => 'ltr',
+                'sort_order' => 0,
             ],
         ];
 

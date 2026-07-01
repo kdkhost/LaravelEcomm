@@ -15,7 +15,7 @@ class CurrencyService
 
     public function __construct()
     {
-        $this->baseCurrency = config('geolocalization.base_currency', 'USD');
+        $this->baseCurrency = config('geolocalization.base_currency', 'BRL');
         $this->provider = config('geolocalization.currency_provider', 'exchangerate-api');
     }
 
@@ -165,7 +165,7 @@ class CurrencyService
      */
     public function getCurrentCurrency(): string
     {
-        return session('currency', config('app.default_currency', 'USD'));
+        return session('currency', config('app.default_currency', 'BRL'));
     }
 
     /**
@@ -193,6 +193,7 @@ class CurrencyService
     public function getCurrencySymbol(string $currency): string
     {
         $symbols = [
+            'BRL' => 'R$',
             'USD' => '$',
             'EUR' => '€',
             'GBP' => '£',
@@ -228,9 +229,8 @@ class CurrencyService
     public function getAvailableCurrencies(): array
     {
         return [
+            'BRL' => 'Brazilian Real (R$)',
             'USD' => 'US Dollar',
-            'EUR' => 'Euro',
-            'GBP' => 'British Pound',
             'JPY' => 'Japanese Yen',
             'CNY' => 'Chinese Yuan',
             'CAD' => 'Canadian Dollar',
@@ -260,8 +260,8 @@ class CurrencyService
     private function getDefaultRates(): array
     {
         return [
-            'USD' => 1.0,
-            'EUR' => 0.85,
+            'BRL' => 1.0,
+            'USD' => 0.19,
             'GBP' => 0.73,
             'JPY' => 110.0,
             'CNY' => 6.45,

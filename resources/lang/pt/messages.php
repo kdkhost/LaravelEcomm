@@ -47,7 +47,7 @@ return [
         'usage_limit_reached' => 'Este cupom atingiu o limite de uso.',
         'usage_limit_per_user_reached' => 'Você já usou este cupom o número máximo de vezes.',
         'not_applicable_to_customer' => 'Este cupom não é aplicável à sua conta.',
-        'minimum_amount_not_met' => 'Valor mínimo do pedido de $:amount é necessário para usar este cupom.',
+        'minimum_amount_not_met' => 'Valor mínimo do pedido de R$ :amount é necessário para usar este cupom.',
         'no_applicable_products' => 'Nenhum dos itens no seu carrinho é elegível para este cupom.',
         'cart_empty' => 'Seu carrinho está vazio.',
         'no_discount_applicable' => 'Este cupom não pode ser aplicado ao seu carrinho atual.',

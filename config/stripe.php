@@ -15,5 +15,5 @@ return [
         'client_secret' => env('STRIPE_LIVE_SECRET', ''),
     ],
     
-    'currency' => env('STRIPE_CURRENCY', 'usd'),
+    'currency' => env('STRIPE_CURRENCY', 'brl'),
 ];

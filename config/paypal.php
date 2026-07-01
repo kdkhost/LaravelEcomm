@@ -15,7 +15,7 @@ return [
         'client_secret' => env('PAYPAL_LIVE_CLIENT_SECRET', ''),
     ],
     
-    'currency' => env('PAYPAL_CURRENCY', 'USD'),
+    'currency' => env('PAYPAL_CURRENCY', 'BRL'),
     
     'notify_url' => env('PAYPAL_NOTIFY_URL', ''),
 ];

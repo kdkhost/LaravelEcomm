@@ -219,7 +219,7 @@ readonly class GeoIpService
             latitude: null,
             longitude: null,
             timezone: config('app.timezone', 'UTC'),
-            currency: config('app.default_currency', 'USD'),
+            currency: config('app.default_currency', 'BRL'),
             isEu: false,
             isp: null,
             connectionType: null,

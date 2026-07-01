@@ -80,7 +80,10 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'America/Sao_Paulo'),
+
+    'default_currency' => env('APP_CURRENCY', 'BRL'),
+    'currency_symbol' => env('APP_CURRENCY_SYMBOL', 'R$'),
 
     /*
     |--------------------------------------------------------------------------
