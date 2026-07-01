@@ -1,33 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 @include('admin::layouts.head')
-<body id="page-top">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed adminlte-shell">
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+<div class="wrapper">
 
-    <!-- Sidebar -->
     @include('admin::layouts.sidebar')
-    <!-- End of Sidebar -->
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-            <!-- Topbar -->
-            @include('admin::layouts.header')
+    <div class="content-wrapper shell-content-wrapper">
+        @include('admin::layouts.header')
 
-            <!-- End of Topbar -->
+        <section class="content pt-3">
             @include('core::notification')
-            <!-- Begin Page Content -->
             @yield('content')
+        </section>
+    </div>
 
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-@include('admin::layouts.footer')
+    @include('admin::layouts.footer')
+</div>
 
 </body>
-
 </html>

@@ -106,72 +106,94 @@ class SystemController extends Controller
     /**
      * Enable maintenance mode
      */
-    public function enableMaintenance(Request $request): RedirectResponse
+    public function enableMaintenance(Request $request): JsonResponse|RedirectResponse
     {
         $secret = $request->input('secret', bin2hex(random_bytes(16)));
         Artisan::call('down', ['--secret' => $secret]);
 
-        return redirect()->back()->with('success', 'Maintenance mode enabled. Secret: '.$secret);
+        return $this->respondSuccess(
+            $request,
+            'Modo de manutencao ativado. Chave de acesso: '.$secret,
+            ['secret' => $secret]
+        );
     }
 
     /**
      * Disable maintenance mode
      */
-    public function disableMaintenance(): RedirectResponse
+    public function disableMaintenance(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('up');
 
-        return redirect()->back()->with('success', 'Maintenance mode disabled');
+        return $this->respondSuccess($request, 'Modo de manutencao desativado.');
     }
 
     /**
      * Clear application cache
      */
-    public function clearCache(): RedirectResponse
+    public function clearCache(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('cache:clear');
 
-        return redirect()->back()->with('success', 'Application cache cleared');
+        return $this->respondSuccess($request, 'Cache da aplicacao limpo com sucesso.');
     }
 
     /**
      * Clear config cache
      */
-    public function clearConfig(): RedirectResponse
+    public function clearConfig(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('config:clear');
 
-        return redirect()->back()->with('success', 'Config cache cleared');
+        return $this->respondSuccess($request, 'Cache de configuracao limpo com sucesso.');
     }
 
     /**
      * Clear route cache
      */
-    public function clearRoute(): RedirectResponse
+    public function clearRoute(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('route:clear');
 
-        return redirect()->back()->with('success', 'Route cache cleared');
+        return $this->respondSuccess($request, 'Cache de rotas limpo com sucesso.');
     }
 
     /**
      * Clear view cache
      */
-    public function clearView(): RedirectResponse
+    public function clearView(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('view:clear');
 
-        return redirect()->back()->with('success', 'View cache cleared');
+        return $this->respondSuccess($request, 'Cache de views limpo com sucesso.');
     }
 
     /**
      * Clear all caches
      */
-    public function clearAll(): RedirectResponse
+    public function clearAll(Request $request): JsonResponse|RedirectResponse
     {
         Artisan::call('optimize:clear');
 
-        return redirect()->back()->with('success', 'All caches cleared');
+        return $this->respondSuccess($request, 'Todos os caches foram limpos com sucesso.');
+    }
+
+    /**
+     * Generate SEO sitemap
+     */
+    public function generateSitemap(Request $request): JsonResponse|RedirectResponse
+    {
+        try {
+            Artisan::call('seo:generate-sitemap');
+
+            return $this->respondSuccess(
+                $request,
+                'Sitemap gerado com sucesso.',
+                ['output' => trim(Artisan::output())]
+            );
+        } catch (Exception $e) {
+            return $this->respondError($request, 'Falha ao gerar sitemap: '.$e->getMessage());
+        }
     }
 
     /**
@@ -459,5 +481,29 @@ class SystemController extends Controller
         } catch (Exception $e) {
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
+    }
+
+    private function respondSuccess(Request $request, string $message, array $payload = []): JsonResponse|RedirectResponse
+    {
+        if ($request->expectsJson() || $request->wantsJson() || $request->ajax()) {
+            return response()->json(array_merge([
+                'success' => true,
+                'message' => $message,
+            ], $payload));
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
+
+    private function respondError(Request $request, string $message, int $status = 500): JsonResponse|RedirectResponse
+    {
+        if ($request->expectsJson() || $request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => false,
+                'message' => $message,
+            ], $status);
+        }
+
+        return redirect()->back()->with('error', $message);
     }
 }

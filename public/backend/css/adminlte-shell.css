@@ -1,0 +1,300 @@
+:root {
+    --admin-primary: #1f4ed8;
+    --admin-primary-dark: #1739a6;
+    --admin-sidebar: #111827;
+    --admin-sidebar-soft: #1f2937;
+    --admin-surface: #ffffff;
+    --admin-surface-alt: #f3f4f6;
+    --admin-border: #dbe2ea;
+    --admin-text: #111827;
+    --admin-text-soft: #6b7280;
+    --admin-success: #16a34a;
+    --admin-danger: #dc2626;
+    --admin-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+body.adminlte-shell {
+    font-family: 'Inter', sans-serif;
+    background: #eef2f7;
+    color: var(--admin-text);
+}
+
+.wrapper {
+    min-height: 100vh;
+}
+
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    background: linear-gradient(180deg, #18253f 0%, var(--admin-sidebar) 100%);
+    overflow-y: auto;
+    z-index: 1035;
+    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.18);
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.brand-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.brand-text {
+    font-size: 1rem;
+    letter-spacing: 0;
+}
+
+.main-sidebar .sidebar {
+    padding: 0.75rem 0.85rem 1rem;
+}
+
+.sidebar-menu,
+.sidebar-menu .navbar-nav {
+    width: 100%;
+}
+
+.sidebar-menu .sidebar-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 0.85rem 0;
+}
+
+.sidebar-heading {
+    padding: 0.35rem 0.95rem 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.sidebar-menu .nav-item {
+    width: 100%;
+    margin-bottom: 0.2rem;
+}
+
+.sidebar-menu .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 44px;
+    padding: 0.7rem 0.95rem;
+    border-radius: 0.8rem;
+    color: rgba(255, 255, 255, 0.86);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-menu .nav-link:hover,
+.sidebar-menu .nav-link:focus,
+.sidebar-menu .nav-item.active > .nav-link {
+    background: rgba(59, 130, 246, 0.18);
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-menu .nav-link i {
+    width: 1.1rem;
+    text-align: center;
+}
+
+.sidebar-menu .collapse-inner {
+    margin: 0.35rem 0 0.5rem 1rem;
+    padding: 0.55rem;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-menu .collapse-header {
+    padding: 0.25rem 0.6rem 0.5rem;
+    margin-bottom: 0.2rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sidebar-menu .collapse-item {
+    display: block;
+    padding: 0.55rem 0.65rem;
+    border-radius: 0.65rem;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.sidebar-menu .collapse-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-decoration: none;
+}
+
+.content-wrapper.shell-content-wrapper {
+    min-height: 100vh;
+    margin-left: 280px;
+    background: #eef2f7;
+}
+
+.main-header {
+    border-bottom: 1px solid var(--admin-border);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 22px rgba(15, 23, 42, 0.05);
+}
+
+.admin-header-search .form-control-navbar,
+.admin-header-search .btn-navbar {
+    height: 2.5rem;
+    border-color: transparent;
+    background: var(--admin-surface-alt);
+}
+
+.admin-header-search .form-control-navbar {
+    min-width: 280px;
+    border-radius: 0.8rem 0 0 0.8rem;
+}
+
+.admin-header-search .btn-navbar {
+    border-radius: 0 0.8rem 0.8rem 0;
+}
+
+.admin-locale-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3.2rem;
+    padding: 0.4rem 0.65rem;
+    border-radius: 999px;
+    background: #e0e7ff;
+    color: var(--admin-primary-dark);
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.user-menu .user-image {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+.content {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card,
+.small-box,
+.info-box,
+.modal-content,
+.dropdown-menu {
+    border: 1px solid rgba(219, 226, 234, 0.9);
+    border-radius: 0.95rem;
+    box-shadow: var(--admin-shadow);
+}
+
+.card-header,
+.modal-header {
+    background: var(--admin-surface);
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.btn-primary,
+.badge-primary,
+.page-item.active .page-link {
+    background-color: var(--admin-primary);
+    border-color: var(--admin-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--admin-primary-dark);
+    border-color: var(--admin-primary-dark);
+}
+
+.main-footer {
+    margin-left: 280px;
+    padding: 0.9rem 1.5rem;
+    background: #fff;
+    border-top: 1px solid var(--admin-border);
+    color: var(--admin-text-soft);
+}
+
+.scroll-to-top {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--admin-primary);
+    color: #fff;
+    border-radius: 999px;
+    box-shadow: 0 12px 24px rgba(31, 78, 216, 0.28);
+}
+
+.scroll-to-top:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-collapse .main-sidebar {
+    transform: translateX(-100%);
+}
+
+.sidebar-collapse .main-header,
+.sidebar-collapse .content-wrapper.shell-content-wrapper,
+.sidebar-collapse .main-footer {
+    margin-left: 0;
+}
+
+.swal2-popup {
+    border-radius: 1rem;
+}
+
+@media (max-width: 991.98px) {
+    .main-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+    .main-header,
+    .content-wrapper.shell-content-wrapper,
+    .main-footer {
+        margin-left: 0;
+    }
+
+    body:not(.sidebar-collapse) .main-sidebar {
+        transform: translateX(0);
+    }
+
+    .admin-header-search {
+        display: none !important;
+    }
+
+    .content {
+        padding: 0 1rem 1rem;
+    }
+}

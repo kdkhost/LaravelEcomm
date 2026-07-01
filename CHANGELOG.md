@@ -2,6 +2,24 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.8] - 2026-07-01
+
+### Corrigido
+- Acao "Limpar cache" do menu lateral deixou de chamar endpoints inexistentes em `/api/v1/admin/*` e agora usa rotas reais do modulo de sistema com retorno JSON consistente.
+- `SystemController` passou a responder JSON em requisicoes AJAX para limpeza de cache, manutencao e geracao de sitemap, evitando o erro `Unexpected token '<'` quando o frontend aguardava JSON e recebia HTML.
+- Alertas nativos do painel foram substituidos pela base SweetAlert2 no shell administrativo, incluindo confirmacao de exclusao e feedback das acoes de SEO/performance.
+
+### Alterado
+- Layout base do admin foi reestruturado para um shell visual no padrao AdminLTE, preservando as 124 views que herdam `admin::layouts.master`.
+- Cabecalho, rodape e sidebar do painel foram padronizados em portugues brasileiro, com visual mais atual e comportamento de recolhimento do menu no desktop e mobile.
+- Novo CSS `public/backend/css/adminlte-shell.css` passou a controlar a moldura administrativa, mantendo os modulos atuais sem reescrever as telas internas.
+
+### Validacoes
+- `php -l Modules/Core/Http/Controllers/SystemController.php`
+- `php -l Modules/Core/Routes/web.php`
+- `php artisan view:cache`
+- `git diff --check`
+
 ## [1.1.7] - 2026-07-01
 
 ### Corrigido

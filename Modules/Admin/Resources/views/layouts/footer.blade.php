@@ -1,16 +1,12 @@
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; <a href="https://github.com/KalimeroMK" target="_blank">KalimeroMK</a> 2021</span>
-        </div>
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-inline-block">
+        Painel administrativo
     </div>
+    <strong>Copyright &copy; {{ date('Y') }} <a href="{{ route('admin') }}">Rataplam</a>.</strong>
+    Todos os direitos reservados.
 </footer>
-<!-- End of Footer -->
 
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<a class="scroll-to-top rounded" href="#">
     <i class="fas fa-angle-up"></i>
 </a>
 
@@ -20,15 +16,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Encerrar sessao?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">Confirme abaixo para sair do painel administrativo.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route('login') }}">Logout</a>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
             </div>
         </div>
     </div>
@@ -36,10 +33,9 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('backend/js/all.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
-<!-- Fix for missing Echo variable globally -->
 <script>
-    // Fix for missing Echo variable and prevent jQuery deferred exceptions
     if (typeof window.Echo === 'undefined') {
         window.Echo = {
             channel: function() { return { listen: function() {} }; },
@@ -49,16 +45,23 @@
         };
     }
 
-    // Prevent jQuery deferred exceptions
     window.addEventListener('unhandledrejection', function(event) {
         if (event.reason && event.reason.message && event.reason.message.includes('Echo')) {
             event.preventDefault();
             console.warn('Echo error suppressed:', event.reason);
         }
     });
+
+    window.alert = function (message) {
+        return Swal.fire({
+            icon: 'info',
+            title: 'Aviso',
+            text: String(message),
+            confirmButtonText: 'OK'
+        });
+    };
 </script>
 
-<!-- Page level plugins -->
 <script>
     $('#data-table').DataTable({
         "ordering": true,
@@ -73,6 +76,10 @@
 </script>
 <script>
     $(document).ready(function () {
+        if (window.innerWidth < 992) {
+            $('body').addClass('sidebar-collapse');
+        }
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -80,25 +87,27 @@
         });
         $('.dltBtn').click(function (e) {
             const form = $(this).closest('form');
-            const dataID = $(this).data('id');
-            // alert(dataID);
             e.preventDefault();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this data!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-        })
-    })
+            Swal.fire({
+                title: 'Deseja excluir este registro?',
+                text: 'Essa acao nao podera ser desfeita.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+
+        $('#sidebarToggle, #sidebarToggleTop').on('click', function (e) {
+            e.preventDefault();
+            $('body').toggleClass('sidebar-collapse');
+        });
+    });
 </script>
 
 <script>

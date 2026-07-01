@@ -1,19 +1,20 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar - Marca -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a class="brand-link" href="{{ route('admin') }}">
+        <span class="brand-image brand-icon elevation-2">
+            <i class="fas fa-store"></i>
+        </span>
+        <span class="brand-text font-weight-semibold">
             @hasrole('super-admin')
-            @lang('sidebar.admin')
+                @lang('sidebar.admin')
             @else
-            {{ Auth::user()->name ?? 'Account' }}
+                {{ Auth::user()->name ?? 'Conta' }}
             @endhasrole
-        </div>
+        </span>
     </a>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="navbar-nav sidebar-menu" id="accordionSidebar">
+                <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
@@ -328,7 +329,7 @@
                 <h6 class="collapse-header">@lang('sidebar.seo_options'):</h6>
                 <a class="collapse-item" href="/sitemap.xml">@lang('sidebar.xml_sitemap')</a>
                 <a class="collapse-item" href="/robots.txt">@lang('sidebar.robots_txt')</a>
-                <a class="collapse-item" href="#" onclick="generateSitemap()">@lang('sidebar.generate_sitemap')</a>
+                <a class="collapse-item" href="#" onclick="generateSitemap(); return false;">@lang('sidebar.generate_sitemap')</a>
                 <a class="collapse-item" href="{{ route('settings.seo.index') }}">@lang('sidebar.meta_tags')</a>
             </div>
         </div>
@@ -336,7 +337,7 @@
 
     <!-- Performance -->
     <li class="nav-item">
-        <a class="nav-link" href="#" onclick="clearCache()">
+        <a class="nav-link" href="#" onclick="clearCache(); return false;">
             <i class="fas fa-tachometer-alt"></i>
             <span>@lang('sidebar.clear_cache')</span>
         </a>
@@ -385,50 +386,143 @@
     @endhasrole
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <div class="text-center d-none d-md-inline py-3">
+                    <button class="rounded-circle border-0" id="sidebarToggle" aria-label="Recolher menu"></button>
+                </div>
+            </ul>
+        </nav>
     </div>
-
-
-</ul>
+</aside>
 
 <script>
-// SEO and Performance Functions
-function generateSitemap() {
-    if (confirm('Generate XML Sitemap? This may take a few minutes.')) {
-        fetch('/api/v1/admin/seo/generate-sitemap', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Sitemap generated successfully!');
-        })
-        .catch(error => {
-            alert('Error generating sitemap: ' + error.message);
-        });
-    }
-}
+(function () {
+    async function parseError(response) {
+        const contentType = response.headers.get('content-type') || '';
 
-function clearCache() {
-    if (confirm('Clear all application cache? This will improve performance but may slow down the next few requests.')) {
-        fetch('/api/v1/admin/clear-cache', {
+        if (contentType.includes('application/json')) {
+            const payload = await response.json();
+            throw new Error(payload.message || 'O servidor retornou um erro inesperado.');
+        }
+
+        const html = await response.text();
+        const text = html
+            .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+            .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        throw new Error(text || `Falha HTTP ${response.status}.`);
+    }
+
+    async function postAdminAction(url) {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Cache cleared successfully!');
-        })
-        .catch(error => {
-            alert('Error clearing cache: ' + error.message);
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            credentials: 'same-origin',
         });
+
+        if (!response.ok) {
+            await parseError(response);
+        }
+
+        const contentType = response.headers.get('content-type') || '';
+
+        if (!contentType.includes('application/json')) {
+            return {
+                success: true,
+                message: 'Operacao executada com sucesso.',
+            };
+        }
+
+        return response.json();
     }
-}
+
+    window.generateSitemap = async function () {
+        const decision = await Swal.fire({
+            title: 'Gerar sitemap XML?',
+            text: 'O processo atualiza os arquivos de SEO da loja e pode levar alguns minutos.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Gerar sitemap',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true,
+        });
+
+        if (!decision.isConfirmed) {
+            return;
+        }
+
+        try {
+            Swal.fire({
+                title: 'Gerando sitemap',
+                text: 'Aguarde enquanto o sistema processa os arquivos.',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading(),
+            });
+
+            const payload = await postAdminAction('{{ route('system.seo.sitemap.generate') }}');
+
+            await Swal.fire({
+                title: 'Sitemap atualizado',
+                text: payload.message || 'Sitemap gerado com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'Fechar',
+            });
+        } catch (error) {
+            await Swal.fire({
+                title: 'Falha ao gerar sitemap',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Entendi',
+            });
+        }
+    };
+
+    window.clearCache = async function () {
+        const decision = await Swal.fire({
+            title: 'Limpar caches do sistema?',
+            text: 'O proximo carregamento pode ficar um pouco mais lento ate os caches serem recriados.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Limpar agora',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true,
+        });
+
+        if (!decision.isConfirmed) {
+            return;
+        }
+
+        try {
+            Swal.fire({
+                title: 'Limpando caches',
+                text: 'Executando optimize:clear no ambiente atual.',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading(),
+            });
+
+            const payload = await postAdminAction('{{ route('system.cache.all.clear') }}');
+
+            await Swal.fire({
+                title: 'Caches limpos',
+                text: payload.message || 'Todos os caches foram limpos com sucesso.',
+                icon: 'success',
+                confirmButtonText: 'Fechar',
+            });
+        } catch (error) {
+            await Swal.fire({
+                title: 'Falha ao limpar caches',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Entendi',
+            });
+        }
+    };
+})();
 </script>

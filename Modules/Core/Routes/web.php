@@ -30,6 +30,7 @@ Route::middleware([])->group(function () {
         Route::post('cache/route/clear', [SystemController::class, 'clearRoute'])->name('cache.route.clear');
         Route::post('cache/view/clear', [SystemController::class, 'clearView'])->name('cache.view.clear');
         Route::post('cache/all/clear', [SystemController::class, 'clearAll'])->name('cache.all.clear');
+        Route::post('seo/sitemap/generate', [SystemController::class, 'generateSitemap'])->name('seo.sitemap.generate');
 
         // Database backup
         Route::get('backup', [SystemController::class, 'backupDatabase'])->name('backup');
