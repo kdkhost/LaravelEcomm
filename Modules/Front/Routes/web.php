@@ -41,8 +41,10 @@ Route::group([
     Route::get('/products', [FrontController::class, 'products'])->name('front.products');
     Route::get('/products/{slug}', [FrontController::class, 'productDetail'])->name('front.product.detail');
     Route::get('/product-detail/{slug}', [FrontController::class, 'productDetail'])->name('front.product-detail'); // Alias for compatibility
-    Route::get('/provador-virtual/{slug?}', [VirtualTryOnController::class, 'index'])->name('front.virtual-try-on');
+    Route::get('/provador-virtual/status', [VirtualTryOnController::class, 'status'])->name('front.virtual-try-on.status');
+    Route::post('/provador-virtual/processar', [VirtualTryOnController::class, 'process'])->name('front.virtual-try-on.process');
     Route::post('/provador-virtual/recomendar', [VirtualTryOnController::class, 'recommend'])->name('front.virtual-try-on.recommend');
+    Route::get('/provador-virtual/{slug?}', [VirtualTryOnController::class, 'index'])->name('front.virtual-try-on');
     Route::post('/frete/calcular', PublicShippingQuoteController::class)->name('front.shipping.quote');
     Route::post('/product/search', [FrontController::class, 'productSearch'])->name('front.product-search');
     Route::get('/product/deal', [FrontController::class, 'productDeal'])->name('front.product-deal');

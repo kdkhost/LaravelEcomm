@@ -26,6 +26,7 @@
     var primaryImage = studio.getAttribute('data-primary-image') || (images[0] && images[0].url) || '';
     var state = {
       childImage: null,
+      photoDataUrl: '',
       garmentImage: null,
       garmentUrl: primaryImage,
       angle: 0,
@@ -42,6 +43,7 @@
     bindControls(studio, state, draw);
     bindMeasures(studio, state, draw);
     bindActions(studio, state, draw);
+    bindAi(studio, state);
 
     if (primaryImage) {
       loadImage(primaryImage).then(function (image) {
@@ -156,7 +158,9 @@
 
       var reader = new FileReader();
       reader.onload = function (event) {
-        loadImage(event.target.result).then(function (image) {
+        var dataUrl = event.target.result;
+        state.photoDataUrl = dataUrl;
+        loadImage(dataUrl).then(function (image) {
           state.childImage = image;
           showResult(studio, 'Foto carregada no navegador. Nenhum arquivo foi salvo no servidor.', false);
           draw();
@@ -354,6 +358,167 @@
         }
       });
     }
+  }
+
+  function bindAi(studio, state) {
+    var statusUrl = studio.getAttribute('data-ai-status-url');
+    var processUrl = studio.getAttribute('data-ai-process-url');
+    var productSlug = studio.getAttribute('data-product-slug') || '';
+    var csrfToken = studio.getAttribute('data-csrf-token') || '';
+    var statusBox = studio.querySelector('[data-tryon-ai-status]');
+    var button = studio.querySelector('[data-tryon-ai-generate]');
+    var style = studio.querySelector('[data-tryon-style]');
+    var consent = studio.querySelector('[data-tryon-consent]');
+
+    if (!button || !processUrl) {
+      return;
+    }
+
+    if (!productSlug) {
+      button.disabled = true;
+      showAiStatus(statusBox, 'Escolha uma peca para ativar a geracao com IA.', 'warning');
+    } else {
+      checkAiStatus(statusUrl, statusBox, button);
+    }
+
+    button.addEventListener('click', function () {
+      if (!productSlug) {
+        showAiResult(studio, 'Escolha uma peca antes de gerar a imagem com IA.', true);
+        return;
+      }
+
+      if (!state.photoDataUrl) {
+        showAiResult(studio, 'Envie uma foto de corpo inteiro antes de gerar a imagem com IA.', true);
+        return;
+      }
+
+      if (consent && !consent.checked) {
+        showAiResult(studio, 'Marque a autorizacao de uso da foto antes de gerar a imagem.', true);
+        return;
+      }
+
+      var previousHtml = button.innerHTML;
+      button.disabled = true;
+      button.classList.add('is-loading');
+      button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Gerando com IA...';
+      showAiResult(studio, 'Processando a foto e a peca escolhida com IA. Aguarde o resultado.', false);
+
+      fetch(processUrl, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+          foto: state.photoDataUrl,
+          product_slug: productSlug,
+          estilo: style ? style.value : 'realista',
+          consent: consent && consent.checked ? '1' : '0'
+        })
+      })
+        .then(function (response) {
+          return response.json().catch(function () {
+            return {};
+          }).then(function (data) {
+            if (!response.ok) {
+              var message = data.mensagem || data.erro || 'Nao foi possivel gerar a imagem com IA.';
+              throw new Error(message);
+            }
+            return data;
+          });
+        })
+        .then(function (data) {
+          if (!data.imagem_url) {
+            throw new Error('A IA nao retornou uma imagem valida.');
+          }
+          showAiImage(studio, data);
+        })
+        .catch(function (error) {
+          showAiResult(studio, error.message || 'Nao foi possivel gerar a imagem com IA agora.', true);
+        })
+        .finally(function () {
+          button.disabled = false;
+          button.classList.remove('is-loading');
+          button.innerHTML = previousHtml;
+        });
+    });
+  }
+
+  function checkAiStatus(statusUrl, statusBox, button) {
+    if (!statusUrl) {
+      showAiStatus(statusBox, 'Status da IA indisponivel.', 'warning');
+      return;
+    }
+
+    fetch(statusUrl, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Falha ao consultar status da IA.');
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.configurado) {
+          showAiStatus(statusBox, 'IA ativa: ' + (data.provedor || 'Replicate') + ' / ' + (data.modelo || 'flux-kontext-pro') + '.', 'ready');
+          return;
+        }
+
+        button.disabled = true;
+        showAiStatus(statusBox, 'IA aguardando REPLICATE_API_TOKEN no servidor.', 'warning');
+      })
+      .catch(function () {
+        showAiStatus(statusBox, 'Nao foi possivel confirmar a IA agora.', 'warning');
+      });
+  }
+
+  function showAiStatus(statusBox, message, type) {
+    if (!statusBox) {
+      return;
+    }
+
+    statusBox.classList.remove('is-ready', 'is-warning');
+    statusBox.classList.add(type === 'ready' ? 'is-ready' : 'is-warning');
+    statusBox.textContent = message;
+  }
+
+  function showAiResult(studio, message, isError) {
+    var result = studio.querySelector('[data-tryon-ai-result]');
+    if (!result) {
+      return;
+    }
+
+    result.classList.add('is-visible');
+    result.classList.toggle('is-error', !!isError);
+    result.textContent = message;
+  }
+
+  function showAiImage(studio, data) {
+    var result = studio.querySelector('[data-tryon-ai-result]');
+    if (!result) {
+      return;
+    }
+
+    var imageUrl = data.imagem_url;
+    result.classList.add('is-visible');
+    result.classList.remove('is-error');
+    result.innerHTML = [
+      '<div class="rataplam-tryon-ai-card">',
+      '<img src="' + escapeHtml(imageUrl) + '" alt="Imagem gerada pelo provador virtual com IA">',
+      '<div class="rataplam-tryon-ai-card-body">',
+      '<strong>Imagem gerada com IA</strong>',
+      '<span>' + escapeHtml(data.modelo || 'flux-kontext-pro') + '</span>',
+      '<div class="rataplam-tryon-ai-card-actions">',
+      '<a href="' + escapeHtml(imageUrl) + '" target="_blank" rel="noopener" class="rataplam-tryon-secondary">Abrir</a>',
+      '<a href="' + escapeHtml(imageUrl) + '" download class="rataplam-tryon-primary">Baixar</a>',
+      '</div>',
+      '</div>',
+      '</div>'
+    ].join('');
   }
 
   function drawBackground(ctx, width, height) {

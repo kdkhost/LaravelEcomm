@@ -9,8 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
+use Modules\Front\Services\VirtualTryOnAiService;
 use Modules\Product\Models\Product;
+use RuntimeException;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Throwable;
 
 class VirtualTryOnController extends Controller
 {
@@ -60,8 +64,63 @@ class VirtualTryOnController extends Controller
                 (float) $data['hip'],
                 isset($data['shoulder']) ? (float) $data['shoulder'] : null
             ),
-            'privacy' => 'A foto enviada no provador padrao e processada no navegador e nao fica salva no servidor.',
+            'privacy' => 'A pre-visualizacao local roda no navegador. No modo IA, a foto e enviada temporariamente ao provedor apos consentimento e a loja nao salva o arquivo.',
         ]);
+    }
+
+    public function status(VirtualTryOnAiService $service): JsonResponse
+    {
+        return response()->json($service->status());
+    }
+
+    public function process(Request $request, VirtualTryOnAiService $service): JsonResponse
+    {
+        $data = $request->validate([
+            'foto' => ['required', 'string'],
+            'product_slug' => ['required', 'string', 'max:255'],
+            'estilo' => ['nullable', 'string', 'in:realista,editorial,casual'],
+            'consent' => ['required', 'accepted'],
+        ]);
+
+        $product = Product::with('media')
+            ->where('slug', $data['product_slug'])
+            ->where('status', 'active')
+            ->first();
+
+        if (! $product instanceof Product) {
+            return response()->json([
+                'sucesso' => false,
+                'erro' => 'Produto nao encontrado para o provador virtual.',
+            ], 404);
+        }
+
+        if (! $service->isConfigured()) {
+            return response()->json([
+                'sucesso' => false,
+                'erro' => 'Servico de IA nao configurado.',
+                'mensagem' => 'Configure REPLICATE_API_TOKEN no arquivo .env do servidor para ativar o provador virtual real.',
+                'status' => $service->status(),
+            ], 503);
+        }
+
+        try {
+            return response()->json($service->process($product, (string) $data['foto'], (string) ($data['estilo'] ?? 'realista')));
+        } catch (InvalidArgumentException $exception) {
+            return response()->json([
+                'sucesso' => false,
+                'erro' => $exception->getMessage(),
+            ], 422);
+        } catch (RuntimeException $exception) {
+            return response()->json([
+                'sucesso' => false,
+                'erro' => $exception->getMessage(),
+            ], 502);
+        } catch (Throwable) {
+            return response()->json([
+                'sucesso' => false,
+                'erro' => 'Nao foi possivel gerar a imagem com IA agora. Tente novamente em instantes.',
+            ], 500);
+        }
     }
 
     /**

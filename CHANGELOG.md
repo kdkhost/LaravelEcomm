@@ -2,6 +2,27 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.5] - 2026-07-01
+
+### Corrigido
+- Provador virtual deixou de tratar a composicao em canvas como resultado final e agora possui geracao real por IA via Replicate FLUX Kontext Pro.
+- A referencia visual da peca passa a ser enviada junto da foto da crianca em uma imagem composta temporaria em memoria, evitando depender apenas de texto para vestir a roupa escolhida.
+- Endpoint `/provador-virtual/status` foi criado antes da rota com slug para nao conflitar com produtos.
+
+### Adicionado
+- Servico `VirtualTryOnAiService` com validacao de imagem, limite de tamanho, prompt direcionado para preservar rosto/pose/corpo e trocar apenas a roupa.
+- Endpoint AJAX `/provador-virtual/processar` para gerar a imagem com IA mediante consentimento de uso da foto.
+- Status publico de configuracao do provador indicando provedor, modelo, limite de upload e disponibilidade da extensao GD.
+- Bloco visual "Resultado IA real" no provador com estilo da imagem, carregamento, erros claros, abertura e download do resultado.
+- Variaveis `REPLICATE_*` nos exemplos `.env.example`, `.env.cpanel.example` e `.env.prod.example`.
+
+### Seguranca e privacidade
+- A foto da crianca nao e persistida no storage da loja; o processamento usa dados temporarios em memoria e envio ao provedor somente apos consentimento.
+- Quando a imagem da peca esta disponivel localmente pela Media Library, o servidor usa o arquivo local em vez de baixar uma URL publica.
+
+### Observacoes
+- A geracao de imagem real depende de `REPLICATE_API_TOKEN` configurado no `.env` do servidor. Sem essa chave, a tela mostra o status pendente e nao dispara custo de IA.
+
 ## [1.1.4] - 2026-07-01
 
 ### Adicionado
