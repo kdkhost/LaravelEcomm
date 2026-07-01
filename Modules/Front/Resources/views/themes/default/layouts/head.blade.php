@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="{{asset('frontend/css/font-awesome.css')}}">
 <!-- Themify Icons -->
 <link rel="stylesheet" href="{{asset('frontend/css/themify-icons.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/css/rataplam-storefront.css')}}?v=20260701">
 
 <!-- ShareThis script disabled - DNS not resolved in local environment -->
 {{-- <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script> --}}

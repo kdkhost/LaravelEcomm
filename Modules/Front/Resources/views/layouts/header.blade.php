@@ -53,10 +53,55 @@
         </div>
     </div>
     <!-- End Topbar -->
+    <div class="rataplam-mobile-backdrop" data-rataplam-mobile-close></div>
+    <aside class="rataplam-mobile-drawer" id="rataplam-mobile-drawer" aria-hidden="true">
+        <div class="rataplam-mobile-drawer-header">
+            <a href="{{route('front.index')}}" class="rataplam-mobile-drawer-logo">
+                <img src="@foreach($settings as $data) {{$data->logo}} @endforeach" alt="Rataplam">
+            </a>
+            <button type="button" class="rataplam-mobile-drawer-close" data-rataplam-mobile-close aria-label="Fechar menu">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <div class="rataplam-mobile-drawer-body">
+            <form class="rataplam-mobile-search" method="POST" action="{{route('front.product-search')}}">
+                @csrf
+                <input name="search" placeholder="@lang('frontend.search_products')" type="search">
+                <button type="submit" aria-label="Buscar"><i class="ti-search"></i></button>
+            </form>
+            @include('front::layouts.menu')
+            <div class="rataplam-mobile-drawer-actions">
+                <a href="{{route('cart-list')}}"><i class="ti-bag"></i> Carrinho</a>
+                <a href="{{route('wishlist')}}"><i class="fa fa-heart-o"></i> Favoritos</a>
+                @auth
+                    <a href="{{ Auth::user()->hasRole('super-admin') ? route('admin') : route('user-profile') }}">
+                        <i class="ti-user"></i> Minha conta
+                    </a>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                        <i class="ti-power-off"></i> Sair
+                    </a>
+                    <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a href="{{route('login')}}"><i class="ti-user"></i> Entrar</a>
+                    <a href="{{route('register')}}"><i class="ti-pencil-alt"></i> Criar conta</a>
+                @endauth
+            </div>
+        </div>
+    </aside>
     <div class="middle-inner">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-12">
+                    <button type="button"
+                            class="rataplam-mobile-menu-toggle"
+                            data-rataplam-mobile-open
+                            aria-controls="rataplam-mobile-drawer"
+                            aria-expanded="false"
+                            aria-label="Abrir menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
                     <!-- Logo -->
                     <div class="logo">
                         <a href="{{route('front.index')}}"><img

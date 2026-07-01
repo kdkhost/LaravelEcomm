@@ -2,6 +2,37 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.3] - 2026-07-01
+
+### Adicionado
+- Comando `rataplam:import-catalog` para importar/catalogar imagens e descricoes dos produtos da loja antiga Rataplam com suporte a lotes para cPanel.
+- Descricoes curtas e completas atualizadas nos 84 produtos da loja nova, usando o titulo, categorias e detalhes estruturados da pagina antiga do Wix.
+- CSS `frontend/css/rataplam-storefront.css` para padronizar altura dos cards, enquadramento das imagens, animacoes de entrada e hover dos produtos.
+- Menu mobile em drawer lateral deslizante, com busca, links principais, carrinho, favoritos e acesso de conta.
+- Layout unificado em portugues brasileiro para login, cadastro, recuperacao de senha, redefinicao, confirmacao de senha e login por link magico.
+
+### Alterado
+- Layouts dos temas default, modern e globais receberam suporte ao drawer mobile e ao CSS de padronizacao da vitrine.
+- Cards de produto agora usam altura consistente, imagem com `object-fit: cover`, textos limitados por linha e area de preco/acao alinhada.
+- O importador Rataplam remove duplicidade de URLs do Wix pelo identificador real da midia, evitando duplicar imagens quando o Wix entrega a mesma foto em tamanhos diferentes.
+
+### Corrigido
+- Removidas 152 midias duplicadas criadas durante a primeira execucao do importador, mantendo a primeira copia valida de cada arquivo por hash.
+- Cache/opcache remoto limpo apos publicacao dos layouts para o cPanel refletir os arquivos atualizados.
+
+### Validacoes
+- 84 de 84 produtos com resumo curto maior que 80 caracteres e descricao completa maior que 250 caracteres.
+- 84 de 84 produtos com bloco "Detalhes corretos do produto" na descricao.
+- 152 imagens finais publicadas na Media Library, sem produtos sem imagem e sem duplicatas por hash.
+- Lote de imagens da Calca Juno e Calca Nono validado com `0` novas duplicatas, `38` imagens existentes reconhecidas e `4` URLs antigas do Wix ainda bloqueadas por HTTP `403`.
+- Home, grade de produtos, detalhes de produto, login, cadastro e recuperacao de senha validados em producao com HTTP `200`.
+- CSS `frontend/css/rataplam-storefront.css?v=20260701` validado em producao com HTTP `200`.
+- Scripts temporarios `_codex_*` removidos do servidor.
+
+### Observacoes
+- As 4 imagens pendentes continuam indisponiveis na origem antiga do Wix: 2 da Calca Nono e 2 da Calca Juno.
+- O site ainda possui rotas de idioma antigas como `/en`; esta entrega padronizou as telas alteradas e o catalogo de produtos, sem remover idiomas cadastrados.
+
 ## [1.1.2] - 2026-07-01
 
 ### Adicionado

@@ -1,59 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('auth.layout')
 
-<head>
-    <title>E-SHOP || Magic Link</title>
-    @include('admin::layouts.head')
+@section('title', 'Link mágico')
 
-</head>
+@section('content')
+    <h1>Entrar por link mágico</h1>
+    <p class="rataplam-auth-subtitle">Receba um link de acesso no e-mail cadastrado para entrar sem digitar senha.</p>
 
-<body class="bg-gradient-primary">
+    @if(session('magic_link_sent'))
+        <div class="rataplam-auth-alert" role="alert">
+            {{ session('magic_link_sent') }}
+        </div>
+    @endif
 
-<div class="container">
+    <form class="rataplam-auth-form" method="POST" action="{{ route('magic.send') }}">
+        @csrf
 
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-
-        <div class="col-xl-10 col-lg-12 col-md-9 mt-5">
-
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
-
-                                @if(session('magic_link_sent'))
-                                    <p>{{ session('magic_link_sent') }}</p>
-                                @endif
-                                <div class="form-group">
-
-                                    <form method="POST" action="{{ route('magic.send') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="email"
-                                                   class="form-control form-control-user @error('email') is-invalid @enderror"
-                                                   name="email" value="{{ old('email') }}" id="exampleInputEmail"
-                                                   aria-describedby="emailHelp" placeholder="Enter Email Address..."
-                                                   required autocomplete="email" autofocus>
-
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email"
+                   class="form-control @error('email') is-invalid @enderror"
+                   name="email"
+                   value="{{ old('email') }}"
+                   id="email"
+                   required
+                   autocomplete="email"
+                   autofocus>
+            @error('email')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
         </div>
 
-    </div>
-</body>
+        <button type="submit" class="rataplam-auth-button">Enviar link de acesso</button>
+    </form>
 
-</html>
+    <div class="rataplam-auth-links">
+        <a href="{{ route('login') }}">Entrar com senha</a>
+        @if (Route::has('register'))
+            <a href="{{ route('register') }}">Criar uma conta</a>
+        @endif
+    </div>
+@endsection

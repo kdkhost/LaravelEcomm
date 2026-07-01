@@ -124,4 +124,54 @@
 
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var drawer = document.getElementById('rataplam-mobile-drawer');
+        var openButtons = document.querySelectorAll('[data-rataplam-mobile-open]');
+        var closeButtons = document.querySelectorAll('[data-rataplam-mobile-close]');
+
+        if (!drawer || !openButtons.length) {
+            return;
+        }
+
+        function openDrawer() {
+            document.body.classList.add('rataplam-menu-open');
+            drawer.setAttribute('aria-hidden', 'false');
+            openButtons.forEach(function (button) {
+                button.setAttribute('aria-expanded', 'true');
+            });
+        }
+
+        function closeDrawer() {
+            document.body.classList.remove('rataplam-menu-open');
+            drawer.setAttribute('aria-hidden', 'true');
+            openButtons.forEach(function (button) {
+                button.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        openButtons.forEach(function (button) {
+            button.addEventListener('click', openDrawer);
+        });
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener('click', closeDrawer);
+        });
+
+        drawer.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', closeDrawer);
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeDrawer();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 992) {
+                closeDrawer();
+            }
+        });
+    });
 </script>
