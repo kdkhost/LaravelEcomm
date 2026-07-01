@@ -2,6 +2,21 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.9] - 2026-07-01
+
+### Corrigido
+- Painel administrativo deixou de depender da rota nomeada `system.seo.sitemap.generate` dentro da sidebar, passando a usar as URLs administrativas diretas de sistema para geracao de sitemap e limpeza de cache.
+- `CoreServiceProvider` deixou de registrar por engano o `RouteServiceProvider` do modulo `Front` e voltou a registrar o roteamento do proprio modulo `Core`, restaurando as rotas `system.*` no ambiente correto.
+
+### Ambiente local
+- `vendor/` foi instalado localmente com `composer install` e `composer dump-autoload` usando ignores de plataforma, porque este Windows esta com PHP 8.5 e sem extensoes de CLI exigidas pelo lock (`curl`, `gd`, `exif`, `pcntl`, `posix`).
+
+### Validacoes
+- `php -l Modules/Core/Providers/CoreServiceProvider.php`
+- `php -l Modules/Admin/Resources/views/layouts/sidebar.blade.php`
+- `git diff --check`
+- Validacao remota das rotas de sistema e recompilacao de cache no cPanel.
+
 ## [1.1.8] - 2026-07-01
 
 ### Corrigido

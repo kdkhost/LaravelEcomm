@@ -9,7 +9,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Modules\Core\Services\CacheService;
 use Modules\Core\View\Components\LanguageSwitcher;
-use Modules\Front\Providers\RouteServiceProvider;
 use Modules\Settings\Models\Setting;
 
 class CoreServiceProvider extends ServiceProvider

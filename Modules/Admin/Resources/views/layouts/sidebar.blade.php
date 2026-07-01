@@ -466,7 +466,7 @@
                 didOpen: () => Swal.showLoading(),
             });
 
-            const payload = await postAdminAction('{{ route('system.seo.sitemap.generate') }}');
+            const payload = await postAdminAction('{{ url('/admin/system/seo/sitemap/generate') }}');
 
             await Swal.fire({
                 title: 'Sitemap atualizado',
@@ -507,7 +507,7 @@
                 didOpen: () => Swal.showLoading(),
             });
 
-            const payload = await postAdminAction('{{ route('system.cache.all.clear') }}');
+            const payload = await postAdminAction('{{ url('/admin/system/cache/all/clear') }}');
 
             await Swal.fire({
                 title: 'Caches limpos',
