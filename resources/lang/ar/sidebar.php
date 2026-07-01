@@ -21,6 +21,7 @@ return [
     'add_shipping' => 'Add Shipping',
     'newsletters' => 'Newsletters',
     'add_newsletter' => 'Add Newsletter',
+        'cron' => 'Cron',
     'orders' => 'Orders',
     'reviews' => 'Reviews',
     'posts' => 'Posts',

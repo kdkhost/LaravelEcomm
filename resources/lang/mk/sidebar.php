@@ -21,6 +21,7 @@ return [
     'add_shipping' => 'Додади Испорака',
     'newsletters' => 'Новости',
     'add_newsletter' => 'Додади Новост',
+        'cron' => 'Cron',
     'orders' => 'Нарачки',
     'reviews' => 'Оценки',
     'posts' => 'Постови',

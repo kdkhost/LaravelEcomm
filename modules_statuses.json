@@ -29,5 +29,6 @@
     "User": true,
     "Language": true,
     "Reporting": true,
-    "GeoLocalization": true
+    "GeoLocalization": true,
+    "Cron": true
 }

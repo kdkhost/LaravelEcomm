@@ -195,6 +195,13 @@
     </li>
     @endhasrole
 
+    <!-- Cron -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.cron-jobs.index') }}">
+            <i class="fas fa-clock"></i>
+            <span>@lang('sidebar.cron')</span>
+        </a>
+    </li>
     <!--Orders -->
     <li class="nav-item">
         <a class="nav-link" href="{{route('orders.index')}}">
@@ -378,7 +385,9 @@
                 <a class="collapse-item"
                    href="javascript:void(0);">@lang('sidebar.blocked_ip')</a>
                 <a class="collapse-item" href="{{route('activity')}}">@lang('sidebar.activity_log')</a>
-                <a class="collapse-item" href="{{ route('admin.languages.index') }}">@lang('sidebar.languages')</a>
+                @if(Route::has('admin.languages.index'))
+                    <a class="collapse-item" href="{{ route('admin.languages.index') }}">@lang('sidebar.languages')</a>
+                @endif
                 <a class="collapse-item" href="{{ url('translations/') }}">@lang('sidebar.translation')</a>
             </div>
         </div>

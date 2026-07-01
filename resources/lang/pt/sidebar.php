@@ -21,6 +21,7 @@ return [
     'add_shipping' => 'Adicionar Frete',
     'newsletters' => 'Newsletters',
     'add_newsletter' => 'Adicionar Newsletter',
+        'cron' => 'Agendador',
     'orders' => 'Pedidos',
     'reviews' => 'Avaliações',
     'posts' => 'Posts',

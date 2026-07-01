@@ -1,0 +1,13 @@
+{
+  "name": "Cron",
+  "alias": "cron",
+  "description": "Internal cron job scheduler and manager",
+  "keywords": [],
+  "priority": 0,
+  "providers": [
+    "Modules\\Cron\\Providers\\CronServiceProvider"
+  ],
+  "aliases": {},
+  "files": [],
+  "requires": []
+}
