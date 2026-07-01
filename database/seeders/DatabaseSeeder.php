@@ -38,7 +38,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         $this->call(LanguageDatabaseSeeder::class);
         $this->call(PermissionTableSeeder::class);
         // Create parent categories first
@@ -78,6 +80,8 @@ class DatabaseSeeder extends Seeder
         // Add Analytics Demo Data
         $this->call(AnalyticsDemoDataSeeder::class);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
     }
 }

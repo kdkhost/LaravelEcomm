@@ -76,6 +76,8 @@ Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/)
 #### 🐛 Correções
 - Criada view `themes/default/pages/product-deal.blade.php` (estava faltando)
 - 4 produtos definidos como oferta para popular a página `/pt/product/deal`
+- `DatabaseSeeder.php`: corrigido `SET FOREIGN_KEY_CHECKS` para compatibilidade com SQLite
+- README.md: corrigidas credenciais padrão (admin, manager, superadmin)
 
 ### Alterado
 - `.env` configurado para SQLite (desenvolvimento local sem Docker)

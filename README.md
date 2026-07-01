@@ -80,7 +80,9 @@ php artisan serve
 
 | Perfil | URL | E-mail | Senha |
 |--------|-----|--------|-------|
-| **Admin** | `/admin` | `superadmin@mail.com` | `password` |
+| **Super Admin** | `/admin` | `superadmin@mail.com` | `password` |
+| **Admin** | `/admin` | `admin@mail.com` | `password` |
+| **Gerente** | `/admin` | `manager@mail.com` | `password` |
 | **Cliente** | `/login` | `client@mail.com` | `password` |
 
 ---
@@ -783,8 +785,10 @@ npx playwright test
 #### Contas de Teste
 
 ```
-Admin:    superadmin@mail.com / password
-Cliente:  client@mail.com / password
+Super Admin:  superadmin@mail.com / password
+Admin:        admin@mail.com / password
+Gerente:      manager@mail.com / password
+Cliente:      client@mail.com / password
 ```
 
 ---
