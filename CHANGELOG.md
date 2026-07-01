@@ -1,0 +1,95 @@
+# Changelog
+
+Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
+
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
+Copyright © 2026 kdkhost. Todos os direitos reservados.
+
+Este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
+
+## [Não publicado]
+
+### Adicionado
+- README e CHANGELOG em português brasileiro (pt-BR)
+
+### Planejado
+- Testar fluxo completo de checkout MercadoPago (sandbox e produção)
+- Configurar servidor de produção e executar `deploy.sh`
+- Adicionar views faltantes se houver rotas quebradas
+- Implementar notificações de e-mail transacionais em português
+- Configurar cron jobs para processamento de carrinhos abandonados
+
+## [1.0.0] - 2026-06-30
+
+### Adicionado
+
+#### 🇧🇷 Internacionalização (Português)
+- Traduções completas em português brasileiro (pt-BR) para:
+  - `frontend.php` — interface do cliente
+  - `auth.php` — autenticação
+  - `pagination.php` — paginação
+  - `passwords.php` — redefinição de senha
+  - `apiResponse.php` — respostas da API
+  - `messages.php` — mensagens do sistema
+  - `sidebar.php` — barra lateral do admin
+  - `partials.php` — componentes parciais
+  - `validation.php` — validação de formulários
+- Adicionado `pt` ao array de locales em `config/app.php`
+- Adicionada língua portuguesa à tabela `languages` no banco de dados
+- Definido português como idioma padrão (`APP_LOCALE=pt`, `APP_FALLBACK_LOCALE=pt` no `.env`)
+
+#### 🛒 Catálogo de Produtos (Rataplam)
+- Criado `RataplamStoreSeeder` com:
+  - Marca **Rataplam**
+  - 8 categorias (Calças, Camisetas, Moletons, Jaquetas, Acessórios, Bermudas, Sapatos, Promoções)
+  - 84 produtos com preços, descrições e imagens extraídos de rataplam.com.br
+- 8 produtos definidos como destaque (`is_featured = true`)
+- 4 produtos definidos como oferta (`d_deal = 1`)
+
+#### 💳 Integração MercadoPago
+- **Service**: `Modules/Billing/Services/MercadoPagoService.php` — API via cURL
+- **Controller**: `Modules/Billing/Http/Controllers/MercadoPagoController.php` com endpoints:
+  - `checkout` — inicia pagamento
+  - `success` — retorno após pagamento aprovado
+  - `failure` — retorno após pagamento recusado
+  - `pending` — retorno após pagamento pendente
+  - `webhook` — notificação automática de status
+  - `refund` — reembolso total e parcial
+- **DTO**: `Modules/Billing/DTOs/MercadoPagoDTO.php`
+- **Action**: `Modules/Billing/Actions/MercadoPago/CreateMercadoPagoChargeAction.php`
+- **Rotas**: 6 rotas em `Modules/Billing/Routes/web.php`
+- **Views de checkout**: atualizadas nos 3 temas (default, modern, sport)
+- **Configuração admin**: formulário de token do MercadoPago no painel
+- **Migrations**: adicionado `mercadopago` aos enums de `payments` e `orders`
+- **CSRF**: webhook excluído da verificação CSRF em `bootstrap/app.php`
+- **Config**: `config/mercadopago.php` com token de acesso e modo sandbox
+- **Singleton**: registrado em `BillingServiceProvider.php`
+- **Checkout**: `ProcessCheckoutAction.php` atualizado com fluxo mercadopago
+
+#### 🚀 Compatibilidade cPanel/WHM
+- `.env.example` reescrito com opções MySQL e SQLite comentadas
+- `deploy.sh` — script de deploy para cPanel
+- Migrations com detecção de driver (`SQLite` vs `MySQL`) para compatibilidade
+- `graphify-out/.gitignore` — exclui `cache/` do versionamento
+- `graphify-out/cache/` removido do git tracking
+
+#### 🐛 Correções
+- Criada view `themes/default/pages/product-deal.blade.php` (estava faltando)
+- 4 produtos definidos como oferta para popular a página `/pt/product/deal`
+
+### Alterado
+- `.env` configurado para SQLite (desenvolvimento local sem Docker)
+- `.env` com `SCOUT_DRIVER=collection`, `MULTI_TENANT_ENABLED=false`,
+  `TELESCOPE_ENABLED=false` para ambiente local
+- `Modules/Front/Http/Controllers/FrontController.php` — rota `productDeal` agora
+  funciona corretamente
+
+### Removido
+- Dependências de serviços externos desnecessários para dev local:
+  - Redis (substituído por file cache)
+  - Elasticsearch (substituído por collection driver)
+  - Telescope (desabilitado)
+
+### Segurança
+- CSRF desabilitado apenas para webhook do MercadoPago
+- Nenhuma chave secreta exposta no código fonte
