@@ -2,6 +2,34 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.10] - 2026-07-01
+
+### Alterado
+- Shell administrativo foi refeito para seguir a estrutura visual base do AdminLTE 4, com `app-wrapper`, `app-sidebar`, `app-main`, cabecalho padrao, area de conteudo e rodape alinhados ao painel original.
+- Painel passou a usar os assets oficiais do AdminLTE 4 (`adminlte.min.css`, `adminlte.min.js` e `bootstrap.bundle.min.js`) mantendo os modulos existentes sobre uma camada de compatibilidade.
+- Suporte dark/light foi padronizado com persistencia em `localStorage`, alternancia no topo do painel e uso de `data-bs-theme` no HTML.
+- Alertas de confirmacao e feedback do painel foram consolidados com SweetAlert2, inclusive o fallback global de `alert()`.
+- Uploads administrativos de produto, banner, configuracoes, pagina, post e kit passaram a usar arrasta e solta com preview integral dos arquivos atuais e dos novos arquivos selecionados.
+
+### Adicionado
+- Componente reutilizavel `admin::components.dropzone-upload` para centralizar os campos de upload do admin.
+- Arquivo `public/backend/js/adminlte4-bridge.js` para compatibilidade entre atributos Bootstrap legados, alternancia de tema e comportamento padrao das novas dropzones.
+- Diretorio `public/backend/vendor/adminlte4/` com os assets oficiais do AdminLTE 4 usados pelo shell do painel.
+
+### Corrigido
+- Bloco global de notificacoes foi reescrito em markup compativel com Bootstrap 5 para evitar inconsistencias visuais no novo shell.
+- Acoes da sidebar para sitemap e limpeza de cache passaram a tolerar retorno nao JSON sem quebrar a UX administrativa.
+
+### Ambiente local
+- `package.json` e `package-lock.json` foram atualizados para registrar `admin-lte` como dependencia frontend do projeto.
+- `php artisan view:cache` e `php artisan route:list --path=admin/system` travaram no PHP 8.5 local deste Windows; a validacao final do bootstrap e dos caches ficou concentrada no servidor cPanel, que e o ambiente alvo.
+
+### Validacoes
+- `php -l Modules/Admin/Resources/views/layouts/header.blade.php`
+- `php -l Modules/Admin/Resources/views/layouts/sidebar.blade.php`
+- `php -l Modules/Admin/Resources/views/components/dropzone-upload.blade.php`
+- `git diff --check`
+
 ## [1.1.9] - 2026-07-01
 
 ### Corrigido

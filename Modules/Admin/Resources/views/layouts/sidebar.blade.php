@@ -1,19 +1,21 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a class="brand-link" href="{{ route('admin') }}">
-        <span class="brand-image brand-icon elevation-2">
-            <i class="fas fa-store"></i>
-        </span>
-        <span class="brand-text font-weight-semibold">
-            @hasrole('super-admin')
-                @lang('sidebar.admin')
-            @else
-                {{ Auth::user()->name ?? 'Conta' }}
-            @endhasrole
-        </span>
-    </a>
-    <div class="sidebar">
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <div class="sidebar-brand">
+        <a class="brand-link" href="{{ route('admin') }}">
+            <span class="brand-image brand-icon elevation-1">
+                <i class="fas fa-store"></i>
+            </span>
+            <span class="brand-text fw-semibold">
+                @hasrole('super-admin')
+                    @lang('sidebar.admin')
+                @else
+                    {{ Auth::user()->name ?? 'Conta' }}
+                @endhasrole
+            </span>
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
         <nav class="mt-2">
-            <ul class="navbar-nav sidebar-menu" id="accordionSidebar">
+            <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" id="accordionSidebar" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
@@ -386,9 +388,6 @@
     @endhasrole
 
     <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline py-3">
-                    <button class="rounded-circle border-0" id="sidebarToggle" aria-label="Recolher menu"></button>
-                </div>
             </ul>
         </nav>
     </div>

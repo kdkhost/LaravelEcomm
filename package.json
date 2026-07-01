@@ -13,7 +13,7 @@
         "@playwright/test": "^1.58.2",
         "@popperjs/core": "^2.11.6",
         "axios": "^0.21",
-        "bootstrap": "^5.2.3",
+        "bootstrap": "^5.3.8",
         "cross-env": "^7.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.49",
@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "admin-lte": "^4.0.2",
         "laravel-echo": "^1.8.0",
         "pusher-js": "^6.0.3",
         "sweetalert2": "^11.4.24"

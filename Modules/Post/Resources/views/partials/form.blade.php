@@ -43,10 +43,21 @@
         <textarea class="form-control" id="description" name="description">{{ old('description',
         $post['description'] ?? '') }}</textarea>
     </div>
-    <div class="form-group">
-        <label for="inputImage">@lang('partials.image')</label>
-        <input type="file" class="form-control" id="inputImage" name="images[]" multiple>
-    </div>
+    @include('admin::components.dropzone-upload', [
+        'inputId' => 'post-images',
+        'inputName' => 'images[]',
+        'label' => __('partials.image'),
+        'multiple' => true,
+        'accept' => 'image/*',
+        'existingFiles' => !empty($post['id']) && isset($post['media'])
+            ? collect($post['media'])->map(fn ($media) => [
+                'url' => data_get($media, 'original_url') ?: data_get($media, 'url'),
+                'name' => data_get($media, 'name', 'Imagem'),
+                'type' => data_get($media, 'mime_type', 'image/*'),
+            ])->filter(fn ($media) => filled($media['url']))->all()
+            : [],
+        'helpText' => 'Use arrasta e solta para revisar as imagens do post.',
+    ])
     <div class="form-group">
         <label for="status">Status</label>
         <select name="status" class="form-control">

@@ -32,10 +32,20 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="inputImage">@lang('partials.image') <span class="text-danger">*</span></label>
-        <input type="file" class="form-control" id="inputImage" name="images[]" multiple>
-    </div>
+    @include('admin::components.dropzone-upload', [
+        'inputId' => 'bundle-images',
+        'inputName' => 'images[]',
+        'label' => __('partials.image'),
+        'multiple' => true,
+        'accept' => 'image/*',
+        'required' => !$bundle->exists,
+        'existingFiles' => $bundle->getMedia('bundle')->map(fn ($media) => [
+            'url' => $media->getUrl(),
+            'name' => $media->name,
+            'type' => $media->mime_type ?? 'image/*',
+        ])->all(),
+        'helpText' => 'As imagens do kit ficam padronizadas com preview integral.',
+    ])
 
     <div class="button-container">
         <button type="reset" class="btn btn-warning">@lang('partials.reset')</button>

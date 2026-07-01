@@ -56,13 +56,23 @@
        </textarea>
     </div>
     
-    <div class="form-group">
-        <label for="inputImage">@lang('partials.logo')</label>
-        <input type="file" class="form-control" id="inputImage" name="images[]" multiple>
-        @if(!empty($settings['logo']))
-            <small class="form-text text-muted">Current logo: {{ $settings['logo'] }}</small>
-        @endif
-    </div>
+    @include('admin::components.dropzone-upload', [
+        'inputId' => 'settings-logo',
+        'inputName' => 'images[]',
+        'label' => __('partials.logo'),
+        'multiple' => true,
+        'accept' => 'image/*',
+        'existingFiles' => !empty($settings['logo'])
+            ? [[
+                'url' => \Illuminate\Support\Str::startsWith($settings['logo'], ['http://', 'https://'])
+                    ? $settings['logo']
+                    : asset(ltrim($settings['logo'], '/')),
+                'name' => basename($settings['logo']),
+                'type' => 'image/*',
+            ]]
+            : [],
+        'helpText' => 'Envie logo e outros arquivos visuais com preview integral.',
+    ])
 
     <!-- Google Map Section -->
     <div class="form-group">

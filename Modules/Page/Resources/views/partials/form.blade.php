@@ -16,15 +16,21 @@
         <label for="description">@lang('partials.description')</label>
         <textarea class="form-control" id="description" name="content">{{$page->content}}</textarea>
     </div>
-    <div class="form-group">
-        <label for="featured_image" class="col-form-label">@lang('partials.featured_image')</label>
-        <input type="file" id="featured_image" name="featured_image" class="form-control" accept="image/jpeg,image/png,image/jpg,image/webp">
-        @if($page->exists && $page->featured_image_url)
-            <div class="mt-2">
-                <img src="{{ $page->featured_image_url }}" alt="Destaques" class="img-thumbnail" style="max-height: 120px;">
-            </div>
-        @endif
-    </div>
+    @include('admin::components.dropzone-upload', [
+        'inputId' => 'featured_image',
+        'inputName' => 'featured_image',
+        'label' => __('partials.featured_image'),
+        'multiple' => false,
+        'accept' => 'image/jpeg,image/png,image/jpg,image/webp',
+        'existingFiles' => $page->exists && $page->featured_image_url
+            ? [[
+                'url' => $page->featured_image_url,
+                'name' => 'Imagem destacada',
+                'type' => 'image/*',
+            ]]
+            : [],
+        'helpText' => 'A imagem destacada aparece com preview completo antes do envio.',
+    ])
     <div class="form-group">
         <label for="status" class="col-form-label">@lang('partials.status') <span class="text-danger">*</span></label>
         <select name="status" class="form-control">

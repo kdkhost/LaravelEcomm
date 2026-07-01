@@ -43,23 +43,22 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="inputPhoto" class="col-form-label">@lang('partials.image') <span
-                    class="text-danger">*</span></label>
-        @if(isset($banner) && $banner->exists && method_exists($banner, 'getMedia') && $banner->getMedia('banner')->count())
-            <div class="mb-2">
-                @foreach($banner->getMedia('banner') as $media)
-                    <img src="{{ $media->getUrl() }}" alt="Banner Image" style="max-height: 100px;">
-                @endforeach
-            </div>
-        @endif
-        <div class="input-group">
-            <span class="btn btn-round btn-rose btn-file">
-                <span class="fileinput-new"></span>
-                <input type="hidden" value="" name="banner"><input type="file" name="banner[]">
-            </span>
-        </div>
-    </div>
+    @include('admin::components.dropzone-upload', [
+        'inputId' => 'banner-images',
+        'inputName' => 'banner[]',
+        'label' => __('partials.image'),
+        'multiple' => true,
+        'accept' => 'image/*',
+        'required' => !$banner->exists,
+        'existingFiles' => isset($banner) && $banner->exists && method_exists($banner, 'getMedia')
+            ? $banner->getMedia('banner')->map(fn ($media) => [
+                'url' => $media->getUrl(),
+                'name' => $media->name,
+                'type' => $media->mime_type ?? 'image/*',
+            ])->all()
+            : [],
+        'helpText' => 'Arraste banners para visualizar o enquadramento completo antes de salvar.',
+    ])
 
     <div class="form-group">
         <label for="status" class="col-form-label">@lang('partials.status') <span class="text-danger">*</span></label>

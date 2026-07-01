@@ -1,5 +1,5 @@
-<footer class="main-footer">
-    <div class="float-right d-none d-sm-inline-block">
+<footer class="app-footer">
+    <div class="float-end d-none d-sm-inline-block">
         Painel administrativo
     </div>
     <strong>Copyright &copy; {{ date('Y') }} <a href="{{ route('admin') }}">Rataplam</a>.</strong>
@@ -11,19 +11,17 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Encerrar sessao?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">Confirme abaixo para sair do painel administrativo.</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
             </div>
@@ -31,9 +29,14 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="{{asset('backend/js/all.min.js')}}"></script>
+<script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('backend/vendor/adminlte4/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('backend/vendor/adminlte4/adminlte.min.js') }}"></script>
+<script src="{{ asset('backend/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('backend/js/dataTables.searchBuilder.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script src="{{ asset('backend/js/adminlte4-bridge.js') }}"></script>
 
 <script>
     if (typeof window.Echo === 'undefined') {
@@ -63,23 +66,20 @@
 </script>
 
 <script>
-    $('#data-table').DataTable({
-        "ordering": true,
-        "paging": true,
-        "pageLength": 25,
-        "lengthMenu": [
-            [25, 50, 75, 100, -1],
-            [25, 50, 75, 100, 'All'],
-        ],
-
-    });
+    if ($('#data-table').length) {
+        $('#data-table').DataTable({
+            ordering: true,
+            paging: true,
+            pageLength: 25,
+            lengthMenu: [
+                [25, 50, 75, 100, -1],
+                [25, 50, 75, 100, 'All'],
+            ],
+        });
+    }
 </script>
 <script>
     $(document).ready(function () {
-        if (window.innerWidth < 992) {
-            $('body').addClass('sidebar-collapse');
-        }
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -101,11 +101,6 @@
                     form.submit();
                 }
             });
-        });
-
-        $('#sidebarToggle, #sidebarToggleTop').on('click', function (e) {
-            e.preventDefault();
-            $('body').toggleClass('sidebar-collapse');
         });
     });
 </script>

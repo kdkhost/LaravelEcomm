@@ -92,16 +92,21 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="form-group">
-                        <label for="images">@lang('partials.image')</label>
-                        <input type="file" name="images[]" id="image" class="form-control">
-                        @if(isset($product) && is_object($product) && $product->hasMedia('images'))
-                            <div class="mt-2">
-                                <img src="{{ $product->getFirstMediaUrl('images', 'thumb') }}" alt="Product Image"
-                                     style="max-width: 150px; max-height: 150px;">
-                            </div>
-                        @endif
-                    </div>
+                    @include('admin::components.dropzone-upload', [
+                        'inputId' => 'product-images',
+                        'inputName' => 'images[]',
+                        'label' => __('partials.image'),
+                        'multiple' => true,
+                        'accept' => 'image/*',
+                        'existingFiles' => isset($product) && is_object($product)
+                            ? $product->getMedia('product')->map(fn ($media) => [
+                                'url' => $media->getUrl(),
+                                'name' => $media->name,
+                                'type' => $media->mime_type ?? 'image/*',
+                            ])->all()
+                            : [],
+                        'helpText' => 'PNG, JPG e WEBP com preview completo antes do envio.',
+                    ])
 
                     <div class="form-group">
                         <label for="sku">@lang('partials.sku')</label>
