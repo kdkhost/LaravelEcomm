@@ -194,16 +194,84 @@
 
     function initScrollTop() {
         const button = document.querySelector('.scroll-to-top');
+        const scroller = document.getElementById('adminContentScroll') || window;
         if (!button) {
             return;
         }
 
         const syncVisibility = function () {
-            button.style.display = window.scrollY > 240 ? 'inline-flex' : 'none';
+            const top = scroller === window ? window.scrollY : scroller.scrollTop;
+            button.style.display = top > 240 ? 'inline-flex' : 'none';
         };
 
         syncVisibility();
-        window.addEventListener('scroll', syncVisibility, { passive: true });
+        scroller.addEventListener('scroll', syncVisibility, { passive: true });
+
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            if (scroller === window) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            scroller.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    function initSidebarState() {
+        const currentPath = window.location.pathname.replace(/\/+$/, '');
+        const links = document.querySelectorAll('.sidebar-menu a[href]');
+
+        links.forEach((link) => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#' || href.startsWith('javascript:')) {
+                return;
+            }
+
+            let url;
+
+            try {
+                url = new URL(href, window.location.origin);
+            } catch (error) {
+                return;
+            }
+
+            const linkPath = url.pathname.replace(/\/+$/, '');
+            const isSamePath = linkPath && (linkPath === currentPath || (linkPath !== '/admin' && currentPath.startsWith(linkPath + '/')));
+
+            if (!isSamePath) {
+                return;
+            }
+
+            if (link.classList.contains('collapse-item')) {
+                link.classList.add('active');
+            } else {
+                link.classList.add('active');
+                const navItem = link.closest('.nav-item');
+                if (navItem) {
+                    navItem.classList.add('active', 'menu-open');
+                }
+            }
+
+            const collapse = link.closest('.collapse');
+            if (collapse) {
+                collapse.classList.add('show');
+
+                const triggerId = collapse.getAttribute('id');
+                if (triggerId) {
+                    const trigger = document.querySelector('[data-bs-target="#' + triggerId + '"], [data-target="#' + triggerId + '"]');
+                    if (trigger) {
+                        trigger.classList.add('active');
+                        trigger.setAttribute('aria-expanded', 'true');
+                        const parentItem = trigger.closest('.nav-item');
+                        if (parentItem) {
+                            parentItem.classList.add('active', 'menu-open');
+                        }
+                    }
+                }
+            }
+        });
     }
 
     window.swal = function (arg1, arg2, arg3) {
@@ -222,6 +290,7 @@
         convertLegacyBootstrapAttributes();
         initThemeToggle();
         initDropzones();
+        initSidebarState();
         initScrollTop();
     });
 })();

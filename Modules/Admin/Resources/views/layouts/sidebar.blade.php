@@ -4,23 +4,40 @@
             <span class="brand-image brand-icon elevation-1">
                 <i class="fas fa-store"></i>
             </span>
-            <span class="brand-text fw-semibold">
-                @hasrole('super-admin')
-                    @lang('sidebar.admin')
-                @else
-                    {{ Auth::user()->name ?? 'Conta' }}
-                @endhasrole
+            <span class="brand-text-wrap">
+                <span class="brand-text fw-semibold">Rataplam</span>
+                <small class="brand-subtitle">Painel AdminLTE 4</small>
             </span>
         </a>
     </div>
     <div class="sidebar-wrapper">
+        <div class="admin-sidebar-panel">
+            <div class="admin-sidebar-avatar">
+                @php $sidebarUser = auth()->user(); @endphp
+                @if($sidebarUser && $sidebarUser->getFirstMediaUrl('photo'))
+                    <img src="{{ $sidebarUser->getFirstMediaUrl('photo') }}" alt="Avatar">
+                @else
+                    <img src="{{ asset('backend/img/avatar.png') }}" alt="Avatar">
+                @endif
+            </div>
+            <div class="admin-sidebar-panel-copy">
+                <strong>{{ $sidebarUser?->name ?? 'Conta administrativa' }}</strong>
+                <span>
+                    @hasrole('super-admin')
+                        @lang('sidebar.admin')
+                    @else
+                        Conta autenticada
+                    @endhasrole
+                </span>
+            </div>
+        </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column sidebar-menu" id="accordionSidebar" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin')}}">
+    <li class="nav-item {{ request()->routeIs('admin') ? 'active' : '' }}">
+        <a class="nav-link {{ request()->routeIs('admin') ? 'active' : '' }}" href="{{route('admin')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>@lang('sidebar.dashboard')</span></a>
     </li>

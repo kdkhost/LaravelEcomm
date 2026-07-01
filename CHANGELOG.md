@@ -2,6 +2,25 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.11] - 2026-07-01
+
+### Alterado
+- Shell administrativo foi refinado para usar a estrutura modular do AdminLTE 4 com navbar fixa, area de conteudo com scroll proprio, hero padrao por pagina e largura util consistente.
+- Sidebar recebeu nova hierarquia visual com branding, painel do usuario, espacamento regular, estados ativos automaticos e melhor leitura dos grupos de navegacao.
+- Tema do admin ganhou paleta premium mais coerente entre claro e escuro, reduzindo conflitos entre texto, superficie, bordas e destaques.
+- Cartoes, tabelas, formularios, dropdowns, modais, botoes e paginacao foram padronizados por CSS base para deixar as views administrativas mais consistentes sem reescrever os modulos.
+
+### Corrigido
+- Botao flutuante de retorno ao topo passou a respeitar o scroll interno do conteudo administrativo.
+- Menu lateral agora reconhece automaticamente a rota atual e expande os grupos corretos mesmo nas telas herdadas do layout antigo.
+- Tema administrativo deixou de depender do scroll global do `body` no desktop, evitando o efeito de scroll duplo no painel.
+
+### Validacoes
+- `php -l Modules/Admin/Resources/views/layouts/master.blade.php`
+- `php -l Modules/Admin/Resources/views/layouts/header.blade.php`
+- `php -l Modules/Admin/Resources/views/layouts/sidebar.blade.php`
+- `git diff --check`
+
 ## [1.1.10] - 2026-07-01
 
 ### Alterado

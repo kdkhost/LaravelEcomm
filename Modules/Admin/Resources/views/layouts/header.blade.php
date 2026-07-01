@@ -1,8 +1,8 @@
-<nav class="app-header navbar navbar-expand bg-body">
+<nav class="app-header navbar navbar-expand bg-body" data-admin-header>
     <div class="container-fluid">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav align-items-center gap-1">
             <li class="nav-item">
-                <a class="nav-link" href="#" data-lte-toggle="sidebar" role="button" aria-label="Alternar menu">
+                <a class="nav-link admin-icon-button" href="#" data-lte-toggle="sidebar" role="button" aria-label="Alternar menu">
                     <i class="fas fa-bars"></i>
                 </a>
             </li>
@@ -18,21 +18,21 @@
             </li>
         </ul>
 
-        <ul class="navbar-nav ms-auto align-items-center">
+        <ul class="navbar-nav ms-auto align-items-center gap-1">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('front.index') }}" target="_blank" title="Abrir loja">
+                <a class="nav-link admin-icon-button" href="{{ route('front.index') }}" target="_blank" title="Abrir loja">
                     <i class="fas fa-store"></i>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-lte-toggle="fullscreen" role="button" title="Tela cheia">
+                <a class="nav-link admin-icon-button" href="#" data-lte-toggle="fullscreen" role="button" title="Tela cheia">
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
 
             <li class="nav-item">
-                <button type="button" class="nav-link btn btn-link admin-theme-toggle" id="adminThemeToggle" aria-label="Alternar tema">
+                <button type="button" class="nav-link btn btn-link admin-theme-toggle admin-icon-button" id="adminThemeToggle" aria-label="Alternar tema">
                     <i class="fas fa-moon"></i>
                 </button>
             </li>
@@ -42,7 +42,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-expanded="false" title="Idioma">
+                <a class="nav-link admin-icon-button" href="#" data-bs-toggle="dropdown" aria-expanded="false" title="Idioma">
                     <span class="admin-locale-badge">{{ mb_strtoupper(app()->getLocale()) }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end shadow-sm">
@@ -53,14 +53,14 @@
             </li>
 
             <li class="nav-item dropdown user-menu">
-                <a class="nav-link d-flex align-items-center" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link d-flex align-items-center admin-user-menu-trigger" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     @php $user = Auth()->user(); @endphp
                     @if($user && $user->getFirstMediaUrl('photo'))
                         <img class="user-image rounded-circle shadow-sm" src="{{ $user->getFirstMediaUrl('photo') }}" alt="Avatar">
                     @else
                         <img class="user-image rounded-circle shadow-sm" src="{{ asset('backend/img/avatar.png') }}" alt="Avatar">
                     @endif
-                    <span class="d-none d-md-inline ms-2">{{ $user?->name }}</span>
+                    <span class="d-none d-md-inline ms-2 admin-user-name">{{ $user?->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end shadow-sm">
                     <div class="dropdown-header text-start">
