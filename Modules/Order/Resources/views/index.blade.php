@@ -46,7 +46,7 @@
                                 <td>{{$order->user->email}}</td>
                                 <td>{{$order->quantity}}</td>
                                 <td>{{ $order->shipping->type ??''}}</td>
-                                <td>${{number_format($order->total_amount,2)}}</td>
+                                <td>R$ {{number_format($order->total_amount, 2, ',', '.')}}</td>
                                 <td>
                                     @if($order->status=='new')
                                         <span class="badge badge-primary">{{$order->status}}</span>

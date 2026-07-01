@@ -55,10 +55,10 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ __('Order Total') }}</td>
-                                            <td class="text-right">${{ number_format($invoice->subtotal, 2) }}</td>
-                                            <td class="text-right">${{ number_format($invoice->tax_amount, 2) }}</td>
-                                            <td class="text-right">${{ number_format($invoice->discount_amount, 2) }}</td>
-                                            <td class="text-right"><strong>${{ number_format($invoice->total_amount, 2) }}</strong></td>
+                                            <td class="text-right">R$ {{ number_format($invoice->subtotal, 2, ',', '.') }}</td>
+                                            <td class="text-right">R$ {{ number_format($invoice->tax_amount, 2, ',', '.') }}</td>
+                                            <td class="text-right">R$ {{ number_format($invoice->discount_amount, 2, ',', '.') }}</td>
+                                            <td class="text-right"><strong>R$ {{ number_format($invoice->total_amount, 2, ',', '.') }}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -89,7 +89,7 @@
                                             @foreach($invoice->payments as $payment)
                                                 <tr>
                                                     <td>{{ $payment->created_at->format('Y-m-d H:i') }}</td>
-                                                    <td>${{ number_format($payment->amount, 2) }}</td>
+                                                    <td>R$ {{ number_format($payment->amount, 2, ',', '.') }}</td>
                                                     <td>{{ ucfirst($payment->payment_method) }}</td>
                                                     <td>
                                                         <span class="badge badge-{{ $payment->status === 'completed' ? 'success' : 'warning' }}">

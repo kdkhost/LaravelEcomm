@@ -20,11 +20,11 @@ class SeoService
         $siteName = $siteName ?? config('app.name');
 
         return match ($type) {
-            'product' => "{$title} - Buy Online | {$siteName}",
-            'category' => "{$title} Products - Shop Online | {$siteName}",
-            'brand' => "{$title} Products - Official Store | {$siteName}",
+            'product' => "{$title} - Compre Online | {$siteName}",
+            'category' => "{$title} - Produtos | {$siteName}",
+            'brand' => "{$title} - Produtos | {$siteName}",
             'blog' => "{$title} - Blog | {$siteName}",
-            'home' => "{$siteName} - Online Shopping Store",
+            'home' => "{$siteName} - Loja de Roupas Infantis",
             default => "{$title} | {$siteName}",
         };
     }
@@ -38,10 +38,10 @@ class SeoService
         $description = Str::limit($description, $length);
 
         return match ($type) {
-            'product' => "Shop {$description} online. Fast shipping, secure payment, and great prices. Order now!",
-            'category' => "Browse our collection of {$description}. Quality products at competitive prices. Shop now!",
-            'brand' => "Discover {$description} products. Official store with authentic items and fast delivery.",
-            'blog' => "Read about {$description}. Latest news, tips, and insights from our blog.",
+            'product' => "Compre {$description} online. Entrega rápida, pagamento seguro e ótimos preços. Peça já!",
+            'category' => "Confira nossa coleção de {$description}. Produtos de qualidade com preços especiais. Compre agora!",
+            'brand' => "Descubra os produtos {$description}. Loja oficial com itens originais e entrega rápida.",
+            'blog' => "Leia sobre {$description}. Últimas novidades, dicas e insights do nosso blog.",
             default => $description,
         };
     }
@@ -79,7 +79,7 @@ class SeoService
         $baseData = [
             'og:type' => $type,
             'og:site_name' => config('app.name'),
-            'og:locale' => 'en_US',
+            'og:locale' => 'pt_BR',
         ];
 
         if ($model) {
@@ -157,7 +157,7 @@ class SeoService
             'offers' => [
                 '@type' => 'Offer',
                 'price' => $product->price,
-                'priceCurrency' => 'USD',
+                'priceCurrency' => config('app.default_currency', 'BRL'),
                 'availability' => $product->stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
                 'seller' => [
                     '@type' => 'Organization',
@@ -190,10 +190,10 @@ class SeoService
             'logo' => config('app.url').'/assets/img/logo/logo.png',
             'contactPoint' => [
                 '@type' => 'ContactPoint',
-                'telephone' => '+1-555-123-4567',
+                'telephone' => config('app.currency_symbol') === 'R$' ? '+55-11-99999-9999' : '+1-555-123-4567',
                 'contactType' => 'customer service',
-                'areaServed' => 'US',
-                'availableLanguage' => 'English',
+                'areaServed' => config('app.default_currency') === 'BRL' ? 'BR' : 'US',
+                'availableLanguage' => config('app.default_currency') === 'BRL' ? 'Portuguese' : 'English',
             ],
             'sameAs' => [
                 'https://www.facebook.com/yourpage',
@@ -235,21 +235,21 @@ class SeoService
             $keywords[] = $model->title;
             $keywords[] = $model->brand?->title;
             $keywords[] = $model->categories->pluck('title')->toArray();
-            $keywords[] = 'buy online';
-            $keywords[] = 'shop now';
+            $keywords[] = 'comprar online';
+            $keywords[] = 'loja infantil';
         } elseif ($model instanceof Category) {
             $keywords[] = $model->title;
-            $keywords[] = 'products';
-            $keywords[] = 'shop online';
+            $keywords[] = 'produtos';
+            $keywords[] = 'comprar';
         } elseif ($model instanceof Brand) {
             $keywords[] = $model->title;
-            $keywords[] = 'official store';
-            $keywords[] = 'authentic';
+            $keywords[] = 'loja oficial';
+            $keywords[] = 'original';
         } elseif ($model instanceof Post) {
             $keywords[] = $model->title;
             $keywords[] = $model->tags->pluck('title')->toArray();
             $keywords[] = 'blog';
-            $keywords[] = 'article';
+            $keywords[] = 'artigo';
         }
 
         return array_filter(array_merge(...array_map(fn ($k): array => is_array($k) ? $k : [$k], $keywords)));
@@ -261,12 +261,12 @@ class SeoService
     private function getTypeKeywords(string $type): array
     {
         return match ($type) {
-            'product' => ['online shopping', 'ecommerce', 'buy now', 'fast shipping'],
-            'category' => ['products', 'shop', 'online store', 'categories'],
-            'brand' => ['official', 'authentic', 'brand store', 'genuine'],
-            'blog' => ['blog', 'article', 'news', 'tips', 'guide'],
-            'home' => ['online shopping', 'ecommerce', 'store', 'products', 'deals'],
-            default => ['online', 'shopping', 'store'],
+            'product' => ['comprar online', 'ecommerce', 'moda infantil', 'roupas infantis'],
+            'category' => ['produtos', 'loja', 'categorias', 'moda'],
+            'brand' => ['oficial', 'original', 'marca', 'autêntico'],
+            'blog' => ['blog', 'artigo', 'notícias', 'dicas', 'guia'],
+            'home' => ['moda infantil', 'roupas', 'loja de roupas', 'bebê', 'criança'],
+            default => ['loja', 'moda', 'roupas'],
         };
     }
 
@@ -282,7 +282,7 @@ class SeoService
                 'og:image' => $model->imageUrl,
                 'og:url' => route('front.product-detail', $model->slug),
                 'product:price:amount' => $model->price,
-                'product:price:currency' => 'USD',
+                'product:price:currency' => config('app.default_currency', 'BRL'),
                 'product:availability' => $model->stock > 0 ? 'in stock' : 'out of stock',
             ];
         }

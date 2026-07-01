@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -167,7 +167,7 @@
                     @endif
                     <div class="product-details">
                         <div class="product-title">{{ $product->title }}</div>
-                        <div class="product-price">${{ number_format($product->price, 2) }}</div>
+                        <div class="product-price">R$ {{ number_format($product->price, 2, ',', '.') }}</div>
                         <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => route('front.product-detail', $product->slug)]) }}" class="read-more-btn">
                             View Product →
                         </a>

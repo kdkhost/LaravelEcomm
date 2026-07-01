@@ -38,7 +38,7 @@
                                 ${{ number_format($data, 2) }}
                             @endforeach
                         </td>
-                        <td>${{ number_format($order->total_amount, 2) }}</td>
+                        <td>R$ {{ number_format($order->total_amount, 2, ',', '.') }}</td>
                         <td>
                             <span class="badge badge-{{ $order->status == 'new' ? 'primary' : ($order->status == 'process' ? 'warning' : ($order->status == 'delivered' ? 'success' : 'danger')) }}">
                                 {{ $order->status }}
@@ -93,18 +93,24 @@
                                             <td>Shipping Charge</td>
                                             <td>
                                                 @foreach($order->shipping ?? [] as $data)
-                                                    ${{ number_format($data, 2) }}
+                                                        R$ {{ number_format($data, 2, ',', '.') }}
                                                 @endforeach
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Total Amount</td>
-                                            <td>: ${{ number_format($order->total_amount, 2) }}</td>
+                                            <td>: R$ {{ number_format($order->total_amount, 2, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <td>Payment Method</td>
                                             <td>
-                                                : {{ $order->payment_method == 'cod' ? 'Cash on Delivery' : 'Paypal' }}</td>
+                                                : @switch($order->payment_method)
+    @case('cod') Dinheiro na Entrega @break
+    @case('paypal') PayPal @break
+    @case('mercadopago') MercadoPago @break
+    @case('stripe') Cartão de Crédito @break
+    @default {{ ucfirst($order->payment_method) }}
+@endswitch</td>
                                         </tr>
                                         <tr>
                                             <td>Payment Status</td>

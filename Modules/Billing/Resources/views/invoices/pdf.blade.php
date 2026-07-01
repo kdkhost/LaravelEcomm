@@ -51,10 +51,10 @@
             <tbody>
                 <tr>
                     <td>Order Total</td>
-                    <td class="text-right">${{ number_format($invoice->subtotal, 2) }}</td>
-                    <td class="text-right">${{ number_format($invoice->tax_amount, 2) }}</td>
-                    <td class="text-right">${{ number_format($invoice->discount_amount, 2) }}</td>
-                    <td class="text-right total">${{ number_format($invoice->total_amount, 2) }}</td>
+                    <td class="text-right">R$ {{ number_format($invoice->subtotal, 2, ',', '.') }}</td>
+                    <td class="text-right">R$ {{ number_format($invoice->tax_amount, 2, ',', '.') }}</td>
+                    <td class="text-right">R$ {{ number_format($invoice->discount_amount, 2, ',', '.') }}</td>
+                    <td class="text-right total">R$ {{ number_format($invoice->total_amount, 2, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>

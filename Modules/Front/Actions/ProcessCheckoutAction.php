@@ -30,7 +30,7 @@ class ProcessCheckoutAction
         $quantity  = $cartItems->sum('quantity');
 
         if ($cartItems->isEmpty()) {
-            return redirect()->back()->with('error', 'Your cart is empty.');
+            return redirect()->back()->with('error', 'Seu carrinho está vazio.');
         }
 
         // Shipping
@@ -75,6 +75,9 @@ class ProcessCheckoutAction
             'address1'       => $request->input('address1'),
             'address2'       => $request->input('address2'),
             'post_code'      => $request->input('post_code'),
+            'state'          => $request->input('state'),
+            'neighborhood'   => $request->input('neighborhood'),
+            'number'         => $request->input('number'),
             'document'       => $request->input('document'),
         ];
 
@@ -114,9 +117,12 @@ class ProcessCheckoutAction
                 'phone'      => $request->input('phone'),
                 'country'    => $request->input('country'),
                 'city'       => $request->input('city'),
-                'address1'   => $request->input('address1'),
-                'address2'   => $request->input('address2'),
-                'post_code'  => $request->input('post_code'),
+                'address1'     => $request->input('address1'),
+                'address2'     => $request->input('address2'),
+                'post_code'    => $request->input('post_code'),
+                'state'        => $request->input('state'),
+                'neighborhood' => $request->input('neighborhood'),
+                'number'       => $request->input('number'),
             ]);
         }
 
@@ -134,7 +140,7 @@ class ProcessCheckoutAction
 
         return redirect()->route('front.index')->with(
             'success',
-            'Order placed successfully! Order number: '.$order->order_number
+            'Pedido realizado com sucesso! Número do pedido: '.$order->order_number
         );
     }
 }

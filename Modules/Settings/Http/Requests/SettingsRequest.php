@@ -60,7 +60,7 @@ class SettingsRequest extends BaseRequest
                 'nullable',
                 'string',
                 'max:20',
-                'regex:/^[\+]?[1-9][\d]{0,15}$/',
+                'regex:/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/',
             ],
             'contact_address' => [
                 'nullable',
@@ -359,7 +359,7 @@ class SettingsRequest extends BaseRequest
             'contact_postal_code.max' => 'Contact postal code must not exceed 20 characters.',
             'currency.required' => 'Currency is required.',
             'currency.size' => 'Currency must be exactly 3 characters.',
-            'currency.regex' => 'Currency must be in uppercase format (e.g., USD, EUR).',
+            'currency.regex' => 'Currency must be in uppercase format (e.g., BRL, USD, EUR).',
             'currency_symbol.required' => 'Currency symbol is required.',
             'currency_symbol.max' => 'Currency symbol must not exceed 10 characters.',
             'timezone.required' => 'Timezone is required.',
@@ -370,7 +370,7 @@ class SettingsRequest extends BaseRequest
             'time_format.in' => 'Time format must be 12 or 24.',
             'language.required' => 'Language is required.',
             'language.size' => 'Language must be exactly 2 characters.',
-            'language.regex' => 'Language must be in lowercase format (e.g., en, es, fr).',
+            'language.regex' => 'Language must be in lowercase format (e.g., pt, en, es, fr).',
             'maintenance_message.max' => 'Maintenance message must not exceed 1000 characters.',
             'smtp_port.min' => 'SMTP port must be at least 1.',
             'smtp_port.max' => 'SMTP port cannot exceed 65535.',
@@ -460,14 +460,14 @@ class SettingsRequest extends BaseRequest
                 }
             }
 
-            // Validate contact phone
+            // Validate contact phone (Brazilian format)
             if ($this->filled('contact_phone')) {
-                $contactPhone = preg_replace('/[^0-9+]/', '', $this->contact_phone);
+                $contactPhone = preg_replace('/[^0-9]/', '', $this->contact_phone);
 
-                if (mb_strlen($contactPhone) < 10 || mb_strlen($contactPhone) > 15) {
+                if (mb_strlen($contactPhone) < 10 || mb_strlen($contactPhone) > 11) {
                     $validator->errors()->add(
                         'contact_phone',
-                        'Contact phone must be between 10 and 15 digits.'
+                        'Telefone de contato deve ter 10 ou 11 dígitos (formato brasileiro).'
                     );
                 }
             }

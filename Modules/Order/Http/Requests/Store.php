@@ -15,16 +15,19 @@ class Store extends CoreRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'string|required',
-            'last_name' => 'string|required',
-            'address1' => 'string|required',
-            'address2' => 'string|nullable',
-            'coupon' => 'nullable|numeric',
-            'phone' => 'numeric|required',
-            'post_code' => 'string|nullable',
-            'email' => 'string|required',
-            'document' => ['nullable', new DocumentRule],
-            'cart' => new CartRule,
+            'first_name'   => 'string|required',
+            'last_name'    => 'string|required',
+            'address1'     => 'string|required',
+            'address2'     => 'string|nullable',
+            'state'        => 'string|required',
+            'neighborhood' => 'string|required',
+            'number'       => 'string|required',
+            'coupon'       => 'nullable|numeric',
+            'phone'        => 'string|required|regex:/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/',
+            'post_code'    => 'string|nullable|regex:/^\d{5}-?\d{3}$/',
+            'email'        => 'string|required',
+            'document'     => ['nullable', new DocumentRule],
+            'cart'         => new CartRule,
         ];
     }
 }

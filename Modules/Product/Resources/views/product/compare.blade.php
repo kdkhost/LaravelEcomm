@@ -36,7 +36,7 @@
                     <tr>
                         <td>Price</td>
                         @foreach($products as $product)
-                            <td>{{ number_format($product->price, 2) }} {{ config('app.currency', 'USD') }}</td>
+                            <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                         @endforeach
                     </tr>
                     <tr>

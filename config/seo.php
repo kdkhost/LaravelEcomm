@@ -15,15 +15,15 @@ return [
 
     'site' => [
         'name' => env('SEO_SITE_NAME', config('app.name')),
-        'description' => env('SEO_SITE_DESCRIPTION', 'Online shopping store with quality products and fast delivery.'),
-        'keywords' => env('SEO_SITE_KEYWORDS', 'online shopping, ecommerce, products, deals, discounts'),
-        'author' => env('SEO_SITE_AUTHOR', 'E-commerce Store'),
-        'language' => env('SEO_SITE_LANGUAGE', 'en'),
-        'locale' => env('SEO_SITE_LOCALE', 'en_US'),
+        'description' => env('SEO_SITE_DESCRIPTION', 'Loja de roupas infantis com produtos de qualidade e entrega rápida.'),
+        'keywords' => env('SEO_SITE_KEYWORDS', 'roupas infantis, moda infantil, bebê, criança, presente, loja de roupas'),
+        'author' => env('SEO_SITE_AUTHOR', 'Rataplam'),
+        'language' => env('SEO_SITE_LANGUAGE', 'pt'),
+        'locale' => env('SEO_SITE_LOCALE', 'pt_BR'),
     ],
 
     'meta' => [
-        'default_title' => env('SEO_DEFAULT_TITLE', 'Online Shopping Store'),
+        'default_title' => env('SEO_DEFAULT_TITLE', 'Rataplam - Loja de Roupas Infantis'),
         'title_separator' => env('SEO_TITLE_SEPARATOR', ' | '),
         'title_suffix' => env('SEO_TITLE_SUFFIX', ''),
         'description_length' => env('SEO_DESCRIPTION_LENGTH', 160),
@@ -34,7 +34,7 @@ return [
         'enabled' => env('SEO_OG_ENABLED', true),
         'app_id' => env('SEO_OG_APP_ID', ''),
         'site_name' => env('SEO_OG_SITE_NAME', config('app.name')),
-        'locale' => env('SEO_OG_LOCALE', 'en_US'),
+        'locale' => env('SEO_OG_LOCALE', 'pt_BR'),
         'image' => env('SEO_OG_IMAGE', '/assets/img/logo/logo.png'),
         'image_width' => env('SEO_OG_IMAGE_WIDTH', 1200),
         'image_height' => env('SEO_OG_IMAGE_HEIGHT', 630),
@@ -54,10 +54,10 @@ return [
             'url' => env('SEO_ORG_URL', config('app.url')),
             'logo' => env('SEO_ORG_LOGO', '/assets/img/logo/logo.png'),
             'contact_point' => [
-                'telephone' => env('SEO_ORG_PHONE', '+1-555-123-4567'),
+                'telephone' => env('SEO_ORG_PHONE', '+55-11-99999-9999'),
                 'contact_type' => 'customer service',
-                'area_served' => 'US',
-                'available_language' => 'English',
+                'area_served' => 'BR',
+                'available_language' => 'Portuguese',
             ],
             'same_as' => [
                 env('SEO_ORG_FACEBOOK', 'https://www.facebook.com/yourpage'),
@@ -146,7 +146,7 @@ return [
         'enabled' => env('SEO_BREADCRUMBS_ENABLED', true),
         'show_home' => env('SEO_BREADCRUMBS_SHOW_HOME', true),
         'separator' => env('SEO_BREADCRUMBS_SEPARATOR', ' > '),
-        'home_text' => env('SEO_BREADCRUMBS_HOME_TEXT', 'Home'),
+        'home_text' => env('SEO_BREADCRUMBS_HOME_TEXT', 'Início'),
     ],
 
     'pagination' => [

@@ -5,14 +5,14 @@
     @if(isset($product_detail))
         <!-- Product-specific meta tags -->
         <meta name="product:price:amount" content="{{ $product_detail->price }}">
-        <meta name="product:price:currency" content="USD">
+        <meta name="product:price:currency" content="{{ config('app.default_currency', 'BRL') }}">
         <meta name="product:availability" content="{{ $product_detail->stock > 0 ? 'in stock' : 'out of stock' }}">
         <meta name="product:condition" content="new">
         <meta name="product:brand" content="{{ $product_detail->brand?->title ?? 'Unknown' }}">
 
         <!-- Additional Open Graph for products -->
         <meta property="product:price:amount" content="{{ $product_detail->price }}">
-        <meta property="product:price:currency" content="USD">
+        <meta property="product:price:currency" content="{{ config('app.default_currency', 'BRL') }}">
         <meta property="product:availability" content="{{ $product_detail->stock > 0 ? 'in stock' : 'out of stock' }}">
         <meta property="product:condition" content="new">
         <meta property="product:brand" content="{{ $product_detail->brand?->title ?? 'Unknown' }}">
@@ -74,10 +74,10 @@
                         @endif
 
                         <div class="product-price">
-                            <span class="current-price">${{ number_format($product_detail->price, 2) }}</span>
+                            <span class="current-price">R$ {{ number_format($product_detail->price, 2, ',', '.') }}</span>
                             @if($product_detail->discount && $product_detail->discount > 0)
-                                <span class="original-price">${{ number_format($product_detail->price + $product_detail->discount, 2) }}</span>
-                                <span class="discount-badge">Save ${{ number_format($product_detail->discount, 2) }}</span>
+                                <span class="original-price">R$ {{ number_format($product_detail->price + $product_detail->discount, 2, ',', '.') }}</span>
+                                <span class="discount-badge">Economize R$ {{ number_format($product_detail->discount, 2, ',', '.') }}</span>
                             @endif
                         </div>
 
