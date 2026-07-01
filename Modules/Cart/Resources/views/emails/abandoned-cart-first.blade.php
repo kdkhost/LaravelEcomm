@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You left something in your cart!</title>
+    <title>Você deixou algo no carrinho!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,14 +95,14 @@
         <div class="header">
             <div class="logo">{{ config('app.name') }}</div>
             <div class="cart-icon">🛒</div>
-            <h1>You left something in your cart!</h1>
+            <h1>Você deixou algo no carrinho!</h1>
         </div>
 
-        <p>Hi {{ $userName }},</p>
+        <p>Olá {{ $userName }},</p>
 
-        <p>We noticed you added some great items to your cart but didn't complete your purchase. Don't worry - your items are still waiting for you!</p>
+        <p>Percebemos que você adicionou ótimos itens ao carrinho mas não finalizou a compra. Não se preocupe — seus itens ainda estão guardados para você!</p>
 
-        <h2>Your Cart Items:</h2>
+        <h2>Seus Itens no Carrinho:</h2>
         @foreach($cartItems as $item)
             @if($item['product'])
             <div class="product-item">
@@ -111,27 +111,27 @@
                 @endif
                 <div class="product-details">
                     <div class="product-title">{{ $item['product']->title }}</div>
-                    <div>Quantity: {{ $item['quantity'] }}</div>
-                    <div class="product-price">${{ number_format($item['amount'], 2) }}</div>
+                    <div>Quantidade: {{ $item['quantity'] }}</div>
+                    <div class="product-price">R$ {{ number_format($item['amount'], 2, ',', '.') }}</div>
                 </div>
             </div>
             @endif
         @endforeach
 
         <div style="text-align: center; margin: 30px 0;">
-            <strong>Total: ${{ number_format($abandonedCart->total_amount, 2) }}</strong>
+            <strong>Total: R$ {{ number_format($abandonedCart->total_amount, 2, ',', '.') }}</strong>
         </div>
 
         <div style="text-align: center;">
-            <a href="{{ $cartUrl }}" class="cta-button">Complete Your Purchase</a>
+            <a href="{{ $cartUrl }}" class="cta-button">Finalizar Compra</a>
         </div>
 
-        <p>Complete your order now and get your items delivered to your doorstep. We offer fast and secure shipping!</p>
+        <p>Finalize seu pedido agora e receba seus itens no conforto da sua casa. Oferecemos entrega rápida e segura!</p>
 
         <div class="footer">
-            <p>Thank you for choosing {{ config('app.name') }}!</p>
+            <p>Obrigado por escolher {{ config('app.name') }}!</p>
             <div class="unsubscribe">
-                <a href="{{ $unsubscribeUrl }}">Unsubscribe from these emails</a>
+                <a href="{{ $unsubscribeUrl }}">Cancelar inscrição destes e-mails</a>
             </div>
         </div>
     </div>

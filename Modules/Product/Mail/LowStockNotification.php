@@ -36,8 +36,8 @@ class LowStockNotification extends Mailable
      */
     public function build(): static
     {
-        return $this->subject('Low Stock Alert')
-            ->from('your-email@example.com', 'Your Name')
+        return $this            ->subject('Alerta de Estoque Baixo')
+            ->from(config('mail.from.address'), config('mail.from.name'))
             ->view('product::emails.low_stock', ['products' => $this->products]);
     }
 }

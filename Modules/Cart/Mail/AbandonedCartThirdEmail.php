@@ -24,12 +24,12 @@ class AbandonedCartThirdEmail extends Mailable implements ShouldQueue
     public function build(): self
     {
         return $this
-            ->subject('Last chance! Your cart expires soon ⏰')
+            ->subject('Última chance! Seu carrinho expira em breve ⏰')
             ->view('cart::emails.abandoned-cart-third')
             ->with([
                 'abandonedCart' => $this->abandonedCart,
                 'cartItems' => $this->abandonedCart->cart_items,
-                'userName' => $this->abandonedCart->user?->name ?? 'Valued Customer',
+                'userName' => $this->abandonedCart->user?->name ?? 'Cliente',
                 'cartUrl' => route('front.cart'),
                 'discountCode' => 'LASTCHANCE15',
                 'discountPercent' => 15,

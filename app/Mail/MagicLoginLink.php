@@ -36,6 +36,6 @@ class MagicLoginLink extends Mailable
 
         return $this->view('emails.magic_login_link')
             ->with(['url' => $url])
-            ->subject('Your Magic Login Link');
+            ->subject('Seu Link de Login Mágico');
     }
 }

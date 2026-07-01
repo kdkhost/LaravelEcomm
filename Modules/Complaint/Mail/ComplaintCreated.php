@@ -26,7 +26,7 @@ class ComplaintCreated extends Mailable
     public function build(): self
     {
         return $this
-            ->subject("New Complaint Created: {$this->complaint->id}")
+            ->subject("Nova Reclamação Criada: {$this->complaint->id}")
             ->view('complaint::email.complaint_created')
             ->with([
                 'complaint' => $this->complaint,

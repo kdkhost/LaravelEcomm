@@ -24,12 +24,12 @@ class AbandonedCartFirstEmail extends Mailable implements ShouldQueue
     public function build(): self
     {
         return $this
-            ->subject('You left something in your cart! 🛒')
+            ->subject('Você deixou algo no carrinho! 🛒')
             ->view('cart::emails.abandoned-cart-first')
             ->with([
                 'abandonedCart' => $this->abandonedCart,
                 'cartItems' => $this->abandonedCart->cart_items,
-                'userName' => $this->abandonedCart->user?->name ?? 'Valued Customer',
+                'userName' => $this->abandonedCart->user?->name ?? 'Cliente',
                 'cartUrl' => route('front.cart'),
                 'unsubscribeUrl' => route('newsletter.unsubscribe', ['email' => $this->abandonedCart->email]),
             ]);

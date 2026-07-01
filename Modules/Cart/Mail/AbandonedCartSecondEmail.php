@@ -24,12 +24,12 @@ class AbandonedCartSecondEmail extends Mailable implements ShouldQueue
     public function build(): self
     {
         return $this
-            ->subject('Still thinking? Here\'s a special offer! 💰')
+            ->subject('Ainda pensando? Oferta especial para você! 💰')
             ->view('cart::emails.abandoned-cart-second')
             ->with([
                 'abandonedCart' => $this->abandonedCart,
                 'cartItems' => $this->abandonedCart->cart_items,
-                'userName' => $this->abandonedCart->user?->name ?? 'Valued Customer',
+                'userName' => $this->abandonedCart->user?->name ?? 'Cliente',
                 'cartUrl' => route('front.cart'),
                 'discountCode' => 'CART10', // You can generate dynamic codes
                 'discountPercent' => 10,

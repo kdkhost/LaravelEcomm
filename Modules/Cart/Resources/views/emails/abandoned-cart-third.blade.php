@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Last chance! Your cart expires soon</title>
+    <title>Última chance! Carrinho expira em breve</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -123,23 +123,23 @@
     <div class="container">
         <div class="header">
             <div class="logo">{{ config('app.name') }}</div>
-            <div class="urgent-badge">⏰ LAST CHANCE</div>
-            <h1>Your cart expires soon!</h1>
+            <div class="urgent-badge">⏰ ÚLTIMA CHANCE</div>
+            <h1>Seu carrinho expira em breve!</h1>
         </div>
 
-        <p>Hi {{ $userName }},</p>
+        <p>Olá {{ $userName }},</p>
 
-        <p>This is your final reminder! Your cart will expire soon and these items may no longer be available at this price.</p>
+        <p>Este é seu lembrete final! Seu carrinho expirará em breve e estes itens podem não estar mais disponíveis por este preço.</p>
 
         <div class="final-discount">
-            🎉 FINAL OFFER: Use code <strong>{{ $discountCode }}</strong> for {{ $discountPercent }}% OFF!
+            🎉 OFERTA FINAL: Use o cupom <strong>{{ $discountCode }}</strong> e ganhe {{ $discountPercent }}% DE DESCONTO!
         </div>
 
         <div class="countdown">
-            ⏰ This offer expires in 24 hours
+            ⏰ Esta oferta expira em 24 horas
         </div>
 
-        <h2>Your Cart Items:</h2>
+        <h2>Seus Itens no Carrinho:</h2>
         @foreach($cartItems as $item)
             @if($item['product'])
             <div class="product-item">
@@ -148,29 +148,29 @@
                 @endif
                 <div class="product-details">
                     <div class="product-title">{{ $item['product']->title }}</div>
-                    <div>Quantity: {{ $item['quantity'] }}</div>
-                    <div class="product-price">${{ number_format($item['amount'], 2) }}</div>
+                    <div>Quantidade: {{ $item['quantity'] }}</div>
+                    <div class="product-price">R$ {{ number_format($item['amount'], 2, ',', '.') }}</div>
                 </div>
             </div>
             @endif
         @endforeach
 
         <div style="text-align: center; margin: 30px 0;">
-            <strong>Total: ${{ number_format($abandonedCart->total_amount, 2) }}</strong><br>
-            <span style="color: #27ae60; font-size: 18px;">With discount: ${{ number_format($abandonedCart->total_amount * (1 - $discountPercent/100), 2) }}</span><br>
-            <span style="color: #e74c3c;">You save: ${{ number_format($abandonedCart->total_amount * ($discountPercent/100), 2) }}!</span>
+            <strong>Total: R$ {{ number_format($abandonedCart->total_amount, 2, ',', '.') }}</strong><br>
+            <span style="color: #27ae60; font-size: 18px;">Com desconto: R$ {{ number_format($abandonedCart->total_amount * (1 - $discountPercent/100), 2, ',', '.') }}</span><br>
+            <span style="color: #e74c3c;">Você economiza: R$ {{ number_format($abandonedCart->total_amount * ($discountPercent/100), 2, ',', '.') }}!</span>
         </div>
 
         <div style="text-align: center;">
-            <a href="{{ $cartUrl }}" class="cta-button">Complete Purchase Now</a>
+            <a href="{{ $cartUrl }}" class="cta-button">Finalizar Compra Agora</a>
         </div>
 
-        <p><strong>Don't miss out!</strong> This is your last chance to get these items at this special price. After this email, your cart will be cleared.</p>
+        <p><strong>Não perca!</strong> Esta é sua última chance de garantir estes itens com preço especial. Após este e-mail, seu carrinho será limpo.</p>
 
         <div class="footer">
-            <p>Thank you for choosing {{ config('app.name') }}!</p>
+            <p>Obrigado por escolher {{ config('app.name') }}!</p>
             <div class="unsubscribe">
-                <a href="{{ $unsubscribeUrl }}">Unsubscribe from these emails</a>
+                <a href="{{ $unsubscribeUrl }}">Cancelar inscrição destes e-mails</a>
             </div>
         </div>
     </div>

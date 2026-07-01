@@ -33,6 +33,7 @@ readonly class OrderDTO
         public ?string $address1 = null,
         public ?string $address2 = null,
         public ?string $post_code = null,
+        public ?string $document = null,
         public ?string $created_at = null,
     ) {}
 
@@ -63,28 +64,45 @@ readonly class OrderDTO
             address1: $validated['address1'] ?? $existing?->address1,
             address2: $validated['address2'] ?? $existing?->address2,
             post_code: $validated['post_code'] ?? $existing?->post_code,
+            document: $validated['document'] ?? $existing?->document,
             created_at: $validated['created_at'] ?? ($existing?->created_at?->format('Y-m-d H:i:s')),
         );
     }
 
     public static function fromArray(array $data): self
     {
-        return new self(
-            $data['id'] ?? null,
-            $data['order_number'] ?? null,
-            $data['user_id'] ?? null,
-            $data['sub_total'] ?? null,
-            $data['shipping_id'] ?? null,
-            $data['total_amount'] ?? null,
-            $data['quantity'] ?? null,
-            $data['payment_method'] ?? null,
-            $data['payment_status'] ?? null,
-            $data['status'] ?? null,
-            isset($data['payer_id']) ? (int) $data['payer_id'] : null,
-            $data['transaction_reference'] ?? null,
-            isset($data['created_at']) && $data['created_at'] instanceof Carbon
+        $createdAt = null;
+        if (isset($data['created_at'])) {
+            $createdAt = $data['created_at'] instanceof Carbon
                 ? $data['created_at']->format('Y-m-d H:i:s')
-                : $data['created_at'] ?? null,
+                : $data['created_at'];
+        }
+
+        return new self(
+            id: $data['id'] ?? null,
+            order_number: $data['order_number'] ?? null,
+            user_id: $data['user_id'] ?? null,
+            sub_total: $data['sub_total'] ?? null,
+            shipping_id: $data['shipping_id'] ?? null,
+            total_amount: $data['total_amount'] ?? null,
+            quantity: $data['quantity'] ?? null,
+            payment_method: $data['payment_method'] ?? null,
+            payment_status: $data['payment_status'] ?? null,
+            status: $data['status'] ?? null,
+            payer_id: isset($data['payer_id']) ? (int) $data['payer_id'] : null,
+            transaction_reference: $data['transaction_reference'] ?? null,
+            first_name: $data['first_name'] ?? null,
+            last_name: $data['last_name'] ?? null,
+            email: $data['email'] ?? null,
+            phone: $data['phone'] ?? null,
+            country: $data['country'] ?? null,
+            city: $data['city'] ?? null,
+            state: $data['state'] ?? null,
+            address1: $data['address1'] ?? null,
+            address2: $data['address2'] ?? null,
+            post_code: $data['post_code'] ?? null,
+            document: $data['document'] ?? null,
+            created_at: $createdAt,
         );
     }
 
@@ -112,6 +130,7 @@ readonly class OrderDTO
             'address1' => $this->address1,
             'address2' => $this->address2,
             'post_code' => $this->post_code,
+            'document' => $this->document,
         ], fn (float|int|string|null $v): bool => $v !== null);
     }
 }

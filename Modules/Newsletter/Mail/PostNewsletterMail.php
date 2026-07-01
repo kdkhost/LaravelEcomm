@@ -49,7 +49,8 @@ class PostNewsletterMail extends Mailable implements ShouldQueue
      */
     public function build(): self
     {
-        return $this->view('newsletter::emails.enhanced-newsletter')
+        return $this->subject('Novidades do Blog')
+            ->view('newsletter::emails.enhanced-newsletter')
             ->with([
                 'posts' => $this->posts,
                 'products' => [], // Can be passed from the job

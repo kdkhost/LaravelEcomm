@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Magic Login Link</title>
+    <title>Link de Login Mágico</title>
 </head>
 <body>
-<p>Hello!</p>
-<p>You requested a magic login link. Click the button below to log in:</p>
+<p>Olá!</p>
+<p>Você solicitou um link de login mágico. Clique no botão abaixo para entrar:</p>
 <p><a href="{{ $url }}"
-      style="display: inline-block; background-color: #3490dc; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Login</a>
+      style="display: inline-block; background-color: #3490dc; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Entrar</a>
 </p>
-<p>If you did not request this, please ignore this email.</p>
+<p>Se você não solicitou isto, ignore este e-mail.</p>
 </body>
 </html>

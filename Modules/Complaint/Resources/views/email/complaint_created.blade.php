@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint Created</title>
+    <title>Reclamação Criada</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,20 +60,20 @@
 <body>
 <div class="email-container">
     <div class="header">
-        <h1>Complaint Created</h1>
+        <h1>Reclamação Criada</h1>
     </div>
     <div class="content">
-        <p><span class="highlight">Complaint ID:</span> {{ $complaint->id }}</p>
-        <p><span class="highlight">Complaint:</span> {!! $complaint->description !!}</p>
+        <p><span class="highlight">ID da Reclamação:</span> {{ $complaint->id }}</p>
+        <p><span class="highlight">Descrição:</span> {!! $complaint->description !!}</p>
         <p><span class="highlight">Status:</span> {{ ucfirst($complaint->status) }}</p>
 
         @if($recipientType === 'admin')
-            <p><span class="highlight">Order ID:</span> {{ $complaint->order_id }}</p>
-            <p><span class="highlight">Created By:</span> {{ $complaint->user->name }}</p>
+            <p><span class="highlight">ID do Pedido:</span> {{ $complaint->order_id }}</p>
+            <p><span class="highlight">Criado por:</span> {{ $complaint->user->name }}</p>
         @endif
     </div>
     <div class="footer">
-        <p>Thank you for using <span class="highlight">{{ config('app.name') }}</span>.</p>
+        <p>Obrigado por usar o <span class="highlight">{{ config('app.name') }}</span>.</p>
     </div>
 </div>
 </body>

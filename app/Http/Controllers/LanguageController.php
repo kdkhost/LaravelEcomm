@@ -53,6 +53,17 @@ class LanguageController extends Controller
         $parsedUrl = parse_url($url);
         $path = $parsedUrl['path'] ?? '/';
 
+        // List of non-localized routes (admin, api, auth, etc.)
+        $nonLocalizedPrefixes = ['/admin', '/api', '/login', '/logout', '/feed', '/magic', '/language', '/placeholder'];
+
+        // Check if current path is a non-localized route
+        foreach ($nonLocalizedPrefixes as $prefix) {
+            if (str_starts_with($path, $prefix)) {
+                // Locale already set in session; redirect back to same URL
+                return $url;
+            }
+        }
+
         // Get active language codes
         $activeLocales = Language::getActiveCodes();
 

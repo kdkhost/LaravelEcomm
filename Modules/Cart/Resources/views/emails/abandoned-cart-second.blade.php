@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Still thinking? Here's a special offer!</title>
+    <title>Ainda pensando? Oferta especial!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -108,19 +108,19 @@
     <div class="container">
         <div class="header">
             <div class="logo">{{ config('app.name') }}</div>
-            <div class="offer-badge">💰 SPECIAL OFFER</div>
-            <h1>Still thinking? Here's a special offer!</h1>
+            <div class="offer-badge">💰 OFERTA ESPECIAL</div>
+            <h1>Ainda pensando? Oferta especial!</h1>
         </div>
 
-        <p>Hi {{ $userName }},</p>
+        <p>Olá {{ $userName }},</p>
 
-        <p>We know you're interested in the items in your cart. To help you make the decision, we're offering you an exclusive discount!</p>
+        <p>Sabemos que você se interessou pelos itens do seu carrinho. Para ajudar na sua decisão, estamos oferecendo um desconto exclusivo!</p>
 
         <div class="discount-code">
-            Use code <strong>{{ $discountCode }}</strong> for {{ $discountPercent }}% OFF your order!
+            Use o cupom <strong>{{ $discountCode }}</strong> e ganhe {{ $discountPercent }}% DE DESCONTO!
         </div>
 
-        <h2>Your Cart Items:</h2>
+        <h2>Seus Itens no Carrinho:</h2>
         @foreach($cartItems as $item)
             @if($item['product'])
             <div class="product-item">
@@ -129,28 +129,28 @@
                 @endif
                 <div class="product-details">
                     <div class="product-title">{{ $item['product']->title }}</div>
-                    <div>Quantity: {{ $item['quantity'] }}</div>
-                    <div class="product-price">${{ number_format($item['amount'], 2) }}</div>
+                    <div>Quantidade: {{ $item['quantity'] }}</div>
+                    <div class="product-price">R$ {{ number_format($item['amount'], 2, ',', '.') }}</div>
                 </div>
             </div>
             @endif
         @endforeach
 
         <div style="text-align: center; margin: 30px 0;">
-            <strong>Total: ${{ number_format($abandonedCart->total_amount, 2) }}</strong><br>
-            <span style="color: #27ae60;">With discount: ${{ number_format($abandonedCart->total_amount * (1 - $discountPercent/100), 2) }}</span>
+            <strong>Total: R$ {{ number_format($abandonedCart->total_amount, 2, ',', '.') }}</strong><br>
+            <span style="color: #27ae60;">Com desconto: R$ {{ number_format($abandonedCart->total_amount * (1 - $discountPercent/100), 2, ',', '.') }}</span>
         </div>
 
         <div style="text-align: center;">
-            <a href="{{ $cartUrl }}" class="cta-button">Complete Your Purchase with Discount</a>
+            <a href="{{ $cartUrl }}" class="cta-button">Finalizar Compra com Desconto</a>
         </div>
 
-        <p><strong>This offer is valid for the next 24 hours only!</strong> Don't miss out on this great deal.</p>
+        <p><strong>Esta oferta é válida por apenas 24 horas!</strong> Não perca esta oportunidade.</p>
 
         <div class="footer">
-            <p>Thank you for choosing {{ config('app.name') }}!</p>
+            <p>Obrigado por escolher {{ config('app.name') }}!</p>
             <div class="unsubscribe">
-                <a href="{{ $unsubscribeUrl }}">Unsubscribe from these emails</a>
+                <a href="{{ $unsubscribeUrl }}">Cancelar inscrição destes e-mails</a>
             </div>
         </div>
     </div>

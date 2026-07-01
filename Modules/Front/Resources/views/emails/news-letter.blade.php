@@ -1,10 +1,9 @@
-<h1>Newsletter Verification Mail</h1>
+<h1>E-mail de Verificação da Newsletter</h1>
 
-Please verify your email with bellow link:
-<a href="{{ route('validation', $token) }}">Verify Email</a>
+<p>Por favor, verifique seu e-mail clicando no link abaixo:</p>
+<a href="{{ route('validation', $token) }}">Verificar E-mail</a>
 
+<p><a href="{{ route('delete-newsletter', $token) }}">Cancelar inscrição</a></p>
 
-<a href="{{ route('delete-newsletter', $token) }}">Unsubscribe</a>
-
-Thanks,<br>
-{{ config('app.name') }}
+<p>Atenciosamente,<br>
+{{ config('app.name') }}</p>

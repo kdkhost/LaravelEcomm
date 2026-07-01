@@ -6,21 +6,12 @@ namespace Modules\Order\Http\Requests;
 
 use Modules\Core\Http\Requests\CoreRequest;
 use Modules\Order\Rules\CartRule;
+use Modules\Order\Rules\DocumentRule;
 
 class Store extends CoreRequest
 {
-    /**
-     * Shipping information.
-     *
-     * @var string[]
-     */
     public array $shipping;
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, string|CartRule>
-     */
     public function rules(): array
     {
         return [
@@ -32,7 +23,8 @@ class Store extends CoreRequest
             'phone' => 'numeric|required',
             'post_code' => 'string|nullable',
             'email' => 'string|required',
-            'cart' => new CartRule, // Ensure this custom rule is properly included
+            'document' => ['nullable', new DocumentRule],
+            'cart' => new CartRule,
         ];
     }
 }

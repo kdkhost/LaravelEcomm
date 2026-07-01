@@ -44,6 +44,7 @@ class ProductNewsletterMail extends Mailable implements ShouldQueue
     public function build(): self
     {
         return $this->markdown('newsletter::emails.product-newsletter')
+            ->subject('Novidades em Produtos')
             ->with('products', $this->products);
     }
 }

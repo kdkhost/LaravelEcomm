@@ -48,6 +48,7 @@ use Modules\User\Models\User;
  * @property string|null $address1
  * @property string|null $address2
  * @property string|null $post_code
+ * @property string|null $document
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Cart> $cart_info
@@ -149,6 +150,7 @@ class Order extends Core
             'state',
             'address1',
             'address2',
+            'document',
         ];
 
     public static function Factory(): OrderFactory

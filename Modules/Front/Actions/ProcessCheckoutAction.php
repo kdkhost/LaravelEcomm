@@ -75,6 +75,7 @@ class ProcessCheckoutAction
             'address1'       => $request->input('address1'),
             'address2'       => $request->input('address2'),
             'post_code'      => $request->input('post_code'),
+            'document'       => $request->input('document'),
         ];
 
         // Payment gateway redirects — store order data in session and redirect
