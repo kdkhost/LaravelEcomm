@@ -207,6 +207,7 @@
                                                     <div class="product-action">
                                                         <a data-toggle="modal" data-target="#{{$product->id}}" title="@lang('frontend.quick_view')" href="#"><i class=" ti-eye"></i><span>@lang('frontend.quick_shop')</span></a>
                                                         <a title="@lang('frontend.wishlist')" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>@lang('frontend.add_to_wishlist')</span></a>
+                                                        <a title="Provador virtual" href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}"><i class="fa fa-magic"></i><span>Provador virtual</span></a>
                                                         <form method="POST" action="{{ route('products.compare.add', $product->id) }}" style="display:inline">
                                                             @csrf
                                                             <button type="submit" class="btn btn-outline-primary btn-xs p-1" style="font-size:12px;line-height:1.1;" title="@lang('frontend.add_to_compare')">
@@ -395,6 +396,8 @@
                                                 <button type="submit" class="btn">@lang('frontend.add_to_cart')</button>
                                                 <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i
                                                             class="ti-heart"></i></a>
+                                                <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn min" title="Provador virtual"><i
+                                                            class="fa fa-magic"></i></a>
                                             </div>
                                         </form>
                                         <div class="default-social">

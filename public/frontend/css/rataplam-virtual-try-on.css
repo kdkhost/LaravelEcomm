@@ -1,0 +1,456 @@
+/* Rataplam virtual try-on studio */
+.rataplam-tryon-studio {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 34px 15px 54px;
+  color: #1f2933;
+}
+
+.rataplam-tryon-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.rataplam-tryon-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.rataplam-tryon-head h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 32px;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.rataplam-tryon-head p {
+  max-width: 720px;
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.rataplam-tryon-back,
+.rataplam-tryon-primary,
+.rataplam-tryon-secondary,
+.rataplam-tryon-tool {
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.rataplam-tryon-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 16px;
+  background: #eef6f5;
+  color: #0f766e;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rataplam-tryon-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.rataplam-tryon-stage-panel,
+.rataplam-tryon-controls {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+.rataplam-tryon-stage-panel {
+  padding: 18px;
+}
+
+.rataplam-tryon-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.rataplam-tryon-tool {
+  min-height: 38px;
+  padding: 8px 14px;
+  background: #f3f6f8;
+  color: #334155;
+  font-weight: 700;
+}
+
+.rataplam-tryon-tool.is-active,
+.rataplam-tryon-tool:hover {
+  background: #f7941d;
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(247, 148, 29, 0.24);
+}
+
+.rataplam-tryon-canvas-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 420px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    #f8fafc;
+  background-size: 34px 34px;
+}
+
+.rataplam-tryon-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rataplam-tryon-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 34px;
+  color: #64748b;
+  text-align: center;
+  pointer-events: none;
+}
+
+.rataplam-tryon-empty.is-hidden {
+  display: none;
+}
+
+.rataplam-tryon-empty i {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #e0f2f1;
+  color: #0f766e;
+  font-size: 34px;
+  line-height: 70px;
+}
+
+.rataplam-tryon-empty strong {
+  color: #111827;
+  font-size: 20px;
+}
+
+.rataplam-tryon-angle {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px;
+  gap: 14px;
+  align-items: center;
+  margin-top: 16px;
+  color: #475569;
+  font-weight: 700;
+}
+
+.rataplam-tryon-angle input,
+.rataplam-tryon-range input {
+  width: 100%;
+  accent-color: #0f766e;
+}
+
+.rataplam-tryon-frames {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.rataplam-tryon-frame {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  padding: 6px;
+  text-align: center;
+}
+
+.rataplam-tryon-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #f8fafc;
+}
+
+.rataplam-tryon-frame span {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rataplam-tryon-controls {
+  padding: 18px;
+}
+
+.rataplam-tryon-control-group {
+  margin-bottom: 18px;
+}
+
+.rataplam-tryon-control-group label,
+.rataplam-tryon-measure-grid label,
+.rataplam-tryon-range {
+  display: block;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rataplam-tryon-control-title {
+  margin-bottom: 12px;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.rataplam-tryon-upload {
+  position: relative;
+  display: flex;
+  min-height: 118px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+  color: #64748b;
+  text-align: center;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.rataplam-tryon-upload.is-dragover,
+.rataplam-tryon-upload:hover {
+  border-color: #0f766e;
+  background: #ecfdf5;
+}
+
+.rataplam-tryon-upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rataplam-tryon-upload i {
+  color: #0f766e;
+  font-size: 24px;
+}
+
+.rataplam-tryon-upload strong {
+  color: #111827;
+  font-size: 15px;
+}
+
+.rataplam-tryon-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0 0 18px;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.rataplam-tryon-garments {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rataplam-tryon-garment {
+  border: 2px solid #e5e7eb;
+  background: #ffffff;
+  padding: 4px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: border 0.2s ease, transform 0.2s ease;
+}
+
+.rataplam-tryon-garment.is-active {
+  border-color: #f7941d;
+  transform: translateY(-2px);
+}
+
+.rataplam-tryon-garment img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rataplam-tryon-measures {
+  margin-bottom: 18px;
+}
+
+.rataplam-tryon-measure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rataplam-tryon-measure-grid input,
+.rataplam-tryon-control-group select {
+  width: 100%;
+  height: 40px;
+  margin-top: 5px;
+  border: 1px solid #d7dde5;
+  background: #ffffff;
+  color: #111827;
+  padding: 0 10px;
+}
+
+.rataplam-tryon-primary,
+.rataplam-tryon-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 14px;
+  font-weight: 800;
+}
+
+.rataplam-tryon-primary {
+  width: 100%;
+  background: #0f766e;
+  color: #ffffff;
+}
+
+.rataplam-tryon-primary:hover {
+  background: #115e59;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.rataplam-tryon-result {
+  display: none;
+  margin-bottom: 18px;
+  padding: 12px;
+  border-left: 4px solid #0f766e;
+  background: #ecfdf5;
+  color: #115e59;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.rataplam-tryon-result.is-visible {
+  display: block;
+}
+
+.rataplam-tryon-range {
+  margin-bottom: 12px;
+}
+
+.rataplam-tryon-range input {
+  display: block;
+  margin-top: 6px;
+}
+
+.rataplam-tryon-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.rataplam-tryon-secondary {
+  width: 100%;
+  background: #f3f6f8;
+  color: #334155;
+}
+
+.rataplam-tryon-secondary:hover {
+  background: #e2e8f0;
+  color: #111827;
+}
+
+.rataplam-tryon-table {
+  color: #334155;
+  font-size: 12px;
+}
+
+.rataplam-tryon-table strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #111827;
+  font-size: 14px;
+}
+
+.rataplam-tryon-table table {
+  margin-bottom: 0;
+  background: #ffffff;
+}
+
+@media (max-width: 991px) {
+  .rataplam-tryon-head {
+    display: block;
+  }
+
+  .rataplam-tryon-back {
+    margin-top: 16px;
+  }
+
+  .rataplam-tryon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rataplam-tryon-canvas-wrap {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 575px) {
+  .rataplam-tryon-studio {
+    padding: 24px 10px 42px;
+  }
+
+  .rataplam-tryon-head h1 {
+    font-size: 25px;
+  }
+
+  .rataplam-tryon-stage-panel,
+  .rataplam-tryon-controls {
+    padding: 12px;
+  }
+
+  .rataplam-tryon-angle {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .rataplam-tryon-frames,
+  .rataplam-tryon-garments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rataplam-tryon-measure-grid,
+  .rataplam-tryon-actions {
+    grid-template-columns: 1fr;
+  }
+}

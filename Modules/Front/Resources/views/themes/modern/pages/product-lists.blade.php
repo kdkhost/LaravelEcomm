@@ -48,6 +48,9 @@
                         </h4>
                         <p>{!! html_entity_decode($product->summary) !!}</p>
                         <a href="{{ route('add-to-cart', $product->slug) }}" class="btn btn-default">Adicionar ao carrinho</a>
+                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn btn-default-transparent">
+                            <i class="fa fa-magic"></i> Provador virtual
+                        </a>
                     </div>
                 </div>
                 @endforeach

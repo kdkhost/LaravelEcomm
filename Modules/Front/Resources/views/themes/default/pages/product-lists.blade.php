@@ -222,6 +222,9 @@
                                                                    href="{{route('add-to-wishlist',$product->slug)}}"
                                                                    class="wishlist" data-id="{{$product->id}}"><i
                                                                             class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
+                                                                <a title="Provador virtual"
+                                                                   href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}"><i
+                                                                            class="fa fa-magic"></i><span>Provador virtual</span></a>
                                                             </div>
                                                             <div class="product-action-2">
                                                                 <a title="Adicionar ao carrinho"
@@ -378,6 +381,8 @@
                                             <button type="submit" class="btn">Adicionar ao carrinho</button>
                                             <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i
                                                         class="ti-heart"></i></a>
+                                            <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn min" title="Provador virtual"><i
+                                                        class="fa fa-magic"></i></a>
                                         </div>
                                     </form>
                                     <div class="default-social">

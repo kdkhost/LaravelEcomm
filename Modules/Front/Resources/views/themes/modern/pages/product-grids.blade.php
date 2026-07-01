@@ -143,6 +143,7 @@
                                                 <div class="product-item-overlay">
                                                     <a href="#" data-toggle="modal" data-target="#modal-{{ $product->id }}" class="btn btn-sm btn-default-transparent"><i class="fa fa-eye"></i></a>
                                                     <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn btn-sm btn-default-transparent"><i class="fa fa-heart-o"></i></a>
+                                                    <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn btn-sm btn-default-transparent" title="Provador virtual"><i class="fa fa-magic"></i></a>
                                                     <a href="{{ route('add-to-cart', $product->slug) }}" class="btn btn-sm btn-default-transparent"><i class="fa fa-shopping-cart"></i></a>
                                                 </div>
                                             </div>
@@ -244,6 +245,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-default btn-animated">Adicionar ao carrinho</button>
                                         <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn btn-default-transparent btn-animated"><i class="fa fa-heart-o"></i></a>
+                                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn btn-default-transparent btn-animated"><i class="fa fa-magic"></i> Provador virtual</a>
                                     </form>
                                 </div>
                             </div>

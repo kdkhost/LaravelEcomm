@@ -111,6 +111,7 @@
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
                                                         <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn-sm-link"><i class="fa fa-magic pr-10"></i>Provador virtual</a>
                                                         <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>
@@ -155,6 +156,7 @@
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
                                                         <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn-sm-link"><i class="fa fa-magic pr-10"></i>Provador virtual</a>
                                                         <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>
@@ -199,6 +201,7 @@
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
                                                         <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}" class="btn-sm-link"><i class="fa fa-magic pr-10"></i>Provador virtual</a>
                                                         <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>

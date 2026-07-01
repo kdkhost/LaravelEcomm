@@ -119,6 +119,9 @@
                                             <a title="Favoritos"
                                                href="{{route('add-to-wishlist',$product->slug)}}"><i
                                                         class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
+                                            <a title="Provador virtual"
+                                               href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}"><i
+                                                        class="fa fa-magic"></i><span>Provador virtual</span></a>
                                             <form method="POST" action="{{ route('products.compare.add', $product->id) }}" style="display:inline">
                                                 @csrf
                                                 <button type="submit" class="btn btn-outline-primary btn-sm" title="Comparar">
@@ -368,6 +371,9 @@
                                                         <a href="{{route('add-to-wishlist',$product->slug)}}"
                                                            class="btn min"><i
                                                                     class="ti-heart"></i></a>
+                                                        <a href="{{ route('front.virtual-try-on', ['slug' => $product->slug]) }}"
+                                                           class="btn min" title="Provador virtual"><i
+                                                                    class="fa fa-magic"></i></a>
                                                     </div>
                                                 </form>
                                                 <div class="default-social">

@@ -2,6 +2,29 @@
 
 Todas as mudancas relevantes deste projeto devem ser documentadas aqui em portugues brasileiro.
 
+## [1.1.4] - 2026-07-01
+
+### Adicionado
+- Provador virtual 360 com upload local de foto de corpo inteiro da crianca, composicao em canvas e aplicacao visual da roupa selecionada.
+- Controles de ajuste fino para largura, altura, posicao vertical, opacidade e angulo 360 da roupa no corpo.
+- Geracao de quadros de visualizacao em 360 graus nos angulos 0, 45, 90, 135, 180, 225, 270 e 315 graus.
+- Botao para baixar a imagem final gerada pelo provador no navegador.
+- Selecionador de produto dentro do provador para trocar a peca sem sair da experiencia.
+- Atalhos "Provador virtual" nas vitrines de produtos dos temas default e modern, incluindo home, grade e lista.
+- CSS e JavaScript dedicados em `frontend/css/rataplam-virtual-try-on.css` e `frontend/js/rataplam-virtual-try-on.js`.
+
+### Alterado
+- `VirtualTryOnController` agora entrega galeria da peca, lista de produtos ativos e mapa corporal para ajuste proporcional do caimento.
+- Paginas do provador dos temas default e modern passam a usar um componente compartilhado em `front::partials.virtual-try-on-studio`.
+- Calculo de medidas retorna tamanho recomendado, mensagem de caimento e parametros de corpo usados pelo canvas.
+
+### Seguranca e privacidade
+- A foto da crianca e processada no navegador no modo padrao e nao fica salva no servidor.
+- O upload exige confirmacao de autorizacao de uso da foto antes de carregar a imagem no provador.
+
+### Observacoes
+- A visualizacao 360 atual e uma simulacao interativa em canvas a partir da foto enviada e da imagem da peca. Um modelo 3D/IA generativa real pode ser acoplado futuramente mediante provedor externo e credenciais proprias.
+
 ## [1.1.3] - 2026-07-01
 
 ### Adicionado
