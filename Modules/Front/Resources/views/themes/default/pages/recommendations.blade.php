@@ -17,21 +17,21 @@
                 <h2 class="text-xl font-semibold text-gray-900 mb-2">Recommendation Types</h2>
                 <p class="text-gray-600">Choose how you'd like to discover new products</p>
             </div>
-            
+
             <div class="flex flex-wrap gap-2">
-                <a href="{{ route('front.recommendations', ['type' => 'ai']) }}" 
+                <a href="{{ route('front.recommendations', ['type' => 'ai']) }}"
                    class="px-4 py-2 rounded-lg {{ $type == 'ai' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }} transition-colors">
                     <i class="fas fa-brain mr-2"></i>
                     AI-Powered
                 </a>
-                
-                <a href="{{ route('front.recommendations', ['type' => 'collaborative']) }}" 
+
+                <a href="{{ route('front.recommendations', ['type' => 'collaborative']) }}"
                    class="px-4 py-2 rounded-lg {{ $type == 'collaborative' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }} transition-colors">
                     <i class="fas fa-users mr-2"></i>
                     Similar Users
                 </a>
-                
-                <a href="{{ route('front.recommendations', ['type' => 'trending']) }}" 
+
+                <a href="{{ route('front.recommendations', ['type' => 'trending']) }}"
                    class="px-4 py-2 rounded-lg {{ $type == 'trending' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }} transition-colors">
                     <i class="fas fa-fire mr-2"></i>
                     Trending
@@ -66,15 +66,15 @@
                 <h2 class="text-xl font-semibold text-gray-900">
                     {{ $totalCount }} Recommended Products
                 </h2>
-                
+
                 <div class="flex items-center space-x-4">
                     <span class="text-sm text-gray-600">View:</span>
-                    <button onclick="setViewMode('grid')" 
+                    <button onclick="setViewMode('grid')"
                             id="gridViewBtn"
                             class="p-2 rounded-md bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
                         <i class="fas fa-th"></i>
                     </button>
-                    <button onclick="setViewMode('list')" 
+                    <button onclick="setViewMode('list')"
                             id="listViewBtn"
                             class="p-2 rounded-md bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
                         <i class="fas fa-list"></i>
@@ -88,7 +88,7 @@
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div class="relative">
                             @if($product->getFirstMediaUrl('images'))
-                                <img src="{{ $product->getFirstMediaUrl('images') }}" 
+                                <img src="{{ $product->getFirstMediaUrl('images') }}"
                                      alt="{{ $product->title }}"
                                      class="w-full h-48 object-cover">
                             @else
@@ -96,7 +96,7 @@
                                     <i class="fas fa-image text-gray-400 text-4xl"></i>
                                 </div>
                             @endif
-                            
+
                             <!-- Recommendation Badge -->
                             <div class="absolute top-2 right-2">
                                 <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
@@ -105,36 +105,36 @@
                                 </span>
                             </div>
                         </div>
-                        
+
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                <a href="{{ route('front.product-detail', $product->slug) }}" 
+                                <a href="{{ route('front.product-detail', $product->slug) }}"
                                    class="hover:text-blue-600 transition-colors">
                                     {{ $product->title }}
                                 </a>
                             </h3>
-                            
+
                             <div class="flex items-center mb-2">
                                 @if($product->special_price)
-                                    <span class="text-lg font-bold text-red-600">${{ number_format($product->special_price, 2) }}</span>
-                                    <span class="text-sm text-gray-500 line-through ml-2">${{ number_format($product->price, 2) }}</span>
+                                    <span class="text-lg font-bold text-red-600">{{ format_currency((float) ($product->special_price)) }}</span>
+                                    <span class="text-sm text-gray-500 line-through ml-2">{{ format_currency((float) ($product->price)) }}</span>
                                 @else
-                                    <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                                    <span class="text-lg font-bold text-gray-900">{{ format_currency((float) ($product->price)) }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="flex items-center justify-between">
                                 <span class="text-sm text-gray-600">
-                                    Stock: {{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                    Estoque: {{ $product->stock > 0 ? 'Em estoque' : 'Sem estoque' }}
                                 </span>
-                                
+
                                 <div class="flex space-x-2">
-                                    <button onclick="addToWishlist({{ $product->id }})" 
+                                    <button onclick="addToWishlist({{ $product->id }})"
                                             class="text-gray-400 hover:text-red-500 transition-colors">
                                         <i class="far fa-heart"></i>
                                     </button>
-                                    
-                                    <button onclick="addToCart({{ $product->id }})" 
+
+                                    <button onclick="addToCart({{ $product->id }})"
                                             class="text-gray-400 hover:text-green-500 transition-colors">
                                         <i class="fas fa-shopping-cart"></i>
                                     </button>
@@ -152,7 +152,7 @@
                         <div class="flex items-center space-x-4">
                             <div class="flex-shrink-0">
                                 @if($product->getFirstMediaUrl('images'))
-                                    <img src="{{ $product->getFirstMediaUrl('images') }}" 
+                                    <img src="{{ $product->getFirstMediaUrl('images') }}"
                                          alt="{{ $product->title }}"
                                          class="w-24 h-24 object-cover rounded-lg">
                                 @else
@@ -161,42 +161,42 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
                             <div class="flex-1 min-w-0">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-1">
-                                    <a href="{{ route('front.product-detail', $product->slug) }}" 
+                                    <a href="{{ route('front.product-detail', $product->slug) }}"
                                        class="hover:text-blue-600 transition-colors">
                                         {{ $product->title }}
                                     </a>
                                 </h3>
-                                
+
                                 <p class="text-gray-600 text-sm mb-2 line-clamp-2">
                                     {{ $product->summary ?? 'No description available.' }}
                                 </p>
-                                
+
                                 <div class="flex items-center space-x-4">
                                     <div class="flex items-center">
                                         @if($product->special_price)
-                                            <span class="text-lg font-bold text-red-600">${{ number_format($product->special_price, 2) }}</span>
-                                            <span class="text-sm text-gray-500 line-through ml-2">${{ number_format($product->price, 2) }}</span>
+                                            <span class="text-lg font-bold text-red-600">{{ format_currency((float) ($product->special_price)) }}</span>
+                                            <span class="text-sm text-gray-500 line-through ml-2">{{ format_currency((float) ($product->price)) }}</span>
                                         @else
-                                            <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                                            <span class="text-lg font-bold text-gray-900">{{ format_currency((float) ($product->price)) }}</span>
                                         @endif
                                     </div>
-                                    
+
                                     <span class="text-sm text-gray-600">
-                                        Stock: {{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                        Estoque: {{ $product->stock > 0 ? 'Em estoque' : 'Sem estoque' }}
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <div class="flex flex-col space-y-2">
-                                <button onclick="addToWishlist({{ $product->id }})" 
+                                <button onclick="addToWishlist({{ $product->id }})"
                                         class="text-gray-400 hover:text-red-500 transition-colors p-2">
                                     <i class="far fa-heart"></i>
                                 </button>
-                                
-                                <button onclick="addToCart({{ $product->id }})" 
+
+                                <button onclick="addToCart({{ $product->id }})"
                                         class="text-gray-400 hover:text-green-500 transition-colors p-2">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
@@ -220,16 +220,16 @@
                     No trending products available at the moment. Check back later for the latest popular items.
                 @endif
             </p>
-            
+
             <div class="flex justify-center space-x-4">
-                <a href="{{ route('front.product-grids') }}" 
+                <a href="{{ route('front.product-grids') }}"
                    class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                    Browse All Products
+                    Browse Todos os produtos
                 </a>
-                
-                <a href="{{ route('front.advanced-search') }}" 
+
+                <a href="{{ route('front.advanced-search') }}"
                    class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors">
-                    Advanced Search
+                    Busca avançada
                 </a>
             </div>
         </div>
@@ -237,25 +237,25 @@
 
     <!-- Additional Features -->
     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Personalized Shopping -->
+        <!-- Compras personalizadas -->
         <div class="bg-white rounded-lg shadow-md p-6 text-center">
             <i class="fas fa-user-cog text-blue-600 text-4xl mb-4"></i>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Personalized Shopping</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Compras personalizadas</h3>
             <p class="text-gray-600 mb-4">Get recommendations based on your unique preferences and shopping history.</p>
-            <a href="{{ route('front.advanced-search') }}" 
+            <a href="{{ route('front.advanced-search') }}"
                class="text-blue-600 hover:text-blue-800 font-medium">
-                Start Shopping →
+                Começar a comprar →
             </a>
         </div>
 
-        <!-- Discover New Brands -->
+        <!-- Descubra novas marcas -->
         <div class="bg-white rounded-lg shadow-md p-6 text-center">
             <i class="fas fa-compass text-green-600 text-4xl mb-4"></i>
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">Discover New Brands</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Descubra novas marcas</h3>
             <p class="text-gray-600 mb-4">Explore products from brands you might not have discovered yet.</p>
-            <a href="{{ route('front.product-brand', 'all') }}" 
+            <a href="{{ route('front.product-brand', 'all') }}"
                class="text-green-600 hover:text-green-800 font-medium">
-                Explore Brands →
+                Explorar marcas →
             </a>
         </div>
 
@@ -264,7 +264,7 @@
             <i class="fas fa-bell text-purple-600 text-4xl mb-4"></i>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Stay Updated</h3>
             <p class="text-gray-600 mb-4">Get notified about new products and recommendations tailored for you.</p>
-            <button onclick="subscribeToUpdates()" 
+            <button onclick="subscribeToUpdates()"
                     class="text-purple-600 hover:text-purple-800 font-medium">
                 Subscribe →
             </button>
@@ -280,7 +280,7 @@ function setViewMode(mode) {
     const listView = document.getElementById('listView');
     const gridBtn = document.getElementById('gridViewBtn');
     const listBtn = document.getElementById('listViewBtn');
-    
+
     if (mode === 'grid') {
         gridView.classList.remove('hidden');
         listView.classList.add('hidden');
@@ -294,7 +294,7 @@ function setViewMode(mode) {
     }
 }
 
-// Add to wishlist function
+// Adicionar aos favoritos function
 async function addToWishlist(productId) {
     try {
         const response = await fetch('{{ route("api.wishlist.store") }}', {
@@ -309,19 +309,19 @@ async function addToWishlist(productId) {
                 quantity: 1
             })
         });
-        
+
         if (response.ok) {
-            showNotification('Product added to wishlist!', 'success');
+            showNotification('Produto adicionado aos favoritos!', 'success');
         } else {
-            showNotification('Failed to add product to wishlist.', 'error');
+            showNotification('Não foi possível adicionar o produto aos favoritos.', 'error');
         }
     } catch (error) {
         console.error('Error adding to wishlist:', error);
-        showNotification('Error adding to wishlist.', 'error');
+        showNotification('Erro ao adicionar aos favoritos.', 'error');
     }
 }
 
-// Add to cart function
+// Adicionar ao carrinho function
 async function addToCart(productId) {
     try {
         const response = await fetch('{{ route("api.carts.store") }}', {
@@ -336,9 +336,9 @@ async function addToCart(productId) {
                 quantity: 1
             })
         });
-        
+
         if (response.ok) {
-            showNotification('Product added to cart!', 'success');
+            showNotification('Produto adicionado ao carrinho!', 'success');
         } else {
             showNotification('Failed to add product to cart.', 'error');
         }
@@ -357,14 +357,14 @@ function subscribeToUpdates() {
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
-        type === 'success' ? 'bg-green-500 text-white' : 
-        type === 'error' ? 'bg-red-500 text-white' : 
+        type === 'success' ? 'bg-green-500 text-white' :
+        type === 'error' ? 'bg-red-500 text-white' :
         'bg-blue-500 text-white'
     }`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.remove();
     }, 3000);

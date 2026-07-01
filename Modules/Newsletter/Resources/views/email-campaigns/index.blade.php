@@ -49,7 +49,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Quick Actions</h5>
+                    <h5>Ações rápidas</h5>
                     <div class="list-group">
                         <a href="{{route('admin.email-campaigns.create')}}" class="list-group-item list-group-item-action">
                             <i class="fas fa-plus text-primary"></i> Create New Campaign
@@ -78,7 +78,7 @@
                                     <p class="mb-1">{{ $template->subject }}</p>
                                     <small>
                                         @if($template->is_default)
-                                            <span class="badge badge-warning">Default</span>
+                                            <span class="badge badge-warning">Padrão</span>
                                         @endif
                                         @if($template->is_active)
                                             <span class="badge badge-success">Active</span>

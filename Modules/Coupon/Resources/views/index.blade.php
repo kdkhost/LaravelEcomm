@@ -54,7 +54,7 @@
                                 </td>
                                 <td>
                                     @if($coupon->type=='fixed')
-                                        ${{number_format($coupon->value,2)}}
+                                        {{ format_currency((float) ($coupon->value)) }}
                                     @else
                                         {{$coupon->value}}%
                                     @endif</td>

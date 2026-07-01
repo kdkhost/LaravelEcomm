@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title','E-SHOP || Coupon Edit')
+@section('title','E-SHOP || Coupon Editar')
 
 @section('content')
 

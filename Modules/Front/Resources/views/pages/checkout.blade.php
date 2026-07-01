@@ -1,11 +1,11 @@
-@php 
+@php
 use Modules\Core\Helpers\Helper;
 $user = Auth::user();
 $defaultAddress = $user?->defaultShippingAddress();
 @endphp
 @extends('front::layouts.master')
 
-@section('title','Checkout page')
+@section('title','Finalizar compra')
 
 @section('content')
 
@@ -16,7 +16,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0)">Checkout</a></li>
                         </ul>
                     </div>
@@ -368,20 +368,20 @@ $defaultAddress = $user?->defaultShippingAddress();
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 @if($user)
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
-                                            <input type="checkbox" name="save_address" value="1" style="width: auto;"> 
-                                            Save this address to my address book
+                                            <input type="checkbox" name="save_address" value="1" style="width: auto;">
+                                            Economize this address to my address book
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="form-group">
                                         <label class="checkbox-inline" style="display: flex; align-items: center; gap: 10px;">
-                                            <input type="checkbox" name="make_default_address" value="1" style="width: auto;"> 
+                                            <input type="checkbox" name="make_default_address" value="1" style="width: auto;">
                                             Make this my default shipping address
                                         </label>
                                     </div>
@@ -401,7 +401,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                     <ul>
                                         <li class="order_subtotal"
                                             data-price="{{Helper::totalCartPrice()}}">Cart
-                                            Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span>
+                                            Subtotal<span>{{ format_currency((float) (Helper::totalCartPrice())) }}</span>
                                         </li>
                                         @if(Helper::cartRequiresShipping())
                                         <li class="shipping">
@@ -412,7 +412,7 @@ $defaultAddress = $user?->defaultShippingAddress();
                                                     @foreach(Helper::shipping() as $shipping)
                                                         <option value="{{$shipping->id}}" class="shippingOption"
                                                                 data-price="{{$shipping->price}}">{{$shipping->type}}
-                                                            : ${{$shipping->price}}</option>
+                                                            : {{ format_currency((float) ($shipping->price)) }}</option>
                                                     @endforeach
                                                 </select>
                                             @else
@@ -423,7 +423,7 @@ $defaultAddress = $user?->defaultShippingAddress();
 
                                         @if(session('coupon'))
                                             <li class="coupon_price" data-price="{{session('coupon')['value']}}">You
-                                                Save<span>${{number_format(session('coupon')['value'],2)}}</span></li>
+                                                Save<span>{{ format_currency((float) (session('coupon')['value'])) }}</span></li>
                                         @endif
                                         @php
                                             $total_amount=Helper::totalCartPrice();
@@ -433,10 +433,10 @@ $defaultAddress = $user?->defaultShippingAddress();
                                         @endphp
                                         @if(session('coupon'))
                                             <li class="last" id="order_total_price">
-                                                Total<span>${{number_format($total_amount,2)}}</span></li>
+                                                Total<span>{{ format_currency((float) ($total_amount)) }}</span></li>
                                         @else
                                             <li class="last" id="order_total_price">
-                                                Total<span>${{number_format($total_amount,2)}}</span></li>
+                                                Total<span>{{ format_currency((float) ($total_amount)) }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -485,7 +485,7 @@ $defaultAddress = $user?->defaultShippingAddress();
     </section>
     <!--/ End Checkout -->
 
-    <!-- Start Shop Services Area  -->
+    <!-- Start Loja Services Area  -->
     <section class="shop-services section home">
         <div class="container">
             <div class="row">
@@ -493,8 +493,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>Frete grátis</h4>
+                        <p>Pedidos acima de R$ 100,00</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -502,8 +502,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>Troca fácil</h4>
+                        <p>Devolução em até 30 dias</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -511,8 +511,8 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Pagamento seguro</h4>
+                        <p>Pagamento 100% seguro</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -520,17 +520,17 @@ $defaultAddress = $user?->defaultShippingAddress();
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>Melhor preço</h4>
+                        <p>Preço garantido</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Shop Services -->
+    <!-- End Loja Services -->
 
-    <!-- Start Shop Newsletter  -->
+    <!-- Start Loja Newsletter  -->
     <section class="shop-newsletter section">
         <div class="container">
             <div class="inner-top">
@@ -551,7 +551,7 @@ $defaultAddress = $user?->defaultShippingAddress();
             </div>
         </div>
     </section>
-    <!-- End Shop Newsletter -->
+    <!-- End Loja Newsletter -->
 @endsection
 @push('styles')
     <style>

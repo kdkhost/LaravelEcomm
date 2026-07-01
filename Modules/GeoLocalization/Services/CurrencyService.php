@@ -15,7 +15,7 @@ class CurrencyService
 
     public function __construct()
     {
-        $this->baseCurrency = config('geolocalization.base_currency', 'USD');
+        $this->baseCurrency = config('geolocalization.base_currency', 'BRL');
         $this->provider = config('geolocalization.currency_provider', 'exchangerate-api');
     }
 
@@ -58,7 +58,7 @@ class CurrencyService
     private function fetchFromExchangeRateApi(): array
     {
         $apiKey = config('geolocalization.exchangerate_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -86,7 +86,7 @@ class CurrencyService
     private function fetchFromOpenExchangeRates(): array
     {
         $apiKey = config('geolocalization.openexchangerates_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -115,7 +115,7 @@ class CurrencyService
     private function fetchFromFixer(): array
     {
         $apiKey = config('geolocalization.fixer_api_key');
-        
+
         if (! $apiKey) {
             return $this->getDefaultRates();
         }
@@ -165,7 +165,7 @@ class CurrencyService
      */
     public function getCurrentCurrency(): string
     {
-        return session('currency', config('app.default_currency', 'USD'));
+        return session('currency', config('geolocalization.default_currency', 'BRL'));
     }
 
     /**
@@ -183,8 +183,8 @@ class CurrencyService
     {
         $currency = $currency ?? $this->getCurrentCurrency();
         $symbol = $this->getCurrencySymbol($currency);
-        
-        return $symbol . number_format($amount, 2);
+
+        return $symbol . ' ' . number_format($amount, 2, ',', '.');
     }
 
     /**
@@ -193,6 +193,7 @@ class CurrencyService
     public function getCurrencySymbol(string $currency): string
     {
         $symbols = [
+            'BRL' => 'R$',
             'USD' => '$',
             'EUR' => '€',
             'GBP' => '£',

@@ -70,21 +70,31 @@ readonly class OrderDTO
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'] ?? null,
-            $data['order_number'] ?? null,
-            $data['user_id'] ?? null,
-            $data['sub_total'] ?? null,
-            $data['shipping_id'] ?? null,
-            $data['total_amount'] ?? null,
-            $data['quantity'] ?? null,
-            $data['payment_method'] ?? null,
-            $data['payment_status'] ?? null,
-            $data['status'] ?? null,
-            isset($data['payer_id']) ? (int) $data['payer_id'] : null,
-            $data['transaction_reference'] ?? null,
-            isset($data['created_at']) && $data['created_at'] instanceof Carbon
+            id: $data['id'] ?? null,
+            order_number: $data['order_number'] ?? null,
+            user_id: $data['user_id'] ?? null,
+            sub_total: $data['sub_total'] ?? null,
+            shipping_id: $data['shipping_id'] ?? null,
+            total_amount: $data['total_amount'] ?? null,
+            quantity: $data['quantity'] ?? null,
+            payment_method: $data['payment_method'] ?? null,
+            payment_status: $data['payment_status'] ?? null,
+            status: $data['status'] ?? null,
+            payer_id: isset($data['payer_id']) ? (int) $data['payer_id'] : null,
+            transaction_reference: $data['transaction_reference'] ?? null,
+            first_name: $data['first_name'] ?? null,
+            last_name: $data['last_name'] ?? null,
+            email: $data['email'] ?? null,
+            phone: $data['phone'] ?? null,
+            country: $data['country'] ?? null,
+            city: $data['city'] ?? null,
+            state: $data['state'] ?? null,
+            address1: $data['address1'] ?? null,
+            address2: $data['address2'] ?? null,
+            post_code: $data['post_code'] ?? null,
+            created_at: isset($data['created_at']) && $data['created_at'] instanceof Carbon
                 ? $data['created_at']->format('Y-m-d H:i:s')
-                : $data['created_at'] ?? null,
+                : ($data['created_at'] ?? null),
         );
     }
 

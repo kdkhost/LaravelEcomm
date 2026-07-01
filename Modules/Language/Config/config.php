@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'name' => 'Language',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Default Locale
@@ -15,8 +15,8 @@ return [
     | will be supported by the application.
     |
     */
-    'locale' => env('APP_LOCALE', 'en'),
-    
+    'locale' => env('APP_LOCALE', 'pt'),
+
     /*
     |--------------------------------------------------------------------------
     | Fallback Locale
@@ -27,8 +27,8 @@ return [
     | the language folders that are provided through your application.
     |
     */
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
-    
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'pt'),
+
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
@@ -39,8 +39,8 @@ return [
     | localized telephone numbers, street address information and more.
     |
     */
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
-    
+    'faker_locale' => env('APP_FAKER_LOCALE', 'pt_BR'),
+
     /*
     |--------------------------------------------------------------------------
     | Available Locales
@@ -50,5 +50,5 @@ return [
     | They are loaded from the database on runtime.
     |
     */
-    'available_locales' => ['en', 'mk', 'de', 'sq'],
+    'available_locales' => ['pt', 'en', 'mk', 'de', 'sq'],
 ];

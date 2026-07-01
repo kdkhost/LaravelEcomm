@@ -6,7 +6,7 @@
     <div class="container"><div class="row"><div class="col-md-12">
         <h1>Blog</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('front.index') }}">Home</a></li>
+            <li><a href="{{ route('front.index') }}">Início</a></li>
             <li class="active">Blog</li>
         </ol>
     </div></div></div>
@@ -56,7 +56,7 @@
                         </form>
                     </div>
                     <div class="block clearfix">
-                        <h3 class="title">Categories</h3>
+                        <h3 class="title">Categorias</h3>
                         <ul class="list-unstyled">
                             @foreach(Helper::postCategoryList() as $cat)
                             <li><a href="{{ route('front.blog-by-category', $cat->slug) }}">{{ $cat->title }}</a></li>

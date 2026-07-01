@@ -1,10 +1,10 @@
 @extends('admin::layouts.master')
-@section('title', 'Abandoned Carts')
+@section('title', 'Carrinhos abandonados')
 @section('content')
     <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Abandoned Carts</h1>
+            <h1 class="h3 mb-0 text-gray-800">Carrinhos abandonados</h1>
         </div>
 
         <!-- Statistics Cards -->
@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Abandoned</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total abandonado</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_abandoned'] ?? 0 }}</div>
                             </div>
                             <div class="col-auto">
@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Converted</div>
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Convertidos</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['converted'] ?? 0 }}</div>
                             </div>
                             <div class="col-auto">
@@ -46,7 +46,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Recovery Rate</div>
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Taxa de recuperação</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['recovery_rate'] ?? 0 }}%</div>
                             </div>
                             <div class="col-auto">
@@ -62,11 +62,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Revenue</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{ number_format($stats['total_revenue'] ?? 0, 2) }}</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Receita total</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ format_currency((float) ($stats['total_revenue'] ?? 0)) }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
         <!-- Abandoned Carts Table -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Abandoned Carts List</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lista de carrinhos abandonados</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -85,14 +85,14 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>User</th>
+                                <th>Usuário</th>
                                 <th>Email</th>
-                                <th>Total Items</th>
-                                <th>Total Amount</th>
-                                <th>Last Activity</th>
-                                <th>Emails Sent</th>
+                                <th>Total de itens</th>
+                                <th>Valor total</th>
+                                <th>Última atividade</th>
+                                <th>E-mails enviados</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,12 +103,12 @@
                                         @if($cart->user)
                                             {{ $cart->user->name }}
                                         @else
-                                            <span class="text-muted">Guest</span>
+                                            <span class="text-muted">Visitante</span>
                                         @endif
                                     </td>
                                     <td>{{ $cart->email ?? 'N/A' }}</td>
                                     <td>{{ $cart->total_items }}</td>
-                                    <td>${{ number_format($cart->total_amount, 2) }}</td>
+                                    <td>{{ format_currency((float) ($cart->total_amount)) }}</td>
                                     <td>{{ $cart->last_activity->format('Y-m-d H:i') }}</td>
                                     <td>
                                         @php
@@ -121,20 +121,20 @@
                                     </td>
                                     <td>
                                         @if($cart->converted)
-                                            <span class="badge badge-success">Converted</span>
+                                            <span class="badge badge-success">Convertido</span>
                                         @else
-                                            <span class="badge badge-warning">Abandoned</span>
+                                            <span class="badge badge-warning">Abandonado</span>
                                         @endif
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info" onclick="viewCartDetails({{ $cart->id }})">
-                                            <i class="fas fa-eye"></i> View
+                                            <i class="fas fa-eye"></i> Ver
                                         </button>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center">No abandoned carts found.</td>
+                                    <td colspan="9" class="text-center">Nenhum carrinho abandonado encontrado.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -154,16 +154,16 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cartDetailsModalLabel">Cart Details</h5>
+                    <h5 class="modal-title" id="cartDetailsModalLabel">Detalhes do carrinho</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="cartDetailsContent">
-                    <!-- Cart details will be loaded here -->
+                    <!-- Detalhes do carrinho carregados por AJAX -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -182,60 +182,67 @@
                     let html = `
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>Cart Information</h6>
-                                <p><strong>Total Items:</strong> ${cart.total_items}</p>
-                                <p><strong>Total Amount:</strong> $${parseFloat(cart.total_amount).toFixed(2)}</p>
-                                <p><strong>Last Activity:</strong> ${cart.last_activity}</p>
+                                <h6>Informações do carrinho</h6>
+                                <p><strong>Total de itens:</strong> ${cart.total_items}</p>
+                                <p><strong>Valor total:</strong> ${formatCurrency(cart.total_amount)}</p>
+                                <p><strong>Última atividade:</strong> ${cart.last_activity}</p>
                             </div>
                             <div class="col-md-6">
-                                <h6>Email Status</h6>
-                                <p><strong>First Email:</strong> ${cart.first_email_sent || 'Not sent'}</p>
-                                <p><strong>Second Email:</strong> ${cart.second_email_sent || 'Not sent'}</p>
-                                <p><strong>Third Email:</strong> ${cart.third_email_sent || 'Not sent'}</p>
+                                <h6>Status dos e-mails</h6>
+                                <p><strong>Primeiro e-mail:</strong> ${cart.first_email_sent || 'Não enviado'}</p>
+                                <p><strong>Segundo e-mail:</strong> ${cart.second_email_sent || 'Não enviado'}</p>
+                                <p><strong>Terceiro e-mail:</strong> ${cart.third_email_sent || 'Não enviado'}</p>
                             </div>
                         </div>
                         <hr>
-                        <h6>Cart Items</h6>
+                        <h6>Itens do carrinho</h6>
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Amount</th>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th>Preço</th>
+                                        <th>Valor</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                     `;
-                    
+
                     if (cart.cart_data && Array.isArray(cart.cart_data)) {
                         cart.cart_data.forEach(item => {
                             html += `
                                 <tr>
-                                    <td>Product ID: ${item.product_id || 'N/A'}</td>
+                                    <td>Produto ID: ${item.product_id || 'N/A'}</td>
                                     <td>${item.quantity || 0}</td>
-                                    <td>$${parseFloat(item.price || 0).toFixed(2)}</td>
-                                    <td>$${parseFloat(item.amount || 0).toFixed(2)}</td>
+                                    <td>${formatCurrency(item.price || 0)}</td>
+                                    <td>${formatCurrency(item.amount || 0)}</td>
                                 </tr>
                             `;
                         });
                     }
-                    
+
                     html += `
                                 </tbody>
                             </table>
                         </div>
                     `;
-                    
+
                     document.getElementById('cartDetailsContent').innerHTML = html;
                     $('#cartDetailsModal').modal('show');
                 }
             })
             .catch(error => {
-                console.error('Error loading cart details:', error);
-                alert('Error loading cart details');
+                console.error('Erro ao carregar detalhes do carrinho:', error);
+                alert('Erro ao carregar detalhes do carrinho');
             });
+    }
+
+    function formatCurrency(value) {
+        return Number(value || 0).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
     }
 </script>
 @endpush

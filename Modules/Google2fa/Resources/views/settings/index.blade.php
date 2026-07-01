@@ -23,8 +23,8 @@
 
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="enforce_for_admins" 
-                                           name="enforce_for_admins" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="enforce_for_admins"
+                                           name="enforce_for_admins" value="1"
                                            {{ $settings->enforce_for_admins ? 'checked' : '' }}>
                                     <label class="form-check-label" for="enforce_for_admins">
                                         Enforce 2FA for Administrators
@@ -37,8 +37,8 @@
 
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="enforce_for_users" 
-                                           name="enforce_for_users" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="enforce_for_users"
+                                           name="enforce_for_users" value="1"
                                            {{ $settings->enforce_for_users ? 'checked' : '' }}>
                                     <label class="form-check-label" for="enforce_for_users">
                                         Enforce 2FA for All Users
@@ -53,7 +53,7 @@
                                 <label for="enforced_roles">Enforce 2FA for Specific Roles</label>
                                 <select multiple class="form-control" id="enforced_roles" name="enforced_roles[]">
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->name }}" 
+                                        <option value="{{ $role->name }}"
                                                 {{ in_array($role->name, $settings->enforced_roles ?? []) ? 'selected' : '' }}>
                                             {{ $role->name }}
                                         </option>
@@ -66,9 +66,9 @@
 
                             <div class="form-group">
                                 <label for="recovery_codes_count">Number of Recovery Codes</label>
-                                <input type="number" class="form-control" id="recovery_codes_count" 
-                                       name="recovery_codes_count" 
-                                       value="{{ $settings->recovery_codes_count }}" 
+                                <input type="number" class="form-control" id="recovery_codes_count"
+                                       name="recovery_codes_count"
+                                       value="{{ $settings->recovery_codes_count }}"
                                        min="5" max="20" required>
                                 <small class="form-text text-muted">
                                     Number of recovery codes to generate (5-20)
@@ -77,8 +77,8 @@
 
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="require_backup_codes" 
-                                           name="require_backup_codes" value="1" 
+                                    <input type="checkbox" class="form-check-input" id="require_backup_codes"
+                                           name="require_backup_codes" value="1"
                                            {{ $settings->require_backup_codes ? 'checked' : '' }}>
                                     <label class="form-check-label" for="require_backup_codes">
                                         Require Backup Codes
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                            <button type="submit" class="btn btn-primary">Economize Settings</button>
                         </form>
                     </div>
                 </div>

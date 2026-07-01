@@ -19,7 +19,7 @@ class PaymentFactory extends Factory
             'order_id' => Order::factory(),
             'invoice_id' => null,
             'user_id' => User::factory(),
-            'payment_method' => $this->faker->randomElement(['cod', 'paypal', 'stripe', 'bank_transfer']),
+            'payment_method' => $this->faker->randomElement(['cod', 'paypal', 'stripe', 'mercadopago', 'bank_transfer']),
             'status' => $this->faker->randomElement(['pending', 'processing', 'completed', 'failed', 'refunded']),
             'amount' => $this->faker->randomFloat(2, 10, 1000),
             'currency' => 'USD',

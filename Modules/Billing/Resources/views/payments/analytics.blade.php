@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ __('Total Revenue') }}</h5>
-                        <h2 class="text-success">${{ number_format($analytics['total_amount'], 2) }}</h2>
+                        <h2 class="text-success">{{ format_currency((float) ($analytics['total_amount'])) }}</h2>
                     </div>
                 </div>
             </div>

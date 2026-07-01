@@ -1,6 +1,6 @@
 @php use Modules\Core\Helpers\Helper; @endphp
 @extends($themePath . '.layouts.master')
-@section('title','Wishlist Page')
+@section('title','Favoritos')
 @section('content')
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
@@ -9,8 +9,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Wishlist</a></li>
+                            <li><a href="{{('home')}}">Início<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0);">Favoritos</a></li>
                         </ul>
                     </div>
                 </div>
@@ -19,19 +19,19 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shopping Cart -->
+    <!-- Compras Cart -->
     <div class="shopping-cart section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!-- Shopping Summery -->
+                    <!-- Compras Summery -->
                     <table class="table shopping-summery">
                         <thead>
                         <tr class="main-hading">
                             <th>@lang('partials.product')</th>
                             <th>@lang('partials.name')</th>
                             <th class="text-center">TOTAL</th>
-                            <th class="text-center">ADD TO CART</th>
+                            <th class="text-center">ADICIONAR AO CARRINHO</th>
                             <th class="text-center"><i class="ti-trash remove-icon"></i></th>
                         </tr>
                         </thead>
@@ -50,11 +50,11 @@
                                         </p>
                                         <p class="product-des">{!!($wishlist['summary']) !!}</p>
                                     </td>
-                                    <td class="total-amount" data-title="Total"><span>${{$wishlist['amount']}}</span>
+                                    <td class="total-amount" data-title="Total"><span>{{ format_currency((float) ($wishlist['amount'])) }}</span>
                                     </td>
                                     <td><a href="{{route('add-to-cart',$wishlist->product['slug'])}}"
-                                           class='btn text-white'>Add To Cart</a></td>
-                                    <td class="action" data-title="Remove"><a
+                                           class='btn text-white'>Adicionar ao carrinho</a></td>
+                                    <td class="action" data-title="Remover"><a
                                                 href="{{route('wishlist-delete',$wishlist->id)}}"><i
                                                     class="ti-trash remove-icon"></i></a></td>
                                 </tr>
@@ -62,8 +62,8 @@
                         @else
                             <tr>
                                 <td class="text-center">
-                                    There are no any wishlist available. <a href="{{route('front.product-grids')}}"
-                                                                            style="color:blue;">Continue shopping</a>
+                                    Sua lista de favoritos está vazia. <a href="{{route('front.product-grids')}}"
+                                                                            style="color:blue;">Continuar comprando</a>
 
                                 </td>
                             </tr>
@@ -72,14 +72,14 @@
 
                         </tbody>
                     </table>
-                    <!--/ End Shopping Summery -->
+                    <!--/ End Compras Summery -->
                 </div>
             </div>
         </div>
     </div>
-    <!--/ End Shopping Cart -->
+    <!--/ End Compras Cart -->
 
-    <!-- Start Shop Services Area  -->
+    <!-- Start Loja Services Area  -->
     <section class="shop-services section">
         <div class="container">
             <div class="row">
@@ -87,8 +87,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>Frete grátis</h4>
+                        <p>Pedidos acima de R$ 100,00</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -96,8 +96,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>Troca fácil</h4>
+                        <p>Devolução em até 30 dias</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -105,8 +105,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Pagamento seguro</h4>
+                        <p>Pagamento 100% seguro</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -114,15 +114,15 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>Melhor preço</h4>
+                        <p>Preço garantido</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Shop Newsletter -->
+    <!-- End Loja Newsletter -->
 
     @include($themePath . '.layouts.newsletter')
 
@@ -171,13 +171,13 @@
                                             <i class="yellow fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <a href="#"> (1 customer review)</a>
+                                        <a href="#"> (1 avaliação de cliente)</a>
                                     </div>
                                     <div class="quickview-stock">
-                                        <span><i class="fa fa-check-circle-o"></i> in stock</span>
+                                        <span><i class="fa fa-check-circle-o"></i> em estoque</span>
                                     </div>
                                 </div>
-                                <h3>$29.00</h3>
+                                <h3>R$ 29,00</h3>
                                 <div class="quickview-peragraph">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
                                         ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui
@@ -226,7 +226,7 @@
                                     <!--/ End Input Order -->
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="#" class="btn">Add to cart</a>
+                                    <a href="#" class="btn">Adicionar ao carrinho</a>
                                     <a href="#" class="btn min"><i class="ti-heart"></i></a>
                                     <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                                 </div>

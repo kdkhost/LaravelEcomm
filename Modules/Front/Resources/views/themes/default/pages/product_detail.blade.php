@@ -1,6 +1,10 @@
+@php
+    $themePath = 'front::themes.default';
+@endphp
+
 @extends($themePath . '.layouts.master')
 @section('SOE')
-    <title>{{$product_detail->title ?? ''}} || PRODUCT DETAIL</title>
+    <title>{{$product_detail->title ?? ''}} | Detalhes do produto</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name='copyright' content=''>
@@ -22,8 +26,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Shop Details</a></li>
+                            <li><a href="{{route('front.index')}}">Inicio<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="">Detalhes do produto</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,7 +36,7 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shop Single -->
+    <!-- Loja Single -->
     <section class="shop single section">
         <div class="container">
             <div class="row">
@@ -86,7 +90,7 @@
                                             @endfor
                                         </ul>
                                         <a href="#" class="total-review">({{$product_detail['getReview']->count()}})
-                                            Review</a>
+                                            avaliacoes</a>
                                     </div>
                                     @php
                                         $price = $product_detail->price;
@@ -95,9 +99,9 @@
                                         $finalPrice = $specialPrice ? $specialPrice : ($price - (($price * $discount) / 100));
                                     @endphp
                                     <p class="price">
-                                        <span class="discount">${{ number_format($finalPrice, 2) }}</span>
+                                        <span class="discount">R$ {{ number_format($finalPrice, 2, ',', '.') }}</span>
                                         @if($finalPrice < $price)
-                                            <s>${{ number_format($price, 2) }}</s>
+                                            <s>R$ {{ number_format($price, 2, ',', '.') }}</s>
                                         @endif
                                     </p>
                                     <p class="description">{!!($product_detail->summary)!!}</p>
@@ -136,7 +140,7 @@
                                 @endphp
                                 @if(count($attributes))
                                     <div class="product-attributes mt-4">
-                                        <h4>Product Attributes</h4>
+                                        <h4>Atributos do produto</h4>
                                         <ul class="list-group">
                                             @foreach($attributes as $attributeValue)
                                                 @php
@@ -158,7 +162,7 @@
                                     <form action="{{route('single-add-to-cart')}}" method="POST">
                                         @csrf
                                         <div class="quantity">
-                                            <h6>Quantity :</h6>
+                                            <h6>Quantidade:</h6>
                                             <!-- Input Order -->
                                             <div class="input-group">
                                                 <div class="button minus">
@@ -181,19 +185,26 @@
                                             <!--/ End Input Order -->
                                         </div>
                                         <div class="add-to-cart mt-4">
-                                            <button type="submit" class="btn">Add to cart</button>
+                                            <button type="submit" class="btn">Adicionar ao carrinho</button>
                                             <a href="{{route('add-to-wishlist',$product_detail->slug)}}"
                                                class="btn min"><i class="ti-heart"></i></a>
+                                            <a href="{{ route('front.virtual-try-on', ['slug' => $product_detail->slug]) }}"
+                                               class="btn">Provador virtual</a>
                                         </div>
                                     </form>
 
-                                    <p class="cat">Category :
+                                    @include('front::partials.shipping-quote', [
+                                        'context' => 'product',
+                                        'productSlug' => $product_detail->slug,
+                                    ])
+
+                                    <p class="cat">Categoria:
                                         @foreach($product_detail->categories as $category)
                                             <a href="{{route('front.product-cat',$category->slug)}}">{{$category->title}}</a>
                                         @endforeach
                                     </p>
 
-                                    <p class="availability">Stock : @if($product_detail->stock>0)
+                                    <p class="availability">Estoque: @if($product_detail->stock>0)
                                             <span
                                                     class="badge badge-success">{{$product_detail->stock}}</span>
                                         @else
@@ -216,9 +227,9 @@
                                     <!-- Tab Nav -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                                href="#description" role="tab">Description</a></li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reviews"
-                                                                role="tab">Reviews ({{ $reviewCount }})</a></li>
+                                                                href="#description" role="tab">Descricao</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#avaliacoes"
+                                                                role="tab">Avaliacoes ({{ $reviewCount }})</a></li>
                                     </ul>
                                     <!--/ End Tab Nav -->
                                 </div>
@@ -237,7 +248,7 @@
                                     </div>
                                     <!--/ End Description Tab -->
                                     <!-- Reviews Tab -->
-                                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                    <div class="tab-pane fade" id="avaliacoes" role="tabpanel">
                                         <div class="tab-single review-panel">
                                             <div class="row">
                                                 <div class="col-12">
@@ -245,11 +256,10 @@
                                                     <!-- Review -->
                                                     <div class="comment-review">
                                                         <div class="add-review">
-                                                            <h5>Add A Review</h5>
-                                                            <p>Your email address will not be published. Required fields
-                                                                are marked</p>
+                                                            <h5>Adicionar avaliacao</h5>
+                                                            <p>Seu e-mail nao sera publicado. Campos obrigatorios estao marcados.</p>
                                                         </div>
-                                                        <h4>Your Rating <span class="text-danger">*</span></h4>
+                                                        <h4>Sua nota <span class="text-danger">*</span></h4>
                                                         <div class="review-inner">
                                                             <!-- Form -->
                                                             @auth
@@ -271,7 +281,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-5"
-                                                                                                title="5 out of 5 stars"></label>
+                                                                                                title="5 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-4"
@@ -280,7 +290,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-4"
-                                                                                                title="4 out of 5 stars"></label>
+                                                                                                title="4 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-3"
@@ -289,7 +299,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-3"
-                                                                                                title="3 out of 5 stars"></label>
+                                                                                                title="3 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-2"
@@ -298,7 +308,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-2"
-                                                                                                title="2 out of 5 stars"></label>
+                                                                                                title="2 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-1"
@@ -307,7 +317,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-1"
-                                                                                                title="1 out of 5 stars"></label>
+                                                                                                title="1 de 5 estrelas"></label>
                                                                                         @error('rate')
                                                                                         <span
                                                                                                 class="text-danger">{{$message}}</span>
@@ -318,7 +328,7 @@
                                                                         </div>
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group">
-                                                                                <label>Write a review</label>
+                                                                                <label>Escreva uma avaliacao</label>
                                                                                 <textarea name="review" rows="6"
                                                                                           placeholder=""></textarea>
                                                                             </div>
@@ -326,7 +336,7 @@
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group button5">
                                                                                 <button type="submit" class="btn">
-                                                                                    Submit
+                                                                                    Enviar
                                                                                 </button>
                                                                             </div>
                                                                         </div>
@@ -334,10 +344,10 @@
                                                                 </form>
                                                             @else
                                                                 <p class="text-center p-5">
-                                                                    You need to <a href="{{route('login')}}"
-                                                                                   style="color:rgb(54, 54, 204)">Login</a>
+                                                                    Voce precisa <a href="{{route('login')}}"
+                                                                                   style="color:rgb(54, 54, 204)">Entrar</a>
                                                                     OR <a style="color:blue"
-                                                                          href="{{route('register')}}">Register</a>
+                                                                          href="{{route('register')}}">Registrar</a>
 
                                                                 </p>
                                                                 <!--/ End Form -->
@@ -345,12 +355,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <!-- Product Reviews Summary -->
+                                                    <!-- Resumo das avaliacoes -->
                                                     @php
                                                         $averageRating = $reviewCount ? round($reviews->avg('rate'), 1) : 0;
                                                     @endphp
                                                     <div class="product-review-summary mb-4">
-                                                        <h4>Customer Reviews</h4>
+                                                        <h4>Avaliacoes dos clientes</h4>
                                                         <div class="d-flex align-items-center mb-2">
                                                             <div class="star-rating" style="font-size:1.5em; color:#FFD700;">
                                                                 @for($i = 1; $i <= 5; $i++)
@@ -363,27 +373,27 @@
                                                                     @endif
                                                                 @endfor
                                                             </div>
-                                                            <span class="ml-2">{{ $averageRating }} / 5 ({{ $reviewCount }} review{{ $reviewCount != 1 ? 's' : '' }})</span>
+                                                            <span class="ml-2">{{ $averageRating }} / 5 ({{ $reviewCount }} avaliacao{{ $reviewCount != 1 ? 'es' : '' }})</span>
                                                         </div>
                                                     </div>
 
-                                                    <!-- List of Reviews -->
+                                                    <!-- Lista de avaliacoes -->
                                                     <div class="review-list mt-4">
                                                         @forelse($reviews as $review)
                                                             <div class="single-review mb-3 p-3 border rounded">
                                                                 <div class="d-flex align-items-center mb-1">
-                                                                    <strong>{{ $review->user->name ?? 'Anonymous' }}</strong>
+                                                                    <strong>{{ $review->user->name ?? 'Cliente' }}</strong>
                                                                     <span class="ml-2 text-warning">
                                                                         @for($i = 1; $i <= 5; $i++)
                                                                             <i class="fa{{ $i <= $review->rate ? ' fa-star' : ' fa-star-o' }}"></i>
                                                                         @endfor
                                                                     </span>
-                                                                    <span class="ml-3 text-muted" style="font-size:0.9em;">{{ $review->created_at ? $review->created_at->format('Y-m-d') : '' }}</span>
+                                                                    <span class="ml-3 text-muted" style="font-size:0.9em;">{{ $review->created_at ? $review->created_at->format('d/m/Y') : '' }}</span>
                                                                 </div>
                                                                 <div>{{ $review->review }}</div>
                                                             </div>
                                                         @empty
-                                                            <p class="text-muted">No reviews yet. Be the first to review this product!</p>
+                                                            <p class="text-muted">Ainda nao ha avaliacoes para este produto.</p>
                                                         @endforelse
                                                     </div>
 
@@ -395,9 +405,9 @@
                                                                     $rate +=$rate
                                                                 }
                                                             @endphp --}}
-                                                            <h4>{{ceil($product_detail->getReview->avg('rate'))}} <span>(Overall)</span>
+                                                            <h4>{{ceil($product_detail->getReview->avg('rate'))}} <span>(media)</span>
                                                             </h4>
-                                                            <span>Based on {{$product_detail->getReview->count()}} Comments</span>
+                                                            <span>Com base em {{$product_detail->getReview->count()}} comentarios</span>
                                                         </div>
                                                         @foreach($product_detail['getReview'] as $data)
                                                             <!-- Single Rating -->
@@ -449,7 +459,7 @@
             </div>
         </div>
     </section>
-    <!--/ End Shop Single -->
+    <!--/ End Loja Single -->
 
     <!-- Start Most Popular -->
     <div class="product-area most-popular related-product section">
@@ -457,7 +467,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Related Products</h2>
+                        <h2>Produtos relacionados</h2>
                     </div>
                 </div>
             </div>
@@ -473,18 +483,16 @@
                                         <a href="{{route('front.product-detail',$data->slug)}}">
                                             <img class="default-img" src="{{$data->imageUrl}}" alt="{{$data->title}}">
                                             <img class="hover-img" src="{{$data->imageUrl}}" alt="{{$data->title}}">
-                                            <span class="price-dec">{{$data->discount}} % Off</span>
+                                            <span class="price-dec">{{$data->discount}}% off</span>
                                             {{-- <span class="out-of-stock">Hot</span> --}}
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
-                                                <a data-toggle="modal" data-target="#modelExample" title="Quick View"
-                                                   href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                <a title="Ver produto" href="{{ route('front.product-detail', $data->slug) }}"><i class=" ti-eye"></i><span>Ver produto</span></a>
+                                                <a title="Favoritos" href="{{ route('add-to-wishlist', $data->slug) }}"><i class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
                                             </div>
                                             <div class="product-action-2">
-                                                <a title="Add to cart" href="#">Add to cart</a>
+                                                <a title="Ver produto" href="{{ route('front.product-detail', $data->slug) }}">Ver detalhes</a>
                                             </div>
                                         </div>
                                     </div>
@@ -498,8 +506,8 @@
                                             $finalPrice = $specialPrice ? $specialPrice : ($price - (($price * $discount) / 100));
                                         @endphp
                                         <div class="product-price">
-                                            <span class="old">${{ number_format($price, 2) }}</span>
-                                            <span>${{ number_format($finalPrice, 2) }}</span>
+                                            <span class="old">R$ {{ number_format($price, 2, ',', '.') }}</span>
+                                            <span>R$ {{ number_format($finalPrice, 2, ',', '.') }}</span>
                                         </div>
 
                                     </div>
@@ -515,126 +523,6 @@
     </div>
     <!-- End Most Popular Area -->
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="modelExample" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close"
-                                                                                                      aria-hidden="true"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row no-gutters">
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <!-- Product Slider -->
-                            <div class="product-gallery">
-                                <div class="quickview-slider-active">
-                                    <div class="single-slider">
-                                        <img src="images/modal1.png" alt="#">
-                                    </div>
-                                    <div class="single-slider">
-                                        <img src="images/modal2.png" alt="#">
-                                    </div>
-                                    <div class="single-slider">
-                                        <img src="images/modal3.png" alt="#">
-                                    </div>
-                                    <div class="single-slider">
-                                        <img src="images/modal4.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Product slider -->
-                        </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                            <div class="quickview-content">
-                                <h2>Flared Shift Dress</h2>
-                                <div class="quickview-ratting-review">
-                                    <div class="quickview-ratting-wrap">
-                                        <div class="quickview-ratting">
-                                            <i class="yellow fa fa-star"></i>
-                                            <i class="yellow fa fa-star"></i>
-                                            <i class="yellow fa fa-star"></i>
-                                            <i class="yellow fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <a href="#"> (1 customer review)</a>
-                                    </div>
-                                    <div class="quickview-stock">
-                                        <span><i class="fa fa-check-circle-o"></i> in stock</span>
-                                    </div>
-                                </div>
-                                <h3>$29.00</h3>
-                                <div class="quickview-peragraph">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
-                                        ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui
-                                        nemo ipsum numquam.</p>
-                                </div>
-                                <div class="size">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12">
-                                            <h5 class="title">Size</h5>
-                                            <select>
-                                                <option selected="selected">s</option>
-                                                <option>m</option>
-                                                <option>l</option>
-                                                <option>xl</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-12">
-                                            <h5 class="title">Color</h5>
-                                            <select>
-                                                <option selected="selected">orange</option>
-                                                <option>purple</option>
-                                                <option>black</option>
-                                                <option>pink</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="quantity">
-                                    <!-- Input Order -->
-                                    <div class="input-group">
-                                        <div class="button minus">
-                                            <button type="button" class="btn btn-primary btn-number"
-                                                    disabled="disabled" data-type="minus" data-field="quantity[1]">
-                                                <i class="ti-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" name="qty" class="input-number" data-min="1" data-max="1000"
-                                               value="1">
-                                        <div class="button plus">
-                                            <button type="button" class="btn btn-primary btn-number" data-type="plus"
-                                                    data-field="quantity[1]">
-                                                <i class="ti-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!--/ End Input Order -->
-                                </div>
-                                <div class="add-to-cart">
-                                    <a href="#" class="btn">Add to cart</a>
-                                    <a href="#" class="btn min"><i class="ti-heart"></i></a>
-                                    <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
-                                </div>
-                                <div class="default-social">
-                                    <h4 class="share-now">Share:</h4>
-                                    <ul>
-                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="youtube" href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                                        <li><a class="dribbble" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal end -->
 
 @endsection
 @push('styles')

@@ -1,4 +1,4 @@
-<!-- Start Shop Newsletter  -->
+<!-- Start Loja Newsletter  -->
 <section class="shop-newsletter section">
     <div class="container">
         <div class="inner-top">
@@ -20,4 +20,4 @@
         </div>
     </div>
 </section>
-<!-- End Shop Newsletter -->
+<!-- End Loja Newsletter -->

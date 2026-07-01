@@ -5,11 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>All Categories</h2>
+                <h2>Todas as categorias</h2>
                 <hr>
             </div>
         </div>
-        
+
         <div class="row">
             @foreach($categories as $category)
             <div class="col-lg-4 col-md-6 col-12">
@@ -27,7 +27,7 @@
                         <h3><a href="{{ route('front.category.detail', ['slug' => $category->slug]) }}">{{ $category->title }}</a></h3>
                         <p>{{ Str::limit($category->summary, 100) }}</p>
                         <a href="{{ route('front.category.detail', ['slug' => $category->slug]) }}" class="btn">
-                            View Products <i class="ti-arrow-right"></i>
+                            Ver produtos <i class="ti-arrow-right"></i>
                         </a>
                     </div>
                 </div>

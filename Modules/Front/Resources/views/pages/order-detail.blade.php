@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
                             <li><a href="{{route('front.my-orders')}}">My Orders<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0)">Order #{{ $order->order_number ?? $order->id }}</a></li>
                         </ul>
@@ -33,10 +33,10 @@
                     @if(session('error'))
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
-                    
+
                     <!-- Download Links for Digital Products -->
                     @include('front::partials.download-links')
-                    
+
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Order #{{ $order->order_number ?? $order->id }}</h4>
@@ -86,16 +86,16 @@
                                     </address>
                                 </div>
                             </div>
-                            
+
                             <hr>
-                            
+
                             <h6>Order Items</h6>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Product</th>
-                                            <th>Price</th>
+                                            <th>Preço</th>
                                             <th>Quantity</th>
                                             <th>Total</th>
                                         </tr>
@@ -112,31 +112,31 @@
                                                         <span class="text-muted">Product no longer available</span>
                                                     @endif
                                                 </td>
-                                                <td>${{ number_format($item->price, 2) }}</td>
+                                                <td>{{ format_currency((float) ($item->price)) }}</td>
                                                 <td>{{ $item->quantity }}</td>
-                                                <td>${{ number_format($item->amount, 2) }}</td>
+                                                <td>{{ format_currency((float) ($item->amount)) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="3" class="text-right"><strong>Subtotal:</strong></td>
-                                            <td>${{ number_format($order->sub_total, 2) }}</td>
+                                            <td>{{ format_currency((float) ($order->sub_total)) }}</td>
                                         </tr>
                                         @if($order->shipping)
                                             <tr>
                                                 <td colspan="3" class="text-right"><strong>Shipping ({{ $order->shipping->type }}):</strong></td>
-                                                <td>${{ number_format($order->shipping->price, 2) }}</td>
+                                                <td>{{ format_currency((float) ($order->shipping->price)) }}</td>
                                             </tr>
                                         @endif
                                         <tr>
                                             <td colspan="3" class="text-right"><strong>Total:</strong></td>
-                                            <td><strong>${{ number_format($order->total_amount, 2) }}</strong></td>
+                                            <td><strong>{{ format_currency((float) ($order->total_amount)) }}</strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
-                            
+
                             <div class="mt-4 d-flex justify-content-between">
                                 <a href="{{ route('front.my-orders') }}" class="btn btn-secondary">
                                     <i class="ti-arrow-left"></i> Back to Orders

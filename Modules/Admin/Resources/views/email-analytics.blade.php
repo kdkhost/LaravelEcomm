@@ -10,7 +10,7 @@
                 <i class="fas fa-sync-alt"></i> Refresh
             </button>
             <button type="button" class="btn btn-success" onclick="exportEmailAnalytics()">
-                <i class="fas fa-download"></i> Export
+                <i class="fas fa-download"></i> Exportar
             </button>
         </div>
     </div>
@@ -404,7 +404,7 @@ function exportEmailAnalytics() {
         if (response.ok) {
             return response.blob();
         }
-        throw new Error('Export failed');
+        throw new Error('Exportar failed');
     })
     .then(blob => {
         const url = window.URL.createObjectURL(blob);
@@ -426,7 +426,7 @@ function exportEmailAnalytics() {
 function showNotification(message, type = 'info') {
     const container = document.getElementById('notificationContainer');
     const alertClass = type === 'error' ? 'alert-danger' : type === 'success' ? 'alert-success' : 'alert-info';
-    
+
     const notification = document.createElement('div');
     notification.className = `alert ${alertClass} alert-dismissible fade show`;
     notification.innerHTML = `
@@ -435,9 +435,9 @@ function showNotification(message, type = 'info') {
             <span>&times;</span>
         </button>
     `;
-    
+
     container.appendChild(notification);
-    
+
     setTimeout(() => {
         if (notification.parentNode) {
             notification.parentNode.removeChild(notification);

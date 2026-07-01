@@ -6,7 +6,7 @@
             <h5 class="mb-0">Email Template: {{ $emailTemplate->name }}</h5>
             <div class="btn-group">
                 <a href="{{ route('admin.email-templates.edit', $emailTemplate->id) }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="fas fa-edit"></i> Editar
                 </a>
                 <a href="{{ route('admin.email-templates.preview', $emailTemplate->id) }}" class="btn btn-secondary btn-sm" target="_blank">
                     <i class="fas fa-external-link-alt"></i> Preview
@@ -28,20 +28,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <strong>Name:</strong> {{ $emailTemplate->name }}<br>
-                                    <strong>Type:</strong> 
+                                    <strong>Type:</strong>
                                     <span class="badge badge-info">
                                         {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$emailTemplate->template_type] ?? $emailTemplate->template_type }}
                                     </span><br>
                                     <strong>Subject:</strong> {{ $emailTemplate->subject }}<br>
                                 </div>
                                 <div class="col-md-6">
-                                    <strong>Status:</strong> 
+                                    <strong>Status:</strong>
                                     @if($emailTemplate->is_active)
                                         <span class="badge badge-success">Active</span>
                                     @else
                                         <span class="badge badge-secondary">Inactive</span>
                                     @endif<br>
-                                    <strong>Default:</strong> 
+                                    <strong>Padrão:</strong>
                                     @if($emailTemplate->is_default)
                                         <span class="badge badge-warning">Yes</span>
                                     @else
@@ -151,15 +151,15 @@
                     </div>
                     @endif
 
-                    <!-- Actions -->
+                    <!-- Ações -->
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="mb-0">Actions</h6>
+                            <h6 class="mb-0">Ações</h6>
                         </div>
                         <div class="card-body">
                             <div class="d-grid gap-2">
                                 <a href="{{ route('admin.email-templates.edit', $emailTemplate->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> Edit Template
+                                    <i class="fas fa-edit"></i> Editar Template
                                 </a>
                                 <a href="{{ route('admin.email-templates.preview', $emailTemplate->id) }}" class="btn btn-secondary" target="_blank">
                                     <i class="fas fa-external-link-alt"></i> Preview Template
@@ -168,7 +168,7 @@
                                     <form action="{{ route('admin.email-templates.set-default', $emailTemplate->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-warning w-100">
-                                            <i class="fas fa-star"></i> Set as Default
+                                            <i class="fas fa-star"></i> Set as Padrão
                                         </button>
                                     </form>
                                 @endif
@@ -179,7 +179,7 @@
                                     </button>
                                 </form>
                                 @if(!$emailTemplate->is_default)
-                                    <form action="{{ route('admin.email-templates.destroy', $emailTemplate->id) }}" method="POST" style="display: inline;" 
+                                    <form action="{{ route('admin.email-templates.destroy', $emailTemplate->id) }}" method="POST" style="display: inline;"
                                           onsubmit="return confirm('Are you sure you want to delete this template?')">
                                         @csrf
                                         @method('DELETE')

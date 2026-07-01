@@ -23,13 +23,13 @@
                                         <span class="badge bg-secondary">Inactive</span>
                                     @endif
                                     @if($template->is_default)
-                                        <span class="badge bg-warning">Default</span>
+                                        <span class="badge bg-warning">Padrão</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    <strong>Type:</strong> 
+                                    <strong>Type:</strong>
                                     <span class="badge bg-info">
                                         {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$template->template_type] ?? $template->template_type }}
                                     </span>
@@ -39,21 +39,21 @@
                                 </p>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        Sent: {{ $template->emailAnalytics()->count() }} | 
-                                        Open: {{ $template->emailAnalytics()->whereNotNull('opened_at')->count() }} | 
+                                        Sent: {{ $template->emailAnalytics()->count() }} |
+                                        Open: {{ $template->emailAnalytics()->whereNotNull('opened_at')->count() }} |
                                         Click: {{ $template->emailAnalytics()->whereNotNull('clicked_at')->count() }}
                                     </small>
                                 </p>
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group w-100" role="group">
-                                    <a href="{{ route('admin.email-templates.show', $template->id) }}" class="btn btn-outline-info btn-sm" title="View Details">
+                                    <a href="{{ route('admin.email-templates.show', $template->id) }}" class="btn btn-outline-info btn-sm" title="Ver detalhes">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.email-templates.usage', $template->id) }}" class="btn btn-outline-success btn-sm" title="View Usage">
                                         <i class="fas fa-chart-bar"></i>
                                     </a>
-                                    <a href="{{ route('admin.email-templates.edit', $template->id) }}" class="btn btn-outline-primary btn-sm" title="Edit Template">
+                                    <a href="{{ route('admin.email-templates.edit', $template->id) }}" class="btn btn-outline-primary btn-sm" title="Editar Template">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="{{ route('admin.email-templates.preview', $template->id) }}" class="btn btn-outline-secondary btn-sm" target="_blank" title="Preview">
@@ -62,14 +62,14 @@
                                     @if(!$template->is_default)
                                         <form action="{{ route('admin.email-templates.set-default', $template->id) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-outline-warning btn-sm" title="Set as Default" onclick="return confirm('Set this template as default?')">
+                                            <button type="submit" class="btn btn-outline-warning btn-sm" title="Set as Padrão" onclick="return confirm('Set this template as default?')">
                                                 <i class="fas fa-star"></i>
                                             </button>
                                         </form>
                                     @endif
                                     <form action="{{ route('admin.email-templates.toggle-active', $template->id) }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-outline-{{ $template->is_active ? 'danger' : 'success' }} btn-sm" 
+                                        <button type="submit" class="btn btn-outline-{{ $template->is_active ? 'danger' : 'success' }} btn-sm"
                                                 title="{{ $template->is_active ? 'Deactivate' : 'Activate' }}"
                                                 onclick="return confirm('{{ $template->is_active ? 'Deactivate' : 'Activate' }} this template?')">
                                             <i class="fas fa-{{ $template->is_active ? 'pause' : 'play' }}"></i>
@@ -81,7 +81,7 @@
                     </div>
                 @endforeach
             </div>
-            
+
             <!-- Pagination -->
             <div class="d-flex justify-content-center">
                 {{ $templates->links('pagination::admin-bootstrap-5') }}

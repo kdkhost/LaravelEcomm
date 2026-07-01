@@ -49,7 +49,7 @@
                                 </ul>
                             </div>
                             <!--/ End Single Widget -->
-                            <!-- Shop By Price -->
+                            <!-- Loja By Preço -->
                             <div class="single-widget range">
                                 <h3 class="title">@lang('frontend.shop_by_price')</h3>
                                 <div class="price-filter">
@@ -69,22 +69,22 @@
                                 <ul class="check-box-list">
                                     <li>
                                         <label class="checkbox-inline" for="1"><input name="news" id="1"
-                                                                                      type="checkbox">$20 - $50<span
+                                                                                      type="checkbox">R$ 20,00 - R$ 50,00<span
                                                     class="count">(3)</span></label>
                                     </li>
                                     <li>
                                         <label class="checkbox-inline" for="2"><input name="news" id="2"
-                                                                                      type="checkbox">$50 - $100<span
+                                                                                      type="checkbox">R$ 50,00 - R$ 100,00<span
                                                     class="count">(5)</span></label>
                                     </li>
                                     <li>
                                         <label class="checkbox-inline" for="3"><input name="news" id="3"
-                                                                                      type="checkbox">$100 - $250<span
+                                                                                      type="checkbox">R$ 100,00 - R$ 250,00<span
                                                     class="count">(8)</span></label>
                                     </li>
                                 </ul>
                             </div>
-                            <!--/ End Shop By Price -->
+                            <!--/ End Loja By Preço -->
                             <!-- Single Widget -->
                             <div class="single-widget recent-post">
                                 <h3 class="title">@lang('frontend.recent_post')</h3>
@@ -101,8 +101,8 @@
                                                 $org=($product->price-($product->price*$product->discount)/100);
                                             @endphp
                                             <p class="price">
-                                                <del class="text-muted">${{number_format($product->price,2)}}</del>
-                                                ${{number_format($org,2)}}  </p>
+                                                <del class="text-muted">{{ format_currency((float) ($product->price)) }}</del>
+                                                {{ format_currency((float) ($org)) }}  </p>
 
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
                     <div class="col-lg-9 col-md-8 col-12">
                         <div class="row">
                             <div class="col-12">
-                                <!-- Shop Top -->
+                                <!-- Loja Top -->
                                 <div class="shop-top">
                                     <div class="shop-shorter">
                                         <div class="single-shorter">
@@ -182,7 +182,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--/ End Shop Top -->
+                                <!--/ End Loja Top -->
                             </div>
                         </div>
                         <div class="row">
@@ -226,9 +226,9 @@
                                                 @php
                                                     $after_discount=($product->price-($product->price*$product->discount)/100);
                                                 @endphp
-                                                <span>${{number_format($after_discount,2)}}</span>
+                                                <span>{{ format_currency((float) ($after_discount)) }}</span>
                                                 <del style="padding-left:4%;">
-                                                    ${{number_format($product->price,2)}}</del>
+                                                    {{ format_currency((float) ($product->price)) }}</del>
                                             </div>
                                         </div>
                                     </div>
@@ -316,8 +316,8 @@
                                             $after_discount=($product->price-($product->price*$product->discount)/100);
                                         @endphp
                                         <h3><small>
-                                                <del class="text-muted">${{number_format($product->price,2)}}</del>
-                                            </small> ${{number_format($after_discount,2)}}  </h3>
+                                                <del class="text-muted">{{ format_currency((float) ($product->price)) }}</del>
+                                            </small> {{ format_currency((float) ($after_discount)) }}  </h3>
                                         <div class="quickview-peragraph">
                                             <p>{!! html_entity_decode($product->summary) !!}</p>
                                         </div>

@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0)">Recently Viewed</a></li>
                         </ul>
                     </div>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class="mb-4">Recently Viewed Products</h2>
-                    
+
                     @if(count($products) > 0)
                         <div class="row">
                             @foreach($products as $product)
@@ -43,12 +43,12 @@
                                             </a>
                                             <div class="button-head">
                                                 <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                    <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                    <a data-toggle="modal" data-target="#exampleModal" title="Visualização rápida" href="#"><i class=" ti-eye"></i><span>Ver rápido</span></a>
+                                                    <a title="Favoritos" href="#"><i class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
+                                                    <a title="Comparar" href="#"><i class="ti-bar-chart-alt"></i><span>Comparar</span></a>
                                                 </div>
                                                 <div class="product-action-2">
-                                                    <a title="Add to cart" href="{{ route('add-to-cart', $product->id) }}">Add to cart</a>
+                                                    <a title="Adicionar ao carrinho" href="{{ route('add-to-cart', $product->id) }}">Adicionar ao carrinho</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,10 +56,10 @@
                                             <h3><a href="{{ route('front.product-detail', $product->slug) }}">{{ $product->title }}</a></h3>
                                             <div class="product-price">
                                                 @if($product->discount > 0)
-                                                    <span class="old">${{ number_format($product->price, 2) }}</span>
-                                                    <span>${{ number_format($product->price - ($product->price * $product->discount / 100), 2) }}</span>
+                                                    <span class="old">{{ format_currency((float) ($product->price)) }}</span>
+                                                    <span>{{ format_currency((float) ($product->price - ($product->price * $product->discount / 100))) }}</span>
                                                 @else
-                                                    <span>${{ number_format($product->price, 2) }}</span>
+                                                    <span>{{ format_currency((float) ($product->price)) }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -73,7 +73,7 @@
                             <h5>No recently viewed products</h5>
                             <p class="text-muted">You haven't viewed any products yet. Start browsing our store!</p>
                             <a href="{{ route('front.product-grids') }}" class="btn btn-primary">
-                                Browse Products
+                                Ver produtos
                             </a>
                         </div>
                     @endif

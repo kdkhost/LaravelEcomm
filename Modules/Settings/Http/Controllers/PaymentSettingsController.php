@@ -14,13 +14,15 @@ use Modules\Settings\Actions\FindSettingAction;
 use Modules\Settings\Actions\GetSettingsAction;
 use Modules\Settings\Actions\UpdatePaymentSettingsAction;
 use Modules\Settings\Models\Setting;
+use Modules\Billing\Services\MercadoPagoService;
 
 class PaymentSettingsController extends Controller
 {
     public function __construct(
         private readonly GetSettingsAction $getSettingsAction,
         private readonly FindSettingAction $findSettingAction,
-        private readonly UpdatePaymentSettingsAction $updatePaymentSettingsAction
+        private readonly UpdatePaymentSettingsAction $updatePaymentSettingsAction,
+        private readonly MercadoPagoService $mercadoPagoService,
     ) {
         // Authorization is handled explicitly in each method
     }
@@ -33,6 +35,8 @@ class PaymentSettingsController extends Controller
         return view('settings::payment.index', [
             'settings' => $settings,
             'paymentSettings' => $settings?->payment_settings ?? [],
+            'mercadoPagoWebhookUrl' => $this->mercadoPagoService->webhookUrl(),
+            'mercadoPagoReturnUrl' => route('mercadopago.return'),
         ]);
     }
 
@@ -48,6 +52,12 @@ class PaymentSettingsController extends Controller
             'paypal_client_id' => 'nullable|string|max:255',
             'paypal_client_secret' => 'nullable|string|max:255',
             'paypal_mode' => 'nullable|in:sandbox,live',
+            'mercadopago_enabled' => 'boolean',
+            'mercadopago_environment' => 'nullable|in:sandbox,production',
+            'mercadopago_access_token' => 'nullable|string|max:500',
+            'mercadopago_public_key' => 'nullable|string|max:500',
+            'mercadopago_webhook_secret' => 'nullable|string|max:120',
+            'mercadopago_statement_descriptor' => 'nullable|string|max:22',
             'cod_enabled' => 'boolean',
             'bank_transfer_enabled' => 'boolean',
             'bank_account_details' => 'nullable|string',
@@ -55,6 +65,6 @@ class PaymentSettingsController extends Controller
 
         $this->updatePaymentSettingsAction->execute($setting, $validated);
 
-        return redirect()->route('settings.payment.index')->with('success', 'Payment settings updated successfully');
+        return redirect()->route('settings.payment.index')->with('success', 'Configurações de pagamento atualizadas com sucesso.');
     }
 }

@@ -1,5 +1,5 @@
 @extends('admin::layouts.master')
-@section('title','E-SHOP || Attribute Group Edit')
+@section('title','E-SHOP || Attribute Group Editar')
 @section('content')
     <div class="card">
         <h5 class="card-header">@lang('partials.edit')</h5>

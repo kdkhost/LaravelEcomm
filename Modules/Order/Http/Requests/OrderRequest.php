@@ -38,7 +38,7 @@ class OrderRequest extends BaseRequest
             'payment_method' => [
                 'required',
                 'string',
-                'in:cod,paypal,stripe,bank_transfer,credit_card',
+                'in:cod,paypal,stripe,mercadopago,bank_transfer,credit_card',
             ],
             'shipping_method' => [
                 'required',

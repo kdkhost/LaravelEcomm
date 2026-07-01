@@ -21,7 +21,7 @@
         <input type="file" id="featured_image" name="featured_image" class="form-control" accept="image/jpeg,image/png,image/jpg,image/webp">
         @if($page->exists && $page->featured_image_url)
             <div class="mt-2">
-                <img src="{{ $page->featured_image_url }}" alt="Featured" class="img-thumbnail" style="max-height: 120px;">
+                <img src="{{ $page->featured_image_url }}" alt="Destaques" class="img-thumbnail" style="max-height: 120px;">
             </div>
         @endif
     </div>

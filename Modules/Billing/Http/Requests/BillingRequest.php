@@ -104,7 +104,7 @@ class BillingRequest extends BaseRequest
             'payment_method' => [
                 'nullable',
                 'string',
-                'in:bank_transfer,credit_card,paypal,stripe,check,cash,other',
+                'in:bank_transfer,credit_card,paypal,stripe,mercadopago,check,cash,other',
             ],
             'payment_reference' => [
                 'nullable',

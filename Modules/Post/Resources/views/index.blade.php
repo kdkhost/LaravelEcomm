@@ -14,7 +14,7 @@
                 <br>
                 <button class="btn btn-primary btn-sm">@lang('messages.import')</button>
                 <a href="{{ route('posts.export') }}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip"
-                   data-placement="bottom" title="Export posts"><i class="fas fa-plus"></i>@lang('partials.export')</a>
+                   data-placement="bottom" title="Exportar posts"><i class="fas fa-plus"></i>@lang('partials.export')</a>
             </form>
         </div>
         <div class="card-body">

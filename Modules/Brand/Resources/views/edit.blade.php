@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title','E-SHOP || Brand Create')
+@section('title','E-SHOP || Marca Create')
 
 @section('content')
     <div class="card">

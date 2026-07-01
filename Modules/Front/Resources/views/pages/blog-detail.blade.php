@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('front.index')}}">Inicio<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="javascript:void(0);">Blog Single Sidebar</a></li>
                         </ul>
                     </div>
@@ -144,14 +144,14 @@
                         <!-- Single Widget -->
                         <div class="single-widget search">
                             <form class="form" method="GET" action="{{route('front.blog-search')}}">
-                                <input type="text" placeholder="Search Here..." name="search">
+                                <input type="text" placeholder="Buscar aqui..." name="search">
                                 <button class="button" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                         <!--/ End Single Widget -->
                         <!-- Single Widget -->
                         <div class="single-widget side-tags">
-                            <h3 class="title">Categories</h3>
+                            <h3 class="title">Categorias</h3>
                             <ul class="tag">
                                 @foreach(Helper::postCategoryList() as $cat)
                                     <li><a href="{{ route('front.blog-by-category', $cat->slug) }}">{{$cat->title}}

@@ -1,16 +1,16 @@
 @extends('admin::layouts.master')
-@section('title', 'Analytics Dashboard')
+@section('title', 'Painel de analytics')
 @section('content')
 <div class="container-fluid analytics-dashboard">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Analytics Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray-800">Painel de analytics</h1>
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-primary" onclick="refreshAnalytics()">
-                <i class="fas fa-sync-alt"></i> Refresh
+                <i class="fas fa-sync-alt"></i> Atualizar
             </button>
             <button type="button" class="btn btn-success" onclick="exportAnalytics()">
-                <i class="fas fa-download"></i> Export
+                <i class="fas fa-download"></i> Exportar
             </button>
         </div>
     </div>
@@ -22,21 +22,21 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-3">
-                            <label for="startDate">Start Date:</label>
+                            <label for="startDate">Data inicial:</label>
                             <input type="date" id="startDate" class="form-control" value="{{ now()->subMonth()->format('Y-m-d') }}">
                         </div>
                         <div class="col-md-3">
-                            <label for="endDate">End Date:</label>
+                            <label for="endDate">Data final:</label>
                             <input type="date" id="endDate" class="form-control" value="{{ now()->format('Y-m-d') }}">
                         </div>
                         <div class="col-md-3">
-                            <label for="analyticsType">Analytics Type:</label>
+                            <label for="analyticsType">Tipo de análise:</label>
                             <select id="analyticsType" class="form-control">
-                                <option value="overview">Overview</option>
-                                <option value="sales">Sales</option>
-                                <option value="users">Users</option>
-                                <option value="products">Products</option>
-                                <option value="content">Content</option>
+                                <option value="overview">Visão geral</option>
+                                <option value="sales">Vendas</option>
+                                <option value="users">Usuários</option>
+                                <option value="products">Produtos</option>
+                                <option value="content">Conteúdo</option>
                                 <option value="marketing">Marketing</option>
                                 <option value="performance">Performance</option>
                             </select>
@@ -44,7 +44,7 @@
                         <div class="col-md-3">
                             <label>&nbsp;</label>
                             <button type="button" class="btn btn-info btn-block" onclick="updateDateRange()">
-                                <i class="fas fa-filter"></i> Apply Filter
+                                <i class="fas fa-filter"></i> Aplicar filtro
                             </button>
                         </div>
                     </div>
@@ -61,12 +61,12 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Revenue</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalRevenue">$0</div>
-                            <div class="text-xs text-muted" id="revenueChange">+0% from last month</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Receita total</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalRevenue">R$ 0,00</div>
+                            <div class="text-xs text-muted" id="revenueChange">+0% em relação ao mês anterior</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-money-bill-wave fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -79,9 +79,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Orders</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total de pedidos</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalOrders">0</div>
-                            <div class="text-xs text-muted" id="ordersChange">+0% from last month</div>
+                            <div class="text-xs text-muted" id="ordersChange">+0% em relação ao mês anterior</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
@@ -140,7 +140,7 @@
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow">
-                            <a class="dropdown-item" href="#" onclick="exportChart('revenue')">Export Chart</a>
+                            <a class="dropdown-item" href="#" onclick="exportChart('revenue')">Exportar Chart</a>
                             <a class="dropdown-item" href="#" onclick="printChart('revenue')">Print Chart</a>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
         loadAnalytics();
         initializeCharts();
         startRealTimeUpdates();
-        
+
         // Add event listener for analytics type dropdown
         document.getElementById('analyticsType').addEventListener('change', function() {
             updateDateRange();
@@ -410,7 +410,7 @@
                 }
             });
             const data = await response.json();
-            
+
             if (data.success && data.data) {
                 if (data.data.overview) {
                     updateOverviewCards(data.data.overview);
@@ -430,12 +430,12 @@
     // Update overview cards
     function updateOverviewCards(overview) {
         if (!overview) return;
-        
+
         const totalRevenue = document.getElementById('totalRevenue');
         const totalOrders = document.getElementById('totalOrders');
         const totalCustomers = document.getElementById('totalCustomers');
         const totalProducts = document.getElementById('totalProducts');
-        
+
         if (totalRevenue && overview.total_revenue) {
             totalRevenue.textContent = '$' + formatNumber(overview.total_revenue.current || 0);
         }
@@ -448,7 +448,7 @@
         if (totalProducts && overview.total_products) {
             totalProducts.textContent = formatNumber(overview.total_products.current || 0);
         }
-        
+
         // Update change indicators
         if (overview.total_revenue) {
             updateChangeIndicator('revenueChange', overview.total_revenue.this_month, overview.total_revenue.last_month);
@@ -467,7 +467,7 @@
         const change = previous > 0 ? ((current - previous) / previous * 100) : 0;
         const sign = change >= 0 ? '+' : '';
         const color = change >= 0 ? 'text-success' : 'text-danger';
-        
+
         element.innerHTML = `<span class="${color}">${sign}${change.toFixed(1)}% from last month</span>`;
     }
 
@@ -736,7 +736,7 @@
             // Update inventory chart
             if (data.products && data.products.inventory_status && inventoryChart) {
                 const inventory = data.products.inventory_status;
-                inventoryChart.data.labels = ['In Stock', 'Out of Stock', 'Low Stock'];
+                inventoryChart.data.labels = ['Em estoque', 'Sem estoque', 'Low Stock'];
                 inventoryChart.data.datasets[0].data = [
                     inventory.in_stock || 0,
                     inventory.out_of_stock || 0,
@@ -823,7 +823,7 @@
                     }
                 });
                 const data = await response.json();
-                
+
                 if (data.success) {
                     document.getElementById('onlineUsers').textContent = data.data.online_users;
                     document.getElementById('currentOrders').textContent = data.data.current_orders.pending + data.data.current_orders.processing;
@@ -843,15 +843,15 @@
         loadAnalytics();
     }
 
-    // Export analytics
+    // Exportar analytics
     async function exportAnalytics() {
-        console.log('Export function called - using POST method');
+        console.log('Exportar function called - using POST method');
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const type = document.getElementById('analyticsType').value;
-        
-        console.log('Export parameters:', { type, format: 'xlsx', startDate, endDate });
-        
+
+        console.log('Exportar parameters:', { type, format: 'xlsx', startDate, endDate });
+
         try {
             const response = await fetch('/admin/analytics/export?_t=' + Date.now(), {
                 method: 'POST',
@@ -867,9 +867,9 @@
                     end_date: endDate
                 })
             });
-            
+
             console.log('Response status:', response.status);
-            
+
             if (response.ok) {
                 const blob = await response.blob();
                 const url = window.URL.createObjectURL(blob);
@@ -880,15 +880,15 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
                 document.body.removeChild(a);
-                console.log('Export completed successfully');
+                console.log('Exportar completed successfully');
             } else {
                 const errorText = await response.text();
-                console.error('Export failed:', response.status, errorText);
-                alert('Export failed. Please try again.');
+                console.error('Exportar failed:', response.status, errorText);
+                alert('Exportar failed. Please try again.');
             }
         } catch (error) {
-            console.error('Export error:', error);
-            alert('Export failed. Please try again.');
+            console.error('Exportar error:', error);
+            alert('Exportar failed. Please try again.');
         }
     }
 
@@ -897,7 +897,7 @@
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
         const type = document.getElementById('analyticsType').value;
-        
+
         // Load analytics for specific date range
         loadDateRangeAnalytics(type, startDate, endDate);
     }
@@ -912,14 +912,14 @@
                 }
             });
             const data = await response.json();
-            
+
             if (data.success) {
                 // Update charts and tables with filtered data
                 // Create a proper data structure for updateCharts
                 const chartData = {};
                 chartData[type] = data.data;
                 updateCharts(chartData);
-                
+
                 // Show success message
                 showNotification('Analytics updated successfully!', 'success');
             }
@@ -929,10 +929,10 @@
         }
     }
 
-    // Export chart
+    // Exportar chart
     function exportChart(chartType) {
         // Implement chart export functionality
-        console.log('Exporting chart:', chartType);
+        console.log('Exportando gráfico:', chartType);
     }
 
     // Print chart
@@ -958,9 +958,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Auto remove after 3 seconds
         setTimeout(() => {
             if (notification.parentNode) {

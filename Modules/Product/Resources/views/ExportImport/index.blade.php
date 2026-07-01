@@ -25,7 +25,7 @@
                                     <div class="text-left">
                                         <a class="btn btn-info btn-sm"
                                            href="{{ route('product.export') }}">Products
-                                            CSV Export</a>
+                                            CSV Exportar</a>
                                     </div>
                                     <div class="text-right">
                                         <a class="btn btn-info btn-sm"

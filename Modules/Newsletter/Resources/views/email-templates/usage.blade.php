@@ -72,7 +72,7 @@
                                                     <td>{{ $campaign->recipients_count ?? 0 }}</td>
                                                     <td>
                                                         @php
-                                                            $openRate = $campaign->recipients_count > 0 ? 
+                                                            $openRate = $campaign->recipients_count > 0 ?
                                                                 round(($campaign->opened_count ?? 0) / $campaign->recipients_count * 100, 1) : 0;
                                                         @endphp
                                                         <span class="badge badge-{{ $openRate > 20 ? 'success' : ($openRate > 10 ? 'warning' : 'danger') }}">
@@ -81,7 +81,7 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $clickRate = $campaign->recipients_count > 0 ? 
+                                                            $clickRate = $campaign->recipients_count > 0 ?
                                                                 round(($campaign->clicked_count ?? 0) / $campaign->recipients_count * 100, 1) : 0;
                                                         @endphp
                                                         <span class="badge badge-{{ $clickRate > 5 ? 'success' : ($clickRate > 2 ? 'warning' : 'danger') }}">
@@ -114,20 +114,20 @@
                         </div>
                         <div class="card-body">
                             <p><strong>Name:</strong> {{ $emailTemplate->name }}</p>
-                            <p><strong>Type:</strong> 
+                            <p><strong>Type:</strong>
                                 <span class="badge badge-info">
                                     {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$emailTemplate->template_type] ?? $emailTemplate->template_type }}
                                 </span>
                             </p>
                             <p><strong>Subject:</strong> {{ $emailTemplate->subject }}</p>
-                            <p><strong>Status:</strong> 
+                            <p><strong>Status:</strong>
                                 @if($emailTemplate->is_active)
                                     <span class="badge badge-success">Active</span>
                                 @else
                                     <span class="badge badge-secondary">Inactive</span>
                                 @endif
                             </p>
-                            <p><strong>Default:</strong> 
+                            <p><strong>Padrão:</strong>
                                 @if($emailTemplate->is_default)
                                     <span class="badge badge-warning">Yes</span>
                                 @else
@@ -137,15 +137,15 @@
                         </div>
                     </div>
 
-                    <!-- Quick Actions -->
+                    <!-- Ações rápidas -->
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="mb-0">Quick Actions</h6>
+                            <h6 class="mb-0">Ações rápidas</h6>
                         </div>
                         <div class="card-body">
                             <div class="d-grid gap-2">
                                 <a href="{{ route('admin.email-templates.edit', $emailTemplate->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> Edit Template
+                                    <i class="fas fa-edit"></i> Editar Template
                                 </a>
                                 <a href="{{ route('admin.email-templates.preview', $emailTemplate->id) }}" class="btn btn-secondary" target="_blank">
                                     <i class="fas fa-external-link-alt"></i> Preview Template
@@ -157,7 +157,7 @@
                                     <form action="{{ route('admin.email-templates.set-default', $emailTemplate->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-warning w-100">
-                                            <i class="fas fa-star"></i> Set as Default
+                                            <i class="fas fa-star"></i> Set as Padrão
                                         </button>
                                     </form>
                                 @endif

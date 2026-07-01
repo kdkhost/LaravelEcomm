@@ -39,7 +39,7 @@ class UserOrderController extends Controller
     {
         // Ensure user can only view their own orders
         if ($order->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized access to this order.');
+            abort(403, 'Acesso nao autorizado a este pedido.');
         }
 
         $order->load(['user', 'carts.product', 'shipping']);
@@ -54,7 +54,7 @@ class UserOrderController extends Controller
     {
         // Ensure user can only track their own orders
         if ($order->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized access to this order.');
+            abort(403, 'Acesso nao autorizado a este pedido.');
         }
 
         $order->load(['user', 'carts.product', 'shipping']);

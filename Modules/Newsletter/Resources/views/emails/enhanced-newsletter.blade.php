@@ -159,7 +159,7 @@
         @endif
 
         @if(!empty($products))
-            <h2>🛍️ Featured Products</h2>
+            <h2>🛍️ Produtos em destaque</h2>
             @foreach($products as $product)
                 <div class="product-item">
                     @if($product->imageUrl)
@@ -167,7 +167,7 @@
                     @endif
                     <div class="product-details">
                         <div class="product-title">{{ $product->title }}</div>
-                        <div class="product-price">${{ number_format($product->price, 2) }}</div>
+                        <div class="product-price">{{ format_currency((float) ($product->price)) }}</div>
                         <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => route('front.product-detail', $product->slug)]) }}" class="read-more-btn">
                             View Product →
                         </a>
@@ -182,10 +182,10 @@
                 <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => 'https://twitter.com']) }}">Twitter</a>
                 <a href="{{ route('email.track.click', ['id' => $analyticsId ?? '', 'url' => 'https://instagram.com']) }}">Instagram</a>
             </div>
-            
+
             <p>Thank you for subscribing to our newsletter!</p>
             <p>{{ config('app.name') }} - Your trusted e-commerce partner</p>
-            
+
             <div class="unsubscribe">
                 <a href="{{ route('email.unsubscribe', ['email' => $recipientEmail ?? '', 'id' => $analyticsId ?? '']) }}">
                     Unsubscribe from this newsletter

@@ -19,12 +19,12 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shopping Cart -->
+    <!-- Compras Cart -->
     <div class="shopping-cart section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!-- Shopping Summery -->
+                    <!-- Compras Summery -->
                     <table class="table shopping-summery">
                         <thead>
                         <tr class="main-hading">
@@ -54,7 +54,7 @@
                                             <p class="product-des">{!!($cart['summary']) !!}</p>
                                         </td>
                                         <td class="price" data-title="@lang('frontend.price')">
-                                            <span>${{number_format($cart['price'],2)}}</span></td>
+                                            <span>{{ format_currency((float) ($cart['price'])) }}</span></td>
                                         <td class="qty" data-title="@lang('frontend.quantity')"><!-- Input Order -->
                                             <div class="input-group">
                                                 <div class="button minus">
@@ -77,7 +77,7 @@
                                             <!--/ End Input Order -->
                                         </td>
                                         <td class="total-amount cart_single_price" data-title="@lang('frontend.total')"><span
-                                                    class="money">${{$cart['amount']}}</span></td>
+                                                    class="money">{{ format_currency((float) ($cart['amount'])) }}</span></td>
 
                                         <td class="action" data-title="@lang('frontend.remove_this_item')"><a
                                                     href="{{route('cart-delete',$cart->id)}}"><i
@@ -107,7 +107,7 @@
                         </form>
                         </tbody>
                     </table>
-                    <!--/ End Shopping Summery -->
+                    <!--/ End Compras Summery -->
                 </div>
             </div>
             <div class="row">
@@ -131,11 +131,11 @@
                                     <ul>
                                         <li class="order_subtotal"
                                             data-price="{{Helper::totalCartPrice()}}">
-                                            @lang('frontend.cart_subtotal')<span>${{number_format(Helper::totalCartPrice(),2)}}</span>
+                                            @lang('frontend.cart_subtotal')<span>{{ format_currency((float) (Helper::totalCartPrice())) }}</span>
                                         </li>
                                         @if(session()->has('coupon'))
                                             <li class="coupon_price" data-price="{{Session::get('coupon')['value']}}">
-                                                @lang('frontend.you_save')<span>${{number_format(Session::get('coupon')['value'],2)}}</span>
+                                                @lang('frontend.you_save')<span>{{ format_currency((float) (Session::get('coupon')['value'])) }}</span>
                                             </li>
                                         @endif
                                         @php
@@ -145,9 +145,9 @@
                                             }
                                         @endphp
                                         @if(session()->has('coupon'))
-                                            <li class="last" id="order_total_price">@lang('frontend.you_pay')<span>${{number_format($total_amount,2)}}</span></li>
+                                            <li class="last" id="order_total_price">@lang('frontend.you_pay')<span>{{ format_currency((float) ($total_amount)) }}</span></li>
                                         @else
-                                            <li class="last" id="order_total_price">@lang('frontend.you_pay')<span>${{number_format($total_amount,2)}}</span></li>
+                                            <li class="last" id="order_total_price">@lang('frontend.you_pay')<span>{{ format_currency((float) ($total_amount)) }}</span></li>
                                         @endif
                                     </ul>
                                     <div class="button5">
@@ -163,9 +163,9 @@
             </div>
         </div>
     </div>
-    <!--/ End Shopping Cart -->
+    <!--/ End Compras Cart -->
 
-    <!-- Start Shop Services Area  -->
+    <!-- Start Loja Services Area  -->
     <section class="shop-services section">
         <div class="container">
             <div class="row">
@@ -208,11 +208,11 @@
             </div>
         </div>
     </section>
-    <!-- End Shop Newsletter -->
+    <!-- End Loja Newsletter -->
 
-    <!-- Start Shop Newsletter  -->
+    <!-- Start Loja Newsletter  -->
     @include('front::layouts.newsletter')
-    <!-- End Shop Newsletter -->
+    <!-- End Loja Newsletter -->
 
 
 
@@ -265,7 +265,7 @@
                                         <span><i class="fa fa-check-circle-o"></i> @lang('frontend.in_stock')</span>
                                     </div>
                                 </div>
-                                <h3>$29.00</h3>
+                                <h3>R$ 29,00</h3>
                                 <div class="quickview-peragraph">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
                                         ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui

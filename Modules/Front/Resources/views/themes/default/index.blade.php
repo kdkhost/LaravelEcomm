@@ -1,5 +1,5 @@
 @extends($themePath . '.layouts.master')
-@section('title','E-SHOP || HOME PAGE')
+@section('title','Loja virtual || Início')
 @section('content')
     <!-- Slider Area -->
     <section class="hero-slider">
@@ -16,7 +16,7 @@
                                         <p>Maboriosam in a nesciung eget magnae <br> dapibus disting tloctio in the find
                                             it pereri <br> odiy maboriosm.</p>
                                         <div class="button">
-                                            <a href="#" class="btn">Shop Now!</a>
+                                            <a href="#" class="btn">Comprar agora</a>
                                         </div>
                                     </div>
                                 </div>
@@ -44,18 +44,18 @@
                             <h1 class="wow fadeInDown">{{$banner->title}}</h1>
                             <p>{!! html_entity_decode($banner->description) !!}</p>
                             <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('front.product-grids')}}"
-                               role="button">Shop Now<i class="far fa-arrow-alt-circle-right"></i></i></a>
+                               role="button">Comprar agora<i class="far fa-arrow-alt-circle-right"></i></i></a>
                         </div>
                     </div>
                 @endforeach
             </div>
             <a class="carousel-control-prev" href="#Gslider" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="sr-only">Anterior</span>
             </a>
             <a class="carousel-control-next" href="#Gslider" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="sr-only">Próximo</span>
             </a>
         </section>
     @endif
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Hot Item</h2>
+                        <h2>Produtos em alta</h2>
                     </div>
                 </div>
             </div>
@@ -114,20 +114,20 @@
                                     <div class="button-head">
                                         <div class="product-action">
                                             <a data-toggle="modal" data-target="#{{$product->id}}"
-                                               title="Quick View" href="#"><i
-                                                        class=" ti-eye"></i><span>Quick Shop</span></a>
-                                            <a title="Wishlist"
+                                               title="Visualização rápida" href="#"><i
+                                                        class=" ti-eye"></i><span>Ver rápido</span></a>
+                                            <a title="Favoritos"
                                                href="{{route('add-to-wishlist',$product->slug)}}"><i
-                                                        class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                        class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
                                             <form method="POST" action="{{ route('products.compare.add', $product->id) }}" style="display:inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-outline-primary btn-sm" title="Add to Compare">
-                                                    <i class="fa fa-balance-scale"></i> <span>Compare</span>
+                                                <button type="submit" class="btn btn-outline-primary btn-sm" title="Comparar">
+                                                    <i class="fa fa-balance-scale"></i> <span>Comparar</span>
                                                 </button>
                                             </form>
                                         </div>
                                         <div class="product-action-2">
-                                            <a href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
+                                            <a href="{{route('add-to-cart',$product->slug)}}">Adicionar ao carrinho</a>
                                         </div>
                                     </div>
                                 </div>
@@ -135,11 +135,11 @@
                                     <h3><a href="{{route('front.product-detail',$product->slug)}}">{{$product->title}}</a>
                                     </h3>
                                     <div class="product-price">
-                                        <span class="old">${{number_format($product->price,2)}}</span>
+                                        <span class="old">{{ format_currency((float) ($product->price)) }}</span>
                                         @php
                                             $after_discount=($product->price-($product->price*$product->discount)/100)
                                         @endphp
-                                        <span>${{number_format($after_discount,2)}}</span>
+                                        <span>{{ format_currency((float) ($after_discount)) }}</span>
                                     </div>
                                     {{-- Display product condition --}}
                                     @if($product->condition)
@@ -168,14 +168,14 @@
                             <div class="col-lg-6 col-12 padding-left">
                                 <div class="content">
                                     <div class="heading-block">
-                                        <p class="small-title">Deal of day</p>
+                                        <p class="small-title">Oferta do dia</p>
                                         <h3 class="title">{{$featured_product->title}}</h3>
                                         <p class="text">{!! html_entity_decode($featured_product->summary) !!}</p>
                                         @php
                                             $after_discount=100
                                         @endphp
-                                        <h1 class="price">${{number_format($after_discount)}}
-                                            <s>${{number_format($featured_product->price)}}</s></h1>
+                                        <h1 class="price">{{ format_currency((float) ($after_discount)) }}
+                                            <s>{{ format_currency((float) ($featured_product->price)) }}</s></h1>
                                         <div class="coming-time">
                                             <div class="clearfix" featured_product-countdown="2021/02/30"></div>
                                         </div>
@@ -189,13 +189,13 @@
             </section>
             <!-- /End Cowndown Area -->
             @endforeach
-            <!-- Start Shop Blog  -->
+            <!-- Start Loja Blog  -->
             <section class="shop-blog section">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="section-title">
-                                <h2>From Our Blog</h2>
+                                <h2>Do nosso blog</h2>
                             </div>
                         </div>
                     </div>
@@ -223,9 +223,9 @@
                     </div>
                 </div>
             </section>
-            <!-- End Shop Blog  -->
+            <!-- End Loja Blog  -->
 
-            <!-- Start Shop Services Area -->
+            <!-- Start Loja Services Area -->
             <section class="shop-services section home">
                 <div class="container">
                     <div class="row">
@@ -233,8 +233,8 @@
                             <!-- Start Single Service -->
                             <div class="single-service">
                                 <i class="ti-rocket"></i>
-                                <h4>Free shiping</h4>
-                                <p>Orders over $100</p>
+                                <h4>Frete grátis</h4>
+                                <p>Pedidos acima de R$ 100,00</p>
                             </div>
                             <!-- End Single Service -->
                         </div>
@@ -242,8 +242,8 @@
                             <!-- Start Single Service -->
                             <div class="single-service">
                                 <i class="ti-reload"></i>
-                                <h4>Free Return</h4>
-                                <p>Within 30 days returns</p>
+                                <h4>Troca fácil</h4>
+                                <p>Devolução em até 30 dias</p>
                             </div>
                             <!-- End Single Service -->
                         </div>
@@ -251,8 +251,8 @@
                             <!-- Start Single Service -->
                             <div class="single-service">
                                 <i class="ti-lock"></i>
-                                <h4>Sucure Payment</h4>
-                                <p>100% secure payment</p>
+                                <h4>Pagamento seguro</h4>
+                                <p>Pagamento 100% seguro</p>
                             </div>
                             <!-- End Single Service -->
                         </div>
@@ -260,15 +260,15 @@
                             <!-- Start Single Service -->
                             <div class="single-service">
                                 <i class="ti-tag"></i>
-                                <h4>Best Peice</h4>
-                                <p>Guaranteed price</p>
+                                <h4>Melhor preço</h4>
+                                <p>Preço garantido</p>
                             </div>
                             <!-- End Single Service -->
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- End Shop Services Area -->
+            <!-- End Loja Services Area -->
             @include($themePath . '.layouts.newsletter')
             <!-- Modal -->
             @if($hot_products)
@@ -316,13 +316,13 @@
                                                                 @endif
                                                             @endfor
                                                         </div>
-                                                        <a href="#"> ({{$rate_count}} customer review)</a>
+                                                        <a href="#"> ({{$rate_count}} avaliação de cliente)</a>
                                                     </div>
                                                     <div class="quickview-stock">
                                                         @if($product->stock >0)
-                                                            <span><i class="fa fa-check-circle-o"></i> {{$product->stock}} in stock</span>
+                                                            <span><i class="fa fa-check-circle-o"></i> {{$product->stock}} em estoque</span>
                                                         @else
-                                                            <span><i class="fa fa-times-circle-o text-danger"></i> {{$product->stock}} out stock</span>
+                                                            <span><i class="fa fa-times-circle-o text-danger"></i> {{$product->stock}} sem estoque</span>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -331,8 +331,8 @@
                                                 @endphp
                                                 <h3><small>
                                                         <del class="text-muted">
-                                                            ${{number_format($product->price,2)}}</del>
-                                                    </small> ${{number_format($after_discount,2)}}  </h3>
+                                                            {{ format_currency((float) ($product->price)) }}</del>
+                                                    </small> {{ format_currency((float) ($after_discount)) }}  </h3>
                                                 <div class="quickview-peragraph">
                                                     <p>{!! html_entity_decode($product->summary) !!}</p>
                                                 </div>
@@ -364,7 +364,7 @@
                                                         <!--/ End Input Order -->
                                                     </div>
                                                     <div class="add-to-cart">
-                                                        <button type="submit" class="btn">Add to cart</button>
+                                                        <button type="submit" class="btn">Adicionar ao carrinho</button>
                                                         <a href="{{route('add-to-wishlist',$product->slug)}}"
                                                            class="btn min"><i
                                                                     class="ti-heart"></i></a>

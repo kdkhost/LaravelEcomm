@@ -16,6 +16,6 @@ class CartRule implements Rule
 
     public function message(): string
     {
-        return 'Cart is empty.';
+        return 'Seu carrinho está vazio.';
     }
 }

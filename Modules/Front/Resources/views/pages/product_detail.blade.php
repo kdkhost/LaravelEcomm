@@ -22,8 +22,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Shop Details</a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="">Loja Details</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shop Single -->
+    <!-- Loja Single -->
     <section class="shop single section">
         <div class="container">
             <div class="row">
@@ -95,9 +95,9 @@
                                         $finalPrice = $specialPrice ? $specialPrice : ($price - (($price * $discount) / 100));
                                     @endphp
                                     <p class="price">
-                                        <span class="discount">${{ number_format($finalPrice, 2) }}</span>
+                                        <span class="discount">{{ format_currency((float) ($finalPrice)) }}</span>
                                         @if($finalPrice < $price)
-                                            <s>${{ number_format($price, 2) }}</s>
+                                            <s>{{ format_currency((float) ($price)) }}</s>
                                         @endif
                                     </p>
                                     <p class="description">{!!($product_detail->summary)!!}</p>
@@ -181,13 +181,13 @@
                                             <!--/ End Input Order -->
                                         </div>
                                         <div class="add-to-cart mt-4">
-                                            <button type="submit" class="btn">Add to cart</button>
+                                            <button type="submit" class="btn">Adicionar ao carrinho</button>
                                             <a href="{{route('add-to-wishlist',$product_detail->slug)}}"
                                                class="btn min"><i class="ti-heart"></i></a>
                                         </div>
                                     </form>
 
-                                    <p class="cat">Category :
+                                    <p class="cat">Categoria :
                                         @foreach($product_detail->categories as $category)
                                             <a href="{{route('front.product-cat',$category->slug)}}">{{$category->title}}</a>
                                         @endforeach
@@ -216,9 +216,9 @@
                                     <!-- Tab Nav -->
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                                href="#description" role="tab">Description</a></li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reviews"
-                                                                role="tab">Reviews ({{ $reviewCount }})</a></li>
+                                                                href="#description" role="tab">Descricao</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#avaliacoes"
+                                                                role="tab">Avaliacoes ({{ $reviewCount }})</a></li>
                                     </ul>
                                     <!--/ End Tab Nav -->
                                 </div>
@@ -237,7 +237,7 @@
                                     </div>
                                     <!--/ End Description Tab -->
                                     <!-- Reviews Tab -->
-                                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                    <div class="tab-pane fade" id="avaliacoes" role="tabpanel">
                                         <div class="tab-single review-panel">
                                             <div class="row">
                                                 <div class="col-12">
@@ -245,11 +245,11 @@
                                                     <!-- Review -->
                                                     <div class="comment-review">
                                                         <div class="add-review">
-                                                            <h5>Add A Review</h5>
-                                                            <p>Your email address will not be published. Required fields
-                                                                are marked</p>
+                                                            <h5>Adicionar avaliacao</h5>
+                                                            <p>Seu e-mail nao sera publicado. Campos obrigatorios
+                                                                estao marcados</p>
                                                         </div>
-                                                        <h4>Your Rating <span class="text-danger">*</span></h4>
+                                                        <h4>Sua nota <span class="text-danger">*</span></h4>
                                                         <div class="review-inner">
                                                             <!-- Form -->
                                                             @auth
@@ -271,7 +271,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-5"
-                                                                                                title="5 out of 5 stars"></label>
+                                                                                                title="5 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-4"
@@ -280,7 +280,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-4"
-                                                                                                title="4 out of 5 stars"></label>
+                                                                                                title="4 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-3"
@@ -289,7 +289,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-3"
-                                                                                                title="3 out of 5 stars"></label>
+                                                                                                title="3 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-2"
@@ -298,7 +298,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-2"
-                                                                                                title="2 out of 5 stars"></label>
+                                                                                                title="2 de 5 estrelas"></label>
                                                                                         <input
                                                                                                 class="star-rating__input"
                                                                                                 id="star-rating-1"
@@ -307,7 +307,7 @@
                                                                                         <label
                                                                                                 class="star-rating__ico fa fa-star-o"
                                                                                                 for="star-rating-1"
-                                                                                                title="1 out of 5 stars"></label>
+                                                                                                title="1 de 5 estrelas"></label>
                                                                                         @error('rate')
                                                                                         <span
                                                                                                 class="text-danger">{{$message}}</span>
@@ -318,7 +318,7 @@
                                                                         </div>
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group">
-                                                                                <label>Write a review</label>
+                                                                                <label>Escreva uma avaliacao</label>
                                                                                 <textarea name="review" rows="6"
                                                                                           placeholder=""></textarea>
                                                                             </div>
@@ -326,7 +326,7 @@
                                                                         <div class="col-lg-12 col-12">
                                                                             <div class="form-group button5">
                                                                                 <button type="submit" class="btn">
-                                                                                    Submit
+                                                                                    Enviar
                                                                                 </button>
                                                                             </div>
                                                                         </div>
@@ -334,10 +334,10 @@
                                                                 </form>
                                                             @else
                                                                 <p class="text-center p-5">
-                                                                    You need to <a href="{{route('login')}}"
-                                                                                   style="color:rgb(54, 54, 204)">Login</a>
+                                                                    Voce precisa <a href="{{route('login')}}"
+                                                                                   style="color:rgb(54, 54, 204)">Entrar</a>
                                                                     OR <a style="color:blue"
-                                                                          href="{{route('register')}}">Register</a>
+                                                                          href="{{route('register')}}">Registrar</a>
 
                                                                 </p>
                                                                 <!--/ End Form -->
@@ -345,12 +345,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <!-- Product Reviews Summary -->
+                                                    <!-- Resumo das avaliacoes -->
                                                     @php
                                                         $averageRating = $reviewCount ? round($reviews->avg('rate'), 1) : 0;
                                                     @endphp
                                                     <div class="product-review-summary mb-4">
-                                                        <h4>Customer Reviews</h4>
+                                                        <h4>Avaliacoes dos clientes</h4>
                                                         <div class="d-flex align-items-center mb-2">
                                                             <div class="star-rating" style="font-size:1.5em; color:#FFD700;">
                                                                 @for($i = 1; $i <= 5; $i++)
@@ -363,27 +363,27 @@
                                                                     @endif
                                                                 @endfor
                                                             </div>
-                                                            <span class="ml-2">{{ $averageRating }} / 5 ({{ $reviewCount }} review{{ $reviewCount != 1 ? 's' : '' }})</span>
+                                                            <span class="ml-2">{{ $averageRating }} / 5 ({{ $reviewCount }} avaliacao{{ $reviewCount != 1 ? 'es' : '' }})</span>
                                                         </div>
                                                     </div>
 
-                                                    <!-- List of Reviews -->
+                                                    <!-- Lista de avaliacoes -->
                                                     <div class="review-list mt-4">
                                                         @forelse($reviews as $review)
                                                             <div class="single-review mb-3 p-3 border rounded">
                                                                 <div class="d-flex align-items-center mb-1">
-                                                                    <strong>{{ $review->user->name ?? 'Anonymous' }}</strong>
+                                                                    <strong>{{ $review->user->name ?? 'Cliente' }}</strong>
                                                                     <span class="ml-2 text-warning">
                                                                         @for($i = 1; $i <= 5; $i++)
                                                                             <i class="fa{{ $i <= $review->rate ? ' fa-star' : ' fa-star-o' }}"></i>
                                                                         @endfor
                                                                     </span>
-                                                                    <span class="ml-3 text-muted" style="font-size:0.9em;">{{ $review->created_at ? $review->created_at->format('Y-m-d') : '' }}</span>
+                                                                    <span class="ml-3 text-muted" style="font-size:0.9em;">{{ $review->created_at ? $review->created_at->format('d/m/Y') : '' }}</span>
                                                                 </div>
                                                                 <div>{{ $review->review }}</div>
                                                             </div>
                                                         @empty
-                                                            <p class="text-muted">No reviews yet. Be the first to review this product!</p>
+                                                            <p class="text-muted">Ainda nao ha avaliacoes para este produto.</p>
                                                         @endforelse
                                                     </div>
 
@@ -449,7 +449,7 @@
             </div>
         </div>
     </section>
-    <!--/ End Shop Single -->
+    <!--/ End Loja Single -->
 
     <!-- Start Most Popular -->
     <div class="product-area most-popular related-product section">
@@ -457,7 +457,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Related Products</h2>
+                        <h2>Produtos relacionados</h2>
                     </div>
                 </div>
             </div>
@@ -478,13 +478,13 @@
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
-                                                <a data-toggle="modal" data-target="#modelExample" title="Quick View"
-                                                   href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                <a data-toggle="modal" data-target="#modelExample" title="Visualização rápida"
+                                                   href="#"><i class=" ti-eye"></i><span>Ver rápido</span></a>
+                                                <a title="Favoritos" href="#"><i class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
+                                                <a title="Comparar" href="#"><i class="ti-bar-chart-alt"></i><span>Comparar</span></a>
                                             </div>
                                             <div class="product-action-2">
-                                                <a title="Add to cart" href="#">Add to cart</a>
+                                                <a title="Adicionar ao carrinho" href="#">Adicionar ao carrinho</a>
                                             </div>
                                         </div>
                                     </div>
@@ -498,8 +498,8 @@
                                             $finalPrice = $specialPrice ? $specialPrice : ($price - (($price * $discount) / 100));
                                         @endphp
                                         <div class="product-price">
-                                            <span class="old">${{ number_format($price, 2) }}</span>
-                                            <span>${{ number_format($finalPrice, 2) }}</span>
+                                            <span class="old">{{ format_currency((float) ($price)) }}</span>
+                                            <span>{{ format_currency((float) ($finalPrice)) }}</span>
                                         </div>
 
                                     </div>
@@ -559,13 +559,13 @@
                                             <i class="yellow fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <a href="#"> (1 customer review)</a>
+                                        <a href="#"> (1 avaliação de cliente)</a>
                                     </div>
                                     <div class="quickview-stock">
-                                        <span><i class="fa fa-check-circle-o"></i> in stock</span>
+                                        <span><i class="fa fa-check-circle-o"></i> em estoque</span>
                                     </div>
                                 </div>
-                                <h3>$29.00</h3>
+                                <h3>R$ 29,00</h3>
                                 <div class="quickview-peragraph">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
                                         ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui
@@ -614,7 +614,7 @@
                                     <!--/ End Input Order -->
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="#" class="btn">Add to cart</a>
+                                    <a href="#" class="btn">Adicionar ao carrinho</a>
                                     <a href="#" class="btn min"><i class="ti-heart"></i></a>
                                     <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                                 </div>

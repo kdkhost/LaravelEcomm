@@ -1,10 +1,10 @@
 @extends('admin::layouts.master')
-@section('title','E-SHOP || Brand Page')
+@section('title','E-SHOP || Marca Page')
 @section('content')
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary float-left">Brand List</h6>
+            <h6 class="m-0 font-weight-bold text-primary float-left">Marca List</h6>
             <a href="{{route('bundles.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip"
                data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add bundle</a>
         </div>

@@ -27,7 +27,7 @@
                                     <th>Methods</th>
                                     <th>Priority</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,7 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('shipping.zones.edit', $zone) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{{ route('shipping.zones.edit', $zone) }}" class="btn btn-sm btn-primary">Editar</a>
                                             <form action="{{ route('shipping.zones.destroy', $zone) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

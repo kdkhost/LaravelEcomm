@@ -1,6 +1,6 @@
 @php use Illuminate\Support\Carbon;use Illuminate\Support\Collection; @endphp
 @extends('admin::layouts.master')
-@section('title','Product Edit')
+@section('title','Product Editar')
 @section('content')
     <div class="container-fluid">
         <form method="POST"

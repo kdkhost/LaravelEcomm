@@ -19,9 +19,9 @@
                             <input type="date" id="to" name="to" class="form-control" value="{{ $to ?? '' }}">
                         </div>
                         <div class="col-md-4">
-                            <label for="category_id">Category</label>
+                            <label for="category_id">Categoria</label>
                             <select id="category_id" name="category_id" class="form-control">
-                                <option value="">-- All Categories --</option>
+                                <option value="">-- Todas as categorias --</option>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->id }}" @if(isset($categoryId) && $categoryId == $cat->id) selected @endif>{{ $cat->title }}</option>
                                 @endforeach

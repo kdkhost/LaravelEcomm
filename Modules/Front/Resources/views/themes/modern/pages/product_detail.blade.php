@@ -1,6 +1,10 @@
+@php
+    $themePath = 'front::themes.modern';
+@endphp
+
 @extends($themePath . '.layouts.master')
 
-@section('title', $product_detail->title ?? 'Product Detail')
+@section('title', $product_detail->title ?? 'Detalhes do produto')
 
 @section('content')
 {{-- Breadcrumb --}}
@@ -10,8 +14,8 @@
             <div class="col-md-12">
                 <h1>{{ $product_detail->title }}</h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{ route('front.index') }}">Home</a></li>
-                    <li class="active">Product Details</li>
+                    <li><a href="{{ route('front.index') }}">Inicio</a></li>
+                    <li class="active">Detalhes do produto</li>
                 </ol>
             </div>
         </div>
@@ -55,7 +59,7 @@
             <div class="col-md-6">
                 <div class="product-details">
                     <h2>{{ $product_detail->title }}</h2>
-                    
+
                     {{-- Rating --}}
                     @php
                         $rate = ceil($product_detail->getReview->avg('rate'));
@@ -65,10 +69,10 @@
                         @for($i = 1; $i <= 5; $i++)
                             <i class="fa fa-star{{ $rate >= $i ? '' : '-o' }} text-default"></i>
                         @endfor
-                        <span class="ml-10">({{ $reviewCount }} reviews)</span>
+                        <span class="ml-10">({{ $reviewCount }} avaliacoes)</span>
                     </div>
 
-                    {{-- Price --}}
+                    {{-- Preco --}}
                     @php
                         $price = $product_detail->price;
                         $discount = $product_detail->discount ?? 0;
@@ -76,9 +80,9 @@
                         $finalPrice = $specialPrice ? $specialPrice : ($price - (($price * $discount) / 100));
                     @endphp
                     <h3 class="price">
-                        <span class="text-default">${{ number_format($finalPrice, 2) }}</span>
+                        <span class="text-default">R$ {{ number_format($finalPrice, 2, ',', '.') }}</span>
                         @if($finalPrice < $price)
-                            <del class="text-muted ml-10">${{ number_format($price, 2) }}</del>
+                            <del class="text-muted ml-10">R$ {{ number_format($price, 2, ',', '.') }}</del>
                             <span class="label label-danger">-{{ $discount }}%</span>
                         @endif
                     </h3>
@@ -88,29 +92,29 @@
 
                     {{-- Stock --}}
                     <p class="mb-20">
-                        <strong>Availability:</strong>
+                        <strong>Disponibilidade:</strong>
                         @if($product_detail->stock > 0)
-                            <span class="text-success"><i class="fa fa-check"></i> In Stock ({{ $product_detail->stock }})</span>
+                            <span class="text-success"><i class="fa fa-check"></i> Em estoque ({{ $product_detail->stock }})</span>
                         @else
-                            <span class="text-danger"><i class="fa fa-times"></i> Out of Stock</span>
+                            <span class="text-danger"><i class="fa fa-times"></i> Fora de estoque</span>
                         @endif
                     </p>
 
-                    {{-- Categories --}}
+                    {{-- Categorias --}}
                     <p class="mb-20">
-                        <strong>Category:</strong>
+                        <strong>Categoria:</strong>
                         @foreach($product_detail->categories as $category)
                             <a href="{{ route('front.product-cat', $category->slug) }}" class="label label-default">{{ $category->title }}</a>
                         @endforeach
                     </p>
 
-                    {{-- Add to Cart Form --}}
+                    {{-- Adicionar ao carrinho Form --}}
                     <form action="{{ route('single-add-to-cart') }}" method="POST" class="mb-30">
                         @csrf
                         <input type="hidden" name="slug" value="{{ $product_detail->slug }}">
-                        
+
                         <div class="form-group" style="display: flex; align-items: center;">
-                            <label style="margin-right: 15px; margin-bottom: 0;">Quantity:</label>
+                            <label style="margin-right: 15px; margin-bottom: 0;">Quantidade:</label>
                             <div class="input-group" style="width: 140px;">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quantity">
@@ -127,12 +131,20 @@
                         </div>
 
                         <button type="submit" class="btn btn-default btn-lg btn-animated">
-                            <i class="fa fa-shopping-cart"></i> Add to Cart
+                            <i class="fa fa-shopping-cart"></i> Adicionar ao carrinho
                         </button>
                         <a href="{{ route('add-to-wishlist', $product_detail->slug) }}" class="btn btn-default-transparent btn-lg btn-animated">
-                            <i class="fa fa-heart-o"></i> Add to Wishlist
+                            <i class="fa fa-heart-o"></i> Adicionar aos favoritos
+                        </a>
+                        <a href="{{ route('front.virtual-try-on', ['slug' => $product_detail->slug]) }}" class="btn btn-default-transparent btn-lg btn-animated">
+                            <i class="fa fa-magic"></i> Provador virtual
                         </a>
                     </form>
+
+                    @include('front::partials.shipping-quote', [
+                        'context' => 'product',
+                        'productSlug' => $product_detail->slug,
+                    ])
 
                     {{-- Share --}}
                     <div class="sharethis-inline-share-buttons"></div>
@@ -144,8 +156,8 @@
         <div class="row mt-50">
             <div class="col-md-12">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
-                    <li><a data-toggle="tab" href="#reviews">Reviews ({{ $reviewCount }})</a></li>
+                    <li class="active"><a data-toggle="tab" href="#description">Descricao</a></li>
+                    <li><a data-toggle="tab" href="#avaliacoes">Avaliacoes ({{ $reviewCount }})</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -157,17 +169,17 @@
                     </div>
 
                     {{-- Reviews Tab --}}
-                    <div id="reviews" class="tab-pane fade">
+                    <div id="avaliacoes" class="tab-pane fade">
                         <div class="pv-30">
                             {{-- Add Review Form --}}
                             @auth
-                            <h4>Add Your Review</h4>
+                            <h4>Adicionar avaliacao</h4>
                             <form method="POST" action="{{ route('product.review.store', $product_detail->slug) }}" class="mb-40">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product_detail->id }}">
-                                
+
                                 <div class="form-group">
-                                    <label>Rating</label>
+                                    <label>Nota</label>
                                     <div class="rating-input">
                                         @for($i = 5; $i >= 1; $i--)
                                         <input type="radio" id="star{{ $i }}" name="rate" value="{{ $i }}" required>
@@ -177,27 +189,27 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Your Review</label>
+                                    <label>Sua avaliacao</label>
                                     <textarea name="review" class="form-control" rows="5" required></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-default">Submit Review</button>
+                                <button type="submit" class="btn btn-default">Enviar avaliacao</button>
                             </form>
                             @else
                             <p class="alert alert-info">
-                                Please <a href="{{ route('login') }}">login</a> to add a review.
+                                Entre na sua conta para adicionar uma avaliacao.
                             </p>
                             @endauth
 
                             {{-- Reviews List --}}
-                            <h4>Customer Reviews</h4>
+                            <h4>Avaliacoes dos clientes</h4>
                             @forelse($product_detail->getReview as $review)
                             <div class="review-item mb-30 p-20 border-radius-3" style="background:#f9f9f9;">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
-                                        <img src="{{ $review->user?->getFirstMediaUrl('photo') ?: asset('backend/img/avatar.png') }}" 
-                                             alt="{{ $review->user['name'] }}" 
-                                             class="img-circle" 
+                                        <img src="{{ $review->user?->getFirstMediaUrl('photo') ?: asset('backend/img/avatar.png') }}"
+                                             alt="{{ $review->user['name'] }}"
+                                             class="img-circle"
                                              style="width:80px;height:80px;">
                                         <p class="mt-10"><strong>{{ $review->user['name'] }}</strong></p>
                                     </div>
@@ -206,14 +218,14 @@
                                             @for($i = 1; $i <= 5; $i++)
                                                 <i class="fa fa-star{{ $review->rate >= $i ? ' text-default' : '-o' }}"></i>
                                             @endfor
-                                            <span class="text-muted ml-10">{{ $review->created_at->format('M d, Y') }}</span>
+                                            <span class="text-muted ml-10">{{ $review->created_at->format('d/m/Y') }}</span>
                                         </div>
                                         <p>{{ $review->review }}</p>
                                     </div>
                                 </div>
                             </div>
                             @empty
-                            <p class="text-muted">No reviews yet. Be the first to review this product!</p>
+                            <p class="text-muted">Ainda nao ha avaliacoes para este produto.</p>
                             @endforelse
                         </div>
                     </div>
@@ -221,11 +233,11 @@
             </div>
         </div>
 
-        {{-- Related Products --}}
+        {{-- Produtos relacionados --}}
         @if(isset($related) && $related->count() > 0)
         <div class="row mt-50">
             <div class="col-md-12">
-                <h3 class="mb-30">Related Products</h3>
+                <h3 class="mb-30">Produtos relacionados</h3>
             </div>
         </div>
         <div class="row">
@@ -248,9 +260,9 @@
                             $relatedPrice = $product->price - ($product->price * ($product->discount ?? 0) / 100);
                         @endphp
                         @if($product->discount)
-                            <del class="text-muted">${{ number_format($product->price, 2) }}</del>
+                            <del class="text-muted">R$ {{ number_format($product->price, 2, ',', '.') }}</del>
                         @endif
-                        <span class="text-default">${{ number_format($relatedPrice, 2) }}</span>
+                        <span class="text-default">R$ {{ number_format($relatedPrice, 2, ',', '.') }}</span>
                     </div>
                 </div>
             </div>
@@ -271,7 +283,7 @@
 .rating-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; }
 .rating-input input { display: none; }
 .rating-input label { cursor: pointer; font-size: 24px; color: #ddd; margin-right: 5px; }
-.rating-input label:hover, .rating-input label:hover ~ label, 
+.rating-input label:hover, .rating-input label:hover ~ label,
 .rating-input input:checked ~ label { color: #FFD700; }
 .product-item { transition: all 0.3s; }
 .product-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -291,7 +303,7 @@ $(document).ready(function() {
         const type = $(this).attr('data-type');
         const input = $(this).closest('.input-group').find('.input-number');
         let currentVal = parseInt(input.val()) || 1;
-        
+
         if(type == 'minus') {
             if(currentVal > 1) input.val(currentVal - 1);
         } else {

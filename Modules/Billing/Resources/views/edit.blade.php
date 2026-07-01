@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title','E-SHOP || PaymentProvider Edit')
+@section('title','E-SHOP || PaymentProvider Editar')
 
 @section('content')
     <div class="card">

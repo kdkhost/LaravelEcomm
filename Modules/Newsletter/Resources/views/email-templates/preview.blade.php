@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Template Preview - {{ $emailTemplate->name }}</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            line-height: 1.6; 
-            color: #333; 
-            margin: 0; 
-            padding: 20px; 
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
             background: #f8f9fa;
         }
         .preview-container {
@@ -69,26 +69,26 @@
         <div class="preview-header">
             <h2>Email Template Preview</h2>
         </div>
-        
+
         <div class="preview-content">
             <!-- Template Information -->
             <div class="template-info">
                 <h4>Template Information</h4>
                 <p><strong>Name:</strong> {{ $emailTemplate->name }}</p>
-                <p><strong>Type:</strong> 
+                <p><strong>Type:</strong>
                     <span class="badge badge-info">
                         {{ \Modules\Newsletter\Models\EmailTemplate::getTemplateTypes()[$emailTemplate->template_type] ?? $emailTemplate->template_type }}
                     </span>
                 </p>
                 <p><strong>Subject:</strong> {{ $emailTemplate->subject }}</p>
-                <p><strong>Status:</strong> 
+                <p><strong>Status:</strong>
                     @if($emailTemplate->is_active)
                         <span class="badge badge-success">Active</span>
                     @else
                         <span class="badge badge-secondary">Inactive</span>
                     @endif
                 </p>
-                <p><strong>Default:</strong> 
+                <p><strong>Padrão:</strong>
                     @if($emailTemplate->is_default)
                         <span class="badge badge-warning">Yes</span>
                     @else
@@ -102,7 +102,7 @@
                 {!! $emailTemplate->html_content !!}
             </div>
         </div>
-        
+
         <div class="preview-footer">
             <p>This is a preview of the email template. Variables like {{name}}, {{email}}, {{company}} will be replaced with actual data when sent.</p>
             <p>© {{ config('app.name', 'Our Company') }} - Email Template Preview</p>

@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->timezone(config('app.timezone', 'America/Sao_Paulo'));
+
         $schedule->command('sitemap:generate')->daily();
         $schedule->command('newsletter:product')->weekly();
         $schedule->command('newsletter:post')->weekly();

@@ -77,7 +77,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.products.edit', $product['id']) }}"
-                                       class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit"><i
+                                       class="btn btn-sm btn-primary" data-toggle="tooltip" title="Editar"><i
                                                 class="fas fa-edit"></i></a>
                                     <form action="{{ route('admin.products.destroy', $product['id']) }}" method="POST"
                                           style="display:inline-block;">

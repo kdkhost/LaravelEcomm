@@ -1,13 +1,13 @@
 @php use Modules\Core\Helpers\Helper; @endphp
 @extends($themePath . '.layouts.master')
-@section('title','Wishlist Page')
+@section('title','Favoritos')
 @section('content')
 <section class="page-header page-header-dark bg-secondary">
     <div class="container"><div class="row"><div class="col-md-12">
-        <h1>Wishlist</h1>
+        <h1>Favoritos</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="active">Wishlist</li>
+            <li><a href="{{ route('front.index') }}">Início</a></li>
+            <li class="active">Favoritos</li>
         </ol>
     </div></div></div>
 </section>
@@ -20,10 +20,10 @@
                     <thead>
                         <tr>
                             <th>Product</th>
-                            <th>Name</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Action</th>
-                            <th class="text-center">Remove</th>
+                            <th>Nome</th>
+                            <th class="text-center">Preço</th>
+                            <th class="text-center">Ação</th>
+                            <th class="text-center">Remover</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,9 +38,9 @@
                                 </a>
                                 <p class="small">{!! $wishlist['summary'] !!}</p>
                             </td>
-                            <td class="text-center">${{ $wishlist['amount'] }}</td>
+                            <td class="text-center">{{ format_currency((float) ($wishlist['amount'])) }}</td>
                             <td class="text-center">
-                                <a href="{{ route('add-to-cart', $wishlist->product['slug']) }}" class="btn btn-sm btn-default">Add to Cart</a>
+                                <a href="{{ route('add-to-cart', $wishlist->product['slug']) }}" class="btn btn-sm btn-default">Adicionar ao carrinho</a>
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('wishlist-delete', $wishlist->id) }}" class="btn btn-sm btn-danger">
@@ -52,7 +52,7 @@
                     @else
                         <tr>
                             <td colspan="5" class="text-center">
-                                There are no items in your wishlist. <a href="{{ route('front.product-grids') }}">Continue shopping</a>
+                                Sua lista de favoritos está vazia. <a href="{{ route('front.product-grids') }}">Continuar comprando</a>
                             </td>
                         </tr>
                     @endif

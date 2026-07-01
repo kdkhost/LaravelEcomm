@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title','Comment Edit')
+@section('title','Comment Editar')
 
 @section('content')
     <div class="card">
@@ -8,7 +8,7 @@
         <div class="card-body">
             <form action="{{route('comments.update',$comment->id)}}" method="POST">
                 @csrf
-                @method('PATCH') <h5 class="card-header">Comment Edit</h5>
+                @method('PATCH') <h5 class="card-header">Comment Editar</h5>
 
                 <div class="form-group">
                     <label for="name">@lang('partials.author'):</label>

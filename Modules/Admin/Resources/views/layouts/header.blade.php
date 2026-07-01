@@ -44,7 +44,7 @@
             </div>
         </li>
 
-        {{-- Home page --}}
+        {{-- Inicio page --}}
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="{{route('admin')}}" target="_blank" data-toggle="tooltip"
                data-placement="bottom" title="home" role="button">

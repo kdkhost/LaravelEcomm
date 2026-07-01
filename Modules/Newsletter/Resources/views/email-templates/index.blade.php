@@ -21,7 +21,7 @@
                             <th>Subject</th>
                             <th>Type</th>
                             <th>Status</th>
-                            <th>Default</th>
+                            <th>Padrão</th>
                             <th>Analytics</th>
                             <th>@lang('partials.action')</th>
                         </tr>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     @if($template->is_default)
-                                        <span class="badge badge-warning">Default</span>
+                                        <span class="badge badge-warning">Padrão</span>
                                     @else
                                         <span class="badge badge-light">-</span>
                                     @endif
@@ -60,51 +60,51 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{route('admin.email-templates.show', $template->id)}}" 
+                                        <a href="{{route('admin.email-templates.show', $template->id)}}"
                                            class="btn btn-info btn-sm" data-toggle="tooltip" title="View">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{route('admin.email-templates.edit', $template->id)}}" 
-                                           class="btn btn-primary btn-sm" data-toggle="tooltip" title="Edit">
+                                        <a href="{{route('admin.email-templates.edit', $template->id)}}"
+                                           class="btn btn-primary btn-sm" data-toggle="tooltip" title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{route('admin.email-templates.preview', $template->id)}}" 
+                                        <a href="{{route('admin.email-templates.preview', $template->id)}}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip" title="Preview" target="_blank">
                                             <i class="fas fa-external-link-alt"></i>
                                         </a>
-                                        <form action="{{route('admin.email-templates.duplicate', $template->id)}}" 
+                                        <form action="{{route('admin.email-templates.duplicate', $template->id)}}"
                                               method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-warning btn-sm" 
+                                            <button type="submit" class="btn btn-warning btn-sm"
                                                     data-toggle="tooltip" title="Duplicate">
                                                 <i class="fas fa-copy"></i>
                                             </button>
                                         </form>
                                         @if(!$template->is_default)
-                                            <form action="{{route('admin.email-templates.set-default', $template->id)}}" 
+                                            <form action="{{route('admin.email-templates.set-default', $template->id)}}"
                                                   method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn btn-success btn-sm" 
-                                                        data-toggle="tooltip" title="Set as Default">
+                                                <button type="submit" class="btn btn-success btn-sm"
+                                                        data-toggle="tooltip" title="Set as Padrão">
                                                     <i class="fas fa-star"></i>
                                                 </button>
                                             </form>
                                         @endif
-                                        <form action="{{route('admin.email-templates.toggle-active', $template->id)}}" 
+                                        <form action="{{route('admin.email-templates.toggle-active', $template->id)}}"
                                               method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-{{$template->is_active ? 'warning' : 'success'}} btn-sm" 
+                                            <button type="submit" class="btn btn-{{$template->is_active ? 'warning' : 'success'}} btn-sm"
                                                     data-toggle="tooltip" title="{{$template->is_active ? 'Deactivate' : 'Activate'}}">
                                                 <i class="fas fa-{{$template->is_active ? 'pause' : 'play'}}"></i>
                                             </button>
                                         </form>
                                         @if(!$template->is_default)
-                                            <form action="{{route('admin.email-templates.destroy', $template->id)}}" 
-                                                  method="POST" style="display: inline;" 
+                                            <form action="{{route('admin.email-templates.destroy', $template->id)}}"
+                                                  method="POST" style="display: inline;"
                                                   onsubmit="return confirm('Are you sure you want to delete this template?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" 
+                                                <button type="submit" class="btn btn-danger btn-sm"
                                                         data-toggle="tooltip" title="Delete">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -116,7 +116,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    
+
                     <!-- Pagination -->
                     <div class="d-flex justify-content-center">
                         {{ $templates->links('pagination::admin-bootstrap-5') }}

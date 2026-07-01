@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="/">Início<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="/">Bundles</a></li>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                                             $org = $product->price;
                                         @endphp
                                         <p class="price">
-                                            ${{number_format($org,2)}}  
+                                            {{ format_currency((float) ($org)) }}
                                         </p>
 
                                     </div>
@@ -58,28 +58,28 @@
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="row">
                         <div class="col-12">
-                            <!-- Shop Top -->
+                            <!-- Loja Top -->
                             <div class="shop-top">
                                 <div class="shop-shorter">
                                     <div class="single-shorter">
-                                        <label>Sort By :</label>
+                                        <label>Ordenar por:</label>
                                         <select class='sortBy' name='sortBy' id='sortFilter'>
-                                            <option value="">Default</option>
+                                            <option value="">Padrão</option>
                                             <option value="name"
                                                     @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='name') selected @endif>
                                                 Name
                                             </option>
                                             <option value="price"
                                                     @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>
-                                                Price
+                                                Preço
                                             </option>
                                             <option value="category"
                                                     @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>
-                                                Category
+                                                Categoria
                                             </option>
                                             <option value="brand"
                                                     @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='brand') selected @endif>
-                                                Brand
+                                                Marca
                                             </option>
                                         </select>
                                     </div>
@@ -91,7 +91,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <!--/ End Shop Top -->
+                            <!--/ End Loja Top -->
                         </div>
                     </div>
                     <div class="row">
@@ -110,14 +110,14 @@
                                             <div class="button-head">
                                                 <div class="product-action">
                                                     <a data-toggle="modal" data-target="#{{$product->id}}"
-                                                       title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                    <a title="Wishlist"
+                                                       title="Visualização rápida" href="#"><i class=" ti-eye"></i><span>Ver rápido</span></a>
+                                                    <a title="Favoritos"
                                                        href="{{route('add-to-wishlist',$product->slug)}}"
                                                        class="wishlist" data-id="{{$product->id}}"><i
-                                                                class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
                                                 </div>
                                                 <div class="product-action-2">
-                                                    <a title="Add to cart"
+                                                    <a title="Adicionar ao carrinho"
                                                        href="{{route('add-to-cart',$product->slug)}}">Add to
                                                         cart</a>
                                                 </div>
@@ -127,13 +127,13 @@
                                             <h3>
                                                 <a href="{{route('front.product-detail',$product->slug)}}">{{$product->name}}</a>
                                             </h3>
-                                            <span>${{number_format($product->price,2)}}</span>
+                                            <span>{{ format_currency((float) ($product->price)) }}</span>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         @else
-                            <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                            <h4 class="text-warning" style="margin:100px auto;">Nenhum produto encontrado.</h4>
                         @endif
 
 
@@ -200,14 +200,14 @@
                                                         @endif
                                                     @endfor
                                                 </div>
-                                                <a href="#"> ({{$rate_count}} customer review)</a>
+                                                <a href="#"> ({{$rate_count}} avaliação de cliente)</a>
                                             </div>
                                             <div class="quickview-stock">
                                                 <span><i class="fa fa-info-circle"></i> Bundle</span>
                                             </div>
                                         </div>
                                         <h3><small>
-                                            </small> ${{number_format($product->price,2)}}  </h3>
+                                            </small> {{ format_currency((float) ($product->price)) }}  </h3>
                                         <div class="quickview-peragraph">
                                             <p>{{ $product->description ?? '' }}</p>
                                         </div>
@@ -273,7 +273,7 @@
                                                 <!--/ End Input Order -->
                                             </div>
                                             <div class="add-to-cart">
-                                                <button type="submit" class="btn">Add to cart</button>
+                                                <button type="submit" class="btn">Adicionar ao carrinho</button>
                                                 <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i
                                                             class="ti-heart"></i></a>
                                             </div>

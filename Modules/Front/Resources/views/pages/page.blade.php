@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="">Page Details</a></li>
                         </ul>
                     </div>
@@ -18,7 +18,7 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shop Single -->
+    <!-- Loja Single -->
     <section class="about-us section">
         <div class="container">
             <div class="row">

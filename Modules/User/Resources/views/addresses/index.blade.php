@@ -26,7 +26,7 @@
                                     {{ ucfirst($address->type) }}
                                 </span>
                                 @if($address->is_default)
-                                    <span class="badge badge-primary">Default</span>
+                                    <span class="badge badge-primary">Padrão</span>
                                 @endif
                             </div>
                             <div class="card-body">
@@ -57,7 +57,7 @@
                             <div class="card-footer d-flex justify-content-between">
                                 <div>
                                     <a href="{{ route('user.addresses.edit', $address) }}" class="btn btn-sm btn-info">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fas fa-edit"></i> Editar
                                     </a>
                                     <form action="{{ route('user.addresses.destroy', $address) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
                                         @csrf
@@ -71,7 +71,7 @@
                                     <form action="{{ route('user.addresses.default', $address) }}" method="POST" class="d-inline">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-outline-primary">
-                                            Set as Default
+                                            Set as Padrão
                                         </button>
                                     </form>
                                 @endif

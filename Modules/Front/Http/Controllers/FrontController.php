@@ -501,7 +501,7 @@ class FrontController extends Controller
         $user = Auth::user();
 
         if (! $user) {
-            return redirect()->route('front.login')->with('message', 'Please login to view your orders.');
+            return redirect()->route('front.login')->with('message', 'Entre na sua conta para visualizar seus pedidos.');
         }
 
         $orders = Order::where('user_id', $user->id)
@@ -518,13 +518,13 @@ class FrontController extends Controller
     public function orderDetail(Order $order): View|RedirectResponse
     {
         $user = Auth::user();
-        
-        if (!$user || $order->user_id !== $user->id) {
-            return redirect()->route('front.my-orders')->with('error', 'Order not found.');
+
+        if (! $user || $order->user_id !== $user->id) {
+            return redirect()->route('front.my-orders')->with('error', 'Pedido nao encontrado.');
         }
-        
-        $order->load('carts.product');
-        
+
+        $order->load('carts.product', 'shipping');
+
         return view(theme_view('pages.order-detail'), compact('order'));
     }
 
@@ -534,17 +534,17 @@ class FrontController extends Controller
     public function reorder(Order $order, ReorderAction $reorderAction): RedirectResponse
     {
         $user = Auth::user();
-        
-        if (!$user || $order->user_id !== $user->id) {
-            return redirect()->route('front.my-orders')->with('error', 'Order not found.');
+
+        if (! $user || $order->user_id !== $user->id) {
+            return redirect()->route('front.my-orders')->with('error', 'Pedido nao encontrado.');
         }
-        
+
         $result = $reorderAction->execute($order->id, $user->id);
-        
+
         if ($result['success']) {
             return redirect()->route('cart-list')->with('success', $result['message']);
         }
-        
+
         return redirect()->back()->with('error', $result['message']);
     }
 
@@ -554,7 +554,7 @@ class FrontController extends Controller
     public function recentlyViewed(RecentlyViewedService $recentlyViewedService): View
     {
         $products = $recentlyViewedService->getForCurrentUser(12);
-        
+
         return view('front::pages.recently-viewed', compact('products'));
     }
 }

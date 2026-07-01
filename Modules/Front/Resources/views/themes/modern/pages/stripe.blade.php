@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Stripe Payment Gateway</title>
+    <title>Pagamento com Stripe</title>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -18,13 +18,13 @@
         <div class="col-md-7 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table">
-                    <h3 class="panel-title text-center"><strong>Payment Details</strong></h3>
+                    <h3 class="panel-title text-center"><strong>Dados do pagamento</strong></h3>
                 </div>
                 <div class="panel-body">
 
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p>{{ Session::get('success') }}</p>
                         </div>
                     @endif
@@ -77,7 +77,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pagar agora (R$ 100,00)</button>
                             </div>
                         </div>
 
@@ -99,7 +99,7 @@
 
         /*------------------------------------------
         --------------------------------------------
-        Stripe Payment Code
+        Codigo de pagamento Stripe
         --------------------------------------------
         --------------------------------------------*/
 

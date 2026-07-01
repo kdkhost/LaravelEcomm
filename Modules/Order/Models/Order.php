@@ -38,6 +38,10 @@ use Modules\User\Models\User;
  * @property string $status
  * @property int|null $payer_id
  * @property string|null $transaction_reference
+ * @property string|null $mercadopago_preference_id
+ * @property string|null $mercadopago_payment_id
+ * @property string|null $mercadopago_status
+ * @property array|null $mercadopago_payload
  * @property string|null $first_name
  * @property string|null $last_name
  * @property string|null $email
@@ -121,6 +125,7 @@ class Order extends Core
             'quantity' => 'int',
             'payer_id' => 'int',
             'shipped_at' => 'datetime',
+            'mercadopago_payload' => 'array',
         ];
 
     protected $fillable
@@ -136,6 +141,10 @@ class Order extends Core
             'status',
             'payer_id',
             'transaction_reference',
+            'mercadopago_preference_id',
+            'mercadopago_payment_id',
+            'mercadopago_status',
+            'mercadopago_payload',
             'post_code',
             'tracking_number',
             'tracking_carrier',

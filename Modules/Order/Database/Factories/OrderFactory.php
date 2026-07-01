@@ -22,7 +22,7 @@ class OrderFactory extends Factory
             'sub_total' => $this->faker->randomFloat(),
             'total_amount' => $this->faker->randomFloat(),
             'quantity' => $this->faker->randomNumber(),
-            'payment_method' => $this->faker->randomElement(['cod', 'paypal']),
+            'payment_method' => $this->faker->randomElement(['cod', 'paypal', 'stripe', 'mercadopago']),
             'payment_status' => $this->faker->randomElement(['pending', 'paid', 'unpaid']),
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']),
             'transaction_reference' => $this->faker->word(),

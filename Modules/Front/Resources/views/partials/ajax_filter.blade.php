@@ -5,7 +5,7 @@
         @include('front::partials.layered_navigation')
     </div>
 
-    {{-- Active Filters --}}
+    {{-- Active Filtros --}}
     <div id="active-filters" class="mb-3">
         {{-- Populated via JS --}}
     </div>
@@ -15,7 +15,7 @@
         <div id="product-grid" class="row">
             @include('front::partials.product_grid_items', ['products' => $products])
         </div>
-        
+
         {{-- Pagination --}}
         <div id="pagination-container">
             {{ $products->links() }}
@@ -42,14 +42,14 @@
         loading: document.getElementById('filter-loading'),
         productGrid: document.getElementById('product-grid'),
         paginationContainer: document.getElementById('pagination-container'),
-        activeFiltersContainer: document.getElementById('active-filters'),
-        
-        currentFilters: {},
+        activeFiltrosContainer: document.getElementById('active-filters'),
+
+        currentFiltros: {},
         categoryId: null,
 
         init() {
             if (!this.container) return;
-            
+
             this.categoryId = this.container.dataset.category;
             this.bindEvents();
             this.parseUrlParams();
@@ -71,7 +71,7 @@
                 });
             });
 
-            // Price slider
+            // Preco slider
             const priceSlider = document.getElementById('price-slider');
             if (priceSlider) {
                 priceSlider.addEventListener('change', (e) => {
@@ -98,8 +98,8 @@
             // Popstate (browser back/forward)
             window.addEventListener('popstate', (e) => {
                 if (e.state && e.state.filters) {
-                    this.currentFilters = e.state.filters;
-                    this.applyFilters(false);
+                    this.currentFiltros = e.state.filters;
+                    this.applyFiltros(false);
                 }
             });
         },
@@ -109,24 +109,24 @@
             const attributeCode = this.getAttributeCodeFromElement(checkbox);
             const value = checkbox.value;
 
-            if (!this.currentFilters[attributeCode]) {
-                this.currentFilters[attributeCode] = [];
+            if (!this.currentFiltros[attributeCode]) {
+                this.currentFiltros[attributeCode] = [];
             }
 
             if (checkbox.checked) {
-                if (!this.currentFilters[attributeCode].includes(value)) {
-                    this.currentFilters[attributeCode].push(value);
+                if (!this.currentFiltros[attributeCode].includes(value)) {
+                    this.currentFiltros[attributeCode].push(value);
                 }
             } else {
-                this.currentFilters[attributeCode] = this.currentFilters[attributeCode]
+                this.currentFiltros[attributeCode] = this.currentFiltros[attributeCode]
                     .filter(v => v !== value);
-                
-                if (this.currentFilters[attributeCode].length === 0) {
-                    delete this.currentFilters[attributeCode];
+
+                if (this.currentFiltros[attributeCode].length === 0) {
+                    delete this.currentFiltros[attributeCode];
                 }
             }
 
-            this.applyFilters();
+            this.applyFiltros();
         },
 
         handleSwatchClick(e) {
@@ -140,33 +140,33 @@
                 .forEach(s => s.classList.remove('active'));
             swatch.classList.add('active');
 
-            this.currentFilters[attributeCode] = [value];
-            this.applyFilters();
+            this.currentFiltros[attributeCode] = [value];
+            this.applyFiltros();
         },
 
         handlePriceChange(value) {
-            this.currentFilters.price_max = value;
-            this.applyFilters();
+            this.currentFiltros.price_max = value;
+            this.applyFiltros();
         },
 
         handleSortChange(sortValue) {
-            this.currentFilters.sort = sortValue;
-            this.applyFilters();
+            this.currentFiltros.sort = sortValue;
+            this.applyFiltros();
         },
 
         handlePagination(url) {
             const urlObj = new URL(url);
             const page = urlObj.searchParams.get('page');
-            this.currentFilters.page = page;
-            this.applyFilters();
+            this.currentFiltros.page = page;
+            this.applyFiltros();
         },
 
-        applyFilters(updateUrl = true) {
+        applyFiltros(updateUrl = true) {
             this.showLoading();
 
             const params = new URLSearchParams();
-            
-            Object.entries(this.currentFilters).forEach(([key, value]) => {
+
+            Object.entries(this.currentFiltros).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
                     params.set(key, value.join(','));
                 } else if (value) {
@@ -188,9 +188,9 @@
             .then(data => {
                 this.updateProductGrid(data.products);
                 this.updatePagination(data.pagination);
-                this.updateActiveFilters();
+                this.updateActiveFiltros();
                 this.updateFilterCounts(data.filter_counts);
-                
+
                 if (updateUrl) {
                     this.updateBrowserUrl(params);
                 }
@@ -219,27 +219,27 @@
             }
         },
 
-        updateActiveFilters() {
-            const activeFilters = [];
-            
-            Object.entries(this.currentFilters).forEach(([key, value]) => {
+        updateActiveFiltros() {
+            const activeFiltros = [];
+
+            Object.entries(this.currentFiltros).forEach(([key, value]) => {
                 if (key === 'page' || key === 'sort') return;
-                
+
                 if (Array.isArray(value)) {
                     value.forEach(v => {
-                        activeFilters.push({ code: key, value: v });
+                        activeFiltros.push({ code: key, value: v });
                     });
                 } else {
-                    activeFilters.push({ code: key, value });
+                    activeFiltros.push({ code: key, value });
                 }
             });
 
-            if (activeFilters.length === 0) {
-                this.activeFiltersContainer.innerHTML = '';
+            if (activeFiltros.length === 0) {
+                this.activeFiltrosContainer.innerHTML = '';
                 return;
             }
 
-            const html = activeFilters.map(filter => `
+            const html = activeFiltros.map(filter => `
                 <span class="badge badge-primary mr-2 mb-2">
                     ${filter.code}: ${filter.value}
                     <button type="button" class="btn btn-sm btn-link text-white p-0 ml-2"
@@ -249,12 +249,12 @@
                 </span>
             `).join('');
 
-            this.activeFiltersContainer.innerHTML = `
+            this.activeFiltrosContainer.innerHTML = `
                 <div class="active-filters">
-                    <small class="text-muted mr-2">Active Filters:</small>
+                    <small class="text-muted mr-2">Active Filtros:</small>
                     ${html}
                     <button type="button" class="btn btn-sm btn-link text-danger"
-                            onclick="AjaxFilter.clearAllFilters()">
+                            onclick="AjaxFilter.clearAllFiltros()">
                         Clear All
                     </button>
                 </div>
@@ -278,13 +278,13 @@
         },
 
         removeFilter(code, value) {
-            if (Array.isArray(this.currentFilters[code])) {
-                this.currentFilters[code] = this.currentFilters[code].filter(v => v !== value);
-                if (this.currentFilters[code].length === 0) {
-                    delete this.currentFilters[code];
+            if (Array.isArray(this.currentFiltros[code])) {
+                this.currentFiltros[code] = this.currentFiltros[code].filter(v => v !== value);
+                if (this.currentFiltros[code].length === 0) {
+                    delete this.currentFiltros[code];
                 }
             } else {
-                delete this.currentFilters[code];
+                delete this.currentFiltros[code];
             }
 
             // Uncheck corresponding checkbox
@@ -295,38 +295,38 @@
                 checkbox.checked = false;
             }
 
-            this.applyFilters();
+            this.applyFiltros();
         },
 
-        clearAllFilters() {
-            this.currentFilters = {};
-            
+        clearAllFiltros() {
+            this.currentFiltros = {};
+
             // Uncheck all checkboxes
             document.querySelectorAll('.filter-option input[type="checkbox"]')
                 .forEach(cb => cb.checked = false);
 
-            this.applyFilters();
+            this.applyFiltros();
         },
 
         updateBrowserUrl(params) {
             const url = new URL(window.location.href);
             url.search = params.toString();
-            window.history.pushState({ filters: this.currentFilters }, '', url);
+            window.history.pushState({ filters: this.currentFiltros }, '', url);
         },
 
         parseUrlParams() {
             const urlParams = new URLSearchParams(window.location.search);
-            
+
             urlParams.forEach((value, key) => {
                 if (value.includes(',')) {
-                    this.currentFilters[key] = value.split(',');
+                    this.currentFiltros[key] = value.split(',');
                 } else {
-                    this.currentFilters[key] = value;
+                    this.currentFiltros[key] = value;
                 }
             });
 
             // Mark checkboxes as checked based on URL params
-            Object.entries(this.currentFilters).forEach(([key, value]) => {
+            Object.entries(this.currentFiltros).forEach(([key, value]) => {
                 if (Array.isArray(value)) {
                     value.forEach(v => {
                         const checkbox = document.querySelector(

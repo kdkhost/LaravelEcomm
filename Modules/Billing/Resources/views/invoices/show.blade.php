@@ -18,7 +18,7 @@
                             <div class="col-md-6">
                                 <h5>{{ __('Invoice Information') }}</h5>
                                 <p><strong>{{ __('Invoice Number') }}:</strong> {{ $invoice->invoice_number }}</p>
-                                <p><strong>{{ __('Status') }}:</strong> 
+                                <p><strong>{{ __('Status') }}:</strong>
                                     <span class="badge badge-{{ $invoice->status === 'paid' ? 'success' : ($invoice->isOverdue() ? 'danger' : 'warning') }}">
                                         {{ ucfirst($invoice->status) }}
                                     </span>
@@ -55,10 +55,10 @@
                                     <tbody>
                                         <tr>
                                             <td>{{ __('Order Total') }}</td>
-                                            <td class="text-right">${{ number_format($invoice->subtotal, 2) }}</td>
-                                            <td class="text-right">${{ number_format($invoice->tax_amount, 2) }}</td>
-                                            <td class="text-right">${{ number_format($invoice->discount_amount, 2) }}</td>
-                                            <td class="text-right"><strong>${{ number_format($invoice->total_amount, 2) }}</strong></td>
+                                            <td class="text-right">{{ format_currency((float) ($invoice->subtotal)) }}</td>
+                                            <td class="text-right">{{ format_currency((float) ($invoice->tax_amount)) }}</td>
+                                            <td class="text-right">{{ format_currency((float) ($invoice->discount_amount)) }}</td>
+                                            <td class="text-right"><strong>{{ format_currency((float) ($invoice->total_amount)) }}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -89,7 +89,7 @@
                                             @foreach($invoice->payments as $payment)
                                                 <tr>
                                                     <td>{{ $payment->created_at->format('Y-m-d H:i') }}</td>
-                                                    <td>${{ number_format($payment->amount, 2) }}</td>
+                                                    <td>{{ format_currency((float) ($payment->amount)) }}</td>
                                                     <td>{{ ucfirst($payment->payment_method) }}</td>
                                                     <td>
                                                         <span class="badge badge-{{ $payment->status === 'completed' ? 'success' : 'warning' }}">

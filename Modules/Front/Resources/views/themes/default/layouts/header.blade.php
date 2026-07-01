@@ -109,7 +109,7 @@
                             <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o"></i> <span
                                         class="total-count">{{Modules\Core\Helpers\Helper::wishlistCount()}}</span></a>
 
-                            <!-- Shopping Item -->
+                            <!-- Compras Item -->
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
@@ -129,7 +129,7 @@
                                                 <h4><a href="{{route('front.product-detail',$data->product['slug'])}}"
                                                        target="_blank">{{$data->product['title']}}</a></h4>
                                                 <p class="quantity">{{$data->quantity}} x - <span
-                                                            class="amount">${{number_format($data->price,2)}}</span></p>
+                                                            class="amount">{{ format_currency((float) ($data->price)) }}</span></p>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -137,19 +137,19 @@
                                         <div class="total">
                                             <span>@lang('frontend.total')</span>
                                             <span
-                                                    class="total-amount">${{number_format(Helper::totalWishlistPrice(),2)}}</span>
+                                                    class="total-amount">{{ format_currency((float) (Helper::totalWishlistPrice())) }}</span>
                                         </div>
                                         <a href="{{route('cart-list')}}" class="btn animate">@lang('frontend.cart')</a>
                                     </div>
                                 </div>
                             @endauth
 
-                            <!--/ End Shopping Item -->
+                            <!--/ End Compras Item -->
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="{{route('cart-list')}}" class="single-icon"><i class="ti-bag"></i> <span
                                         class="total-count">{{Helper::cartCount()}}</span></a>
-                            <!-- Shopping Item -->
+                            <!-- Compras Item -->
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
@@ -169,7 +169,7 @@
                                                 <h4><a href="{{route('front.product-detail',$data->product['slug'])}}"
                                                        target="_blank">{{$data->product['title']}}</a></h4>
                                                 <p class="quantity">{{$data->quantity}} x - <span
-                                                            class="amount">${{number_format($data->price,2)}}</span></p>
+                                                            class="amount">{{ format_currency((float) ($data->price)) }}</span></p>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -177,13 +177,13 @@
                                         <div class="total">
                                             <span>@lang('frontend.total')</span>
                                             <span
-                                                    class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
+                                                    class="total-amount">{{ format_currency((float) (Helper::totalCartPrice())) }}</span>
                                         </div>
                                         <a href="{{route('front.checkout')}}" class="btn animate">@lang('frontend.checkout')</a>
                                     </div>
                                 </div>
                             @endauth
-                            <!--/ End Shopping Item -->
+                            <!--/ End Compras Item -->
                             <div class="compare-bar" style="position: relative; display: inline-block;">
                                 <a href="{{ route('products.compare.show') }}" class="single-icon ml-2 compare-icon"
                                    title="@lang('frontend.compare')">

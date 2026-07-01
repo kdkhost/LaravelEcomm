@@ -5,8 +5,8 @@
             <div class="product-image position-relative">
                 <a href="{{ route('front.product.show', $product->slug) }}">
                     @if($product->image)
-                        <img src="{{ asset($product->image) }}" 
-                             alt="{{ $product->name }}" 
+                        <img src="{{ asset($product->image) }}"
+                             alt="{{ $product->name }}"
                              class="img-fluid">
                     @else
                         <div class="placeholder-image">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
                 </a>
-                
+
                 {{-- Badges --}}
                 <div class="product-badges">
                     @if($product->type === 'configurable')
@@ -27,38 +27,38 @@
                         <span class="badge badge-danger">Sale</span>
                     @endif
                 </div>
-                
-                {{-- Quick Actions --}}
+
+                {{-- Ações rápidas --}}
                 <div class="quick-actions">
-                    <button class="btn btn-light btn-sm add-to-wishlist" 
+                    <button class="btn btn-light btn-sm add-to-wishlist"
                             data-product-id="{{ $product->id }}"
-                            title="Add to Wishlist">
+                            title="Adicionar aos favoritos">
                         <i class="far fa-heart"></i>
                     </button>
-                    <button class="btn btn-light btn-sm quick-view" 
+                    <button class="btn btn-light btn-sm quick-view"
                             data-product-id="{{ $product->id }}"
-                            title="Quick View">
+                            title="Visualização rápida">
                         <i class="far fa-eye"></i>
                     </button>
                 </div>
             </div>
-            
+
             {{-- Product Info --}}
             <div class="product-info p-3">
-                {{-- Category --}}
+                {{-- Categoria --}}
                 @if($product->categories->first())
                     <div class="product-category text-muted small mb-1">
                         {{ $product->categories->first()->name }}
                     </div>
                 @endif
-                
+
                 {{-- Name --}}
                 <h5 class="product-title">
                     <a href="{{ route('front.product.show', $product->slug) }}">
                         {{ Str::limit($product->name, 50) }}
                     </a>
                 </h5>
-                
+
                 {{-- Rating --}}
                 @if($product->reviews_count > 0)
                     <div class="product-rating mb-2">
@@ -72,27 +72,27 @@
                         <small class="text-muted">({{ $product->reviews_count }})</small>
                     </div>
                 @endif
-                
-                {{-- Price --}}
+
+                {{-- Preço --}}
                 <div class="product-price">
                     @if($product->hasSpecialPrice())
                         <span class="original-price text-muted text-decoration-line-through">
-                            ${{ number_format($product->price, 2) }}
+                            {{ format_currency((float) ($product->price)) }}
                         </span>
                         <span class="sale-price text-danger">
-                            ${{ number_format($product->special_price, 2) }}
+                            {{ format_currency((float) ($product->special_price)) }}
                         </span>
                     @else
                         <span class="regular-price">
-                            ${{ number_format($product->price, 2) }}
+                            {{ format_currency((float) ($product->price)) }}
                         </span>
                     @endif
                 </div>
-                
-                {{-- Add to Cart --}}
+
+                {{-- Adicionar ao carrinho --}}
                 <div class="mt-3">
                     @if($product->type === 'configurable')
-                        <a href="{{ route('front.product.show', $product->slug) }}" 
+                        <a href="{{ route('front.product.show', $product->slug) }}"
                            class="btn btn-outline-primary btn-block">
                             Select Options
                         </a>
@@ -101,7 +101,7 @@
                                 data-product-id="{{ $product->id }}"
                                 data-quantity="1">
                             <i class="fas fa-shopping-cart mr-2"></i>
-                            Add to Cart
+                            Adicionar ao carrinho
                         </button>
                     @endif
                 </div>
@@ -114,8 +114,8 @@
             <i class="fas fa-search fa-3x text-muted mb-3"></i>
             <h4>No products found</h4>
             <p class="text-muted">Try adjusting your filters or search criteria</p>
-            <button class="btn btn-outline-primary" onclick="AjaxFilter.clearAllFilters()">
-                Clear All Filters
+            <button class="btn btn-outline-primary" onclick="AjaxFilter.clearAllFiltros()">
+                Clear All Filtros
             </button>
         </div>
     </div>

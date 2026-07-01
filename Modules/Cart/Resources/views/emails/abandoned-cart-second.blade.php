@@ -130,15 +130,15 @@
                 <div class="product-details">
                     <div class="product-title">{{ $item['product']->title }}</div>
                     <div>Quantity: {{ $item['quantity'] }}</div>
-                    <div class="product-price">${{ number_format($item['amount'], 2) }}</div>
+                    <div class="product-price">{{ format_currency((float) ($item['amount'])) }}</div>
                 </div>
             </div>
             @endif
         @endforeach
 
         <div style="text-align: center; margin: 30px 0;">
-            <strong>Total: ${{ number_format($abandonedCart->total_amount, 2) }}</strong><br>
-            <span style="color: #27ae60;">With discount: ${{ number_format($abandonedCart->total_amount * (1 - $discountPercent/100), 2) }}</span>
+            <strong>Total: {{ format_currency((float) ($abandonedCart->total_amount)) }}</strong><br>
+            <span style="color: #27ae60;">With discount: {{ format_currency((float) ($abandonedCart->total_amount * (1 - $discountPercent/100))) }}</span>
         </div>
 
         <div style="text-align: center;">

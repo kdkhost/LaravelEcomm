@@ -1,7 +1,7 @@
 @extends($themePath . '.layouts.master')
 
-@section('title', 'Home - ' . ($settings['site-name'] ?? 'E-commerce Website'))
-@section('description', $settings['short_des'] ?? 'Modern e-commerce website with advanced features')
+@section('title', 'Início - ' . ($settings['site-name'] ?? 'E-commerce Website'))
+@section('description', $settings['short_des'] ?? 'Loja virtual moderna com recursos avançados')
 
 @section('content')
 
@@ -38,7 +38,7 @@
                                 <div class="separator-2 light"></div>
                                 <p style="color: #fff; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ Str::limit($banner->description, 150) }}</p>
                                 <a href="{{ route('front.product-grids') }}" class="btn btn-default btn-animated">
-                                    Shop Now <i class="fa fa-arrow-right"></i>
+                                    Comprar agora <i class="fa fa-arrow-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -47,11 +47,11 @@
                     <div class="item active">
                         <img src="{{ route('front.placeholder.image', ['type' => 'banner', 'text' => $settings['site-name'] ?? 'E-commerce']) }}" alt="Welcome" style="width:100%; height: 500px; object-fit: cover;">
                         <div class="carousel-caption">
-                            <h2 class="title text-white" style="color: #fff; font-size: 48px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Welcome to {{ $settings['site-name'] ?? 'E-commerce' }}</h2>
+                            <h2 class="title text-white" style="color: #fff; font-size: 48px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Bem-vindo à {{ $settings['site-name'] ?? 'E-commerce' }}</h2>
                             <div class="separator-2 light"></div>
-                            <p style="color: #fff; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ $settings['description'] ?? 'Discover amazing products with the best prices and quality.' }}</p>
+                            <p style="color: #fff; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ $settings['description'] ?? 'Descubra produtos com ótimos preços e qualidade.' }}</p>
                             <a href="{{ route('front.product-grids') }}" class="btn btn-default btn-animated">
-                                Shop Now <i class="fa fa-arrow-right"></i>
+                                Comprar agora <i class="fa fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -61,11 +61,11 @@
             <!-- Controls -->
             <a class="left carousel-control" href="#main-slider" role="button" data-slide="prev">
                 <span class="icon-prev" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                <span class="sr-only">Anterior</span>
             </a>
             <a class="right carousel-control" href="#main-slider" role="button" data-slide="next">
                 <span class="icon-next" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+                <span class="sr-only">Próximo</span>
             </a>
         </div>
         <!-- slider revolution end -->
@@ -88,9 +88,9 @@
                 <!-- ================ -->
                 <!-- Nav tabs -->
                 <ul class="nav nav-pills" role="tablist">
-                    <li class="active"><a href="#pill-1" role="tab" data-toggle="tab" title="Latest Products"><i class="icon-star"></i> Latest Products</a></li>
-                    <li><a href="#pill-2" role="tab" data-toggle="tab" title="Featured"><i class="icon-heart"></i> Featured</a></li>
-                    <li><a href="#pill-3" role="tab" data-toggle="tab" title="Best Sellers"><i class="icon-up-1"></i> Best Sellers</a></li>
+                    <li class="active"><a href="#pill-1" role="tab" data-toggle="tab" title="Novidades"><i class="icon-star"></i> Novidades</a></li>
+                    <li><a href="#pill-2" role="tab" data-toggle="tab" title="Destaques"><i class="icon-heart"></i> Destaques</a></li>
+                    <li><a href="#pill-3" role="tab" data-toggle="tab" title="Mais vendidos"><i class="icon-up-1"></i> Mais vendidos</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content clear-style">
@@ -110,8 +110,8 @@
                                                 @endif
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
-                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Add to Wishlist</a>
-                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>View Details</a>
+                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -119,9 +119,9 @@
                                                 <h3><a href="{{ route('front.product-detail', $product->slug) }}">{{ $product->title }}</a></h3>
                                                 <p class="small">{{ Str::limit($product->description, 100) }}</p>
                                                 <div class="elements-list clearfix">
-                                                    <span class="price">{{ number_format($product->price, 2) }} {{ config('app.currency', '$') }}</span>
+                                                    <span class="price">{{ format_currency((float) ($product->price)) }}</span>
                                                     <a href="{{ route('add-to-cart', $product->slug) }}" class="pull-right margin-clear btn btn-sm btn-default-transparent btn-animated">
-                                                        Add to Cart<i class="fa fa-shopping-cart"></i>
+                                                        Adicionar ao carrinho<i class="fa fa-shopping-cart"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -131,8 +131,8 @@
                             @else
                                 <div class="col-md-12">
                                     <div class="text-center">
-                                        <h3>No products available</h3>
-                                        <p>Check back later for new products!</p>
+                                        <h3>Nenhum produto disponível</h3>
+                                        <p>Volte em breve para ver novidades.</p>
                                     </div>
                                 </div>
                             @endif
@@ -154,8 +154,8 @@
                                                 @endif
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
-                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Add to Wishlist</a>
-                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>View Details</a>
+                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -163,9 +163,9 @@
                                                 <h3><a href="{{ route('front.product-detail', $product->slug) }}">{{ $product->title }}</a></h3>
                                                 <p class="small">{{ Str::limit($product->description, 100) }}</p>
                                                 <div class="elements-list clearfix">
-                                                    <span class="price">{{ number_format($product->price, 2) }} {{ config('app.currency', '$') }}</span>
+                                                    <span class="price">{{ format_currency((float) ($product->price)) }}</span>
                                                     <a href="{{ route('add-to-cart', $product->slug) }}" class="pull-right margin-clear btn btn-sm btn-default-transparent btn-animated">
-                                                        Add to Cart<i class="fa fa-shopping-cart"></i>
+                                                        Adicionar ao carrinho<i class="fa fa-shopping-cart"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -175,8 +175,8 @@
                             @else
                                 <div class="col-md-12">
                                     <div class="text-center">
-                                        <h3>Featured Products</h3>
-                                        <p>No featured products available</p>
+                                        <h3>Produtos em destaque</h3>
+                                        <p>Nenhum produto em destaque disponível</p>
                                     </div>
                                 </div>
                             @endif
@@ -198,8 +198,8 @@
                                                 @endif
                                                 <div class="overlay-to-top links">
                                                     <span class="small">
-                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Add to Wishlist</a>
-                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>View Details</a>
+                                                        <a href="{{ route('add-to-wishlist', $product->slug) }}" class="btn-sm-link"><i class="fa fa-heart-o pr-10"></i>Adicionar aos favoritos</a>
+                                                        <a href="{{ route('front.product-detail', $product->slug) }}" class="btn-sm-link"><i class="icon-link pr-5"></i>Ver detalhes</a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -207,9 +207,9 @@
                                                 <h3><a href="{{ route('front.product-detail', $product->slug) }}">{{ $product->title }}</a></h3>
                                                 <p class="small">{{ Str::limit($product->description, 100) }}</p>
                                                 <div class="elements-list clearfix">
-                                                    <span class="price">{{ number_format($product->price, 2) }} {{ config('app.currency', '$') }}</span>
+                                                    <span class="price">{{ format_currency((float) ($product->price)) }}</span>
                                                     <a href="{{ route('add-to-cart', $product->slug) }}" class="pull-right margin-clear btn btn-sm btn-default-transparent btn-animated">
-                                                        Add to Cart<i class="fa fa-shopping-cart"></i>
+                                                        Adicionar ao carrinho<i class="fa fa-shopping-cart"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -219,8 +219,8 @@
                             @else
                                 <div class="col-md-12">
                                     <div class="text-center">
-                                        <h3>Best Sellers</h3>
-                                        <p>No best sellers available</p>
+                                        <h3>Mais vendidos</h3>
+                                        <p>Nenhum mais vendido disponível</p>
                                     </div>
                                 </div>
                             @endif
@@ -240,36 +240,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center title">Why Choose Us?</h1>
+                <h1 class="text-center title">Por que comprar aqui?</h1>
                 <div class="separator"></div>
-                <p class="text-center">{{ $settings['short_des'] ?? 'We provide the best shopping experience with quality products and excellent service.' }}</p>
+                <p class="text-center">{{ $settings['short_des'] ?? 'Oferecemos uma experiência de compra segura, produtos de qualidade e atendimento eficiente.' }}</p>
                 <div class="row grid-space-20">
                     <div class="col-md-3 col-sm-6">
                         <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
                             <i class="fa fa-truck text-default"></i>
-                            <h2>Free Shipping</h2>
-                            <p>Free shipping on orders over $50. Fast and reliable delivery to your doorstep.</p>
+                            <h2>Frete grátis</h2>
+                            <p>Frete grátis em pedidos acima de R$ 50,00, com entrega rápida e confiável.</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="200">
                             <i class="fa fa-shield text-default"></i>
-                            <h2>Secure Payment</h2>
+                            <h2>Pagamento seguro</h2>
                             <p>Your payment information is safe and secure with our encrypted payment system.</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="400">
                             <i class="fa fa-refresh text-default"></i>
-                            <h2>Easy Returns</h2>
-                            <p>30-day return policy. Easy returns and exchanges for your peace of mind.</p>
+                            <h2>Troca fácil</h2>
+                            <p>Política de devolução em até 30 dias, com trocas simples.</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="box-style-1 white-bg object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="600">
                             <i class="fa fa-headphones text-default"></i>
-                            <h2>24/7 Support</h2>
-                            <p>Round-the-clock customer support to help you with any questions or concerns.</p>
+                            <h2>Atendimento</h2>
+                            <p>Atendimento preparado para ajudar em dúvidas, pedidos e pós-venda.</p>
                         </div>
                     </div>
                 </div>

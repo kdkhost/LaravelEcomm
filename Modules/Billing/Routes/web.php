@@ -16,6 +16,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Modules\Billing\Http\Controllers\BillingController;
 use Modules\Billing\Http\Controllers\InvoiceController;
+use Modules\Billing\Http\Controllers\MercadoPagoController;
 use Modules\Billing\Http\Controllers\PaymentController;
 use Modules\Billing\Http\Controllers\PaypalController;
 use Modules\Billing\Http\Controllers\StripeController;
@@ -32,6 +33,9 @@ Route::get('wishlist-delete/{id}', [WishlistController::class, 'wishlistDelete']
 Route::get('payment', [PaypalController::class, 'charge'])->name('payment');
 Route::get('cancel', [PaypalController::class, 'cancel'])->name('payment.cancel');
 Route::get('payment/success', [PaypalController::class, 'success'])->name('payment.success');
+// Mercado Pago
+Route::get('mercadopago/retorno', [MercadoPagoController::class, 'retorno'])->name('mercadopago.return');
+Route::post('mercadopago/webhook/{secret?}', [MercadoPagoController::class, 'webhook'])->name('mercadopago.webhook');
 // Stripe
 Route::get('stripe/{id}', [StripeController::class, 'stripe'])->name('stripe');
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');

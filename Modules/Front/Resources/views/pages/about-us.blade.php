@@ -11,7 +11,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="/">Início<i class="ti-arrow-right"></i></a></li>
                             <li class="active"><a href="{{ route('front.about-us') }}">About Us</a></li>
                         </ul>
                     </div>
@@ -184,7 +184,7 @@
     </section>
     <!--/ End Team Area -->
 
-    <!-- Start Shop Services Area -->
+    <!-- Start Loja Services Area -->
     <section class="shop-services section">
         <div class="container">
             <div class="row">
@@ -192,8 +192,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>Frete grátis</h4>
+                        <p>Pedidos acima de R$ 100,00</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -201,8 +201,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>Troca fácil</h4>
+                        <p>Devolução em até 30 dias</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -210,8 +210,8 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>Pagamento seguro</h4>
+                        <p>Pagamento 100% seguro</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -219,15 +219,15 @@
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>Melhor preço</h4>
+                        <p>Preço garantido</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Shop Services Area -->
+    <!-- End Loja Services Area -->
 
     @include('front::layouts.newsletter')
 @endsection

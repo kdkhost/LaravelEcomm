@@ -1,18 +1,18 @@
 @extends('admin::layouts.master')
 
-@section('title','Edit Address')
+@section('title','Editar Address')
 
 @section('content')
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h4 class="font-weight-bold m-0">Edit Address</h4>
+        <h4 class="font-weight-bold m-0">Editar Address</h4>
     </div>
     <div class="card-body">
         <form action="{{ route('user.addresses.update', $address) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

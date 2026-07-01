@@ -6,7 +6,7 @@
     <div class="container"><div class="row"><div class="col-md-12">
         <h1>Products - List View</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('front.index') }}">Home</a></li>
+            <li><a href="{{ route('front.index') }}">Início</a></li>
             <li class="active">Products</li>
         </ol>
     </div></div></div>
@@ -20,7 +20,7 @@
             <div class="col-md-3">
                 <aside class="sidebar">
                     <div class="block clearfix">
-                        <h3 class="title">Categories</h3>
+                        <h3 class="title">Categorias</h3>
                         <ul class="list-unstyled">
                             @foreach ($categories as $category)
                             <li><a href="{{ route('front.product-cat', $category->slug) }}">{{ $category->title }}</a></li>
@@ -43,11 +43,11 @@
                         <h3><a href="{{ route('front.product-detail', $product->slug) }}">{{ $product->title }}</a></h3>
                         @php $after_discount = ($product->price - ($product->price * $product->discount) / 100); @endphp
                         <h4 class="price">
-                            @if($product->discount)<del class="text-muted">${{ number_format($product->price, 2) }}</del>@endif
-                            ${{ number_format($after_discount, 2) }}
+                            @if($product->discount)<del class="text-muted">{{ format_currency((float) ($product->price)) }}</del>@endif
+                            {{ format_currency((float) ($after_discount)) }}
                         </h4>
                         <p>{!! html_entity_decode($product->summary) !!}</p>
-                        <a href="{{ route('add-to-cart', $product->slug) }}" class="btn btn-default">Add to Cart</a>
+                        <a href="{{ route('add-to-cart', $product->slug) }}" class="btn btn-default">Adicionar ao carrinho</a>
                     </div>
                 </div>
                 @endforeach

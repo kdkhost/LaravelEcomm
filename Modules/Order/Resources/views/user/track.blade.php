@@ -28,18 +28,18 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Total Amount:</strong></td>
-                                        <td>${{ number_format($order->total_amount, 2) }}</td>
+                                        <td>{{ format_currency((float) ($order->total_amount)) }}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-md-6">
                                 <h5>Current Status</h5>
                                 <div class="status-display">
-                                    <span class="badge badge-lg badge-{{ 
-                                        $order->status == 'pending' ? 'warning' : 
-                                        ($order->status == 'processing' ? 'info' : 
-                                        ($order->status == 'shipped' ? 'primary' : 
-                                        ($order->status == 'delivered' ? 'success' : 'danger'))) 
+                                    <span class="badge badge-lg badge-{{
+                                        $order->status == 'pending' ? 'warning' :
+                                        ($order->status == 'processing' ? 'info' :
+                                        ($order->status == 'shipped' ? 'primary' :
+                                        ($order->status == 'delivered' ? 'success' : 'danger')))
                                     }}" style="font-size: 1.2em; padding: 10px 20px;">
                                         {{ ucfirst($order->status) }}
                                     </span>

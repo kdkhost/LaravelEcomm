@@ -4,7 +4,7 @@
     <div class="container"><div class="row"><div class="col-md-12">
         <h1>Contact Us</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('front.index') }}">Home</a></li>
+            <li><a href="{{ route('front.index') }}">Início</a></li>
             <li class="active">Contact</li>
         </ol>
     </div></div></div>
@@ -20,7 +20,7 @@
                 @else
                 <p>Write us a message <span class="text-danger">(You need to login first)</span></p>
                 @endauth
-                
+
                 <form method="POST" action="{{ route('front.store-message') }}" class="form">
                     @csrf
                     <div class="row">

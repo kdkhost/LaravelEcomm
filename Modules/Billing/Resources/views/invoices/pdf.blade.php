@@ -19,7 +19,7 @@
     <div class="header">
         <h1>Invoice #{{ $invoice->invoice_number }}</h1>
     </div>
-    
+
     <div class="invoice-info">
         <table>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
         </table>
     </div>
-    
+
     <div class="invoice-items">
         <table>
             <thead>
@@ -51,15 +51,15 @@
             <tbody>
                 <tr>
                     <td>Order Total</td>
-                    <td class="text-right">${{ number_format($invoice->subtotal, 2) }}</td>
-                    <td class="text-right">${{ number_format($invoice->tax_amount, 2) }}</td>
-                    <td class="text-right">${{ number_format($invoice->discount_amount, 2) }}</td>
-                    <td class="text-right total">${{ number_format($invoice->total_amount, 2) }}</td>
+                    <td class="text-right">{{ format_currency((float) ($invoice->subtotal)) }}</td>
+                    <td class="text-right">{{ format_currency((float) ($invoice->tax_amount)) }}</td>
+                    <td class="text-right">{{ format_currency((float) ($invoice->discount_amount)) }}</td>
+                    <td class="text-right total">{{ format_currency((float) ($invoice->total_amount)) }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    
+
     @if($invoice->notes)
         <div style="margin-top: 30px;">
             <strong>Notes:</strong><br>

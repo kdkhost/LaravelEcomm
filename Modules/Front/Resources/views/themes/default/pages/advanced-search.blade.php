@@ -1,12 +1,12 @@
 @extends($themePath . '.layouts.master')
 
-@section('title', 'Advanced Search - ' . config('app.name'))
+@section('title', 'Busca avançada - ' . config('app.name'))
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <!-- Search Header -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">Advanced Search</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Busca avançada</h1>
         <p class="text-gray-600">Find exactly what you're looking for with our powerful search and filtering tools.</p>
     </div>
 
@@ -16,60 +16,60 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <!-- Search Query -->
                 <div class="md:col-span-2">
-                    <label for="query" class="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
+                    <label for="query" class="block text-sm font-medium text-gray-700 mb-2">Buscar produtos</label>
                     <div class="relative">
-                        <input type="text" 
-                               id="query" 
-                               name="query" 
+                        <input type="text"
+                               id="query"
+                               name="query"
                                value="{{ $query }}"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                               placeholder="Search for products, brands, or categories..."
+                               placeholder="Busque por produtos, marcas ou categorias..."
                                autocomplete="off">
                         <div id="searchSuggestions" class="absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg hidden"></div>
                     </div>
                 </div>
 
-                <!-- Sort By -->
+                <!-- Ordenar por -->
                 <div>
-                    <label for="sort_by" class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                    <label for="sort_by" class="block text-sm font-medium text-gray-700 mb-2">Ordenar por</label>
                     <select id="sort_by" name="sort_by" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <option value="relevance" {{ $filters['sort_by'] ?? '' == 'relevance' ? 'selected' : '' }}>Relevance</option>
-                        <option value="price_asc" {{ $filters['sort_by'] ?? '' == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-                        <option value="price_desc" {{ $filters['sort_by'] ?? '' == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+                        <option value="price_asc" {{ $filters['sort_by'] ?? '' == 'price_asc' ? 'selected' : '' }}>Preço: Low to High</option>
+                        <option value="price_desc" {{ $filters['sort_by'] ?? '' == 'price_desc' ? 'selected' : '' }}>Preço: High to Low</option>
                         <option value="newest" {{ $filters['sort_by'] ?? '' == 'newest' ? 'selected' : '' }}>Newest First</option>
                         <option value="popular" {{ $filters['sort_by'] ?? '' == 'popular' ? 'selected' : '' }}>Most Popular</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Advanced Filters -->
+            <!-- Advanced Filtros -->
             <div class="border-t pt-4">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Advanced Filters</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Advanced Filtros</h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Price Range -->
+                    <!-- Preço Range -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Price Range</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preço Range</label>
                         <div class="flex space-x-2">
-                            <input type="number" 
-                                   name="price_min" 
+                            <input type="number"
+                                   name="price_min"
                                    value="{{ $filters['price_min'] ?? '' }}"
                                    placeholder="Min"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <span class="text-gray-500 self-center">-</span>
-                            <input type="number" 
-                                   name="price_max" 
+                            <input type="number"
+                                   name="price_max"
                                    value="{{ $filters['price_max'] ?? '' }}"
                                    placeholder="Max"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
 
-                    <!-- Categories -->
+                    <!-- Categorias -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Categories</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Categorias</label>
                         <select name="categories[]" multiple class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            @foreach($availableFilters['categories'] as $category)
-                                <option value="{{ $category->id }}" 
+                            @foreach($availableFiltros['categories'] as $category)
+                                <option value="{{ $category->id }}"
                                         {{ in_array($category->id, $filters['categories'] ?? []) ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
@@ -77,12 +77,12 @@
                         </select>
                     </div>
 
-                    <!-- Brands -->
+                    <!-- Marcas -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Brands</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Marcas</label>
                         <select name="brand" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">All Brands</option>
-                            @foreach($availableFilters['brands'] as $brand)
+                            <option value="">Todas as marcas</option>
+                            @foreach($availableFiltros['brands'] as $brand)
                                 <option value="{{ $brand->name }}" {{ ($filters['brand'] ?? '') == $brand->name ? 'selected' : '' }}>
                                     {{ $brand->name }}
                                 </option>
@@ -90,13 +90,13 @@
                         </select>
                     </div>
 
-                    <!-- Stock Status -->
+                    <!-- Status do estoque -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Stock Status</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Status do estoque</label>
                         <select name="in_stock" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="">All Items</option>
-                            <option value="1" {{ ($filters['in_stock'] ?? '') == '1' ? 'selected' : '' }}>In Stock</option>
-                            <option value="0" {{ ($filters['in_stock'] ?? '') == '0' ? 'selected' : '' }}>Out of Stock</option>
+                            <option value="1" {{ ($filters['in_stock'] ?? '') == '1' ? 'selected' : '' }}>Em estoque</option>
+                            <option value="0" {{ ($filters['in_stock'] ?? '') == '0' ? 'selected' : '' }}>Sem estoque</option>
                         </select>
                     </div>
                 </div>
@@ -104,27 +104,27 @@
 
             <!-- Search Buttons -->
             <div class="flex justify-between items-center mt-6">
-                <button type="submit" 
+                <button type="submit"
                         class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                     <i class="fas fa-search mr-2"></i>
-                    Search Products
+                    Buscar produtos
                 </button>
-                
-                <button type="button" 
-                        onclick="clearFilters()"
+
+                <button type="button"
+                        onclick="clearFiltros()"
                         class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors">
-                    Clear Filters
+                    Clear Filtros
                 </button>
             </div>
         </form>
     </div>
 
-    <!-- Search Results -->
+    <!-- Resultados da busca -->
     @if($searchPerformed)
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-semibold text-gray-900">
-                    Search Results for "{{ $query }}"
+                    Resultados da busca por "{{ $query }}"
                 </h2>
                 <span class="text-gray-600">{{ $totalResults }} products found</span>
             </div>
@@ -136,7 +136,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                             <div class="aspect-w-1 aspect-h-1 bg-gray-200">
                                 @if($product->getFirstMediaUrl('images'))
-                                    <img src="{{ $product->getFirstMediaUrl('images') }}" 
+                                    <img src="{{ $product->getFirstMediaUrl('images') }}"
                                          alt="{{ $product->title }}"
                                          class="w-full h-48 object-cover">
                                 @else
@@ -145,30 +145,30 @@
                                     </div>
                                 @endif
                             </div>
-                            
+
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                    <a href="{{ route('front.product-detail', $product->slug) }}" 
+                                    <a href="{{ route('front.product-detail', $product->slug) }}"
                                        class="hover:text-blue-600 transition-colors">
                                         {{ $product->title }}
                                     </a>
                                 </h3>
-                                
+
                                 <div class="flex items-center mb-2">
                                     @if($product->special_price)
-                                        <span class="text-lg font-bold text-red-600">${{ number_format($product->special_price, 2) }}</span>
-                                        <span class="text-sm text-gray-500 line-through ml-2">${{ number_format($product->price, 2) }}</span>
+                                        <span class="text-lg font-bold text-red-600">{{ format_currency((float) ($product->special_price)) }}</span>
+                                        <span class="text-sm text-gray-500 line-through ml-2">{{ format_currency((float) ($product->price)) }}</span>
                                     @else
-                                        <span class="text-lg font-bold text-gray-900">${{ number_format($product->price, 2) }}</span>
+                                        <span class="text-lg font-bold text-gray-900">{{ format_currency((float) ($product->price)) }}</span>
                                     @endif
                                 </div>
-                                
+
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm text-gray-600">
-                                        Stock: {{ $product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                        Estoque: {{ $product->stock > 0 ? 'Em estoque' : 'Sem estoque' }}
                                     </span>
-                                    
-                                    <button onclick="addToWishlist({{ $product->id }})" 
+
+                                    <button onclick="addToWishlist({{ $product->id }})"
                                             class="text-gray-400 hover:text-red-500 transition-colors">
                                         <i class="far fa-heart"></i>
                                     </button>
@@ -181,22 +181,22 @@
                 <!-- No Results -->
                 <div class="text-center py-12">
                     <i class="fas fa-search text-gray-400 text-6xl mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Nenhum produto encontrado</h3>
                     <p class="text-gray-600 mb-6">Try adjusting your search terms or filters to find what you're looking for.</p>
-                    
+
                     <!-- Suggested Searches -->
                     <div class="max-w-md mx-auto">
                         <h4 class="text-sm font-medium text-gray-700 mb-3">Try these suggestions:</h4>
                         <div class="flex flex-wrap gap-2 justify-center">
-                            <button onclick="suggestedSearch('laptop')" 
+                            <button onclick="suggestedSearch('laptop')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Laptop
                             </button>
-                            <button onclick="suggestedSearch('smartphone')" 
+                            <button onclick="suggestedSearch('smartphone')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Smartphone
                             </button>
-                            <button onclick="suggestedSearch('headphones')" 
+                            <button onclick="suggestedSearch('headphones')"
                                     class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors">
                                 Headphones
                             </button>
@@ -206,9 +206,9 @@
             @endif
         </div>
     @else
-        <!-- Search Tips -->
+        <!-- Dicas de busca -->
         <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-blue-900 mb-3">Search Tips</h3>
+            <h3 class="text-lg font-semibold text-blue-900 mb-3">Dicas de busca</h3>
             <ul class="text-blue-800 space-y-2">
                 <li class="flex items-start">
                     <i class="fas fa-lightbulb text-blue-600 mt-1 mr-2"></i>
@@ -237,12 +237,12 @@ const suggestionsDiv = document.getElementById('searchSuggestions');
 queryInput.addEventListener('input', function() {
     clearTimeout(searchTimeout);
     const query = this.value.trim();
-    
+
     if (query.length < 2) {
         suggestionsDiv.classList.add('hidden');
         return;
     }
-    
+
     searchTimeout = setTimeout(() => {
         fetchSuggestions(query);
     }, 300);
@@ -252,7 +252,7 @@ async function fetchSuggestions(query) {
     try {
         const response = await fetch(`{{ route('front.search-suggestions') }}?query=${encodeURIComponent(query)}`);
         const data = await response.json();
-        
+
         if (data.suggestions && Object.keys(data.suggestions).some(key => data.suggestions[key].length > 0)) {
             displaySuggestions(data.suggestions);
         } else {
@@ -265,31 +265,31 @@ async function fetchSuggestions(query) {
 
 function displaySuggestions(suggestions) {
     let html = '<div class="p-3">';
-    
+
     if (suggestions.popular_terms && suggestions.popular_terms.length > 0) {
-        html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Popular Products</h4>';
+        html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Produtos populares</h4>';
         suggestions.popular_terms.forEach(term => {
             html += `<div class="suggestion-item px-2 py-1 hover:bg-gray-100 cursor-pointer rounded" onclick="selectSuggestion('${term}')">${term}</div>`;
         });
         html += '</div>';
     }
-    
+
     if (suggestions.categories && suggestions.categories.length > 0) {
-        html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Categories</h4>';
+        html += '<div class="mb-3"><h4 class="text-sm font-medium text-gray-700 mb-2">Categorias</h4>';
         suggestions.categories.forEach(category => {
             html += `<div class="suggestion-item px-2 py-1 hover:bg-gray-100 cursor-pointer rounded" onclick="selectSuggestion('${category}')">${category}</div>`;
         });
         html += '</div>';
     }
-    
+
     if (suggestions.brands && suggestions.brands.length > 0) {
-        html += '<div><h4 class="text-sm font-medium text-gray-700 mb-2">Brands</h4>';
+        html += '<div><h4 class="text-sm font-medium text-gray-700 mb-2">Marcas</h4>';
         suggestions.brands.forEach(brand => {
             html += `<div class="suggestion-item px-2 py-1 hover:bg-gray-100 cursor-pointer rounded" onclick="selectSuggestion('${brand}')">${brand}</div>`;
         });
         html += '</div>';
     }
-    
+
     html += '</div>';
     suggestionsDiv.innerHTML = html;
     suggestionsDiv.classList.remove('hidden');
@@ -309,7 +309,7 @@ document.addEventListener('click', function(e) {
 });
 
 // Clear filters function
-function clearFilters() {
+function clearFiltros() {
     document.getElementById('query').value = '';
     document.getElementById('sort_by').value = 'relevance';
     document.querySelector('input[name="price_min"]').value = '';
@@ -325,7 +325,7 @@ function suggestedSearch(term) {
     document.getElementById('advancedSearchForm').submit();
 }
 
-// Add to wishlist function
+// Adicionar aos favoritos function
 async function addToWishlist(productId) {
     try {
         const response = await fetch('{{ route("api.wishlist.store") }}', {
@@ -340,16 +340,16 @@ async function addToWishlist(productId) {
                 quantity: 1
             })
         });
-        
+
         if (response.ok) {
             // Show success message
-            showNotification('Product added to wishlist!', 'success');
+            showNotification('Produto adicionado aos favoritos!', 'success');
         } else {
-            showNotification('Failed to add product to wishlist.', 'error');
+            showNotification('Não foi possível adicionar o produto aos favoritos.', 'error');
         }
     } catch (error) {
         console.error('Error adding to wishlist:', error);
-        showNotification('Error adding to wishlist.', 'error');
+        showNotification('Erro ao adicionar aos favoritos.', 'error');
     }
 }
 
@@ -360,9 +360,9 @@ function showNotification(message, type) {
         type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
     }`;
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.remove();
     }, 3000);

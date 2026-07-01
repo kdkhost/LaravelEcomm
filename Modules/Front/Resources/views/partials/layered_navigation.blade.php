@@ -1,21 +1,21 @@
-{{-- Layered Navigation / Sidebar Filters --}}
+{{-- Layered Navigation / Sidebar Filtros --}}
 <div class="layered-navigation">
-    <h5 class="filter-title">Filters</h5>
-    
-    {{-- Price Filter --}}
+    <h5 class="filter-title">Filtros</h5>
+
+    {{-- Filtro de preço --}}
     <div class="filter-section mb-4">
-        <h6 class="filter-heading">Price</h6>
+        <h6 class="filter-heading">Preço</h6>
         <div class="price-range-slider">
-            <input type="range" 
-                   id="price-slider" 
+            <input type="range"
+                   id="price-slider"
                    class="form-control-range"
-                   min="0" 
-                   max="1000" 
+                   min="0"
+                   max="1000"
                    value="1000"
                    data-attribute-code="price">
             <div class="d-flex justify-content-between mt-2">
-                <span>$0</span>
-                <span id="price-value">$1000</span>
+                <span>R$ 0,00</span>
+                <span id="price-value">R$ 1.000,00</span>
             </div>
         </div>
     </div>
@@ -24,19 +24,19 @@
         @foreach($filters as $filter)
             <div class="filter-section mb-4" data-attribute-code="{{ $filter['code'] }}">
                 <h6 class="filter-heading">{{ $filter['name'] }}</h6>
-                
+
                 @switch($filter['type'])
                     {{-- Color Swatches Filter --}}
                     @case('swatch')
                         <div class="filter-options color-swatch-filters">
                             @foreach($filter['options'] as $option)
                                 <label class="color-swatch-filter" title="{{ $option['label'] }}">
-                                    <input type="checkbox" 
-                                           name="{{ $filter['code'] }}" 
+                                    <input type="checkbox"
+                                           name="{{ $filter['code'] }}"
                                            value="{{ $option['value'] }}"
                                            class="d-none"
                                            data-attribute-code="{{ $filter['code'] }}">
-                                    <span class="color-swatch" 
+                                    <span class="color-swatch"
                                           style="background-color: {{ $option['color'] ?? $option['value'] }};"></span>
                                     @if(isset($option['count']))
                                         <small class="count">({{ $option['count'] }})</small>
@@ -46,13 +46,13 @@
                         </div>
                         @break
 
-                    {{-- Button/Toggle Filters --}}
+                    {{-- Button/Toggle Filtros --}}
                     @case('button')
                         <div class="filter-options button-filters">
                             @foreach($filter['options'] as $option)
                                 <label class="filter-option">
-                                    <input type="checkbox" 
-                                           name="{{ $filter['code'] }}" 
+                                    <input type="checkbox"
+                                           name="{{ $filter['code'] }}"
                                            value="{{ $option['value'] }}"
                                            class="d-none"
                                            data-attribute-code="{{ $filter['code'] }}">
@@ -72,13 +72,13 @@
                         <div class="filter-options checkbox-filters">
                             @foreach($filter['options'] as $option)
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" 
-                                           class="custom-control-input" 
+                                    <input type="checkbox"
+                                           class="custom-control-input"
                                            id="{{ $filter['code'] }}_{{ $option['value'] }}"
-                                           name="{{ $filter['code'] }}" 
+                                           name="{{ $filter['code'] }}"
                                            value="{{ $option['value'] }}"
                                            data-attribute-code="{{ $filter['code'] }}">
-                                    <label class="custom-control-label" 
+                                    <label class="custom-control-label"
                                            for="{{ $filter['code'] }}_{{ $option['value'] }}">
                                         {{ $option['label'] }}
                                         @if(isset($option['count']))
@@ -90,9 +90,9 @@
                         </div>
                         @break
 
-                    {{-- Default Dropdown --}}
+                    {{-- Padrão Dropdown --}}
                     @default
-                        <select class="form-control filter-select" 
+                        <select class="form-control filter-select"
                                 name="{{ $filter['code'] }}"
                                 data-attribute-code="{{ $filter['code'] }}">
                             <option value="">All {{ $filter['name'] }}</option>
@@ -109,8 +109,8 @@
             </div>
         @endforeach
     @else
-        {{-- Default filters if no dynamic filters provided --}}
-        
+        {{-- Padrão filters if no dynamic filters provided --}}
+
         {{-- Color Filter --}}
         <div class="filter-section mb-4">
             <h6 class="filter-heading">Color</h6>
@@ -127,8 +127,8 @@
                 @endphp
                 @foreach($colors as $color)
                     <label class="color-swatch-filter" title="{{ $color['name'] }}">
-                        <input type="checkbox" 
-                               name="color" 
+                        <input type="checkbox"
+                               name="color"
                                value="{{ strtolower($color['name']) }}"
                                class="d-none"
                                data-attribute-code="color">
@@ -144,8 +144,8 @@
             <div class="filter-options button-filters">
                 @foreach(['XS', 'S', 'M', 'L', 'XL', 'XXL'] as $size)
                     <label class="filter-option">
-                        <input type="checkbox" 
-                               name="size" 
+                        <input type="checkbox"
+                               name="size"
                                value="{{ $size }}"
                                class="d-none"
                                data-attribute-code="size">
@@ -181,7 +181,7 @@
         color: #666;
     }
 
-    /* Color Swatch Filters */
+    /* Color Swatch Filtros */
     .color-swatch-filters {
         display: flex;
         flex-wrap: wrap;
@@ -224,7 +224,7 @@
         display: block;
     }
 
-    /* Button Filters */
+    /* Button Filtros */
     .button-filters {
         display: flex;
         flex-wrap: wrap;
@@ -242,7 +242,7 @@
         border-color: #333;
     }
 
-    /* Checkbox Filters */
+    /* Checkbox Filtros */
     .checkbox-filters {
         max-height: 200px;
         overflow-y: auto;
@@ -252,7 +252,7 @@
         margin-bottom: 0.5rem;
     }
 
-    /* Price Slider */
+    /* Preço Slider */
     .price-range-slider {
         padding: 0.5rem 0;
     }
@@ -341,7 +341,7 @@
 
 @push('scripts')
 <script>
-    // Price slider update
+    // Preço slider update
     document.getElementById('price-slider')?.addEventListener('input', function() {
         document.getElementById('price-value').textContent = '$' + this.value;
     });

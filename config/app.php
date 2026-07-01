@@ -56,6 +56,10 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'currency' => env('APP_CURRENCY_SYMBOL', 'R$'),
+
+    'currency_code' => env('APP_CURRENCY_CODE', 'BRL'),
+
     /*
     |--------------------------------------------------------------------------
     | Trusted Proxies
@@ -76,11 +80,11 @@ return [
     |
     | Here you may specify the default timezone for your application, which
     | will be used by the PHP date and date-time functions. The timezone
-    | is set to "UTC" by default as it is suitable for most use cases.
+    | is set to "America/Sao_Paulo" by default for Brazilian deployments.
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'America/Sao_Paulo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,11 +97,11 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'pt'),
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'pt'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'pt_BR'),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +114,12 @@ return [
     */
 
     'locales' => [
+        'pt' => [
+            'name' => 'Português do Brasil',
+            'native' => 'Português do Brasil',
+            'flag' => 'BR',
+            'rtl' => false,
+        ],
         'en' => [
             'name' => 'English',
             'native' => 'English',

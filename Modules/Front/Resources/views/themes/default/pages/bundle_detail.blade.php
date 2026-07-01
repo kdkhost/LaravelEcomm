@@ -22,8 +22,8 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{route('front.index')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="">Shop Details</a></li>
+                            <li><a href="{{route('front.index')}}">Início<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="">Loja Details</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
     </div>
     <!-- End Breadcrumbs -->
 
-    <!-- Shop Single -->
+    <!-- Loja Single -->
     <section class="shop single section">
         <div class="container">
             <div class="row">
@@ -58,12 +58,12 @@
                             <div class="product-info">
                                 <h2 class="product-title">{{$bundle->name}}</h2>
                                 <div class="product-price">
-                                    <span class="price">${{number_format($bundle->price, 2)}}</span>
+                                    <span class="price">{{ format_currency((float) ($bundle->price)) }}</span>
                                 </div>
                                 <div class="product-description">
                                     <p>{!! ($bundle->description) !!}</p>
                                 </div>
-                                
+
                                 @if($bundle->products && $bundle->products->count() > 0)
                                     <div class="bundle-products mt-4">
                                         <h4>Products in this Bundle ({{$bundle->products->count()}})</h4>
@@ -74,7 +74,7 @@
                                                         <a href="{{route('front.product-detail', $product->slug)}}">
                                                             <img src="{{$product->imageUrl}}" alt="{{$product->title}}" class="img-fluid" style="max-width: 100px;">
                                                             <h5>{{$product->title}}</h5>
-                                                            <p class="price">${{number_format($product->price, 2)}}</p>
+                                                            <p class="price">{{ format_currency((float) ($product->price)) }}</p>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -82,9 +82,9 @@
                                         </div>
                                     </div>
                                 @endif
-                                
+
                                 <div class="add-to-cart mt-4">
-                                    <a href="#" class="btn btn-primary">Add Bundle to Cart</a>
+                                    <a href="#" class="btn btn-primary">Adicionar kit ao carrinho</a>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                                                                 <a href="{{route('front.product-detail', $product->slug)}}">
                                                                     <img src="{{$product->imageUrl}}" alt="{{$product->title}}" class="img-fluid">
                                                                     <h5>{{$product->title}}</h5>
-                                                                    <p class="price">${{number_format($product->price, 2)}}</p>
+                                                                    <p class="price">{{ format_currency((float) ($product->price)) }}</p>
                                                                     @if($product->summary)
                                                                         <p class="summary">{{Str::limit($product->summary, 100)}}</p>
                                                                     @endif
@@ -136,7 +136,7 @@
                                                     @endforeach
                                                 @else
                                                     <div class="col-12">
-                                                        <p>No products in this bundle.</p>
+                                                        <p>Nenhum produto neste kit.</p>
                                                     </div>
                                                 @endif
                                             </div>
@@ -150,7 +150,7 @@
             </div>
         </div>
     </section>
-    <!--/ End Shop Single -->
+    <!--/ End Loja Single -->
 
     <!-- Start Most Popular -->
     <div class="product-area most-popular related-product section">
@@ -158,7 +158,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Related Products</h2>
+                        <h2>Produtos relacionados</h2>
                     </div>
                 </div>
             </div>
@@ -180,13 +180,13 @@
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
-                                                <a data-toggle="modal" data-target="#modelExample" title="Quick View"
-                                                   href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                <a data-toggle="modal" data-target="#modelExample" title="Visualização rápida"
+                                                   href="#"><i class=" ti-eye"></i><span>Ver rápido</span></a>
+                                                <a title="Favoritos" href="#"><i class=" ti-heart "></i><span>Adicionar aos favoritos</span></a>
+                                                <a title="Comparar" href="#"><i class="ti-bar-chart-alt"></i><span>Comparar</span></a>
                                             </div>
                                             <div class="product-action-2">
-                                                <a title="Add to cart" href="#">Add to cart</a>
+                                                <a title="Adicionar ao carrinho" href="#">Adicionar ao carrinho</a>
                                             </div>
                                         </div>
                                     </div>
@@ -197,8 +197,8 @@
                                             @php
                                                 $after_discount=($data->price-(($data->discount*$data->price)/100));
                                             @endphp
-                                            <span class="old">${{number_format($data->price,2)}}</span>
-                                            <span>${{number_format($after_discount,2)}}</span>
+                                            <span class="old">{{ format_currency((float) ($data->price)) }}</span>
+                                            <span>{{ format_currency((float) ($after_discount)) }}</span>
                                         </div>
 
                                     </div>
@@ -258,23 +258,23 @@
                                             <i class="yellow fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <a href="#"> (1 customer review)</a>
+                                        <a href="#"> (1 avaliação de cliente)</a>
                                     </div>
                                     <div class="quickview-stock">
-                                        <span><i class="fa fa-check-circle-o"></i> in stock</span>
+                                        <span><i class="fa fa-check-circle-o"></i> em estoque</span>
                                     </div>
                                 </div>
-                                <h3>$29.00</h3>
+                                <h3>R$ 29,00</h3>
                                 <div class="quickview-peragraph">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum
                                         ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui
                                         nemo ipsum numquam.</p>
                                 </div>
                                 @php
-                                    // Bundles don't have attributeValues, so we'll show bundle information instead
+                                    // Kits don't have attributeValues, so we'll show bundle information instead
                                     $bundleInfo = [
                                         'Bundle Name' => $bundle->name ?? 'N/A',
-                                        'Bundle Price' => '$' . number_format($bundle->price ?? 0, 2),
+                                        'Bundle Preço' => '$' . number_format($bundle->price ?? 0, 2),
                                         'Products Count' => $bundle->products->count() ?? 0,
                                     ];
                                 @endphp
@@ -330,7 +330,7 @@
                                     <!--/ End Input Order -->
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="#" class="btn">Add to cart</a>
+                                    <a href="#" class="btn">Adicionar ao carrinho</a>
                                     <a href="#" class="btn min"><i class="ti-heart"></i></a>
                                     <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                                 </div>

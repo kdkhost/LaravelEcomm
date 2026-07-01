@@ -78,7 +78,8 @@
       "Modules\\": "Modules/"
     },
     "files": [
-      "Modules/Front/Helpers/theme.php"
+      "Modules/Front/Helpers/theme.php",
+      "Modules/GeoLocalization/Helpers/GeoLocalizationHelper.php"
     ]
   },
   "autoload-dev": {
@@ -87,9 +88,6 @@
       "Modules\\": "Modules/"
     }
   },
-  "files": [
-    "Modules/Core/Helpers/Helper.php"
-  ],
   "scripts": {
     "phpstan": "php -d memory_limit=-1 vendor/bin/phpstan analyse",
     "pint": "vendor/bin/pint",

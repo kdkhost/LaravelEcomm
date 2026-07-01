@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="my-4">All Categories</h1>
+            <h1 class="my-4">Todas as categorias</h1>
             <hr>
         </div>
     </div>
-    
+
     <div class="row">
         @foreach($categories as $category)
         <div class="col-md-4 mb-4">
@@ -24,7 +24,7 @@
                     <h5 class="card-title">{{ $category->title }}</h5>
                     <p class="card-text">{{ Str::limit($category->summary, 100) }}</p>
                     <a href="{{ route('front.category.detail', ['slug' => $category->slug]) }}" class="btn btn-primary">
-                        View Products
+                        Ver produtos
                     </a>
                 </div>
             </div>

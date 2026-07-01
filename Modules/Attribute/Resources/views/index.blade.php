@@ -1,5 +1,5 @@
 @extends('admin::layouts.master')
-@section('title','E-SHOP || Brand Page')
+@section('title','E-SHOP || Marca Page')
 @section('content')
     <!-- DataTales Example -->
     <div class="card shadow mb-4">

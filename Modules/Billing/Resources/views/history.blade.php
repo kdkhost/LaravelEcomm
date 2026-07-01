@@ -33,7 +33,7 @@
                                                 <th>{{ __('Date') }}</th>
                                                 <th>{{ __('Amount') }}</th>
                                                 <th>{{ __('Status') }}</th>
-                                                <th>{{ __('Actions') }}</th>
+                                                <th>{{ __('Ações') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -41,7 +41,7 @@
                                                 <tr>
                                                     <td>{{ $invoice->invoice_number }}</td>
                                                     <td>{{ $invoice->issue_date->format('Y-m-d') }}</td>
-                                                    <td>${{ number_format($invoice->total_amount, 2) }}</td>
+                                                    <td>{{ format_currency((float) ($invoice->total_amount)) }}</td>
                                                     <td>
                                                         <span class="badge badge-{{ $invoice->status === 'paid' ? 'success' : ($invoice->isOverdue() ? 'danger' : 'warning') }}">
                                                             {{ ucfirst($invoice->status) }}
@@ -81,7 +81,7 @@
                                             @forelse($payments as $payment)
                                                 <tr>
                                                     <td>{{ $payment->created_at->format('Y-m-d H:i') }}</td>
-                                                    <td>${{ number_format($payment->amount, 2) }} {{ $payment->currency }}</td>
+                                                    <td>{{ format_currency((float) ($payment->amount)) }} {{ $payment->currency }}</td>
                                                     <td>{{ ucfirst($payment->payment_method) }}</td>
                                                     <td>
                                                         <span class="badge badge-{{ $payment->status === 'completed' ? 'success' : ($payment->status === 'failed' ? 'danger' : 'warning') }}">

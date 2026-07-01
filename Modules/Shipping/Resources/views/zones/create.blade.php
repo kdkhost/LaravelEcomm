@@ -26,7 +26,7 @@
 
                             <div class="form-group">
                                 <label for="countries">Countries (ISO codes, comma-separated)</label>
-                                <input type="text" class="form-control" id="countries" name="countries" 
+                                <input type="text" class="form-control" id="countries" name="countries"
                                        placeholder="US, CA, MX (leave empty for all countries)">
                                 <small class="form-text text-muted">Enter 2-letter country codes separated by commas</small>
                             </div>
@@ -57,11 +57,11 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Price *</label>
+                                        <label>Preço *</label>
                                         <input type="number" step="0.01" name="methods[0][price]" class="form-control" required min="0">
                                     </div>
                                     <div class="form-group">
-                                        <label>Free Shipping Threshold</label>
+                                        <label>Frete grátis Threshold</label>
                                         <input type="number" step="0.01" name="methods[0][free_shipping_threshold]" class="form-control" min="0">
                                     </div>
                                     <div class="form-group">

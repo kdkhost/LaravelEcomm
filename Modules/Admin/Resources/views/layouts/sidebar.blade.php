@@ -1,5 +1,5 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <!-- Sidebar - Brand -->
+    <!-- Sidebar - Marca -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin')}}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
@@ -74,7 +74,7 @@
             </div>
         </div>
     </li>
-    {{-- Brands --}}
+    {{-- Marcas --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true"
            aria-controls="brandCollapse">
@@ -105,7 +105,7 @@
             </div>
         </div>
     </li>
-    <!-- Categories -->
+    <!-- Categorias -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categoryCollapse"
            aria-expanded="true" aria-controls="categoryCollapse">
@@ -210,9 +210,9 @@
     </li>
     <!-- Reviews -->
     <li class="nav-item">
-        <a class="nav-link" href="{{route('reviews.index')}}">
+        <a class="nav-link" href="{{route('avaliacoes.index')}}">
             <i class="fas fa-comments"></i>
-            <span>@lang('sidebar.reviews')</span></a>
+            <span>@lang('sidebar.avaliacoes')</span></a>
     </li>
 
 
@@ -309,7 +309,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    
+
     @hasrole('super-admin')
     <!-- Heading -->
     <div class="sidebar-heading">

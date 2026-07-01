@@ -25,7 +25,7 @@
                                         <th>{{ __('Date') }}</th>
                                         <th>{{ __('Amount') }}</th>
                                         <th>{{ __('Status') }}</th>
-                                        <th>{{ __('Actions') }}</th>
+                                        <th>{{ __('Ações') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,7 +34,7 @@
                                             <td>{{ $invoice->invoice_number }}</td>
                                             <td>{{ $invoice->user->name ?? '-' }}</td>
                                             <td>{{ $invoice->issue_date->format('Y-m-d') }}</td>
-                                            <td>${{ number_format($invoice->total_amount, 2) }}</td>
+                                            <td>{{ format_currency((float) ($invoice->total_amount)) }}</td>
                                             <td>
                                                 <span class="badge badge-{{ $invoice->status === 'paid' ? 'success' : ($invoice->isOverdue() ? 'danger' : 'warning') }}">
                                                     {{ ucfirst($invoice->status) }}
@@ -46,7 +46,7 @@
                                                 </a>
                                                 @can('update', $invoice)
                                                     <a href="{{ route('invoices.edit', $invoice) }}" class="btn btn-sm btn-warning">
-                                                        {{ __('Edit') }}
+                                                        {{ __('Editar') }}
                                                     </a>
                                                 @endcan
                                                 <a href="{{ route('invoices.download', $invoice) }}" class="btn btn-sm btn-primary">

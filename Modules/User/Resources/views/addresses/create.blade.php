@@ -11,7 +11,7 @@
     <div class="card-body">
         <form action="{{ route('user.addresses.store') }}" method="POST">
             @csrf
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -172,7 +172,7 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save Address</button>
+                <button type="submit" class="btn btn-primary">Economize Address</button>
                 <a href="{{ route('user.addresses.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>

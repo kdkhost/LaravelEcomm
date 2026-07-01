@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="bread-inner">
                         <ul class="bread-list">
-                            <li><a href="{{ route('front.index') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li><a href="{{ route('front.index') }}">Início<i class="ti-arrow-right"></i></a></li>
                             <li><a href="{{ route('user.orders.history') }}">My Orders<i class="ti-arrow-right"></i></a>
                             </li>
                             <li class="active"><a href="javascript:void(0)">File Complaint</a></li>
@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <p><strong>Order Number:</strong> {{ $order->order_number ?? $order->id }}</p>
                             <p><strong>Order Date:</strong> {{ $order->created_at->format('M d, Y') }}</p>
-                            <p><strong>Total:</strong> ${{ number_format($order->total_amount, 2) }}</p>
+                            <p><strong>Total:</strong> {{ format_currency((float) ($order->total_amount)) }}</p>
                         </div>
                     </div>
 

@@ -1,359 +1,359 @@
-# Advanced E-commerce Platform in Laravel 12
+# Plataforma Avancada de E-commerce em Laravel 12
 
-### 🌐 Demo: https://e-comm.mk
-
----
-
-## 📑 Table of Contents
-
-- [🚀 Quick Start](#-quick-start)
-- [✨ Features Overview](#-features-overview)
-- [📸 Screenshots](#-screenshots)
-- [📚 Documentation](#-documentation)
-- [⚡ Blaze Template Engine](#-blaze-template-engine-custom-fork)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+### Demo: https://e-comm.mk
 
 ---
 
-## 🚀 Quick Start
+## Sumario
 
-### Option 1: Docker (Recommended)
+- [Inicio rapido](#inicio-rapido)
+- [Visao geral dos recursos](#visao-geral-dos-recursos)
+- [Capturas de tela](#capturas-de-tela)
+- [Documentacao](#documentacao)
+- [Blaze Template Engine](#blaze-template-engine-fork-personalizado)
+- [Contribuindo](#contribuindo)
+- [Licenca](#licenca)
+
+---
+
+## Inicio rapido
+
+### Opcao 1: Docker (recomendado)
 
 ```bash
-# 1. Clone and start
+# 1. Clone e inicie
 git clone https://github.com/KalimeroMK/LaravelEcomm.git
 cd LaravelEcomm
 docker-compose up -d
 
-# 2. Install dependencies
+# 2. Instale as dependencias
 docker exec e_comm_app composer install
 
-# 3. Setup environment
+# 3. Configure o ambiente
 cp .env.example .env
 docker exec e_comm_app php artisan key:generate
 
-# 4. Configure database in .env
+# 4. Configure o banco de dados no .env
 DB_HOST=db
 DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 
-# 5. Run migrations and seeders
+# 5. Execute migrations e seeders
 docker exec e_comm_app php artisan migrate:fresh --seed
 
-# 6. Create storage link
+# 6. Crie o link do storage
 docker exec e_comm_app php artisan storage:link
 
-# 7. Access the application
+# 7. Acesse a aplicacao
 # Frontend: http://localhost:90
 # Admin:    http://localhost:90/admin
 # API:      http://localhost:90/api/v1
 ```
 
-### Option 2: Local Development
+### Opcao 2: Desenvolvimento local
 
 ```bash
-# 1. Clone and install
+# 1. Clone e instale
 git clone https://github.com/KalimeroMK/LaravelEcomm.git
 cd LaravelEcomm
 composer install
 cp .env.example .env
 
-# 2. Configure environment
+# 2. Configure o ambiente
 php artisan key:generate
-# Edit .env with your database credentials
+# Edite o .env com as credenciais do seu banco de dados
 
-# 3. Setup database
+# 3. Configure o banco de dados
 php artisan migrate:fresh --seed
 
-# 4. Install frontend assets
+# 4. Instale os assets do frontend
 npm install && npm run build
 
-# 5. Create storage link
+# 5. Crie o link do storage
 php artisan storage:link
 
-# 6. Start server
+# 6. Inicie o servidor
 php artisan serve
-# Visit: http://localhost:8000
+# Visite: http://localhost:8000
 ```
 
-### Default Credentials
+### Credenciais padrao
 
-| Role | URL | Email | Password |
+| Papel | URL | E-mail | Senha |
 |------|-----|-------|----------|
 | **Admin** | `/admin` | `superadmin@mail.com` | `password` |
-| **Client** | `/login` | `client@mail.com` | `password` |
+| **Cliente** | `/login` | `client@mail.com` | `password` |
 
 ---
 
-## ✨ Features Overview
+## Visao geral dos recursos
 
-### 🎨 Frontend Features
+### Recursos do frontend
 
-#### Multi-Theme System
-- **Two Complete Themes**: Default theme (classic e-commerce) & Modern theme (contemporary design)
-- **Easy Theme Switching**: Change active theme via admin settings (no code changes)
-- **Theme Assets**: Organized CSS, JS, images per theme (`public/frontend/themes/{theme}/`)
-- **View Fallback**: Automatic fallback to default theme if view missing in active theme
-- **32+ Theme Views**: Complete page coverage (homepage, products, cart, checkout, user pages)
+#### Sistema multi-tema
+- **Dois temas completos**: tema Padrao (e-commerce classico) e tema Moderno (design contemporaneo)
+- **Troca facil de tema**: altere o tema ativo pelas configuracoes do admin, sem mudancas no codigo
+- **Assets por tema**: CSS, JS e imagens organizados por tema (`public/frontend/themes/{theme}/`)
+- **Fallback de views**: fallback automatico para o tema padrao quando uma view nao existir no tema ativo
+- **32+ views por tema**: cobertura completa de paginas (inicio, produtos, carrinho, checkout, paginas do usuario)
 
-#### Internationalization (i18n)
-- **URL Prefix Strategy**: `/en/`, `/mk/`, `/de/`, `/sq/` for language switching
-- **Auto Locale Detection**: Detects browser language and redirects automatically
-- **Database-Driven Languages**: Add/remove languages via admin without code changes
-- **Translation Management**: Admin UI for managing translations
-- **Model Translations**: Product, Category, Page, Post models support translations via `HasTranslations` trait
-- **Automatic Fallback**: Falls back to default language if translation missing
-- **RTL Support**: Right-to-left language support built-in
+#### Internacionalizacao (i18n)
+- **Estrategia por prefixo de URL**: `/en/`, `/mk/`, `/de/`, `/sq/` para troca de idioma
+- **Deteccao automatica de locale**: detecta o idioma do navegador e redireciona automaticamente
+- **Idiomas controlados por banco**: adicione/remova idiomas pelo admin sem alterar codigo
+- **Gerenciamento de traducoes**: interface administrativa para gerenciar traducoes
+- **Traducoes de models**: Product, Category, Page e Post suportam traducoes via trait `HasTranslations`
+- **Fallback automatico**: usa o idioma padrao quando uma traducao estiver ausente
+- **Suporte RTL**: suporte embutido para idiomas da direita para a esquerda
 
-#### GeoLocalization & Currency
-- **GeoIP Detection**: Auto-detect user country from IP address
-- **Automatic Currency**: Detects and sets currency based on country
-- **Real-Time Exchange Rates**: 20+ currencies with live rates
-- **Currency Conversion API**: Convert prices between currencies on-the-fly
-- **EU Detection**: GDPR compliance helpers for EU countries
-- **Timezone Detection**: Auto-set timezone based on location
+#### Geolocalizacao e moeda
+- **Deteccao por GeoIP**: detecta automaticamente o pais do usuario pelo endereco IP
+- **Moeda automatica**: detecta e define a moeda com base no pais
+- **Taxas de cambio em tempo real**: mais de 20 moedas com taxas ao vivo
+- **API de conversao de moeda**: converte precos entre moedas dinamicamente
+- **Deteccao da UE**: helpers de conformidade GDPR para paises da Uniao Europeia
+- **Deteccao de fuso horario**: define automaticamente o fuso horario com base na localizacao
 
-#### Product Catalog
-- **Product Types**: Simple, Configurable, Bundle, Downloadable products
-- **Advanced Attributes**: Bagisto-style attribute system (color, size, material swatches)
-- **Visual Swatches**: Color swatches, button swatches, image swatches
-- **Configurable Products**: Auto-generate variants from attribute combinations (e.g., T-Shirt: Red × S, M, L)
-- **Layered Navigation**: AJAX-powered filtering with real-time product counts
-- **Product Variants**: Manage stock, price, images per variant
-- **Product Reviews**: Star ratings, review text, helpfulness voting
-- **Wishlist**: Save products for later, share wishlist
-- **Recently Viewed**: Track and display browsing history
-- **Product Comparison**: Compare up to 4 products side-by-side
-- **Stock Management**: Track inventory, low stock alerts, out-of-stock handling
-- **Digital Downloads**: Support for downloadable products with secure links
+#### Catalogo de produtos
+- **Tipos de produto**: simples, configuravel, pacote e baixavel
+- **Atributos avancados**: sistema de atributos no estilo Bagisto (cor, tamanho, material, amostras)
+- **Amostras visuais**: amostras de cor, botoes e imagens
+- **Produtos configuraveis**: geracao automatica de variantes por combinacoes de atributos (ex.: camiseta vermelha em P, M, G)
+- **Navegacao em camadas**: filtros AJAX com contagem de produtos em tempo real
+- **Variantes de produto**: estoque, preco e imagens por variante
+- **Avaliacoes de produto**: notas por estrelas, texto de avaliacao e votos de utilidade
+- **Lista de desejos**: salve produtos para depois e compartilhe a lista
+- **Vistos recentemente**: rastreia e exibe historico de navegacao
+- **Comparacao de produtos**: compara ate 4 produtos lado a lado
+- **Gerenciamento de estoque**: controle de inventario, alertas de estoque baixo e tratamento de indisponibilidade
+- **Downloads digitais**: suporte para produtos baixaveis com links seguros
 
-#### Shopping Experience
-- **Shopping Cart**: AJAX add/remove, quantity updates, mini-cart dropdown
-- **Saved Carts**: Save cart for later, restore cart
-- **Guest Checkout**: Checkout without registration
-- **Multiple Addresses**: Save multiple shipping/billing addresses
-- **Address Book**: Default addresses, address management
-- **Order Tracking**: Track order status, shipping information
-- **Order History**: View all orders, reorder previous orders
-- **Coupon System**: Apply coupons in cart, see discount breakdown
-- **Shipping Estimation**: Calculate shipping costs before checkout
+#### Experiencia de compra
+- **Carrinho de compras**: adicionar/remover via AJAX, atualizar quantidades e mini-carrinho
+- **Carrinhos salvos**: salvar carrinho para depois e restaurar carrinho
+- **Checkout como visitante**: compra sem cadastro
+- **Multiplos enderecos**: salvar varios enderecos de entrega/cobranca
+- **Catalogo de enderecos**: enderecos padrao e gerenciamento de enderecos
+- **Rastreamento de pedidos**: acompanhar status do pedido e informacoes de envio
+- **Historico de pedidos**: visualizar todos os pedidos e refazer pedidos anteriores
+- **Sistema de cupons**: aplicar cupons no carrinho e ver detalhamento do desconto
+- **Estimativa de frete**: calcular custos de frete antes do checkout
 
-#### Search & Discovery
-- **Elasticsearch Integration**: Full-text search, fuzzy matching, suggestions
-- **Advanced Filters**: Filter by price, brand, attributes, ratings
-- **Auto-Complete**: Search suggestions as you type
-- **Search Analytics**: Track popular searches, no-results queries
-- **Category Navigation**: Multi-level categories, category tree
-- **Breadcrumbs**: Navigation trail for easy back-tracking
-- **Related Products**: AI-powered or manual related products
-- **Up-Sells & Cross-Sells**: Product recommendations
+#### Busca e descoberta
+- **Integracao com Elasticsearch**: busca full-text, correspondencia aproximada e sugestoes
+- **Filtros avancados**: filtrar por preco, marca, atributos e avaliacoes
+- **Autocompletar**: sugestoes de busca enquanto digita
+- **Analise de buscas**: rastreia buscas populares e consultas sem resultado
+- **Navegacao por categorias**: categorias multinivel e arvore de categorias
+- **Breadcrumbs**: trilha de navegacao para facilitar retorno
+- **Produtos relacionados**: produtos relacionados por IA ou manualmente
+- **Up-sells e cross-sells**: recomendacoes de produtos
 
-#### Content Management (Frontend)
-- **Blog System**: Categories, tags, featured images, SEO meta
-- **CMS Pages**: Create custom pages (About, Contact, FAQ) via admin
-- **Banners**: Homepage banners, promotional banners with click tracking
-- **Menus**: Dynamic menu management, nested menus
-- **Newsletter**: Subscribe form, double opt-in confirmation
+#### Gerenciamento de conteudo (frontend)
+- **Sistema de blog**: categorias, tags, imagens destacadas e meta SEO
+- **Paginas CMS**: crie paginas personalizadas (Sobre, Contato, FAQ) pelo admin
+- **Banners**: banners da pagina inicial e promocionais com rastreamento de cliques
+- **Menus**: gerenciamento dinamico de menus e menus aninhados
+- **Newsletter**: formulario de assinatura e confirmacao double opt-in
 
-#### User Account Features
-- **User Dashboard**: Overview of orders, addresses, account info
-- **Profile Management**: Update name, email, password, avatar
-- **Order Management**: View orders, download invoices, track shipments
-- **Address Book**: Multiple addresses, default shipping/billing
-- **Wishlist Management**: Add/remove, move to cart
-- **Review Management**: Edit/delete own reviews
-- **Comment Management**: Manage blog comments
-- **Social Login**: Login with Facebook, Google, Twitter, GitHub
+#### Recursos da conta do usuario
+- **Painel do usuario**: visao geral de pedidos, enderecos e dados da conta
+- **Gerenciamento de perfil**: atualizar nome, e-mail, senha e avatar
+- **Gerenciamento de pedidos**: visualizar pedidos, baixar faturas e rastrear envios
+- **Catalogo de enderecos**: multiplos enderecos e padrao de entrega/cobranca
+- **Gerenciamento de lista de desejos**: adicionar/remover e mover para o carrinho
+- **Gerenciamento de avaliacoes**: editar/excluir proprias avaliacoes
+- **Gerenciamento de comentarios**: gerenciar comentarios do blog
+- **Login social**: login com Facebook, Google, Twitter e GitHub
 
-#### Payment & Checkout
-- **Payment Gateways**:
-  - **Stripe**: Credit card payments (tested with Stripe Elements)
-  - **PayPal**: Express checkout, sandbox support
-  - **Cash on Delivery (COD)**: Pay on delivery option
-- **Secure Checkout**: SSL support, PCI compliance helpers
-- **Multi-Step Checkout**: Shipping, payment, review steps
-- **Order Confirmation**: Email confirmation, PDF invoice
-- **Failed Payment Handling**: Retry payment, cancel order
+#### Pagamento e checkout
+- **Gateways de pagamento**:
+  - **Stripe**: pagamentos com cartao de credito (testado com Stripe Elements)
+  - **PayPal**: checkout expresso e suporte a sandbox
+  - **Pagamento na entrega (COD)**: opcao de pagar na entrega
+- **Checkout seguro**: suporte a SSL e helpers de conformidade PCI
+- **Checkout em etapas**: etapas de entrega, pagamento e revisao
+- **Confirmacao de pedido**: confirmacao por e-mail e fatura em PDF
+- **Tratamento de pagamento com falha**: tentar pagamento novamente ou cancelar pedido
 
-#### Marketing & Engagement
-- **Product Sharing**: Share on social media (Facebook, Twitter, Pinterest)
-- **Social Login**: One-click registration/login
-- **Newsletter Subscription**: Footer signup, popup option
-- **Abandoned Cart Recovery**: Automated email reminders
-- **Product Recommendations**: AI-powered suggestions based on behavior
-- **Promotional Banners**: Targeted banners based on user segment
+#### Marketing e engajamento
+- **Compartilhamento de produtos**: compartilhar em redes sociais (Facebook, Twitter, Pinterest)
+- **Login social**: cadastro/login com um clique
+- **Assinatura de newsletter**: formulario no rodape e opcao de popup
+- **Recuperacao de carrinho abandonado**: lembretes automaticos por e-mail
+- **Recomendacoes de produtos**: sugestoes por IA com base no comportamento
+- **Banners promocionais**: banners segmentados por perfil de usuario
 
-#### SEO Features
-- **Dynamic Meta Tags**: Auto-generated title, description per page
-- **Open Graph**: Facebook sharing optimization
-- **Twitter Cards**: Twitter sharing optimization
-- **Structured Data**: Schema.org markup (Product, Organization, BreadcrumbList)
-- **XML Sitemaps**: Auto-generated for products, categories, posts
-- **SEO-Friendly URLs**: Slug-based URLs (`/product/nike-air-max`)
-- **Canonical URLs**: Prevent duplicate content issues
-- **Robots.txt**: Auto-generated with sitemap reference
-- **Alt Tags**: Image SEO with automatic alt text
-
----
-
-### ⚙️ Admin Dashboard
-
-#### Dashboard & Analytics
-- **Overview Dashboard**: Sales today, orders, users, revenue charts
-- **Interactive Charts**: Chart.js integration (line, bar, pie charts)
-- **Sales Reports**: Daily, weekly, monthly, yearly sales data
-- **Revenue Tracking**: Total revenue, average order value
-- **User Analytics**: New users, active users, user growth
-- **Product Analytics**: Best sellers, low stock, views/clicks
-- **Order Analytics**: Order statuses, payment methods, shipping methods
-- **Export Reports**: Download reports as CSV, Excel, PDF
-- **Real-time Updates**: Live data refresh for key metrics
-
-#### Product Management
-- **Product Grid**: Advanced filtering, sorting, bulk actions
-- **Product Creation**: Wizard for creating products step-by-step
-- **Attribute Management**: Create attributes, options, families
-- **Variant Management**: Manage product variants (stock, price, images)
-- **Media Manager**: Upload images, videos, documents (Unisharp File Manager)
-- **Category Assignment**: Multi-category products, primary category
-- **SEO Management**: Meta title, description, keywords per product
-- **Stock Management**: Quantity, low stock threshold, backorders
-- **Pricing**: Base price, sale price, cost price, tier pricing
-- **Product Reviews**: Approve/reject reviews, reply to reviews
-- **Product Import/Export**: Bulk import via CSV
-
-#### Order Management
-- **Order Grid**: Filter by status, date, customer, payment
-- **Order Lifecycle**: 
-  - Statuses: Pending, Processing, On Hold, Shipped, Delivered, Cancelled, Refunded, Failed
-  - Payment Statuses: Pending, Paid, Failed, Refunded
-- **Order Details**: Products, customer info, shipping, payment
-- **Invoice Generation**: PDF invoices with customizable template
-- **Shipment Tracking**: Add tracking numbers, shipping carriers
-- **Refund Processing**: Partial/full refunds, store credit
-- **Order Notes**: Internal notes, customer-visible notes
-- **Print Order**: Print-friendly order page
-- **Resend Email**: Resend order confirmation, invoice
-
-#### Customer Management
-- **Customer Grid**: Search, filter, export customers
-- **Customer Profile**: Orders, addresses, activity history
-- **Customer Groups**: Create groups (VIP, Wholesale, etc.)
-- **Customer Segmentation**: Based on purchase history, location
-- **Impersonation**: Login as customer to help troubleshoot
-- **Address Management**: View/edit customer addresses
-
-#### Content Management
-- **Blog Posts**: Create, edit, schedule posts
-- **Categories**: Hierarchical categories, SEO settings
-- **Tags**: Tag management, tag cloud
-- **Pages**: CMS pages (About, Contact, Terms, etc.)
-- **Banners**: Homepage sliders, promotional banners
-  - Click tracking
-  - Impression tracking
-  - Start/end dates
-  - Target URLs
-- **Media Library**: Central file management, image optimization
-- **Menu Builder**: Drag-drop menu creation
-
-#### Marketing Tools
-- **Email Campaigns**: Create and send newsletter campaigns
-- **Email Templates**: Customizable templates for all emails
-- **Newsletter Management**: Subscribers, segments, send history
-- **Abandoned Cart Emails**: 3-email sequence automation
-  - Email 1: 1 hour after abandonment
-  - Email 2: 24 hours after abandonment  
-  - Email 3: 72 hours after abandonment
-- **Coupon Management**:
-  - Types: Percentage, Fixed amount, Free shipping
-  - Restrictions: Minimum purchase, category restrictions, user restrictions
-  - Usage limits: Per coupon, per user
-  - Expiry dates
-- **Promotions**: Catalog price rules, cart price rules
-
-#### Email Marketing & Automation
-- **Campaign Analytics**: Open rates, click rates, bounce rates, unsubscribes
-- **Email Templates**: HTML templates with dynamic variables
-- **Automated Emails**: Welcome series, birthday emails, re-engagement
-- **Email Scheduling**: Schedule campaigns for future dates
-- **A/B Testing**: Test different subject lines, content
-- **Segmentation**: Target specific customer groups
-
-#### User & Role Management
-- **Admin Users**: Create/edit admin accounts
-- **Roles**: Define roles (Super Admin, Admin, Editor, etc.)
-- **Permissions**: Granular permissions per role
-- **Permission Matrix**: Visual permission assignment
-- **Activity Log**: Track admin actions, login history
-
-#### System Configuration
-- **General Settings**: Store name, logo, address, contact info
-- **Currency Settings**: Default currency, exchange rates, formatting
-- **Language Settings**: Active languages, default language
-- **Email Settings**: SMTP configuration, email templates
-- **Payment Settings**: Enable/disable gateways, sandbox mode
-- **Shipping Settings**: Methods, zones, rates
-- **Tax Settings**: Tax rates, tax classes, display options
-- **SEO Settings**: Default meta tags, sitemap settings
-- **Social Settings**: Social media links, API keys
-- **Maintenance Mode**: Enable/disable with custom message
-
-#### Reporting Module
-- **8 Report Types**: Sales, Products, Customers, Inventory, Orders, Coupons, Revenue, Tax
-- **Scheduled Reports**: Auto-generate and email reports
-- **Custom Date Ranges**: Flexible reporting periods
-- **Export Formats**: CSV, Excel, PDF
-- **Report History**: Track generated reports
-- **Visual Charts**: Graphical representation of data
+#### Recursos de SEO
+- **Meta tags dinamicas**: titulo e descricao gerados por pagina
+- **Open Graph**: otimizacao de compartilhamento no Facebook
+- **Twitter Cards**: otimizacao de compartilhamento no Twitter
+- **Dados estruturados**: marcacao Schema.org (Product, Organization, BreadcrumbList)
+- **Sitemaps XML**: gerados automaticamente para produtos, categorias e posts
+- **URLs amigaveis para SEO**: URLs por slug (`/product/nike-air-max`)
+- **URLs canonicas**: evita problemas de conteudo duplicado
+- **Robots.txt**: gerado automaticamente com referencia ao sitemap
+- **Alt tags**: SEO de imagens com texto alternativo automatico
 
 ---
 
-### 🔐 Security & Performance
+### Painel administrativo
 
-#### Security Features
-- **Two-Factor Authentication (2FA)**: Google Authenticator integration
-- **Role-Based Access Control (RBAC)**: Granular permissions
-- **IP Blocking**: Block specific IP addresses or ranges
-- **Login Attempt Limiting**: Prevent brute force attacks
-- **Secure Password Policies**: Enforce strong passwords
-- **Activity Logging**: Track all admin actions
-- **Audit Trails**: Complete history of data changes
-- **CSRF Protection**: Built-in Laravel CSRF tokens
-- **XSS Protection**: Output escaping, Content Security Policy
-- **SQL Injection Protection**: Parameterized queries
+#### Dashboard e analytics
+- **Dashboard geral**: vendas de hoje, pedidos, usuarios e graficos de receita
+- **Graficos interativos**: integracao Chart.js (linhas, barras e pizza)
+- **Relatorios de vendas**: dados diarios, semanais, mensais e anuais
+- **Rastreamento de receita**: receita total e ticket medio
+- **Analise de usuarios**: novos usuarios, usuarios ativos e crescimento
+- **Analise de produtos**: mais vendidos, estoque baixo, visualizacoes/cliques
+- **Analise de pedidos**: status de pedidos, metodos de pagamento e metodos de frete
+- **Exportacao de relatorios**: baixar relatorios em CSV, Excel e PDF
+- **Atualizacoes em tempo real**: atualizacao ao vivo para metricas principais
 
-#### Performance Optimization
-- **Redis Caching**: Application caching, session storage
-- **Query Optimization**: Eager loading, query caching
-- **Image Optimization**: Automatic image compression, WebP support
-- **Lazy Loading**: Images load as user scrolls
-- **CDN Support**: Serve static assets from CDN
-- **Gzip Compression**: Compress responses
-- **Browser Caching**: Cache headers for static assets
-- **Database Indexing**: Optimized indexes for fast queries
-- **Full-Page Caching**: Cache rendered pages for guests
-- **Tenant Cache Isolation**: Per-tenant cache prefix prevents cross-tenant cache pollution
-- **Search Generation Counter**: Instant search cache invalidation on product changes (no stale results)
-- **Helper Caching**: Shipping methods, post tags, post categories cached at 1 h TTL
+#### Gerenciamento de produtos
+- **Grade de produtos**: filtros avancados, ordenacao e acoes em massa
+- **Criacao de produtos**: assistente passo a passo para criar produtos
+- **Gerenciamento de atributos**: crie atributos, opcoes e familias
+- **Gerenciamento de variantes**: estoque, preco e imagens de variantes
+- **Gerenciador de midia**: upload de imagens, videos e documentos (Unisharp File Manager)
+- **Atribuicao de categorias**: produtos em multiplas categorias e categoria principal
+- **Gerenciamento de SEO**: meta title, descricao e palavras-chave por produto
+- **Gerenciamento de estoque**: quantidade, limite de estoque baixo e encomendas
+- **Precificacao**: preco base, preco promocional, preco de custo e precificacao por nivel
+- **Avaliacoes de produto**: aprovar/rejeitar avaliacoes e responder avaliacoes
+- **Importacao/exportacao de produtos**: importacao em massa via CSV
+
+#### Gerenciamento de pedidos
+- **Grade de pedidos**: filtrar por status, data, cliente e pagamento
+- **Ciclo de vida do pedido**:
+  - Status: Pending, Processing, On Hold, Shipped, Delivered, Cancelled, Refunded, Failed
+  - Status de pagamento: Pending, Paid, Failed, Refunded
+- **Detalhes do pedido**: produtos, dados do cliente, entrega e pagamento
+- **Geracao de faturas**: faturas em PDF com template personalizavel
+- **Rastreamento de envio**: adicionar codigos de rastreio e transportadoras
+- **Processamento de reembolso**: reembolso parcial/total e credito na loja
+- **Notas do pedido**: notas internas e notas visiveis para o cliente
+- **Impressao do pedido**: pagina amigavel para impressao
+- **Reenvio de e-mail**: reenviar confirmacao do pedido e fatura
+
+#### Gerenciamento de clientes
+- **Grade de clientes**: buscar, filtrar e exportar clientes
+- **Perfil do cliente**: pedidos, enderecos e historico de atividade
+- **Grupos de clientes**: crie grupos (VIP, Atacado etc.)
+- **Segmentacao de clientes**: com base em historico de compra e localizacao
+- **Impersonacao**: entrar como cliente para ajudar em diagnosticos
+- **Gerenciamento de enderecos**: visualizar/editar enderecos de clientes
+
+#### Gerenciamento de conteudo
+- **Posts do blog**: criar, editar e agendar posts
+- **Categorias**: categorias hierarquicas e configuracoes de SEO
+- **Tags**: gerenciamento de tags e nuvem de tags
+- **Paginas**: paginas CMS (Sobre, Contato, Termos etc.)
+- **Banners**: sliders da pagina inicial e banners promocionais
+  - Rastreamento de cliques
+  - Rastreamento de impressoes
+  - Datas de inicio/fim
+  - URLs de destino
+- **Biblioteca de midia**: gerenciamento central de arquivos e otimizacao de imagens
+- **Construtor de menus**: criacao de menus por arrastar e soltar
+
+#### Ferramentas de marketing
+- **Campanhas de e-mail**: criar e enviar campanhas de newsletter
+- **Templates de e-mail**: templates personalizaveis para todos os e-mails
+- **Gerenciamento de newsletter**: assinantes, segmentos e historico de envio
+- **E-mails de carrinho abandonado**: automacao em sequencia de 3 e-mails
+  - E-mail 1: 1 hora apos abandono
+  - E-mail 2: 24 horas apos abandono
+  - E-mail 3: 72 horas apos abandono
+- **Gerenciamento de cupons**:
+  - Tipos: percentual, valor fixo e frete gratis
+  - Restricoes: compra minima, restricoes por categoria e por usuario
+  - Limites de uso: por cupom e por usuario
+  - Datas de expiracao
+- **Promocoes**: regras de preco de catalogo e regras de preco de carrinho
+
+#### E-mail marketing e automacao
+- **Analytics de campanhas**: taxas de abertura, clique, rejeicao e descadastro
+- **Templates de e-mail**: templates HTML com variaveis dinamicas
+- **E-mails automaticos**: serie de boas-vindas, aniversario e reengajamento
+- **Agendamento de e-mail**: agendar campanhas para datas futuras
+- **Teste A/B**: testar assuntos e conteudos diferentes
+- **Segmentacao**: direcionar grupos especificos de clientes
+
+#### Gerenciamento de usuarios e funcoes
+- **Usuarios admin**: criar/editar contas administrativas
+- **Funcoes**: definir funcoes (Super Admin, Admin, Editor etc.)
+- **Permissoes**: permissoes granulares por funcao
+- **Matriz de permissoes**: atribuicao visual de permissoes
+- **Log de atividades**: rastrear acoes administrativas e historico de login
+
+#### Configuracao do sistema
+- **Configuracoes gerais**: nome da loja, logo, endereco e contato
+- **Configuracoes de moeda**: moeda padrao, taxas de cambio e formatacao
+- **Configuracoes de idioma**: idiomas ativos e idioma padrao
+- **Configuracoes de e-mail**: SMTP e templates de e-mail
+- **Configuracoes de pagamento**: ativar/desativar gateways e modo sandbox
+- **Configuracoes de frete**: metodos, zonas e tarifas
+- **Configuracoes de impostos**: aliquotas, classes e opcoes de exibicao
+- **Configuracoes de SEO**: meta tags padrao e configuracoes de sitemap
+- **Configuracoes sociais**: links de redes sociais e chaves de API
+- **Modo de manutencao**: ativar/desativar com mensagem personalizada
+
+#### Modulo de relatorios
+- **8 tipos de relatorio**: vendas, produtos, clientes, estoque, pedidos, cupons, receita e impostos
+- **Relatorios agendados**: gerar e enviar relatorios por e-mail automaticamente
+- **Periodos personalizados**: intervalos flexiveis para relatorios
+- **Formatos de exportacao**: CSV, Excel e PDF
+- **Historico de relatorios**: rastrear relatorios gerados
+- **Graficos visuais**: representacao grafica de dados
 
 ---
 
-### ⚡ Blaze Template Engine (Custom Fork)
+### Seguranca e desempenho
 
-This project uses a **custom fork** of the Blaze template engine optimization package with enhanced features for Laravel Blade:
+#### Recursos de seguranca
+- **Autenticacao de dois fatores (2FA)**: integracao com Google Authenticator
+- **Controle de acesso baseado em funcoes (RBAC)**: permissoes granulares
+- **Bloqueio de IP**: bloquear enderecos IP especificos ou faixas
+- **Limite de tentativas de login**: prevencao contra ataques de forca bruta
+- **Politicas de senha segura**: exigir senhas fortes
+- **Registro de atividades**: rastrear todas as acoes administrativas
+- **Trilhas de auditoria**: historico completo de alteracoes de dados
+- **Protecao CSRF**: tokens CSRF nativos do Laravel
+- **Protecao XSS**: escape de saida e Content Security Policy
+- **Protecao contra SQL Injection**: consultas parametrizadas
 
-#### Features
-- **View Component Support**: Full support for Laravel View Components with proper rendering
-- **View::share() Support**: Auto-injects shared view variables with zero performance overhead
-- **View Composer Support**: Trigger composers via `@blaze(name: 'view.name')` directive
-- **Theme-Aware Optimization**: Per-theme optimization strategies (compile, memo, fold)
-- **Multi-Theme Support**: Different optimization settings per theme (default vs modern)
-- **Debug Overlay**: Built-in performance profiler showing render times per view
-- **Cache Warming**: Pre-compiles views on deployment for faster first load
+#### Otimizacao de desempenho
+- **Cache Redis**: cache da aplicacao e armazenamento de sessao
+- **Otimizacao de consultas**: eager loading e cache de consultas
+- **Otimizacao de imagens**: compressao automatica e suporte WebP
+- **Lazy loading**: imagens carregam conforme o usuario rola a pagina
+- **Suporte a CDN**: servir assets estaticos por CDN
+- **Compressao Gzip**: compressao de respostas
+- **Cache do navegador**: headers de cache para assets estaticos
+- **Indices de banco de dados**: indices otimizados para consultas rapidas
+- **Cache de pagina inteira**: cache de paginas renderizadas para visitantes
+- **Isolamento de cache por tenant**: prefixo por tenant evita contaminacao de cache entre tenants
+- **Contador de geracao da busca**: invalidacao instantanea do cache de busca quando produtos mudam
+- **Cache de helpers**: metodos de frete, tags de post e categorias de post em cache com TTL de 1 h
 
-#### Configuration (`config/blaze.php`)
+---
+
+### Blaze Template Engine (fork personalizado)
+
+Este projeto usa um **fork personalizado** do pacote de otimizacao Blaze template engine com recursos aprimorados para Laravel Blade:
+
+#### Recursos
+- **Suporte a View Components**: suporte completo a Laravel View Components com renderizacao correta
+- **Suporte a View::share()**: injeta variaveis compartilhadas de view sem custo extra de desempenho
+- **Suporte a View Composer**: dispara composers pela diretiva `@blaze(name: 'view.name')`
+- **Otimizacao consciente de tema**: estrategias por tema (compile, memo, fold)
+- **Suporte multi-tema**: configuracoes diferentes por tema (default vs modern)
+- **Overlay de debug**: profiler embutido com tempos de renderizacao por view
+- **Aquecimento de cache**: pre-compila views no deploy para primeira carga mais rapida
+
+#### Configuracao (`config/blaze.php`)
 ```php
 'themes' => [
     'enabled' => true,
@@ -368,49 +368,49 @@ This project uses a **custom fork** of the Blaze template engine optimization pa
 ],
 ```
 
-#### Environment Variables
+#### Variaveis de ambiente
 ```env
-BLAZE_ENABLED=true          # Enable/disable Blaze optimization
-BLAZE_DEBUG=true            # Show debug overlay with render times
-BLAZE_CACHE_WARM=true       # Pre-compile views on cache warm
+BLAZE_ENABLED=true          # Ativar/desativar a otimizacao Blaze
+BLAZE_DEBUG=true            # Exibir overlay de debug com tempos de renderizacao
+BLAZE_CACHE_WARM=true       # Pre-compilar views no aquecimento de cache
 ```
 
-> **Note**: This project uses a fork at `KalimeroMK/blaze` (dev-main) which includes:
-> - View::share() auto-injection (upstream: not supported)
-> - View::composer() support via `@blaze(name: ...)` directive
-> - @extends template support
-> - All upstream Blaze features and performance optimizations
+> **Observacao**: este projeto usa um fork em `KalimeroMK/blaze` (dev-main) que inclui:
+> - injecao automatica de View::share() (upstream: nao suportado)
+> - suporte a View::composer() via diretiva `@blaze(name: ...)`
+> - suporte a templates com @extends
+> - todos os recursos upstream do Blaze e otimizacoes de desempenho
 
 ---
 
-### 🤖 AI & Automation
+### IA e automacao
 
-#### OpenAI Integration
-- **Product Description Generator**: AI-generated product descriptions
-- **Content Creation**: Blog post ideas, content suggestions
-- **SEO Optimization**: Meta description generation
-- **Translation Assistance**: AI-powered translation suggestions
+#### Integracao OpenAI
+- **Gerador de descricao de produto**: descricoes de produto geradas por IA
+- **Criacao de conteudo**: ideias de posts de blog e sugestoes de conteudo
+- **Otimizacao de SEO**: geracao de meta descriptions
+- **Assistencia de traducao**: sugestoes de traducao com IA
 
-#### Email Automation
-- **Abandoned Cart Recovery**: 3-email sequence
-- **Welcome Series**: Onboarding emails for new users
-- **Post-Purchase Follow-up**: Request reviews, cross-sell
-- **Re-engagement Campaigns**: Win back inactive customers
-- **Birthday Emails**: Automated birthday wishes with coupon
+#### Automacao de e-mail
+- **Recuperacao de carrinho abandonado**: sequencia de 3 e-mails
+- **Serie de boas-vindas**: onboarding para novos usuarios
+- **Acompanhamento pos-compra**: solicitar avaliacoes e oferecer cross-sell
+- **Campanhas de reengajamento**: recuperar clientes inativos
+- **E-mails de aniversario**: felicitacoes automaticas com cupom
 
-#### Smart Recommendations
-- **AI-Powered Suggestions**: Product recommendations based on behavior
-- **Related Products**: Smart matching of related items
-- **Frequently Bought Together**: Amazon-style recommendations
-- **Recently Viewed**: Personalized browsing history
-- **Trending Products**: Popular items in user's category
+#### Recomendacoes inteligentes
+- **Sugestoes por IA**: recomendacoes de produtos baseadas em comportamento
+- **Produtos relacionados**: correspondencia inteligente de itens relacionados
+- **Frequentemente comprados juntos**: recomendacoes no estilo Amazon
+- **Vistos recentemente**: historico personalizado de navegacao
+- **Produtos em alta**: itens populares na categoria do usuario
 
 ---
 
-## 📸 Screenshots
+## Capturas de tela
 
 <details>
-<summary>Click to view screenshots</summary>
+<summary>Clique para ver as capturas de tela</summary>
 
 ![Admin Dashboard](https://user-images.githubusercontent.com/29488275/90719413-13b82200-e2d4-11ea-8ca0-f0e5551c4c9d.png)
 ![Category Management](https://user-images.githubusercontent.com/29488275/90719470-3813fe80-e2d4-11ea-8f63-e6001855a945.png)
@@ -424,14 +424,14 @@ BLAZE_CACHE_WARM=true       # Pre-compile views on cache warm
 
 ---
 
-## 🧪 Testing
+## Testes
 
-The project has comprehensive test coverage with **220+ unit test files** covering all Action classes.
+O projeto tem cobertura abrangente de testes com **220+ arquivos de testes unitarios** cobrindo todas as classes Action.
 
-### Test Coverage
+### Cobertura de testes
 
-| Module | Action Classes | Test Files |
-|--------|---------------|------------|
+| Modulo | Classes Action | Arquivos de teste |
+|--------|---------------|-------------------|
 | **User** | 14 | 9 |
 | **Product** | 23 | 16 |
 | **Order** | 11 | 7 |
@@ -463,31 +463,31 @@ The project has comprehensive test coverage with **220+ unit test files** coveri
 | **Other** | 4 | 4 |
 | **TOTAL** | **220** | **220** |
 
-### Running Tests
+### Executando testes
 
 ```bash
-# Run all tests
+# Executar todos os testes
 ./vendor/bin/phpunit
 
-# Run unit tests only
+# Executar apenas testes unitarios
 ./vendor/bin/phpunit tests/Unit
 
-# Run tests for specific module
+# Executar testes de um modulo especifico
 ./vendor/bin/phpunit tests/Unit/Actions/Product
 ./vendor/bin/phpunit tests/Unit/Actions/User
 ./vendor/bin/phpunit tests/Unit/Actions/Order
 
-# Run with coverage report
+# Executar com relatorio de cobertura
 ./vendor/bin/phpunit --coverage-html coverage
 ```
 
-### Test Structure
+### Estrutura de testes
 
-Tests are organized following the Action pattern:
+Os testes sao organizados seguindo o padrao Action:
 
 ```
 tests/Unit/Actions/
-├── ActionTestCase.php              # Base test class with RefreshDatabase
+├── ActionTestCase.php              # Classe base de teste com RefreshDatabase
 ├── User/
 │   ├── LoginUserActionTest.php
 │   ├── RegisterUserActionTest.php
@@ -502,16 +502,16 @@ tests/Unit/Actions/
     └── [Action]Test.php
 ```
 
-### Writing New Tests
+### Escrevendo novos testes
 
-All Action tests should:
-1. Extend `ActionTestCase` (provides `RefreshDatabase` and language seeding)
-2. Use factories for model creation
-3. Test happy paths and edge cases
-4. Verify database state changes
-5. Mock external services (OpenAI, Payment gateways)
+Todos os testes de Action devem:
+1. Estender `ActionTestCase` (fornece `RefreshDatabase` e seed de idiomas)
+2. Usar factories para criacao de models
+3. Testar fluxos felizes e casos de borda
+4. Verificar alteracoes no estado do banco de dados
+5. Mockar servicos externos (OpenAI, gateways de pagamento)
 
-Example:
+Exemplo:
 ```php
 <?php
 declare(strict_types=1);
@@ -530,7 +530,7 @@ class CreateProductActionTest extends ActionTestCase
         $dto = new ProductDTO(
             id: null,
             title: 'Test Product',
-            // ... other fields
+            // ... outros campos
         );
 
         $action = app(StoreProductAction::class);
@@ -544,52 +544,52 @@ class CreateProductActionTest extends ActionTestCase
 
 ---
 
-## 📚 Documentation
+## Documentacao
 
-### Table of Contents
+### Sumario
 
-1. [Installation Guides](#installation-guides)
-2. [API Documentation](#api-documentation)
-3. [Module Documentation](#module-documentation)
-4. [Command Reference](#command-reference)
-5. [Testing](#testing)
-6. [Recent Enhancements](#recent-enhancements)
+1. [Guias de instalacao](#guias-de-instalacao)
+2. [Documentacao da API](#documentacao-da-api)
+3. [Documentacao de modulos](#documentacao-de-modulos)
+4. [Referencia de comandos](#referencia-de-comandos)
+5. [Testes](#testes)
+6. [Melhorias recentes](#melhorias-recentes)
 
 ---
 
-### Installation Guides
+### Guias de instalacao
 
-#### Docker Detailed Setup
+#### Configuracao detalhada com Docker
 
-**Prerequisites:** Docker & Docker Compose
+**Pre-requisitos:** Docker e Docker Compose
 
-**Step-by-step:**
+**Passo a passo:**
 
 ```bash
-# Start all containers
+# Iniciar todos os containers
 docker-compose up -d
 
-# Container access
-docker exec -it e_comm_app sh      # App container
-docker exec -it e_comm_mysql mysql -u homestead -p  # Database
+# Acesso aos containers
+docker exec -it e_comm_app sh      # Container da aplicacao
+docker exec -it e_comm_mysql mysql -u homestead -p  # Banco de dados
 docker exec -it e_comm_redis redis-cli               # Redis
 
-# Useful commands
+# Comandos uteis
 docker exec e_comm_app php artisan cache:clear
 docker exec e_comm_app php artisan view:clear
 docker exec e_comm_app php artisan migrate
 
-# Container ports:
-# - Web (FrankenPHP):  90 → 80
-# - MySQL:            3311 → 3306
-# - Redis:            6381 → 6379
-# - Elasticsearch:    9200 → 9200
+# Portas dos containers:
+# - Web (FrankenPHP):  90 -> 80
+# - MySQL:            3311 -> 3306
+# - Redis:            6381 -> 6379
+# - Elasticsearch:    9200 -> 9200
 ```
 
-#### Email Configuration
+#### Configuracao de e-mail
 
 ```bash
-# Configure in .env
+# Configure no .env
 MAIL_MAILER=smtp
 MAIL_HOST=your-smtp-host
 MAIL_PORT=587
@@ -597,29 +597,29 @@ MAIL_USERNAME=your-email
 MAIL_PASSWORD=your-password
 MAIL_ENCRYPTION=tls
 
-# Process abandoned cart emails
+# Processar e-mails de carrinho abandonado
 php artisan cart:process-abandoned-emails
 ```
 
-#### Elasticsearch Setup
+#### Configuracao do Elasticsearch
 
 ```bash
-# Index products
+# Indexar produtos
 docker-compose exec app php artisan product:index
 
-# Rebuild from scratch
+# Reconstruir do zero
 docker-compose exec app php artisan product:index --fresh
 ```
 
 ---
 
-### API Documentation
+### Documentacao da API
 
-**Postman Collection:** `LaravelEcomm.postman_collection.json`
+**Colecao Postman:** `LaravelEcomm.postman_collection.json`
 
-**Base URL:** `http://localhost:90/api/v1`
+**URL base:** `http://localhost:90/api/v1`
 
-#### Authentication
+#### Autenticacao
 
 ```bash
 # Login
@@ -630,24 +630,24 @@ POST /api/v1/auth/login
 }
 ```
 
-#### Multi-Language API
+#### API multi-idioma
 
 ```bash
-# List languages
+# Listar idiomas
 GET /api/languages
 
-# Get current locale
+# Obter locale atual
 GET /api/languages/current
 X-Locale: mk
 ```
 
-#### Reporting API
+#### API de relatorios
 
 ```bash
-# List report types
+# Listar tipos de relatorio
 GET /api/admin/report-types
 
-# Create report
+# Criar relatorio
 POST /api/admin/reports
 {
     "name": "Monthly Sales",
@@ -659,19 +659,19 @@ POST /api/admin/reports
     }
 }
 
-# Generate & Export
+# Gerar e exportar
 POST /api/admin/reports/{id}/generate
 POST /api/admin/reports/{id}/export
 { "format": "csv" }
 ```
 
-#### GeoLocalization API
+#### API de geolocalizacao
 
 ```bash
-# Get location from IP
+# Obter localizacao por IP
 GET /api/geolocation
 
-# Convert currency
+# Converter moeda
 POST /api/currency/convert
 {
     "amount": 100,
@@ -682,12 +682,12 @@ POST /api/currency/convert
 
 ---
 
-### Module Documentation
+### Documentacao de modulos
 
-#### Attribute System
+#### Sistema de atributos
 
 ```php
-// Create attribute with options
+// Criar atributo com opcoes
 $color = Attribute::factory()->create([
     'code' => 'color',
     'type' => 'select',
@@ -701,188 +701,188 @@ $color->options()->create([
     'color_hex' => '#FF0000',
 ]);
 
-// Create configurable product
+// Criar produto configuravel
 $product = Product::factory()->create([
     'type' => Product::TYPE_CONFIGURABLE,
 ]);
 $product->configurableAttributes()->attach($color);
 
-// Generate variants
+// Gerar variantes
 app(ConfigurableProductService::class)->generateVariants($product);
 ```
 
-#### SEO Configuration
+#### Configuracao de SEO
 
 ```bash
-# Generate sitemaps
+# Gerar sitemaps
 php artisan seo:generate-sitemap
 
-# Configuration in config/seo.php
+# Configuracao em config/seo.php
 ```
 
 ---
 
-### Command Reference
+### Referencia de comandos
 
-#### Cache Management
+#### Gerenciamento de cache
 
 ```bash
-php artisan cache:clear          # Clear application cache
-php artisan config:clear         # Clear config cache
-php artisan view:clear           # Clear compiled views
-php artisan route:clear          # Clear route cache
+php artisan cache:clear          # Limpar cache da aplicacao
+php artisan config:clear         # Limpar cache de configuracao
+php artisan view:clear           # Limpar views compiladas
+php artisan route:clear          # Limpar cache de rotas
 ```
 
-#### Database & Seeding
+#### Banco de dados e seed
 
 ```bash
-php artisan migrate:fresh --seed     # Fresh database with seeders
-php artisan db:seed --class=DatabaseSeeder  # Run specific seeder
+php artisan migrate:fresh --seed     # Banco novo com seeders
+php artisan db:seed --class=DatabaseSeeder  # Executar seeder especifico
 ```
 
-#### Product Management
+#### Gerenciamento de produtos
 
 ```bash
-php artisan product:index          # Index products in Elasticsearch
-php artisan product:index --fresh  # Rebuild index
+php artisan product:index          # Indexar produtos no Elasticsearch
+php artisan product:index --fresh  # Reconstruir indice
 ```
 
-#### Email & Marketing
+#### E-mail e marketing
 
 ```bash
-php artisan cart:process-abandoned-emails  # Process abandoned carts
-php artisan newsletter:send-campaigns      # Send newsletter campaigns
+php artisan cart:process-abandoned-emails  # Processar carrinhos abandonados
+php artisan newsletter:send-campaigns      # Enviar campanhas de newsletter
 ```
 
-#### Analytics & Reports
+#### Analytics e relatorios
 
 ```bash
-php artisan analytics:aggregate    # Aggregate analytics data
-php artisan reports:generate       # Generate scheduled reports
+php artisan analytics:aggregate    # Agregar dados de analytics
+php artisan reports:generate       # Gerar relatorios agendados
 ```
 
 ---
 
-### Testing
+### Testes
 
-#### Running Tests
+#### Executando testes
 
 ```bash
-# Run all tests
+# Executar todos os testes
 php artisan test
 
-# Run specific test suite
+# Executar suite especifica
 php artisan test --filter=OrderTest
 
-# Run with coverage
+# Executar com cobertura
 php artisan test --coverage
 
-# Run E2E tests (requires Playwright)
+# Executar testes E2E (requer Playwright)
 npx playwright test
 ```
 
-#### Test Accounts
+#### Contas de teste
 
 ```
 Admin:    superadmin@mail.com / password
-Client:   client@mail.com / password
+Cliente:  client@mail.com / password
 ```
 
 ---
 
-### 🏢 Multi-Tenancy (Optional)
+### Multi-tenancy (opcional)
 
-Multi-tenancy is **disabled by default** — the application runs as a standard single-store e-commerce platform with no extra config needed.
+Multi-tenancy vem **desativado por padrao**. A aplicacao roda como uma plataforma padrao de e-commerce de loja unica, sem configuracao extra.
 
-To enable database-per-tenant mode, set in `.env`:
+Para ativar o modo com um banco por tenant, defina no `.env`:
 
 ```env
 MULTI_TENANT_ENABLED=true
 TENANT_MAIN_DOMAIN=yourdomain.com
 ```
 
-When enabled, each tenant is identified by subdomain and gets its own isolated MySQL database. Cache is automatically prefixed per-tenant (`laravel_t1_`, `laravel_t2_`, ...) so tenants never share cached data.
+Quando ativado, cada tenant e identificado por subdominio e recebe seu proprio banco MySQL isolado. O cache recebe prefixo automatico por tenant (`laravel_t1_`, `laravel_t2_`, ...) para que tenants nunca compartilhem dados em cache.
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `MULTI_TENANT_ENABLED` | `false` | Enable database-per-tenant isolation |
-| `TENANT_MAIN_DOMAIN` | `localhost` | Root domain for subdomain detection |
-| `TENANT_DB_PREFIX` | `tenant_` | Database name prefix for tenant DBs |
-| `TENANT_ISOLATE_USERS` | `true` | Keep user accounts per-tenant |
+| Configuracao | Padrao | Descricao |
+|--------------|--------|-----------|
+| `MULTI_TENANT_ENABLED` | `false` | Ativa isolamento de banco por tenant |
+| `TENANT_MAIN_DOMAIN` | `localhost` | Dominio raiz para deteccao de subdominio |
+| `TENANT_DB_PREFIX` | `tenant_` | Prefixo do nome dos bancos dos tenants |
+| `TENANT_ISOLATE_USERS` | `true` | Mantem contas de usuario por tenant |
 
 ---
 
-### Recent Enhancements
+### Melhorias recentes
 
 <details>
-<summary>Click to expand recent updates</summary>
+<summary>Clique para expandir atualizacoes recentes</summary>
 
-#### Latest: Cache & Performance Fixes
-- ✅ Tenant cache isolation via per-tenant prefix (no more `Cache::flush()` on switch)
-- ✅ Search cache invalidation via generation counter (instant, not 24 h stale)
-- ✅ Multi-tenancy off by default — works as normal ecom, opt-in to multi-tenant
-- ✅ Theme resolution via `Cache::remember()` — safe for FrankenPHP/Octane workers
-- ✅ Replaced all `Artisan::call()` in web requests with direct filesystem ops
-- ✅ `Helper::shipping()`, `postTagList()`, `postCategoryList()` now cached at 1 h TTL
+#### Mais recente: correcoes de cache e desempenho
+- Tenant cache isolation via prefixo por tenant (sem mais `Cache::flush()` na troca)
+- Invalidacao de cache de busca por contador de geracao (instantanea, sem resultado obsoleto por 24 h)
+- Multi-tenancy desligado por padrao, funcionando como e-commerce normal e com opt-in para multi-tenant
+- Resolucao de tema via `Cache::remember()`, segura para workers FrankenPHP/Octane
+- Substituicao de todos os `Artisan::call()` em requisicoes web por operacoes diretas no filesystem
+- `Helper::shipping()`, `postTagList()` e `postCategoryList()` agora ficam em cache com TTL de 1 h
 
-#### Previous: Cart/Checkout & Payment Fixes
-- ✅ Modern theme views for cart, checkout, my-orders
-- ✅ Fixed payment workflows (Stripe, PayPal, COD)
-- ✅ Client orders access fixed
-- ✅ E2E tests with Playwright
+#### Anterior: correcoes de carrinho/checkout e pagamento
+- Views do tema moderno para carrinho, checkout e meus pedidos
+- Fluxos de pagamento corrigidos (Stripe, PayPal, COD)
+- Acesso aos pedidos do cliente corrigido
+- Testes E2E com Playwright
 
-#### API Refactoring & Architecture
-- Action-based architecture for all controllers
-- Complete API coverage for all modules
-- 540+ tests passing
-- PHPStan compliance
+#### Refatoracao de API e arquitetura
+- Arquitetura baseada em Actions para todos os controllers
+- Cobertura completa de API para todos os modulos
+- Mais de 540 testes passando
+- Conformidade com PHPStan
 
-#### Multi-Language, Reporting & GeoLocalization
-- URL prefix strategy (`/en/`, `/mk/`, `/de/`)
-- 8 Report types with scheduling
-- GeoIP detection with currency conversion
-- Real-time exchange rates
+#### Multi-idioma, relatorios e geolocalizacao
+- Estrategia por prefixo de URL (`/en/`, `/mk/`, `/de/`)
+- 8 tipos de relatorios com agendamento
+- Deteccao GeoIP com conversao de moeda
+- Taxas de cambio em tempo real
 
-#### Modern Theme Implementation
-- 32+ view files for modern theme
-- Responsive design with comprehensive coverage
-- Easy theme switching via settings
+#### Implementacao do tema moderno
+- Mais de 32 arquivos de view para o tema moderno
+- Design responsivo com cobertura abrangente
+- Troca facil de tema via configuracoes
 
-#### Attribute System (Bagisto-style)
-- Polymorphic attributes for Products, Bundles, Categories
-- Visual swatches (color, image, button)
-- Configurable products with auto-variant generation
-- Layered navigation with AJAX filtering
+#### Sistema de atributos (estilo Bagisto)
+- Atributos polimorficos para Products, Bundles e Categories
+- Amostras visuais (cor, imagem, botao)
+- Produtos configuraveis com geracao automatica de variantes
+- Navegacao em camadas com filtros AJAX
 
 </details>
 
 ---
 
-## 🤝 Contributing
+## Contribuindo
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+1. Faca um fork do repositorio
+2. Crie sua branch de recurso (`git checkout -b feature/amazing-feature`)
+3. Commit suas alteracoes (`git commit -m 'Add amazing feature'`)
+4. Envie para a branch (`git push origin feature/amazing-feature`)
+5. Abra um Pull Request
 
 ---
 
-## 🔗 Quick Links
+## Licenca
 
-| Resource | URL |
-|----------|-----|
+Este projeto e licenciado sob a Licenca MIT.
+
+---
+
+## Links rapidos
+
+| Recurso | URL |
+|---------|-----|
 | **Demo** | https://e-comm.mk |
 | **Admin** | http://localhost:90/admin |
-| **API Docs** | `LaravelEcomm.postman_collection.json` |
+| **Docs da API** | `LaravelEcomm.postman_collection.json` |
 | **Frontend** | http://localhost:90 |
 
 ---
 
-<p align="center">Built with ❤️ using Laravel 12</p>
+<p align="center">Construido com amor usando Laravel 12</p>

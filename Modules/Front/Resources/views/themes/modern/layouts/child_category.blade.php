@@ -1,4 +1,4 @@
-{{-- Modern Theme Child Category Recursive Component --}}
+{{-- Modern Theme Child Categoria Recursive Component --}}
 <li>
     <a href="{{ route('front.product-cat', $child_category->slug) }}">{{ $child_category->title }}</a>
     @if($child_category->childrenCategories->count() > 0)

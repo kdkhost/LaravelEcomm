@@ -8,7 +8,7 @@ use Modules\Core\Helpers\Helper;
 <div class="breadcrumb-container">
     <div class="container">
         <ol class="breadcrumb">
-            <li><i class="fa fa-home pr-10"></i><a href="{{ route('front.index') }}">Home</a></li>
+            <li><i class="fa fa-home pr-10"></i><a href="{{ route('front.index') }}">Início</a></li>
             <li class="active">{{ $category->title }}</li>
         </ol>
     </div>
@@ -23,12 +23,12 @@ use Modules\Core\Helpers\Helper;
             <div class="main col-md-12">
                 <h1 class="page-title">{{ $category->title }}</h1>
                 <div class="separator-2"></div>
-                
+
                 @if($category->summary)
                     <p class="lead">{{ $category->summary }}</p>
                 @endif
 
-                <!-- Child Categories Section -->
+                <!-- Child Categorias Section -->
                 @if($childCategories->isNotEmpty())
                     <h3 class="mt-4">Subcategories</h3>
                     <div class="separator"></div>
@@ -51,7 +51,7 @@ use Modules\Core\Helpers\Helper;
                                         <a href="{{ route('front.product-cat', $childCat->slug) }}">{{ $childCat->title }}</a>
                                     </h4>
                                     <p class="small mb-10 text-muted">
-                                        <i class="fa fa-folder-o pr-1"></i> 
+                                        <i class="fa fa-folder-o pr-1"></i>
                                         {{ $childCat->children_count ?? 0 }} subcategories
                                         <span class="pl-1 pr-1">|</span>
                                         {{ $childCat->products_count ?? 0 }} products
@@ -86,10 +86,10 @@ use Modules\Core\Helpers\Helper;
                                         <div class="elements-list clearfix">
                                             <span class="price">
                                                 @if($product->discount > 0)
-                                                    <del>${{ number_format($product->price, 2) }}</del>
-                                                    <span class="text-default">${{ number_format($product->price - ($product->price * $product->discount / 100), 2) }}</span>
+                                                    <del>{{ format_currency((float) ($product->price)) }}</del>
+                                                    <span class="text-default">{{ format_currency((float) ($product->price - ($product->price * $product->discount / 100))) }}</span>
                                                 @else
-                                                    <span class="text-default">${{ number_format($product->price, 2) }}</span>
+                                                    <span class="text-default">{{ format_currency((float) ($product->price)) }}</span>
                                                 @endif
                                             </span>
                                             <a href="{{ route('front.product-detail', $product->slug) }}" class="pull-right btn btn-sm btn-default btn-animated">
@@ -109,7 +109,7 @@ use Modules\Core\Helpers\Helper;
                         </div>
                     @else
                         <div class="alert alert-info">
-                            No products found in this category.
+                            Nenhum produto encontrado nesta categoria.
                         </div>
                     @endif
                 @endif
@@ -123,7 +123,7 @@ use Modules\Core\Helpers\Helper;
 @if($recentProducts->isNotEmpty())
 <section class="pv-30 clearfix">
     <div class="container">
-        <h3 class="title">Recent Products</h3>
+        <h3 class="title">Produtos recentes</h3>
         <div class="separator-2"></div>
         <div class="row">
             @foreach($recentProducts as $recentProduct)
@@ -135,7 +135,7 @@ use Modules\Core\Helpers\Helper;
                     </div>
                     <div class="body">
                         <h5 class="title"><a href="{{ route('front.product-detail', $recentProduct->slug) }}">{{ $recentProduct->title }}</a></h5>
-                        <span class="price text-default">${{ number_format($recentProduct->price, 2) }}</span>
+                        <span class="price text-default">{{ format_currency((float) ($recentProduct->price)) }}</span>
                     </div>
                 </div>
             </div>

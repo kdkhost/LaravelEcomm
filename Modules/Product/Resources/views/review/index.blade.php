@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                @if(isset($reviews))
+                @if(isset($avaliações))
                     <table class="table table-bordered" id="data-table">
                         <thead>
                         <tr>
@@ -36,7 +36,7 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($reviews as $review)
+                        @foreach($avaliações as $review)
 
                             <tr>
                                 <td>{{$review->id}}</td>
@@ -63,11 +63,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('reviews.edit',$review->id)}}"
+                                    <a href="{{route('avaliações.edit',$review->id)}}"
                                        class="btn btn-primary btn-sm float-left mr-1"
                                        style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip"
                                        title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                                    <form method="POST" action="{{route('reviews.destroy',$review->id)}}">
+                                    <form method="POST" action="{{route('avaliações.destroy',$review->id)}}">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm dltBtn"

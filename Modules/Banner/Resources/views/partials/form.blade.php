@@ -35,7 +35,7 @@
         <input type="number" class="form-control" id="max_impressions" name="max_impressions" value="{{ old('max_impressions', $banner->max_impressions) }}" min="0">
     </div>
     <div class="form-group">
-        <label for="categories">Categories</label>
+        <label for="categories">Categorias</label>
         <select name="categories[]" id="categories" class="form-control select2" multiple required>
             @foreach($categories as $category)
                 <option value="{{ $category->id }}" {{ (isset($banner) && $banner->categories->contains($category->id)) ? 'selected' : '' }}>{{ $category->title }}</option>

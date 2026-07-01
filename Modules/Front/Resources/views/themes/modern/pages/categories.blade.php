@@ -1,12 +1,12 @@
 @extends($themePath . '.layouts.master')
-@section('title', 'Categories')
+@section('title', 'Categorias')
 @section('content')
 <!-- breadcrumb start -->
 <div class="breadcrumb-container">
     <div class="container">
         <ol class="breadcrumb">
-            <li><i class="fa fa-home pr-10"></i><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="active">Categories</li>
+            <li><i class="fa fa-home pr-10"></i><a href="{{ route('front.index') }}">Início</a></li>
+            <li class="active">Categorias</li>
         </ol>
     </div>
 </div>
@@ -17,9 +17,9 @@
     <div class="container">
         <div class="row">
             <div class="main col-md-12">
-                <h1 class="page-title">{{ __('All Categories') }}</h1>
+                <h1 class="page-title">{{ __('Todas as categorias') }}</h1>
                 <div class="separator-2"></div>
-                
+
                 @if(isset($categories) && $categories->isNotEmpty())
                     <div class="row">
                         @foreach($categories as $category)
@@ -40,7 +40,7 @@
                                         <a href="{{ route('front.product-cat', $category->slug) }}">{{ $category->title }}</a>
                                     </h4>
                                     <p class="small mb-10 text-muted">
-                                        <i class="fa fa-folder-o pr-1"></i> 
+                                        <i class="fa fa-folder-o pr-1"></i>
                                         {{ $category->children_count ?? 0 }} subcategories
                                     </p>
                                     <a href="{{ route('front.product-cat', $category->slug) }}" class="btn btn-default btn-sm margin-clear">

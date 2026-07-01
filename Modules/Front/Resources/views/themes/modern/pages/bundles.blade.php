@@ -1,12 +1,12 @@
 @extends($themePath . '.layouts.master')
-@section('title','E-SHOP || Bundles')
+@section('title','E-SHOP || Kits')
 @section('content')
 <section class="page-header page-header-dark bg-secondary">
     <div class="container"><div class="row"><div class="col-md-12">
-        <h1>Product Bundles</h1>
+        <h1>Kits de produtos</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="active">Bundles</li>
+            <li><a href="{{ route('front.index') }}">Início</a></li>
+            <li class="active">Kits</li>
         </ol>
     </div></div></div>
 </section>
@@ -22,7 +22,7 @@
                             <img src="{{ $bundle->imageUrl }}" alt="{{ $bundle->title }}" class="img-responsive">
                         </a>
                         @if($bundle->discount)
-                        <span class="badge badge-danger">Save {{ $bundle->discount }}%</span>
+                        <span class="badge badge-danger">Economize {{ $bundle->discount }}%</span>
                         @endif
                     </div>
                     <div class="product-item-title">
@@ -30,8 +30,8 @@
                     </div>
                     <div class="product-item-price">
                         @php $after_discount = ($bundle->price - ($bundle->price * $bundle->discount) / 100); @endphp
-                        @if($bundle->discount)<del class="text-muted">${{ number_format($bundle->price, 2) }}</del>@endif
-                        <span class="text-default">${{ number_format($after_discount, 2) }}</span>
+                        @if($bundle->discount)<del class="text-muted">{{ format_currency((float) ($bundle->price)) }}</del>@endif
+                        <span class="text-default">{{ format_currency((float) ($after_discount)) }}</span>
                     </div>
                 </div>
             </div>
